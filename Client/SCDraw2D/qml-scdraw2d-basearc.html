@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- BaseArc.qml -->
+  <meta name="description" content="用於繪製圓弧的自訂 QML 元件  支援線性與放射性漸層填色，會自動計算弧形上的點。">
+  <title>BaseArc QML Type | SCDraw2d 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="scdraw2d-qmlmodule.html" translate="no">SCDraw2D</a></li>
+<li>BaseArc</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">BaseArc QML Type</h1>
+<!-- $$$BaseArc-brief -->
+<p>用於繪製圓弧的自訂 QML 元件 <br />
+ 支援線性與放射性漸層填色，會自動計算弧形上的點。. <a href="#details">More...</a></p>
+<!-- @@@BaseArc -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SCDraw2D</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-scarc.html" translate="no">ScArc</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-scdraw2d-basearc-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basearc.html#endAngle-prop" translate="no">endAngle</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basearc.html#fillGradient-prop" translate="no">fillGradient</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basearc.html#fillGradientCenterX-prop" translate="no">fillGradientCenterX</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basearc.html#fillGradientCenterY-prop" translate="no">fillGradientCenterY</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basearc.html#fillGradientEndX-prop" translate="no">fillGradientEndX</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basearc.html#fillGradientEndY-prop" translate="no">fillGradientEndY</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basearc.html#fillGradientRadiusX-prop" translate="no">fillGradientRadiusX</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basearc.html#fillGradientRadiusY-prop" translate="no">fillGradientRadiusY</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basearc.html#fillGradientStartX-prop" translate="no">fillGradientStartX</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basearc.html#fillGradientStartY-prop" translate="no">fillGradientStartY</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basearc.html#gradientRadialRad-prop" translate="no">gradientRadialRad</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basearc.html#lineGradient-prop" translate="no">lineGradient</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basearc.html#radialGradientRad-prop" translate="no">radialGradientRad</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basearc.html#startAngle-prop" translate="no">startAngle</a></b> : real</li>
+</ul>
+<!-- $$$BaseArc-description -->
+<h2 id="details">Detailed Description</h2>
+<!-- @@@BaseArc -->
+<h2>Property Documentation</h2>
+<!-- $$$endAngle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="endAngle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">endAngle</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>弧形結束角度（度數）。</p>
+</div></div><!-- @@@endAngle -->
+<br/>
+<!-- $$$fillGradient -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fillGradient-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fillGradient</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>填充漸層色陣列。每個元素包含 position(0~1) 與 color。</p>
+</div></div><!-- @@@fillGradient -->
+<br/>
+<!-- $$$fillGradientCenterX -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fillGradientCenterX-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fillGradientCenterX</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>放射性漸層中心 X（0~1）。</p>
+</div></div><!-- @@@fillGradientCenterX -->
+<br/>
+<!-- $$$fillGradientCenterY -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fillGradientCenterY-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fillGradientCenterY</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>放射性漸層中心 Y（0~1）。</p>
+</div></div><!-- @@@fillGradientCenterY -->
+<br/>
+<!-- $$$fillGradientEndX -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fillGradientEndX-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fillGradientEndX</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>線性漸層終點 X（0~1）。</p>
+</div></div><!-- @@@fillGradientEndX -->
+<br/>
+<!-- $$$fillGradientEndY -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fillGradientEndY-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fillGradientEndY</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>線性漸層終點 Y（0~1）。</p>
+</div></div><!-- @@@fillGradientEndY -->
+<br/>
+<!-- $$$fillGradientRadiusX -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fillGradientRadiusX-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fillGradientRadiusX</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>放射性漸層半徑 X（0~1）。</p>
+</div></div><!-- @@@fillGradientRadiusX -->
+<br/>
+<!-- $$$fillGradientRadiusY -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fillGradientRadiusY-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fillGradientRadiusY</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>放射性漸層半徑 Y（0~1）。</p>
+</div></div><!-- @@@fillGradientRadiusY -->
+<br/>
+<!-- $$$fillGradientStartX -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fillGradientStartX-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fillGradientStartX</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>線性漸層起點 X（0~1）。</p>
+</div></div><!-- @@@fillGradientStartX -->
+<br/>
+<!-- $$$fillGradientStartY -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fillGradientStartY-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fillGradientStartY</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>線性漸層起點 Y（0~1）。</p>
+</div></div><!-- @@@fillGradientStartY -->
+<br/>
+<!-- $$$gradientRadialRad -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="gradientRadialRad-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">gradientRadialRad</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>放射性漸層旋轉角度（弧度）。</p>
+<p>由 <a href="qml-scdraw2d-basearc.html#radialGradientRad-prop" translate="no">radialGradientRad</a> 轉換而來，會正規化到 -360~360 內再轉弧度。</p>
+</div></div><!-- @@@gradientRadialRad -->
+<br/>
+<!-- $$$lineGradient -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="lineGradient-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">lineGradient</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>弧線漸層色陣列。每個元素包含 position(0~1) 與 color。</p>
+</div></div><!-- @@@lineGradient -->
+<br/>
+<!-- $$$radialGradientRad -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="radialGradientRad-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">radialGradientRad</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>放射性漸層旋轉角度（弧度）。</p>
+<p>由 radialGradientRad 轉換而來，會正規化到 -360~360 內再轉弧度。</p>
+</div></div><!-- @@@radialGradientRad -->
+<br/>
+<!-- $$$startAngle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="startAngle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">startAngle</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>弧形起始角度（度數）。</p>
+</div></div><!-- @@@startAngle -->
+<br/>
+</body>
+</html>

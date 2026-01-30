@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- WaObject.qml -->
+  <meta name="description" content="基礎 Widget 物件。">
+  <title>WaObject QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>WaObject</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">WaObject QML Type</h1>
+<!-- $$$WaObject-brief -->
+<p>基礎 Widget 物件。. <a href="#details">More...</a></p>
+<!-- @@@WaObject -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 1.0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qml-basewidget.html" translate="no">BaseWidget</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-waobject-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-waobject.html#componentId-prop" translate="no">componentId</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-waobject.html#handleDestroyingManual-prop" translate="no">handleDestroyingManual</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-waobject.html#isDestroying-prop" translate="no">isDestroying</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-waobject.html#waName-prop" translate="no">waName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-waobject.html#waid-prop" translate="no">waid</a></b> : string</li>
+</ul>
+<h2 id="signals">Signals</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-waobject.html#destroying-signal" translate="no">destroying</a></b>()</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">string <b><a href="qml-sc-waobject.html#getName-method" translate="no">getName</a></b>()</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-waobject.html#setId-method" translate="no">setId</a></b>(string <i>newId</i>)</li>
+</ul>
+<!-- $$$WaObject-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>WaObject</summary>
+<p>是所有 Widget 的基礎類別，負責：</p>
+<ul>
+<li>Widget 生命週期管理（建立 / 銷毀）</li>
+<li>全域資源註冊與解除註冊</li>
+<li>Widget 命名與唯一性管理</li>
+<li>父子 Widget 關係維護</li>
+</ul>
+<!-- @@@WaObject -->
+<h2>Property Documentation</h2>
+<!-- $$$componentId -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="componentId-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">componentId</span> : <span class="type">string</span> <code class="details extra" translate="no">[required]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Widget 的元件類型識別。</p>
+</div></div><!-- @@@componentId -->
+<br/>
+<!-- $$$handleDestroyingManual -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="handleDestroyingManual-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">handleDestroyingManual</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>當前 Widget 是否手動處理銷毀流程。</p>
+</div></div><!-- @@@handleDestroyingManual -->
+<br/>
+<!-- $$$isDestroying -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isDestroying-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isDestroying</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>指示 Widget 是否正處於銷毀流程中。</p>
+</div></div><!-- @@@isDestroying -->
+<br/>
+<!-- $$$waName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="waName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">waName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>顯示用的 Widget 名稱，需在同一 Drawing 內保持唯一。</p>
+</div></div><!-- @@@waName -->
+<br/>
+<!-- $$$waid -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="waid-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">waid</span> : <span class="type">string</span> <code class="details extra" translate="no">[required]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Widget 的唯一識別 ID。</p>
+</div></div><!-- @@@waid -->
+<br/>
+<h2>Signal Documentation</h2>
+<!-- $$$destroying[overload1]$$$destroying -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="destroying-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">destroying</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>在 Widget 即將被銷毀時發送。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onDestroying</code>.</p>
+</div></div></div><!-- @@@destroying -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$getName[overload1]$$$getName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getName-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span> <span class="name">getName</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>回傳目前 Widget 的名稱。</p>
+</div></div><!-- @@@getName -->
+<br/>
+<!-- $$$setId[overload1]$$$setIdstring -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="setId-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">setId</span>(<span class="type">string</span> <i>newId</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>設定 Widget 的唯一 ID。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>newId 新的 Widget ID。 <b class="redFont"><code translate=\"no\">\return</code></b> 是否設定成功。</p>
+</div></div><!-- @@@setId -->
+<br/>
+</body>
+</html>

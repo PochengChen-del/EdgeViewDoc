@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- WALabel.qml -->
+  <meta name="description" content="顯示文字內容的 Widget。">
+  <title>WALabel QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>WALabel</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">WALabel QML Type</h1>
+<!-- $$$WALabel-brief -->
+<p>顯示文字內容的 Widget。. <a href="#details">More...</a></p>
+<!-- @@@WALabel -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 1.0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-basewidget.html" translate="no">BaseWidget</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-walabel-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#bold-prop" translate="no">bold</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#fontFamily-prop" translate="no">fontFamily</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#horizontalAlignment-prop" translate="no">horizontalAlignment</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#italic-prop" translate="no">italic</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#loaderItem-prop" translate="no">loaderItem</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#marquee-prop" translate="no">marquee</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#marqueePause-prop" translate="no">marqueePause</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#marqueeSpeed-prop" translate="no">marqueeSpeed</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#pixelSize-prop" translate="no">pixelSize</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#prefix-prop" translate="no">prefix</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#scrollbar-prop" translate="no">scrollbar</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#suffix-prop" translate="no">suffix</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#textColor-prop" translate="no">textColor</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#value-prop" translate="no">value</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#verticalAlignment-prop" translate="no">verticalAlignment</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walabel.html#wrapMode-prop" translate="no">wrapMode</a></b> : int</li>
+</ul>
+<!-- $$$WALabel-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>WALabel</summary>
+<p>用於顯示靜態或動態文字，支援：</p>
+<ul>
+<li>前綴（prefix）、內容（value）、後綴（suffix）組合顯示</li>
+<li>字型樣式、對齊方式與換行設定</li>
+<li>捲動顯示（ScrollView）</li>
+<li>跑馬燈（Marquee）動畫</li>
+<li>滑鼠互動暫停跑馬燈</li>
+</ul>
+<p>此元件常用於儀表、狀態顯示與即時資料呈現。</p>
+<!-- @@@WALabel -->
+<h2>Property Documentation</h2>
+<!-- $$$bold -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bold-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bold</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否使用粗體字型。</p>
+</div></div><!-- @@@bold -->
+<br/>
+<!-- $$$fontFamily -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fontFamily-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fontFamily</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字使用的字型家族。</p>
+</div></div><!-- @@@fontFamily -->
+<br/>
+<!-- $$$horizontalAlignment -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="horizontalAlignment-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">horizontalAlignment</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字的水平對齊方式。</p>
+</div></div><!-- @@@horizontalAlignment -->
+<br/>
+<!-- $$$italic -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="italic-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">italic</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否使用斜體字型。</p>
+</div></div><!-- @@@italic -->
+<br/>
+<!-- $$$loaderItem -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="loaderItem-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">loaderItem</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>內部 Label Loader 載入完成後的 Item。</p>
+</div></div><!-- @@@loaderItem -->
+<br/>
+<!-- $$$marquee -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="marquee-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">marquee</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否啟用跑馬燈顯示模式。</p>
+</div></div><!-- @@@marquee -->
+<br/>
+<!-- $$$marqueePause -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="marqueePause-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">marqueePause</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>跑馬燈暫停方式，可為：</p>
+<ul>
+<li><code translate="no">&quot;none&quot;</code></li>
+<li><code translate="no">&quot;hover&quot;</code></li>
+<li><code translate="no">&quot;click&quot;</code></li>
+</ul>
+</div></div><!-- @@@marqueePause -->
+<br/>
+<!-- $$$marqueeSpeed -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="marqueeSpeed-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">marqueeSpeed</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>跑馬燈速度（1～10，數字越大速度越快）。</p>
+</div></div><!-- @@@marqueeSpeed -->
+<br/>
+<!-- $$$pixelSize -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="pixelSize-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">pixelSize</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字大小（像素）。</p>
+</div></div><!-- @@@pixelSize -->
+<br/>
+<!-- $$$prefix -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="prefix-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">prefix</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>顯示文字的前綴內容。</p>
+</div></div><!-- @@@prefix -->
+<br/>
+<!-- $$$scrollbar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="scrollbar-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">scrollbar</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>ScrollBar 顯示策略。</p>
+</div></div><!-- @@@scrollbar -->
+<br/>
+<!-- $$$suffix -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="suffix-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">suffix</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>顯示文字的後綴內容。</p>
+</div></div><!-- @@@suffix -->
+<br/>
+<!-- $$$textColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字顏色。</p>
+</div></div><!-- @@@textColor -->
+<br/>
+<!-- $$$value -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="value-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">value</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主要顯示的文字內容。</p>
+</div></div><!-- @@@value -->
+<br/>
+<!-- $$$verticalAlignment -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="verticalAlignment-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">verticalAlignment</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字的垂直對齊方式。</p>
+</div></div><!-- @@@verticalAlignment -->
+<br/>
+<!-- $$$wrapMode -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="wrapMode-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">wrapMode</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字的換行模式。</p>
+</div></div><!-- @@@wrapMode -->
+<br/>
+</body>
+</html>

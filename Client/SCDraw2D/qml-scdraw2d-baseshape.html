@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- BaseShape.qml -->
+  <meta name="description" content="可繪製任意多點形狀，支援線性與放射性漸層，以及可選 Bezier 曲線。">
+  <title>BaseShape QML Type | SCDraw2d 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="scdraw2d-qmlmodule.html" translate="no">SCDraw2D</a></li>
+<li>BaseShape</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">BaseShape QML Type</h1>
+<!-- $$$BaseShape-brief -->
+<p>可繪製任意多點形狀，支援線性與放射性漸層，以及可選 Bezier 曲線。. <a href="#details">More...</a></p>
+<!-- @@@BaseShape -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SCDraw2D</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-scshape.html" translate="no">ScShape</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-scdraw2d-baseshape-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-baseshape.html#fillGradient-prop" translate="no">fillGradient</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-baseshape.html#lineGradient-prop" translate="no">lineGradient</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-baseshape.html#pointList-prop" translate="no">pointList</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-baseshape.html#points-prop" translate="no">points</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-baseshape.html#radialGradientRad-prop" translate="no">radialGradientRad</a></b> : real</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-baseshape.html#underscore.transPoint-method" translate="no">_transPoint</a></b>(<i>prePt</i>, <i>curPt</i>)</li>
+</ul>
+<!-- $$$BaseShape-description -->
+<h2 id="details">Detailed Description</h2>
+<p>BaseShape 元件可依 <a href="qml-scdraw2d-baseshape.html#pointList-prop" translate="no">pointList</a> 自動生成繪製點， 並支援：</p>
+<ul>
+<li>封閉或開放路徑</li>
+<li>每段線段可自動判斷是否使用 Bezier 控制點</li>
+<li>線性與放射性漸層顏色</li>
+</ul>
+<!-- @@@BaseShape -->
+<h2>Property Documentation</h2>
+<!-- $$$fillGradient -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fillGradient-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fillGradient</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>填色使用的線性漸層設定。</p>
+</div></div><!-- @@@fillGradient -->
+<br/>
+<!-- $$$lineGradient -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="lineGradient-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">lineGradient</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描邊使用的線性漸層設定。</p>
+<p>陣列元素需包含：</p>
+<ul>
+<li>position：0.0 ~ 1.0</li>
+<li>color：顏色值</li>
+</ul>
+</div></div><!-- @@@lineGradient -->
+<br/>
+<!-- $$$pointList -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="pointList-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">pointList</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>形狀的頂點列表。</p>
+<p>陣列元素結構為：</p>
+<pre class="cpp" translate="no">{
+    x: number<span class="operator">,</span>
+    y: number<span class="operator">,</span>
+    preCtrl: { x: number<span class="operator">,</span> y: number } <span class="operator">|</span> null<span class="operator">,</span>
+    nextCtrl: { x: number<span class="operator">,</span> y: number } <span class="operator">|</span> null
+}</pre>
+<p>preCtrl/nextCtrl 用於指定 Bezier 曲線控制點，可選。</p>
+</div></div><!-- @@@pointList -->
+<br/>
+<!-- $$$points -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="points-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">points</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>自動生成的繪製點座標陣列。</p>
+<p>由 <a href="qml-scdraw2d-baseshape.html#pointList-prop" translate="no">pointList</a> 與 Bezier 控制點計算產生， 使用者通常不需直接修改。</p>
+</div></div><!-- @@@points -->
+<br/>
+<!-- $$$radialGradientRad -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="radialGradientRad-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">radialGradientRad</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>放射性漸層旋轉角度（單位：度）。</p>
+<p>有效範圍 -360 ~ 360。 正值為順時針旋轉。</p>
+</div></div><!-- @@@radialGradientRad -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$_transPoint[overload1]$$$_transPoint -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="underscore.transPoint-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">_transPoint</span>(<i>prePt</i>, <i>curPt</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>自動生成的繪製點座標陣列。</p>
+<p>由 <a href="qml-scdraw2d-baseshape.html#pointList-prop" translate="no">pointList</a> 與 Bezier 控制點計算產生， 使用者通常不需直接修改。</p>
+</div></div><!-- @@@_transPoint -->
+<br/>
+</body>
+</html>

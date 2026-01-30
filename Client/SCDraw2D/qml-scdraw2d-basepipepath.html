@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- BasePipePath.qml -->
+  <meta name="description" content="管線用單一路徑繪製元件，支援直線與三次貝茲曲線。">
+  <title>BasePipePath QML Type | SCDraw2d 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="scdraw2d-qmlmodule.html" translate="no">SCDraw2D</a></li>
+<li>BasePipePath</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">BasePipePath QML Type</h1>
+<!-- $$$BasePipePath-brief -->
+<p>管線用單一路徑繪製元件，支援直線與三次貝茲曲線。. <a href="#details">More...</a></p>
+<!-- @@@BasePipePath -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SCDraw2D</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-scdraw2d-basepipepath-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipepath.html#fillGradient-prop" translate="no">fillGradient</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipepath.html#gradientRadialRad-prop" translate="no">gradientRadialRad</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipepath.html#gradientStop-prop" translate="no">gradientStop</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipepath.html#lineGradient-prop" translate="no">lineGradient</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipepath.html#lineGradientStop-prop" translate="no">lineGradientStop</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipepath.html#pointList-prop" translate="no">pointList</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipepath.html#radialGradientRad-prop" translate="no">radialGradientRad</a></b> : real</li>
+</ul>
+<!-- $$$BasePipePath-description -->
+<h2 id="details">Detailed Description</h2>
+<p>BasePipePath 依據 <a href="qml-scdraw2d-basepipepath.html#pointList-prop" translate="no">pointList</a> 所定義的節點資料， 自動產生可繪製的路徑座標。</p>
+<p>當相鄰節點包含有效控制點，且控制點不在直線段上時， 系統會自動轉換為三次貝茲曲線，以達到平滑管線效果。</p>
+<div class="admonition note">
+<p><b>Note: </b>此元件屬於繪圖系統的低階組件， 通常作為 Pipe、<a href="qml-scdraw2d-basepipe.html" translate="no">BasePipe</a>、<a href="qml-scdraw2d-basepipeoverlap.html" translate="no">BasePipeOverlap</a> 的內部組成， 不建議直接用於一般 UI。</p>
+</div>
+<!-- @@@BasePipePath -->
+<h2>Property Documentation</h2>
+<!-- $$$fillGradient -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fillGradient-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fillGradient</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>填色漸層設定。</p>
+<p>position 範圍為 0.0 ~ 1.0， 系統會自動補齊起點與終點的漸層色。</p>
+</div></div><!-- @@@fillGradient -->
+<br/>
+<!-- $$$gradientRadialRad -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="gradientRadialRad-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">gradientRadialRad</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>放射性漸層旋轉角度（弧度）。</p>
+<p>此屬性由 <a href="qml-scdraw2d-basepipepath.html#radialGradientRad-prop" translate="no">radialGradientRad</a> 自動換算， 主要供內部繪製使用。</p>
+</div></div><!-- @@@gradientRadialRad -->
+<br/>
+<!-- $$$gradientStop -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="gradientStop-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">gradientStop</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>填色漸層用的 Stop 陣列（position, color）。</p>
+<p>會自動轉換成內部渲染所需格式。</p>
+</div></div><!-- @@@gradientStop -->
+<br/>
+<!-- $$$lineGradient -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="lineGradient-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">lineGradient</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>線條漸層設定。</p>
+<p>position 範圍為 0.0 ~ 1.0， 系統會自動補齊起點與終點的漸層色。</p>
+</div></div><!-- @@@lineGradient -->
+<br/>
+<!-- $$$lineGradientStop -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="lineGradientStop-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">lineGradientStop</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>線條漸層用的 Stop 陣列（position, color）。</p>
+<p>會自動轉換成內部渲染所需格式。</p>
+</div></div><!-- @@@lineGradientStop -->
+<br/>
+<!-- $$$pointList -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="pointList-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">pointList</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>路徑節點列表。</p>
+<p>每個節點至少需包含 <code translate="no">x</code> 與 <code translate="no">y，</code> 並可選擇性定義前後控制點，用於產生貝茲曲線。</p>
+<pre class="cpp" translate="no">{
+    x: Number<span class="operator">,</span>
+    y: Number<span class="operator">,</span>
+    preCtrl:  { x: Number<span class="operator">,</span> y: Number }<span class="operator">,</span>
+    nextCtrl: { x: Number<span class="operator">,</span> y: Number }
+}</pre>
+</div></div><!-- @@@pointList -->
+<br/>
+<!-- $$$radialGradientRad -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="radialGradientRad-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">radialGradientRad</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>放射性漸層旋轉角度（單位：度）。</p>
+<p>可設定範圍為 -360 ~ 360， 正值為順時針旋轉，負值為逆時針旋轉。</p>
+</div></div><!-- @@@radialGradientRad -->
+<br/>
+</body>
+</html>

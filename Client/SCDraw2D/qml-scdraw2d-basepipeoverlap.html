@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- BasePipeOverlap.qml -->
+  <meta name="description" content="疊加式管線圖形元件，用於顯示具有流動效果的雙層管線。">
+  <title>BasePipeOverlap QML Type | SCDraw2d 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="scdraw2d-qmlmodule.html" translate="no">SCDraw2D</a></li>
+<li>BasePipeOverlap</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">BasePipeOverlap QML Type</h1>
+<!-- $$$BasePipeOverlap-brief -->
+<p>疊加式管線圖形元件，用於顯示具有流動效果的雙層管線。. <a href="#details">More...</a></p>
+<!-- @@@BasePipeOverlap -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SCDraw2D</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-scdraw2d-baseshapeex.html" translate="no">BaseShapeEx</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-scdraw2d-basepipeoverlap-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#contentDashArray-prop" translate="no">contentDashArray</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#contentDashOffset-prop" translate="no">contentDashOffset</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#contentLineColor-prop" translate="no">contentLineColor</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#contentLineGradient-prop" translate="no">contentLineGradient</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#contentLineGradientType-prop" translate="no">contentLineGradientType</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#contentLineWidth-prop" translate="no">contentLineWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#contentPathDashOffsets-prop" translate="no">contentPathDashOffsets</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#contentUseDash-prop" translate="no">contentUseDash</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#dashArray-prop" translate="no">dashArray</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#dashedImageMirror-prop" translate="no">dashedImageMirror</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#dashedImageSrc-prop" translate="no">dashedImageSrc</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#flowDirection-prop" translate="no">flowDirection</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#flowEnable-prop" translate="no">flowEnable</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#flowStep-prop" translate="no">flowStep</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#hasContent-prop" translate="no">hasContent</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#lightColor-prop" translate="no">lightColor</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#lineColor-prop" translate="no">lineColor</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-scdraw2d-basepipeoverlap.html#pathFlowDirections-prop" translate="no">pathFlowDirections</a></b> : var</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">void <b><a href="qml-scdraw2d-basepipeoverlap.html#onDashFlowUpdate-method" translate="no">onDashFlowUpdate</a></b>()</li>
+</ul>
+<!-- $$$BasePipeOverlap-description -->
+<h2 id="details">Detailed Description</h2>
+<p>BasePipeOverlap 是一個複合型的管線繪製元件，基於 <a href="qml-scdraw2d-baseshapeex.html" translate="no">BaseShapeEx</a> 與 <a href="qml-scdraw2d-basepipepath.html" translate="no">BasePipePath</a> 實作。</p>
+<p>該元件支援：</p>
+<ul>
+<li>雙層管線（背景管線 + 前景流動線）</li>
+<li>虛線與虛線動畫（flow）</li>
+<li>多路徑獨立流向控制</li>
+<li>線條與填色漸層</li>
+</ul>
+<p>常見用途包含 SCADA、流程圖、工業管線顯示與動態流向視覺化。</p>
+<!-- @@@BasePipeOverlap -->
+<h2>Property Documentation</h2>
+<!-- $$$contentDashArray -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="contentDashArray-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">contentDashArray</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>前景管線虛線設定陣列。</p>
+<p>格式為：</p>
+<pre class="cpp" translate="no"><span class="operator">[</span>dashLength<span class="operator">,</span> gapLength<span class="operator">,</span> dashLength2<span class="operator">,</span> gapLength2<span class="operator">]</span></pre>
+</div></div><!-- @@@contentDashArray -->
+<br/>
+<!-- $$$contentDashOffset -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="contentDashOffset-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">contentDashOffset</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>前景管線虛線的位移量。</p>
+</div></div><!-- @@@contentDashOffset -->
+<br/>
+<!-- $$$contentLineColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="contentLineColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">contentLineColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>前景管線的線條顏色。</p>
+</div></div><!-- @@@contentLineColor -->
+<br/>
+<!-- $$$contentLineGradient -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="contentLineGradient-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">contentLineGradient</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>前景管線的線條漸層設定。 每個元素包含 position 與 color 欄位。</p>
+</div></div><!-- @@@contentLineGradient -->
+<br/>
+<!-- $$$contentLineGradientType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="contentLineGradientType-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">contentLineGradientType</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>前景管線的線條漸層類型。</p>
+</div></div><!-- @@@contentLineGradientType -->
+<br/>
+<!-- $$$contentLineWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="contentLineWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">contentLineWidth</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>前景管線的線條寬度。</p>
+</div></div><!-- @@@contentLineWidth -->
+<br/>
+<!-- $$$contentPathDashOffsets -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="contentPathDashOffsets-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">contentPathDashOffsets</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>各路徑獨立的虛線位移量設定。</p>
+</div></div><!-- @@@contentPathDashOffsets -->
+<br/>
+<!-- $$$contentUseDash -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="contentUseDash-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">contentUseDash</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否對前景管線啟用虛線。</p>
+</div></div><!-- @@@contentUseDash -->
+<br/>
+<!-- $$$dashArray -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dashArray-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">dashArray</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>背景管線的虛線設定陣列。</p>
+</div></div><!-- @@@dashArray -->
+<br/>
+<!-- $$$dashedImageMirror -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dashedImageMirror-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">dashedImageMirror</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否對虛線圖片進行鏡像顯示。</p>
+</div></div><!-- @@@dashedImageMirror -->
+<br/>
+<!-- $$$dashedImageSrc -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dashedImageSrc-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">dashedImageSrc</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>用於虛線繪製的圖片來源路徑。</p>
+</div></div><!-- @@@dashedImageSrc -->
+<br/>
+<!-- $$$flowDirection -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="flowDirection-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">flowDirection</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>虛線流動方向。 true 表示正向，false 表示反向。</p>
+</div></div><!-- @@@flowDirection -->
+<br/>
+<!-- $$$flowEnable -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="flowEnable-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">flowEnable</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否啟用虛線流動動畫。</p>
+</div></div><!-- @@@flowEnable -->
+<br/>
+<!-- $$$flowStep -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="flowStep-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">flowStep</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>每次更新時虛線位移的步進值。</p>
+</div></div><!-- @@@flowStep -->
+<br/>
+<!-- $$$hasContent -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="hasContent-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">hasContent</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示前景管線內容。</p>
+</div></div><!-- @@@hasContent -->
+<br/>
+<!-- $$$lightColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="lightColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">lightColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>前景（高亮）管線顏色。</p>
+</div></div><!-- @@@lightColor -->
+<br/>
+<!-- $$$lineColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="lineColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">lineColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>背景管線顏色。</p>
+</div></div><!-- @@@lineColor -->
+<br/>
+<!-- $$$pathFlowDirections -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="pathFlowDirections-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">pathFlowDirections</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>各路徑的流動方向設定陣列。</p>
+</div></div><!-- @@@pathFlowDirections -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$onDashFlowUpdate[overload1]$$$onDashFlowUpdate -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="onDashFlowUpdate-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">onDashFlowUpdate</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>更新虛線流動狀態。</p>
+<p>當 <a href="qml-scdraw2d-basepipeoverlap.html#flowEnable-prop" translate="no">flowEnable</a> 為 true 時，會依據 <a href="qml-scdraw2d-basepipeoverlap.html#flowStep-prop" translate="no">flowStep</a>、 <a href="qml-scdraw2d-basepipeoverlap.html#flowDirection-prop" translate="no">flowDirection</a> 與 <a href="qml-scdraw2d-basepipeoverlap.html#pathFlowDirections-prop" translate="no">pathFlowDirections</a> 更新虛線位移量。</p>
+</div></div><!-- @@@onDashFlowUpdate -->
+<br/>
+</body>
+</html>

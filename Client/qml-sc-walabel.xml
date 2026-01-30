@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>WALabel QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>顯示文字內容的 Widget。.</db:para>
+<db:para>This type was introduced in Qt 1.0.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 1.0</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-basewidget.xml">BaseWidget</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>用於顯示靜態或動態文字，支援：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>前綴（prefix）、內容（value）、後綴（suffix）組合顯示</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>字型樣式、對齊方式與換行設定</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>捲動顯示（ScrollView）</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>跑馬燈（Marquee）動畫</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>滑鼠互動暫停跑馬燈</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>此元件常用於儀表、狀態顯示與即時資料呈現。</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="bold-prop">
+<db:title>bold : bool</db:title>
+<db:para>是否使用粗體字型。</db:para>
+</db:section>
+<db:section xml:id="fontFamily-prop">
+<db:title>fontFamily : string</db:title>
+<db:para>文字使用的字型家族。</db:para>
+</db:section>
+<db:section xml:id="horizontalAlignment-prop">
+<db:title>horizontalAlignment : int</db:title>
+<db:para>文字的水平對齊方式。</db:para>
+</db:section>
+<db:section xml:id="italic-prop">
+<db:title>italic : bool</db:title>
+<db:para>是否使用斜體字型。</db:para>
+</db:section>
+<db:section xml:id="loaderItem-prop">
+<db:title>loaderItem : Item</db:title>
+<db:para>內部 Label Loader 載入完成後的 Item。</db:para>
+</db:section>
+<db:section xml:id="marquee-prop">
+<db:title>marquee : bool</db:title>
+<db:para>是否啟用跑馬燈顯示模式。</db:para>
+</db:section>
+<db:section xml:id="marqueePause-prop">
+<db:title>marqueePause : string</db:title>
+<db:para>跑馬燈暫停方式，可為：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para><db:code>&quot;none&quot;</db:code></db:para>
+</db:listitem>
+<db:listitem>
+<db:para><db:code>&quot;hover&quot;</db:code></db:para>
+</db:listitem>
+<db:listitem>
+<db:para><db:code>&quot;click&quot;</db:code></db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="marqueeSpeed-prop">
+<db:title>marqueeSpeed : int</db:title>
+<db:para>跑馬燈速度（1～10，數字越大速度越快）。</db:para>
+</db:section>
+<db:section xml:id="pixelSize-prop">
+<db:title>pixelSize : int</db:title>
+<db:para>文字大小（像素）。</db:para>
+</db:section>
+<db:section xml:id="prefix-prop">
+<db:title>prefix : string</db:title>
+<db:para>顯示文字的前綴內容。</db:para>
+</db:section>
+<db:section xml:id="scrollbar-prop">
+<db:title>scrollbar : int</db:title>
+<db:para>ScrollBar 顯示策略。</db:para>
+</db:section>
+<db:section xml:id="suffix-prop">
+<db:title>suffix : string</db:title>
+<db:para>顯示文字的後綴內容。</db:para>
+</db:section>
+<db:section xml:id="textColor-prop">
+<db:title>textColor : color</db:title>
+<db:para>文字顏色。</db:para>
+</db:section>
+<db:section xml:id="value-prop">
+<db:title>value : string</db:title>
+<db:para>主要顯示的文字內容。</db:para>
+</db:section>
+<db:section xml:id="verticalAlignment-prop">
+<db:title>verticalAlignment : int</db:title>
+<db:para>文字的垂直對齊方式。</db:para>
+</db:section>
+<db:section xml:id="wrapMode-prop">
+<db:title>wrapMode : int</db:title>
+<db:para>文字的換行模式。</db:para>
+</db:section>
+</db:section>
+</db:article>

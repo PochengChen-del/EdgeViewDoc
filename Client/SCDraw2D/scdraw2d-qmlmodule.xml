@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>SCDraw2D QML Types</db:title>
+<db:productname>SCDraw2d</db:productname>
+<db:titleabbrev>SCDraw2D library</db:titleabbrev>
+<db:abstract>
+<db:para><db:link xlink:href="scdraw2d-qmlmodule.xml">SCDraw2D</db:link> 是 2D 繪圖的函式庫，將底層硬體繪圖命令，轉成上層可以使用的 QML 元件。.</db:para>
+</db:abstract>
+</db:info>
+<db:anchor xml:id="details"/>
+<db:variablelist role="members">
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-scdraw2d-basearc.xml" xlink:role="">BaseArc</db:link></db:term>
+<db:listitem>
+<db:para>用於繪製圓弧的自訂 QML 元件  支援線性與放射性漸層填色，會自動計算弧形上的點。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-scdraw2d-baseellipse.xml" xlink:role="">BaseEllipse</db:link></db:term>
+<db:listitem>
+<db:para>橢圓圖形元件，支援線條與填充漸層。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-scdraw2d-basepie.xml" xlink:role="">BasePie</db:link></db:term>
+<db:listitem>
+<db:para>扇形（Pie）繪製元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-scdraw2d-basepipe.xml" xlink:role="">BasePipe</db:link></db:term>
+<db:listitem>
+<db:para>多路徑管線（Pipe）繪製元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-scdraw2d-basepipeex.xml" xlink:role="">BasePipeEx</db:link></db:term>
+<db:listitem>
+<db:para>管線繪製的高階封裝元件，支援重疊與非重疊模式。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-scdraw2d-basepipeoverlap.xml" xlink:role="">BasePipeOverlap</db:link></db:term>
+<db:listitem>
+<db:para>疊加式管線圖形元件，用於顯示具有流動效果的雙層管線。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-scdraw2d-basepipepath.xml" xlink:role="">BasePipePath</db:link></db:term>
+<db:listitem>
+<db:para>管線用單一路徑繪製元件，支援直線與三次貝茲曲線。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-scdraw2d-basepolygon.xml" xlink:role="">BasePolygon</db:link></db:term>
+<db:listitem>
+<db:para>多邊形繪製元件，支援線條與填色漸層。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-scdraw2d-baserectangle.xml" xlink:role="">BaseRectangle</db:link></db:term>
+<db:listitem>
+<db:para>可支援圓角與線性／放射性漸層的矩形繪製元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-scdraw2d-baseshape.xml" xlink:role="">BaseShape</db:link></db:term>
+<db:listitem>
+<db:para>可繪製任意多點形狀，支援線性與放射性漸層，以及可選 Bezier 曲線。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-scdraw2d-baseshapeex.xml" xlink:role="">BaseShapeEx</db:link></db:term>
+<db:listitem>
+<db:para>支援多條路徑、多屬性同步的 Shape 容器元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+</db:article>

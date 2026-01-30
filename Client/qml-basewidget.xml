@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>BaseWidget QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>基礎 Widget 類別。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherited By:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-walabel.xml" xlink:role="">WALabel</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-waobject.xml">WaObject</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>是所有可視化 Widget 的基礎類別，提供：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>變形（旋轉、縮放、平移）</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>動畫與事件觸發機制</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Drawing 座標與層級計算</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>編輯模式輔助資訊</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>此類別通常不直接使用，而是由具體 Widget 繼承。</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="angle2Drawing-prop">
+<db:title>[read-only] angle2Drawing : real</db:title>
+<db:para>相對於 Drawing 的旋轉角度。</db:para>
+</db:section>
+<db:section xml:id="animations-prop">
+<db:title>animations : var</db:title>
+<db:para>動畫設定物件。</db:para>
+<db:para>包含 displays、frame、actions、path 等動畫與互動設定， 其結構由系統內部定義，通常由編輯器產生。</db:para>
+</db:section>
+<db:section xml:id="level-prop">
+<db:title>[read-only] level : int</db:title>
+<db:para>Widget 在 Drawing 中的層級。</db:para>
+</db:section>
+<db:section xml:id="offset2Drawing-prop">
+<db:title>[read-only] offset2Drawing : point</db:title>
+<db:para>相對於 Drawing 的位移。</db:para>
+</db:section>
+<db:section xml:id="type-prop">
+<db:title>[read-only] type : string</db:title>
+<db:para>Widget 類型識別字串。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="signal-documentation">
+<db:title>Signal Documentation</db:title>
+<db:section xml:id="afterPositionChanged-signal">
+<db:title>afterPositionChanged(real <db:emphasis>diffX</db:emphasis>, real <db:emphasis>diffY</db:emphasis>)</db:title>
+<db:para>在 Widget 位置變更完成後發送。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onAfterPositionChanged</db:code>.</db:para>
+</db:note>
+</db:section>
+<db:section xml:id="afterSizeChanged-signal">
+<db:title>afterSizeChanged(real <db:emphasis>diffWidth</db:emphasis>, real <db:emphasis>diffHeight</db:emphasis>)</db:title>
+<db:para>在 Widget 尺寸變更完成後發送。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onAfterSizeChanged</db:code>.</db:para>
+</db:note>
+</db:section>
+</db:section>
+</db:article>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>BasePipeOverlap QML Type</db:title>
+<db:productname>SCDraw2d</db:productname>
+<db:titleabbrev>SCDraw2D library</db:titleabbrev>
+<db:abstract>
+<db:para>疊加式管線圖形元件，用於顯示具有流動效果的雙層管線。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SCDraw2D</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-scdraw2d-baseshapeex.xml">BaseShapeEx</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para><db:link xlink:href="qml-scdraw2d-basepipeoverlap.xml">BasePipeOverlap</db:link> 是一個複合型的管線繪製元件，基於 <db:link xlink:href="qml-scdraw2d-baseshapeex.xml">BaseShapeEx</db:link> 與 <db:link xlink:href="qml-scdraw2d-basepipepath.xml">BasePipePath</db:link> 實作。</db:para>
+<db:para>該元件支援：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>雙層管線（背景管線 + 前景流動線）</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>虛線與虛線動畫（flow）</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>多路徑獨立流向控制</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>線條與填色漸層</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>常見用途包含 SCADA、流程圖、工業管線顯示與動態流向視覺化。</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="contentDashArray-prop">
+<db:title>contentDashArray : var</db:title>
+<db:para>前景管線虛線設定陣列。</db:para>
+<db:para>格式為：</db:para>
+<db:programlisting language="cpp">[dashLength, gapLength, dashLength2, gapLength2]
+</db:programlisting>
+</db:section>
+<db:section xml:id="contentDashOffset-prop">
+<db:title>contentDashOffset : real</db:title>
+<db:para>前景管線虛線的位移量。</db:para>
+</db:section>
+<db:section xml:id="contentLineColor-prop">
+<db:title>contentLineColor : color</db:title>
+<db:para>前景管線的線條顏色。</db:para>
+</db:section>
+<db:section xml:id="contentLineGradient-prop">
+<db:title>contentLineGradient : var</db:title>
+<db:para>前景管線的線條漸層設定。 每個元素包含 position 與 color 欄位。</db:para>
+</db:section>
+<db:section xml:id="contentLineGradientType-prop">
+<db:title>contentLineGradientType : int</db:title>
+<db:para>前景管線的線條漸層類型。</db:para>
+</db:section>
+<db:section xml:id="contentLineWidth-prop">
+<db:title>contentLineWidth : real</db:title>
+<db:para>前景管線的線條寬度。</db:para>
+</db:section>
+<db:section xml:id="contentPathDashOffsets-prop">
+<db:title>contentPathDashOffsets : var</db:title>
+<db:para>各路徑獨立的虛線位移量設定。</db:para>
+</db:section>
+<db:section xml:id="contentUseDash-prop">
+<db:title>contentUseDash : bool</db:title>
+<db:para>是否對前景管線啟用虛線。</db:para>
+</db:section>
+<db:section xml:id="dashArray-prop">
+<db:title>dashArray : var</db:title>
+<db:para>背景管線的虛線設定陣列。</db:para>
+</db:section>
+<db:section xml:id="dashedImageMirror-prop">
+<db:title>dashedImageMirror : bool</db:title>
+<db:para>是否對虛線圖片進行鏡像顯示。</db:para>
+</db:section>
+<db:section xml:id="dashedImageSrc-prop">
+<db:title>dashedImageSrc : string</db:title>
+<db:para>用於虛線繪製的圖片來源路徑。</db:para>
+</db:section>
+<db:section xml:id="flowDirection-prop">
+<db:title>flowDirection : bool</db:title>
+<db:para>虛線流動方向。 true 表示正向，false 表示反向。</db:para>
+</db:section>
+<db:section xml:id="flowEnable-prop">
+<db:title>flowEnable : bool</db:title>
+<db:para>是否啟用虛線流動動畫。</db:para>
+</db:section>
+<db:section xml:id="flowStep-prop">
+<db:title>flowStep : int</db:title>
+<db:para>每次更新時虛線位移的步進值。</db:para>
+</db:section>
+<db:section xml:id="hasContent-prop">
+<db:title>hasContent : bool</db:title>
+<db:para>是否顯示前景管線內容。</db:para>
+</db:section>
+<db:section xml:id="lightColor-prop">
+<db:title>lightColor : color</db:title>
+<db:para>前景（高亮）管線顏色。</db:para>
+</db:section>
+<db:section xml:id="lineColor-prop">
+<db:title>lineColor : color</db:title>
+<db:para>背景管線顏色。</db:para>
+</db:section>
+<db:section xml:id="pathFlowDirections-prop">
+<db:title>pathFlowDirections : var</db:title>
+<db:para>各路徑的流動方向設定陣列。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="onDashFlowUpdate-method">
+<db:title>void onDashFlowUpdate()</db:title>
+<db:para>更新虛線流動狀態。</db:para>
+<db:para>當 <db:link xlink:href="qml-scdraw2d-basepipeoverlap.xml#flowEnable-prop">flowEnable</db:link> 為 true 時，會依據 <db:link xlink:href="qml-scdraw2d-basepipeoverlap.xml#flowStep-prop">flowStep</db:link>、 <db:link xlink:href="qml-scdraw2d-basepipeoverlap.xml#flowDirection-prop">flowDirection</db:link> 與 <db:link xlink:href="qml-scdraw2d-basepipeoverlap.xml#pathFlowDirections-prop">pathFlowDirections</db:link> 更新虛線位移量。</db:para>
+</db:section>
+</db:section>
+</db:article>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>BaseEllipse QML Type</db:title>
+<db:productname>SCDraw2d</db:productname>
+<db:titleabbrev>SCDraw2D library</db:titleabbrev>
+<db:abstract>
+<db:para>橢圓圖形元件，支援線條與填充漸層。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SCDraw2D</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-scellipse.xml">ScEllipse</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para><db:link xlink:href="qml-scdraw2d-baseellipse.xml">BaseEllipse</db:link> 是基於 <db:link xlink:href="scdraw2d-qmlmodule.xml">SCDraw2D</db:link> 模組的橢圓繪製元件， 支援以下功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>橢圓路徑自動計算</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>線條與填充漸層</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>放射性與任意方向漸層</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>可設定填充起始角度</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="fillGradient-prop">
+<db:title>fillGradient : var</db:title>
+<db:para>填充漸層資料。</db:para>
+</db:section>
+<db:section xml:id="fillStartAngle-prop">
+<db:title>fillStartAngle : real</db:title>
+<db:para>填充起始角度（0~360）。</db:para>
+</db:section>
+<db:section xml:id="lineGradient-prop">
+<db:title>lineGradient : var</db:title>
+<db:para>線條漸層資料。</db:para>
+</db:section>
+<db:section xml:id="radialGradientRad-prop">
+<db:title>radialGradientRad : real</db:title>
+<db:para>放射性漸層旋轉角度（-360 ~ 360 度）。</db:para>
+</db:section>
+</db:section>
+</db:article>

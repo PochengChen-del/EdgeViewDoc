@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>SC QML Types</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>SC 是 公用函式庫，提供 EdgeView 內部程序函式。.</db:para>
+</db:abstract>
+</db:info>
+<db:anchor xml:id="details"/>
+<db:variablelist role="members">
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-walabel.xml" xlink:role="">WALabel</db:link></db:term>
+<db:listitem>
+<db:para>顯示文字內容的 Widget。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-waobject.xml" xlink:role="">WaObject</db:link></db:term>
+<db:listitem>
+<db:para>基礎 Widget 物件。</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+</db:article>

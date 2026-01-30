@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>WaObject QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>基礎 Widget 物件。.</db:para>
+<db:para>This type was introduced in Qt 1.0.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 1.0</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherited By:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-basewidget.xml" xlink:role="">BaseWidget</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>是所有 Widget 的基礎類別，負責：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>Widget 生命週期管理（建立 / 銷毀）</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>全域資源註冊與解除註冊</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Widget 命名與唯一性管理</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>父子 Widget 關係維護</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="componentId-prop">
+<db:title>[required] componentId : string</db:title>
+<db:para>Widget 的元件類型識別。</db:para>
+</db:section>
+<db:section xml:id="handleDestroyingManual-prop">
+<db:title>handleDestroyingManual : bool</db:title>
+<db:para>當前 Widget 是否手動處理銷毀流程。</db:para>
+</db:section>
+<db:section xml:id="isDestroying-prop">
+<db:title>isDestroying : bool</db:title>
+<db:para>指示 Widget 是否正處於銷毀流程中。</db:para>
+</db:section>
+<db:section xml:id="waName-prop">
+<db:title>waName : string</db:title>
+<db:para>顯示用的 Widget 名稱，需在同一 Drawing 內保持唯一。</db:para>
+</db:section>
+<db:section xml:id="waid-prop">
+<db:title>[required] waid : string</db:title>
+<db:para>Widget 的唯一識別 ID。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="signal-documentation">
+<db:title>Signal Documentation</db:title>
+<db:section xml:id="destroying-signal">
+<db:title>destroying()</db:title>
+<db:para>在 Widget 即將被銷毀時發送。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onDestroying</db:code>.</db:para>
+</db:note>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="getName-method">
+<db:title>string getName()</db:title>
+<db:para>回傳目前 Widget 的名稱。</db:para>
+</db:section>
+<db:section xml:id="setId-method">
+<db:title>bool setId(string <db:emphasis>newId</db:emphasis>)</db:title>
+<db:para>設定 Widget 的唯一 ID。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>newId 新的 Widget ID。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis> 是否設定成功。</db:para>
+</db:section>
+</db:section>
+</db:article>

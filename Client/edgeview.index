@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE QDOCINDEX>
+<INDEX url="" title="EdgeView" version="1.0" project="EdgeView">
+    <namespace name="" status="active" access="public" module="edgeview">
+        <qmlclass name="BaseWidget" qml-base-type="SC::WaObject" href="qml-basewidget.html" status="active" access="public" location="BaseWidget.qml" filepath="D:/code/azure_egesync/wax_hmi-designer-client/wa-hmi-designer/ui/component/widgets/BaseWidget.qml" lineno="17" since="6.8" documented="true" title="BaseWidget" fulltitle="BaseWidget" subtitle="" brief="基礎 Widget 類別。">
+            <function name="afterPositionChanged" fullname="BaseWidget::afterPositionChanged" href="qml-basewidget.html#afterPositionChanged-signal" status="active" access="public" location="BaseWidget.qml" filepath="D:/code/azure_egesync/wax_hmi-designer-client/wa-hmi-designer/ui/component/widgets/BaseWidget.qml" lineno="633" documented="true" meta="qmlsignal">
+                <parameter type="real" name="diffX" default=""/>
+                <parameter type="real" name="diffY" default=""/>
+            </function>
+            <function name="afterSizeChanged" fullname="BaseWidget::afterSizeChanged" href="qml-basewidget.html#afterSizeChanged-signal" status="active" access="public" location="BaseWidget.qml" filepath="D:/code/azure_egesync/wax_hmi-designer-client/wa-hmi-designer/ui/component/widgets/BaseWidget.qml" lineno="627" documented="true" meta="qmlsignal">
+                <parameter type="real" name="diffWidth" default=""/>
+                <parameter type="real" name="diffHeight" default=""/>
+            </function>
+            <qmlproperty name="angle2Drawing" fullname="BaseWidget::angle2Drawing" href="qml-basewidget.html#angle2Drawing-prop" status="active" access="public" documented="true" type="real" attached="false" writable="false"/>
+            <qmlproperty name="animations" fullname="BaseWidget::animations" href="qml-basewidget.html#animations-prop" status="active" access="public" documented="true" type="var" attached="false" writable="true"/>
+            <qmlproperty name="level" fullname="BaseWidget::level" href="qml-basewidget.html#level-prop" status="active" access="public" documented="true" type="int" attached="false" writable="false"/>
+            <qmlproperty name="offset2Drawing" fullname="BaseWidget::offset2Drawing" href="qml-basewidget.html#offset2Drawing-prop" status="active" access="public" documented="true" type="point" attached="false" writable="false"/>
+            <qmlproperty name="type" fullname="BaseWidget::type" href="qml-basewidget.html#type-prop" status="active" access="public" documented="true" type="string" attached="false" writable="false"/>
+        </qmlclass>
+        <qmlclass name="WALabel" qml-module-name="SC" qml-base-type="::BaseWidget" fullname="SC.WALabel" href="qml-sc-walabel.html" status="active" access="public" location="WALabel.qml" filepath="D:/code/azure_egesync/wax_hmi-designer-client/wa-hmi-designer/ui/component/widgets/WALabel.qml" lineno="6" since="1.0" documented="true" title="WALabel" fulltitle="WALabel" subtitle="" brief="顯示文字內容的 Widget。">
+            <qmlproperty name="bold" fullname="SC.WALabel.bold" href="qml-sc-walabel.html#bold-prop" status="active" access="public" documented="true" type="bool" attached="false" writable="true"/>
+            <qmlproperty name="fontFamily" fullname="SC.WALabel.fontFamily" href="qml-sc-walabel.html#fontFamily-prop" status="active" access="public" documented="true" type="string" attached="false" writable="true"/>
+            <qmlproperty name="horizontalAlignment" fullname="SC.WALabel.horizontalAlignment" href="qml-sc-walabel.html#horizontalAlignment-prop" status="active" access="public" documented="true" type="int" attached="false" writable="true"/>
+            <qmlproperty name="italic" fullname="SC.WALabel.italic" href="qml-sc-walabel.html#italic-prop" status="active" access="public" documented="true" type="bool" attached="false" writable="true"/>
+            <qmlproperty name="loaderItem" fullname="SC.WALabel.loaderItem" href="qml-sc-walabel.html#loaderItem-prop" status="active" access="public" documented="true" type="Item" attached="false" writable="true"/>
+            <qmlproperty name="marquee" fullname="SC.WALabel.marquee" href="qml-sc-walabel.html#marquee-prop" status="active" access="public" documented="true" type="bool" attached="false" writable="true"/>
+            <qmlproperty name="marqueePause" fullname="SC.WALabel.marqueePause" href="qml-sc-walabel.html#marqueePause-prop" status="active" access="public" documented="true" type="string" attached="false" writable="true"/>
+            <qmlproperty name="marqueeSpeed" fullname="SC.WALabel.marqueeSpeed" href="qml-sc-walabel.html#marqueeSpeed-prop" status="active" access="public" documented="true" type="int" attached="false" writable="true"/>
+            <qmlproperty name="pixelSize" fullname="SC.WALabel.pixelSize" href="qml-sc-walabel.html#pixelSize-prop" status="active" access="public" documented="true" type="int" attached="false" writable="true"/>
+            <qmlproperty name="prefix" fullname="SC.WALabel.prefix" href="qml-sc-walabel.html#prefix-prop" status="active" access="public" documented="true" type="string" attached="false" writable="true"/>
+            <qmlproperty name="scrollbar" fullname="SC.WALabel.scrollbar" href="qml-sc-walabel.html#scrollbar-prop" status="active" access="public" documented="true" type="int" attached="false" writable="true"/>
+            <qmlproperty name="suffix" fullname="SC.WALabel.suffix" href="qml-sc-walabel.html#suffix-prop" status="active" access="public" documented="true" type="string" attached="false" writable="true"/>
+            <qmlproperty name="textColor" fullname="SC.WALabel.textColor" href="qml-sc-walabel.html#textColor-prop" status="active" access="public" documented="true" type="color" attached="false" writable="true"/>
+            <qmlproperty name="value" fullname="SC.WALabel.value" href="qml-sc-walabel.html#value-prop" status="active" access="public" documented="true" type="string" attached="false" writable="true"/>
+            <qmlproperty name="verticalAlignment" fullname="SC.WALabel.verticalAlignment" href="qml-sc-walabel.html#verticalAlignment-prop" status="active" access="public" documented="true" type="int" attached="false" writable="true"/>
+            <qmlproperty name="wrapMode" fullname="SC.WALabel.wrapMode" href="qml-sc-walabel.html#wrapMode-prop" status="active" access="public" documented="true" type="int" attached="false" writable="true"/>
+        </qmlclass>
+        <qmlclass name="WaObject" qml-module-name="SC" fullname="SC.WaObject" href="qml-sc-waobject.html" status="active" access="public" location="WaObject.qml" filepath="D:/code/azure_egesync/wax_hmi-designer-client/wa-hmi-designer/ui/global/WaObject.qml" lineno="4" since="1.0" documented="true" title="WaObject" fulltitle="WaObject" subtitle="" brief="基礎 Widget 物件。">
+            <function name="destroying" fullname="SC.WaObject.destroying" href="qml-sc-waobject.html#destroying-signal" status="active" access="public" location="WaObject.qml" filepath="D:/code/azure_egesync/wax_hmi-designer-client/wa-hmi-designer/ui/global/WaObject.qml" lineno="55" documented="true" meta="qmlsignal"/>
+            <function name="getName" fullname="SC.WaObject.getName" href="qml-sc-waobject.html#getName-method" status="active" access="public" location="WaObject.qml" filepath="D:/code/azure_egesync/wax_hmi-designer-client/wa-hmi-designer/ui/global/WaObject.qml" lineno="66" documented="true" meta="qmlmethod" type="string"/>
+            <function name="setId" fullname="SC.WaObject.setId" href="qml-sc-waobject.html#setId-method" status="active" access="public" location="WaObject.qml" filepath="D:/code/azure_egesync/wax_hmi-designer-client/wa-hmi-designer/ui/global/WaObject.qml" lineno="201" documented="true" meta="qmlmethod" type="bool">
+                <parameter type="string" name="newId" default=""/>
+            </function>
+            <qmlproperty name="componentId" fullname="SC.WaObject.componentId" href="qml-sc-waobject.html#componentId-prop" status="active" access="public" documented="true" type="string" attached="false" writable="true" required="true"/>
+            <qmlproperty name="handleDestroyingManual" fullname="SC.WaObject.handleDestroyingManual" href="qml-sc-waobject.html#handleDestroyingManual-prop" status="active" access="public" documented="true" type="bool" attached="false" writable="true"/>
+            <qmlproperty name="isDestroying" fullname="SC.WaObject.isDestroying" href="qml-sc-waobject.html#isDestroying-prop" status="active" access="public" documented="true" type="bool" attached="false" writable="true"/>
+            <qmlproperty name="waName" fullname="SC.WaObject.waName" href="qml-sc-waobject.html#waName-prop" status="active" access="public" documented="true" type="string" attached="false" writable="true"/>
+            <qmlproperty name="waid" fullname="SC.WaObject.waid" href="qml-sc-waobject.html#waid-prop" status="active" access="public" documented="true" type="string" attached="false" writable="true" required="true"/>
+        </qmlclass>
+        <qmlmodule name="SC" qml-module-name="SC" href="sc-qmlmodule.html" status="active" location="SC.qdoc" filepath="D:/code/azure_egesync/wax_hmi-designer-client/wa-hmi-designer/docs/qdoc/SC.qdoc" lineno="1" documented="true" seen="true" title="SC QML Types" brief="是 公用函式庫，提供 EdgeView 內部程序函式。"/>
+        <qmlmodule name="SCDraw2D" href="scdraw2d-qmlmodule.html" status="internal" seen="false" title=""/>
+    </namespace>
+</INDEX>

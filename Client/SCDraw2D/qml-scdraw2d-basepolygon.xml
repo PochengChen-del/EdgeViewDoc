@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>BasePolygon QML Type</db:title>
+<db:productname>SCDraw2d</db:productname>
+<db:titleabbrev>SCDraw2D library</db:titleabbrev>
+<db:abstract>
+<db:para>多邊形繪製元件，支援線條與填色漸層。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SCDraw2D</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-scpolygon.xml">ScPolygon</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para><db:link xlink:href="qml-scdraw2d-basepolygon.xml">BasePolygon</db:link> 用於依據 <db:link xlink:href="">pointList</db:link> 定義的頂點資料， 自動產生封閉的多邊形路徑。</db:para>
+<db:para>支援：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>線性漸層（線條 / 填色）</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>任意方向線性漸層</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>放射性漸層（含旋轉角度）</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+</db:article>
