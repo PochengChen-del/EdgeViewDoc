@@ -1,0 +1,426 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "所有 API(登入API除外), 都需要在 Cookie 中帶入 GraphicSession token",
+    "title": "Proxy Service API",
+    "contact": {
+      "name": "API Support",
+      "email": "junyu.ke@advantech.com.tw;ml.wu@advantech.com.tw;jill.li@advantech.com.tw"
+    },
+    "version": "1.0"
+  },
+  "paths": {
+    "/ws/login/login": {
+      "post": {
+        "description": "Authenticate client via WebSocket using CSRF token",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "WebSocket-Login"
+        ],
+        "summary": "WebSocket login",
+        "parameters": [
+          {
+            "description": "Login request payload",
+            "name": "message",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/wsmodel.Login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login success",
+            "schema": {
+              "$ref": "#/definitions/wsmodel.TopicMessage"
+            },
+            "examples": {
+              "application/json": {
+                "action": "login",
+                "error": 0,
+                "reason": "",
+                "topic": "login"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "schema": {
+              "$ref": "#/definitions/wsmodel.TopicMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/wsmodel.TopicMessage"
+            }
+          }
+        },
+        "x-example": {
+          "action": "login",
+          "error": 0,
+          "reason": "",
+          "topic": "login"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "controller.RecordControlPageReceive": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "description": "每個 handler 下可以有多個 action",
+          "type": "string"
+        },
+        "request": {
+          "$ref": "#/definitions/controller.RecordControlPageRequest"
+        },
+        "topic": {
+          "description": "每個 topic 由不同的 message handler(controller) 處理",
+          "type": "string"
+        }
+      }
+    },
+    "controller.RecordControlPageRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "page": {
+          "type": "integer"
+        }
+      }
+    },
+    "controller.RecordQueryData": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "param": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "controller.RecordRegisterReceive": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "description": "每個 handler 下可以有多個 action",
+          "type": "string"
+        },
+        "request": {
+          "$ref": "#/definitions/controller.RecordRegisterRequest"
+        },
+        "topic": {
+          "description": "每個 topic 由不同的 message handler(controller) 處理",
+          "type": "string"
+        }
+      }
+    },
+    "controller.RecordRegisterRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "param": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.BaseResponse-array_service_DatabaseTable": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/service.DatabaseTable"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-bool": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "boolean"
+        }
+      }
+    },
+    "model.BaseResponse-service_DatabaseColumn": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/service.DatabaseColumn"
+        }
+      }
+    },
+    "model.BaseResponse-string": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "string"
+        }
+      }
+    },
+    "model.BaseResponseLoose": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {}
+      }
+    },
+    "model.RecordStruct": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "funcname": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "info": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "source": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "service.DatabaseColumn": {
+      "type": "object",
+      "properties": {
+        "hasTimeZone": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "originalType": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "service.DatabaseTable": {
+      "type": "object",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/service.DatabaseColumn"
+          }
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "wsmodel.EHAlarmSumaryRegister": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "register",
+            "unregister"
+          ],
+          "example": "register"
+        },
+        "groupid": {
+          "type": "integer"
+        },
+        "request": {},
+        "tenantid": {
+          "type": "string"
+        },
+        "topic": {
+          "type": "string",
+          "enum": [
+            "ehalarmsummary"
+          ],
+          "example": "ehalarmsummary"
+        }
+      }
+    },
+    "wsmodel.ErrorMessage": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "description": "每個 handler 下可以有多個 action",
+          "type": "string"
+        },
+        "error": {
+          "description": "error = 0 Success, otherwise failed",
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "request": {},
+        "topic": {
+          "description": "每個 topic 由不同的 message handler(controller) 處理",
+          "type": "string"
+        }
+      }
+    },
+    "wsmodel.Login": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "login"
+          ],
+          "example": "login"
+        },
+        "csrfToken": {
+          "type": "string"
+        },
+        "request": {},
+        "topic": {
+          "type": "string",
+          "enum": [
+            "login"
+          ],
+          "example": "login"
+        }
+      }
+    },
+    "wsmodel.TopicMessage": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "description": "每個 handler 下可以有多個 action",
+          "type": "string"
+        },
+        "request": {},
+        "topic": {
+          "description": "每個 topic 由不同的 message handler(controller) 處理",
+          "type": "string"
+        }
+      }
+    },
+    "wsmodel.WAAlarmSummaryRegister": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "register",
+            "unregister"
+          ],
+          "example": "register"
+        },
+        "projectName": {
+          "type": "string",
+          "example": "project_name"
+        },
+        "request": {},
+        "topic": {
+          "type": "string",
+          "enum": [
+            "waalarmsummary"
+          ],
+          "example": "waalarmsummary"
+        }
+      }
+    },
+    "wsmodel.XAlarmSumaryRegister": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "register",
+            "unregister"
+          ],
+          "example": "register"
+        },
+        "projectName": {
+          "type": "string",
+          "example": "project_name"
+        },
+        "request": {},
+        "topic": {
+          "type": "string",
+          "enum": [
+            "xalarmsummary"
+          ],
+          "example": "xalarmsummary"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "GraphicSession": {
+      "type": "apiKey",
+      "name": "graphicSession",
+      "in": "cookie"
+    }
+  }
+}
