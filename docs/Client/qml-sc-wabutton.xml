@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>WAButton QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>可自訂樣式的按鈕元件，支援文字、圖示、漸層與亮度效果。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-basewidget.xml">BaseWidget</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="buttonEffect-prop">
+<db:title>buttonEffect : bool</db:title>
+<db:para>是否啟用按鈕亮度效果。</db:para>
+</db:section>
+<db:section xml:id="cornerRadius-prop">
+<db:title>cornerRadius : real</db:title>
+<db:para>按鈕矩形圓角。</db:para>
+</db:section>
+<db:section xml:id="fillColor-prop">
+<db:title>fillColor : color</db:title>
+<db:para>按鈕背景色。</db:para>
+</db:section>
+<db:section xml:id="source-prop">
+<db:title>source : string</db:title>
+<db:para>按鈕圖片來源。 當 source 改變時會自動更新 img.source。</db:para>
+</db:section>
+<db:section xml:id="text-prop">
+<db:title>text : string</db:title>
+<db:para>按鈕顯示的文字。</db:para>
+</db:section>
+<db:section xml:id="textColor-prop">
+<db:title>textColor : color</db:title>
+<db:para>按鈕文字顏色。</db:para>
+</db:section>
+</db:section>
+</db:article>

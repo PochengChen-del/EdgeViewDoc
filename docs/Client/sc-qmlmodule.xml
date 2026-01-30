@@ -11,6 +11,12 @@
 <db:anchor xml:id="details"/>
 <db:variablelist role="members">
 <db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-wabutton.xml" xlink:role="">WAButton</db:link></db:term>
+<db:listitem>
+<db:para>可自訂樣式的按鈕元件，支援文字、圖示、漸層與亮度效果。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
 <db:term><db:link xlink:href="qml-sc-walabel.xml" xlink:role="">WALabel</db:link></db:term>
 <db:listitem>
 <db:para>顯示文字內容的 Widget。</db:para>
