@@ -1,0 +1,4401 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "所有 API(登入API除外), 都需要在 Cookie 中帶入 SettingSession 或 GraphicSession token",
+    "title": "Metadata Service API",
+    "contact": {
+      "name": "API Support",
+      "email": "junyu.ke@advantech.com.tw;ml.wu@advantech.com.tw;jill.li@advantech.com.tw"
+    },
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/opcua/user/activecode/{userid}": {
+      "post": {
+        "description": "Generate a new active code for a user",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Regenerate user active code",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "User ID",
+            "name": "userid",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Active code generated",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponseLoose"
+            },
+            "examples": {
+              "application/json": {
+                "error": 0,
+                "reason": "",
+                "result": {
+                  "activecode": 30,
+                  "userid": 1
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid user ID",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        },
+        "x-example": {
+          "error": 0,
+          "reason": "",
+          "result": {
+            "activecode": 30,
+            "userid": 1
+          }
+        }
+      }
+    },
+    "/api/opcua/user/delete": {
+      "post": {
+        "description": "Delete one or more users by ID list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete users",
+        "parameters": [
+          {
+            "description": "List of user IDs",
+            "name": "useridlist",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.UserIDList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete success",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        }
+      }
+    },
+    "/api/opcua/user/detail/{userid}": {
+      "post": {
+        "description": "Returns detail info for a specific user by user ID",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user detail",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "User ID",
+            "name": "userid",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User detail",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponseLoose"
+            },
+            "examples": {
+              "application/json": {
+                "error": 0,
+                "reason": "",
+                "result": {
+                  "active": true,
+                  "authorizedprojects": [
+                    {
+                      "projid": 101,
+                      "usertype": "power"
+                    },
+                    {
+                      "projid": 102,
+                      "usertype": "power"
+                    }
+                  ],
+                  "enable": true,
+                  "functionpermissions": [
+                    {
+                      "edit": true,
+                      "function": "EditTag"
+                    },
+                    {
+                      "edit": false,
+                      "function": "ViewLog"
+                    }
+                  ],
+                  "id": 1,
+                  "name": "UserA",
+                  "role": "Admin"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid user ID",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        },
+        "x-example": {
+          "error": 0,
+          "reason": "",
+          "result": {
+            "active": true,
+            "authorizedprojects": [
+              {
+                "projid": 101,
+                "usertype": "power"
+              },
+              {
+                "projid": 102,
+                "usertype": "power"
+              }
+            ],
+            "enable": true,
+            "functionpermissions": [
+              {
+                "edit": true,
+                "function": "EditTag"
+              },
+              {
+                "edit": false,
+                "function": "ViewLog"
+              }
+            ],
+            "id": 1,
+            "name": "UserA",
+            "role": "Admin"
+          }
+        }
+      }
+    },
+    "/api/opcua/user/enable": {
+      "post": {
+        "description": "Set user status to enabled or disabled",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Enable or disable user",
+        "parameters": [
+          {
+            "description": "User ID and enable flag",
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.UserEnable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        }
+      }
+    },
+    "/api/opcua/user/insert": {
+      "post": {
+        "description": "Add a new user to the system",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Insert new user",
+        "parameters": [
+          {
+            "description": "User info",
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WxMetaService_model_opcua.UserDetail"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Inserted user ID and active code",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponseLoose"
+            },
+            "examples": {
+              "application/json": {
+                "error": 0,
+                "reason": "",
+                "result": {
+                  "activecode": 30,
+                  "userid": 1
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input or user exists",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        },
+        "x-example": {
+          "error": 0,
+          "reason": "",
+          "result": {
+            "activecode": 30,
+            "userid": 1
+          }
+        }
+      }
+    },
+    "/api/opcua/user/update": {
+      "post": {
+        "description": "Update existing user info",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Update user",
+        "parameters": [
+          {
+            "description": "User info",
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WxMetaService_model_opcua.UserDetail"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update success",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "400": {
+            "description": "Invalid input or access denied",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        }
+      }
+    },
+    "/api/opcua/user/updatepw": {
+      "post": {
+        "description": "Update password for current user",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Update user password",
+        "parameters": [
+          {
+            "description": "Old and new password",
+            "name": "password",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.UserUpdatePW"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password updated",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "400": {
+            "description": "Wrong password or invalid",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        }
+      }
+    },
+    "/api/opcua/userlist": {
+      "post": {
+        "description": "Returns all users. Only system admin can query.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user list",
+        "responses": {
+          "200": {
+            "description": "User list",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponseLoose"
+            },
+            "examples": {
+              "application/json": {
+                "error": 0,
+                "reason": "",
+                "result": [
+                  {
+                    "active": true,
+                    "authorizedprojects": [
+                      {
+                        "projid": 123,
+                        "usertype": 0
+                      },
+                      {
+                        "projid": 124,
+                        "usertype": 1
+                      }
+                    ],
+                    "createtime": "2026/01/23 08:00:00",
+                    "enable": true,
+                    "functionpermissions": [
+                      {
+                        "edit": true,
+                        "function": "EditTag"
+                      },
+                      {
+                        "edit": false,
+                        "function": "ViewLog"
+                      }
+                    ],
+                    "id": 1,
+                    "modifytime": "2026/01/23 12:00:00",
+                    "name": "UserA",
+                    "role": "Admin"
+                  }
+                ]
+              }
+            }
+          },
+          "403": {
+            "description": "No authority",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        },
+        "x-example": {
+          "error": 0,
+          "reason": "",
+          "result": [
+            {
+              "active": true,
+              "authorizedprojects": [
+                {
+                  "projid": 123,
+                  "usertype": 0
+                },
+                {
+                  "projid": 124,
+                  "usertype": 1
+                }
+              ],
+              "createtime": "2026/01/23 08:00:00",
+              "enable": true,
+              "functionpermissions": [
+                {
+                  "edit": true,
+                  "function": "EditTag"
+                },
+                {
+                  "edit": false,
+                  "function": "ViewLog"
+                }
+              ],
+              "id": 1,
+              "modifytime": "2026/01/23 12:00:00",
+              "name": "UserA",
+              "role": "Admin"
+            }
+          ]
+        }
+      }
+    },
+    "/api/user/alllist/{projid}": {
+      "post": {
+        "description": "Get all users for a project without authority restriction",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "List all users in a project",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "Project ID",
+            "name": "projid",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all users",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponseLoose"
+            },
+            "examples": {
+              "application/json": {
+                "error": 0,
+                "reason": "",
+                "result": [
+                  {
+                    "name": "user1",
+                    "usertype": 1
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        },
+        "x-example": {
+          "error": 0,
+          "reason": "",
+          "result": [
+            {
+              "name": "user1",
+              "usertype": 1
+            }
+          ]
+        }
+      }
+    },
+    "/api/user/checkdetail": {
+      "post": {
+        "description": "Check whether a user exists and password is correct",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Verify user credentials",
+        "parameters": [
+          {
+            "description": "User name, password and project ID",
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.UserProjNamePass"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User details if correct",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponseLoose"
+            },
+            "examples": {
+              "application/json": {
+                "error": 0,
+                "reason": "",
+                "result": {
+                  "access": [
+                    {
+                      "ack": true,
+                      "change": false,
+                      "displayid": 1
+                    }
+                  ],
+                  "ack": true,
+                  "area": [
+                    0,
+                    1
+                  ],
+                  "change": true,
+                  "home": 30,
+                  "name": "ML",
+                  "projid": 1,
+                  "sourceuserid": "77",
+                  "usertype": 3
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        },
+        "x-example": {
+          "error": 0,
+          "reason": "",
+          "result": {
+            "access": [
+              {
+                "ack": true,
+                "change": false,
+                "displayid": 1
+              }
+            ],
+            "ack": true,
+            "area": [
+              0,
+              1
+            ],
+            "change": true,
+            "home": 30,
+            "name": "ML",
+            "projid": 1,
+            "sourceuserid": "77",
+            "usertype": 3
+          }
+        }
+      }
+    },
+    "/api/user/copyfromwa": {
+      "post": {
+        "description": "Only admin can sync users from WebAccess to local DB",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Copy users from WebAccess",
+        "responses": {
+          "200": {
+            "description": "Result of copy",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        }
+      }
+    },
+    "/api/user/delete": {
+      "post": {
+        "description": "Remove a user from a project",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete a user",
+        "parameters": [
+          {
+            "description": "User to delete",
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.UserDelete"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of deletion",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        }
+      }
+    },
+    "/api/user/detail": {
+      "post": {
+        "description": "Retrieve detailed information of a specific user",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user detail",
+        "parameters": [
+          {
+            "description": "Project ID and user name",
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.UserDelete"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User details",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponseLoose"
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        }
+      }
+    },
+    "/api/user/insert": {
+      "post": {
+        "description": "Add a new user to a project",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Create a new user",
+        "parameters": [
+          {
+            "description": "User details",
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WxMetaService_model_device.UserDetail"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of insert",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "400": {
+            "description": "Invalid parameters or no authority",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        }
+      }
+    },
+    "/api/user/list/{projid}": {
+      "post": {
+        "description": "Get users in a project based on the current user's authority",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "List users in a project",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "Project ID",
+            "name": "projid",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of users",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-array_model_UserList"
+            }
+          },
+          "403": {
+            "description": "No authority",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        }
+      }
+    },
+    "/api/user/sourcedetail": {
+      "post": {
+        "description": "Retrieve user information from WebAccess or BI source",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user info from source",
+        "parameters": [
+          {
+            "description": "Project ID and user name",
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.UserDelete"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Source user details",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponseLoose"
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        }
+      }
+    },
+    "/api/user/update": {
+      "post": {
+        "description": "Update an existing user's information",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Update user information",
+        "parameters": [
+          {
+            "description": "User update details",
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.UserUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of update",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "400": {
+            "description": "Invalid parameters or no authority",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        }
+      }
+    },
+    "/api/user/updatepw": {
+      "post": {
+        "description": "Change the password of a user",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Update user password",
+        "parameters": [
+          {
+            "description": "User name and new password",
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.UserProjNamePass"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of password update",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/model.BaseResponse-bool"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WxMetaService_model_device.ProjectDetail": {
+      "type": "object",
+      "properties": {
+        "asyncdraw": {
+          "type": "boolean"
+        },
+        "decimalSeparatorMode": {
+          "type": "integer"
+        },
+        "defaultpage": {
+          "type": "integer"
+        },
+        "fullscreen": {
+          "type": "boolean"
+        },
+        "highlightchange": {
+          "type": "boolean"
+        },
+        "initenabled": {
+          "type": "boolean"
+        },
+        "lang": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "scaletype": {
+          "type": "integer"
+        },
+        "showconfirmdialog": {
+          "type": "boolean"
+        },
+        "toolbarvisible": {
+          "type": "boolean"
+        },
+        "useDeviceTypeOnly": {
+          "type": "boolean"
+        },
+        "userhomeenabled": {
+          "type": "boolean"
+        },
+        "viewmode": {
+          "type": "integer"
+        }
+      }
+    },
+    "WxMetaService_model_device.User": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "setting": {
+          "type": "boolean"
+        },
+        "username": {
+          "type": "string"
+        },
+        "web": {
+          "description": "is web client?",
+          "type": "boolean"
+        }
+      }
+    },
+    "WxMetaService_model_device.UserDetail": {
+      "type": "object",
+      "properties": {
+        "access": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.UserAccess"
+          }
+        },
+        "ack": {
+          "type": "boolean"
+        },
+        "area": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "change": {
+          "type": "boolean"
+        },
+        "home": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "sourceuserid": {
+          "type": "string"
+        },
+        "thirdsource": {
+          "description": "don't update back to source",
+          "type": "boolean"
+        },
+        "usertype": {
+          "type": "integer"
+        }
+      }
+    },
+    "WxMetaService_model_opcua.ProjectDetail": {
+      "type": "object",
+      "properties": {
+        "createtimestamp": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "modifytimestamp": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "tagconfig": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.TagConfigBody"
+          }
+        }
+      }
+    },
+    "WxMetaService_model_opcua.UserDetail": {
+      "type": "object",
+      "properties": {
+        "active": {
+          "type": "boolean"
+        },
+        "authorizedProjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.UserProj"
+          }
+        },
+        "createtime": {
+          "type": "integer"
+        },
+        "enable": {
+          "type": "boolean"
+        },
+        "functionpermissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.UserFunc"
+          }
+        },
+        "id": {
+          "type": "integer"
+        },
+        "modifytime": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
+    "controller.DeleteImageReq": {
+      "type": "object",
+      "properties": {
+        "imageids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "controller.ImageListObj": {
+      "type": "object",
+      "properties": {
+        "imageid": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "pathid": {
+          "type": "integer"
+        }
+      }
+    },
+    "controller.Pong": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "controller.RecordSearchQuery": {
+      "type": "object",
+      "properties": {
+        "froms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "rows": {
+          "type": "integer"
+        }
+      }
+    },
+    "controller.TemplateDeleteReq": {
+      "type": "object",
+      "properties": {
+        "tmpids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "map_int_model.DisplayVersionInfo": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/model.DisplayVersionInfo"
+      }
+    },
+    "model.AddFolderReq": {
+      "type": "object",
+      "properties": {
+        "foldername": {
+          "type": "string"
+        },
+        "parentpathid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.AddFolderRes": {
+      "type": "object",
+      "properties": {
+        "pathid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.AlarmAllInfo": {
+      "type": "object",
+      "properties": {
+        "area": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.AlarmDetail"
+          }
+        },
+        "info": {
+          "$ref": "#/definitions/model.AlarmStructDetail"
+        }
+      }
+    },
+    "model.AlarmArea": {
+      "type": "object",
+      "properties": {
+        "areaaudio": {
+          "type": "boolean"
+        },
+        "audioid": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.AlarmDelete": {
+      "type": "object",
+      "properties": {
+        "alarmname": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "projid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.AlarmDetail": {
+      "type": "object",
+      "properties": {
+        "areaaudio": {
+          "type": "boolean"
+        },
+        "audioid": {
+          "type": "integer"
+        },
+        "audioname": {
+          "type": "string"
+        },
+        "audiopath": {
+          "type": "string"
+        },
+        "audiopathtext": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.AlarmTags"
+          }
+        }
+      }
+    },
+    "model.AlarmID": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.AlarmStruct": {
+      "type": "object",
+      "properties": {
+        "multiaudioid": {
+          "type": "integer"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "singleaudioid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.AlarmStructDetail": {
+      "type": "object",
+      "properties": {
+        "multiaudioid": {
+          "type": "integer"
+        },
+        "multiaudioname": {
+          "type": "string"
+        },
+        "multiaudiopath": {
+          "type": "string"
+        },
+        "multiaudiopathtext": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "singleaudioid": {
+          "type": "integer"
+        },
+        "singleaudioname": {
+          "type": "string"
+        },
+        "singleaudiopath": {
+          "type": "string"
+        },
+        "singleaudiopathtext": {
+          "type": "string"
+        }
+      }
+    },
+    "model.AlarmTags": {
+      "type": "object",
+      "properties": {
+        "audioid": {
+          "type": "integer"
+        },
+        "audioname": {
+          "type": "string"
+        },
+        "audiopath": {
+          "type": "string"
+        },
+        "audiopathtext": {
+          "type": "string"
+        },
+        "tagname": {
+          "type": "string"
+        }
+      }
+    },
+    "model.AlarmUpsertStruct": {
+      "type": "object",
+      "properties": {
+        "areaaudio": {
+          "type": "boolean"
+        },
+        "audioid": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "oriname": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "audioid": {
+                "type": "integer"
+              },
+              "tagname": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "model.AudioListObj": {
+      "type": "object",
+      "properties": {
+        "audioid": {
+          "type": "integer"
+        },
+        "fullpathtext": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "pathid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.BaseResponse-array_WxMetaService_model_opcua_ProjectDetail": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WxMetaService_model_opcua.ProjectDetail"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_controller_ImageListObj": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/controller.ImageListObj"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_AlarmArea": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.AlarmArea"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_AudioListObj": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.AudioListObj"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_ConstDetail": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.ConstDetail"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_CopyObject": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.CopyObject"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_DBDefine": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.DBDefine"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_DBDefineBody": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.DBDefineBody"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_DataSource": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.DataSource"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_DataSourceBody": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.DataSourceBody"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_Display": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.Display"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_FileCacheMeta": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.FileCacheMeta"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_FileStruct": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.FileStruct"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_JSListObject": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.JSListObject"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_JSPathList": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.JSPathList"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_JSVersionObj": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.JSVersionObj"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_NextLevelObj": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.NextLevelObj"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_PluginFileDrift": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.PluginFileDrift"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_RecipeListStruct": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.RecipeListStruct"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_TemplateIDName": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.TemplateIDName"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_Tenant": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.Tenant"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_model_UserList": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.UserList"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-array_string": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "model.BaseResponse-bool": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "boolean"
+        }
+      }
+    },
+    "model.BaseResponse-int": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.BaseResponse-int64": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.BaseResponse-map_int_model_DisplayVersionInfo": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/map_int_model.DisplayVersionInfo"
+        }
+      }
+    },
+    "model.BaseResponse-model_AddFolderRes": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.AddFolderRes"
+        }
+      }
+    },
+    "model.BaseResponse-model_AlarmAllInfo": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.AlarmAllInfo"
+        }
+      }
+    },
+    "model.BaseResponse-model_AlarmDetail": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.AlarmDetail"
+        }
+      }
+    },
+    "model.BaseResponse-model_AlarmStructDetail": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.AlarmStructDetail"
+        }
+      }
+    },
+    "model.BaseResponse-model_ConnectionDetail": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.ConnectionDetail"
+        }
+      }
+    },
+    "model.BaseResponse-model_CreateDisplayRes": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.CreateDisplayRes"
+        }
+      }
+    },
+    "model.BaseResponse-model_CreateJSRes": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.CreateJSRes"
+        }
+      }
+    },
+    "model.BaseResponse-model_DisplayDetail": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.DisplayDetail"
+        }
+      }
+    },
+    "model.BaseResponse-model_DisplayDetailMobileVer": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.DisplayDetailMobileVer"
+        }
+      }
+    },
+    "model.BaseResponse-model_DisplayVersionRes": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.DisplayVersionRes"
+        }
+      }
+    },
+    "model.BaseResponse-model_GetNextLevelbyidRes": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.GetNextLevelbyidRes"
+        }
+      }
+    },
+    "model.BaseResponse-model_JSDetailRes": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.JSDetailRes"
+        }
+      }
+    },
+    "model.BaseResponse-model_MQTTBrokerSetting": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.MQTTBrokerSetting"
+        }
+      }
+    },
+    "model.BaseResponse-model_NextLevelObj": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.NextLevelObj"
+        }
+      }
+    },
+    "model.BaseResponse-model_PluginFileDrift": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.PluginFileDrift"
+        }
+      }
+    },
+    "model.BaseResponse-model_RecordStruct": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.RecordStruct"
+        }
+      }
+    },
+    "model.BaseResponse-model_TemplateDetail": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.TemplateDetail"
+        }
+      }
+    },
+    "model.BaseResponse-model_UploadAudioRes": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.UploadAudioRes"
+        }
+      }
+    },
+    "model.BaseResponse-model_UploadImageRes": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/model.UploadImageRes"
+        }
+      }
+    },
+    "model.BaseResponse-service_ProductInfo": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/definitions/service.ProductInfo"
+        }
+      }
+    },
+    "model.BaseResponse-string": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "string"
+        }
+      }
+    },
+    "model.BaseResponseLoose": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "result": {
+          "type": "object"
+        }
+      }
+    },
+    "model.ConnectionBase": {
+      "type": "object",
+      "properties": {
+        "createtimestamp": {
+          "type": "string"
+        },
+        "modifytimestamp": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "opcuri": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.ConnectionDelete": {
+      "type": "object",
+      "properties": {
+        "names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "projid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.ConnectionDetail": {
+      "type": "object",
+      "properties": {
+        "ApplicationName": {
+          "type": "string"
+        },
+        "ApplicationUrl": {
+          "type": "string"
+        },
+        "AuthMode": {
+          "type": "string"
+        },
+        "DomainIP": {
+          "type": "string"
+        },
+        "DomainName": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "PfxFile": {
+          "type": "string"
+        },
+        "SecurityMode": {
+          "type": "string"
+        },
+        "SecurityPolicy": {
+          "type": "string"
+        },
+        "Username": {
+          "type": "string"
+        },
+        "createtimestamp": {
+          "type": "string"
+        },
+        "modifytimestamp": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "opcuri": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.ConstDetail": {
+      "type": "object",
+      "properties": {
+        "analen": {
+          "type": "integer"
+        },
+        "area": {
+          "type": "integer"
+        },
+        "createtimestamp": {
+          "type": "string"
+        },
+        "dataType": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "displaydec": {
+          "type": "integer"
+        },
+        "displayint": {
+          "description": "analog",
+          "type": "integer"
+        },
+        "level": {
+          "type": "integer"
+        },
+        "modifytimestamp": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "spanhi": {
+          "type": "number"
+        },
+        "spanlo": {
+          "type": "number"
+        },
+        "state0": {
+          "description": "discrete",
+          "type": "string"
+        },
+        "state1": {
+          "type": "string"
+        },
+        "state2": {
+          "type": "string"
+        },
+        "state3": {
+          "type": "string"
+        },
+        "state4": {
+          "type": "string"
+        },
+        "state5": {
+          "type": "string"
+        },
+        "state6": {
+          "type": "string"
+        },
+        "state7": {
+          "type": "string"
+        },
+        "tagname": {
+          "type": "string"
+        },
+        "textarylen": {
+          "type": "integer"
+        },
+        "textlen": {
+          "description": "text",
+          "type": "integer"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "model.ConstUpdate": {
+      "type": "object",
+      "properties": {
+        "analen": {
+          "type": "integer"
+        },
+        "area": {
+          "type": "integer"
+        },
+        "createtimestamp": {
+          "type": "string"
+        },
+        "dataType": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "displaydec": {
+          "type": "integer"
+        },
+        "displayint": {
+          "description": "analog",
+          "type": "integer"
+        },
+        "level": {
+          "type": "integer"
+        },
+        "modifytimestamp": {
+          "type": "string"
+        },
+        "oritagname": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "spanhi": {
+          "type": "number"
+        },
+        "spanlo": {
+          "type": "number"
+        },
+        "state0": {
+          "description": "discrete",
+          "type": "string"
+        },
+        "state1": {
+          "type": "string"
+        },
+        "state2": {
+          "type": "string"
+        },
+        "state3": {
+          "type": "string"
+        },
+        "state4": {
+          "type": "string"
+        },
+        "state5": {
+          "type": "string"
+        },
+        "state6": {
+          "type": "string"
+        },
+        "state7": {
+          "type": "string"
+        },
+        "tagname": {
+          "type": "string"
+        },
+        "textarylen": {
+          "type": "integer"
+        },
+        "textlen": {
+          "description": "text",
+          "type": "integer"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "model.ContainJS": {
+      "type": "object",
+      "properties": {
+        "jsids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "pathid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.CopyObject": {
+      "type": "object",
+      "properties": {
+        "newobjectid": {
+          "type": "string"
+        },
+        "newobjectname": {
+          "type": "string"
+        },
+        "newparentpathid": {
+          "type": "integer"
+        },
+        "newpathid": {
+          "type": "integer"
+        },
+        "objectid": {
+          "type": "string"
+        },
+        "objectname": {
+          "type": "string"
+        },
+        "objecttype": {
+          "type": "integer"
+        },
+        "pathid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.CopyObject1": {
+      "type": "object",
+      "properties": {
+        "fileexist": {
+          "type": "boolean"
+        },
+        "fullpathtext": {
+          "type": "string"
+        },
+        "newfullpathtext": {
+          "type": "string"
+        },
+        "newobjectid": {
+          "type": "string"
+        },
+        "newobjectname": {
+          "type": "string"
+        },
+        "newparentpathid": {
+          "type": "integer"
+        },
+        "newpathid": {
+          "type": "integer"
+        },
+        "objectid": {
+          "type": "string"
+        },
+        "objectname": {
+          "type": "string"
+        },
+        "objecttype": {
+          "type": "integer"
+        },
+        "parentpathid": {
+          "type": "integer"
+        },
+        "pathid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.CreateDisplayAPIResObj": {
+      "type": "object",
+      "properties": {
+        "displayid": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pathid": {
+          "type": "integer"
+        },
+        "phoneversion": {
+          "type": "integer"
+        },
+        "tabletversion": {
+          "type": "integer"
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.CreateDisplayRes": {
+      "type": "object",
+      "properties": {
+        "createupdateresult": {
+          "$ref": "#/definitions/model.CreateDisplayAPIResObj"
+        }
+      }
+    },
+    "model.CreateJSReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "jscontent": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "model.CreateJSRes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pathid": {
+          "type": "integer"
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.DBDefine": {
+      "type": "object",
+      "properties": {
+        "dbtype": {
+          "type": "string"
+        },
+        "descript": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "model.DBDefineBody": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "model.DMVariableExchange": {
+      "type": "object",
+      "properties": {
+        "dmid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "no": {
+          "type": "integer"
+        },
+        "projid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.DataModelID": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.DataModelStruct": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "importpw": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "thumbnail": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.DataModelVariImport": {
+      "type": "object",
+      "properties": {
+        "dmid": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.DataModelVariStruct"
+          }
+        }
+      }
+    },
+    "model.DataModelVariStruct": {
+      "type": "object",
+      "properties": {
+        "area": {
+          "type": "integer"
+        },
+        "consttype": {
+          "type": "string"
+        },
+        "decpl": {
+          "type": "integer"
+        },
+        "dmid": {
+          "type": "string"
+        },
+        "event": {
+          "type": "boolean"
+        },
+        "info": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "interval": {
+          "type": "integer"
+        },
+        "label": {
+          "type": "string"
+        },
+        "level": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "regex": {
+          "type": "string"
+        },
+        "sequence": {
+          "type": "integer"
+        },
+        "spanhi": {
+          "type": "number"
+        },
+        "spanlo": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "model.DataModelVariUpdate": {
+      "type": "object",
+      "properties": {
+        "area": {
+          "type": "integer"
+        },
+        "consttype": {
+          "type": "string"
+        },
+        "decpl": {
+          "type": "integer"
+        },
+        "dmid": {
+          "type": "string"
+        },
+        "event": {
+          "type": "boolean"
+        },
+        "info": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "interval": {
+          "type": "integer"
+        },
+        "label": {
+          "type": "string"
+        },
+        "level": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "oriname": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "regex": {
+          "type": "string"
+        },
+        "spanhi": {
+          "type": "number"
+        },
+        "spanlo": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "model.DataModelVariableDelete": {
+      "type": "object",
+      "properties": {
+        "variables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "dmid": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "projid": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "model.DataModeldmID": {
+      "type": "object",
+      "properties": {
+        "dmid": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.DataSource": {
+      "type": "object",
+      "properties": {
+        "dbtype": {
+          "type": "string"
+        },
+        "descript": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "sourcetype": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.DataSourceBody": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "type": "string"
+        },
+        "sourcetype": {
+          "type": "integer"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "model.DataSourceHead": {
+      "type": "object",
+      "properties": {
+        "dbtype": {
+          "type": "string"
+        },
+        "descript": {
+          "type": "string"
+        },
+        "info": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.DataSourceBody"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "sourcetype": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.DeleteAudioReq": {
+      "type": "object",
+      "properties": {
+        "audioids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "model.DeleteDisplayReq": {
+      "type": "object",
+      "properties": {
+        "displayids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "mobileids": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "type": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "model.DeleteFolderReq": {
+      "type": "object",
+      "properties": {
+        "pathids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "model.DeleteJSReq": {
+      "type": "object",
+      "properties": {
+        "jsids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "model.Display": {
+      "type": "object",
+      "properties": {
+        "fullpathtext": {
+          "description": "Path       string `db:\"displaypath\" json:\"path\"`",
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        }
+      }
+    },
+    "model.DisplayDetail": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "fullpath": {
+          "type": "string"
+        },
+        "fullpathtext": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pathid": {
+          "type": "integer"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.DisplayDetailMobileVer": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "fullpath": {
+          "type": "string"
+        },
+        "fullpathtext": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pathid": {
+          "type": "integer"
+        },
+        "phoneversion": {
+          "type": "integer"
+        },
+        "tabletversion": {
+          "type": "integer"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.DisplayVersionInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "phoneversion": {
+          "type": "integer"
+        },
+        "tabletversion": {
+          "type": "integer"
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.DisplayVersionRes": {
+      "type": "object",
+      "properties": {
+        "phoneversion": {
+          "type": "integer"
+        },
+        "tabletversion": {
+          "type": "integer"
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.FCMDeviceProjectStruct": {
+      "type": "object",
+      "properties": {
+        "alarmLevel": {
+          "type": "integer"
+        },
+        "deviceID": {
+          "type": "string"
+        },
+        "projectID": {
+          "type": "integer"
+        },
+        "projectName": {
+          "type": "string"
+        },
+        "projectToken": {
+          "type": "string"
+        }
+      }
+    },
+    "model.FCMDeviceProjects": {
+      "type": "object",
+      "properties": {
+        "continueMinute": {
+          "type": "integer"
+        },
+        "dataSource": {
+          "type": "integer"
+        },
+        "deviceID": {
+          "description": "unique id of a mobile device",
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "lastUpdate": {
+          "type": "integer"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "projectList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.FCMDeviceProjectStruct"
+          }
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "model.FileCacheMeta": {
+      "type": "object",
+      "properties": {
+        "filename": {
+          "type": "string"
+        },
+        "objecttype": {
+          "type": "integer"
+        },
+        "parentpathid": {
+          "type": "integer"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "salt": {
+          "type": "string"
+        },
+        "ver": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.FileIDsReq": {
+      "type": "object",
+      "properties": {
+        "fileids": {
+          "type": "array",
+          "items": {}
+        },
+        "projID": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.FileStruct": {
+      "type": "object",
+      "properties": {
+        "filetype": {
+          "type": "string"
+        },
+        "fullpathtext": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        }
+      }
+    },
+    "model.GUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "usertype": {
+          "type": "string"
+        }
+      }
+    },
+    "model.GUserIDList": {
+      "type": "object",
+      "properties": {
+        "projid": {
+          "type": "integer"
+        },
+        "userids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "model.GUserProj": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "usertype": {
+          "type": "string"
+        }
+      }
+    },
+    "model.GUserProjList": {
+      "type": "object",
+      "properties": {
+        "graphicusers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.GUser"
+          }
+        },
+        "projid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.GetNextLevelbyidRes": {
+      "type": "object",
+      "properties": {
+        "objectlist": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.NextLevelObj"
+          }
+        }
+      }
+    },
+    "model.GroupDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "model.JSDetailRes": {
+      "type": "object",
+      "properties": {
+        "fullpath": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "jscontent": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.JSListObject": {
+      "type": "object",
+      "properties": {
+        "fullpath": {
+          "type": "string"
+        },
+        "fullpathtext": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.JSPathList": {
+      "type": "object",
+      "properties": {
+        "fullpathtext": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "model.JSVersionObj": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.LimitPath": {
+      "type": "object",
+      "properties": {
+        "extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "objectIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "objectType": {
+          "type": "integer"
+        },
+        "pathIds": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "model.MQTTBrokerSetting": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "keepalive": {
+          "type": "integer"
+        },
+        "password": {
+          "type": "string"
+        },
+        "tcpport": {
+          "type": "integer"
+        },
+        "tlsport": {
+          "type": "integer"
+        },
+        "username": {
+          "type": "string"
+        },
+        "websocketport": {
+          "type": "integer"
+        },
+        "websockettlsport": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.MoveObjectReq": {
+      "type": "object",
+      "properties": {
+        "pathid": {
+          "type": "integer"
+        },
+        "targetpathid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.NextLevelObj": {
+      "type": "object",
+      "properties": {
+        "displayid": {
+          "type": "integer"
+        },
+        "fullpath": {
+          "type": "string"
+        },
+        "fullpathtext": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "objectid": {
+          "type": "string"
+        },
+        "objectname": {
+          "type": "string"
+        },
+        "objecttype": {
+          "type": "integer"
+        },
+        "parentpathid": {
+          "type": "integer"
+        },
+        "projid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.ObjectExport": {
+      "type": "object",
+      "properties": {
+        "globalvaris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "importpw": {
+          "type": "string"
+        },
+        "pathids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "recordids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "model.PluginFileDrift": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.ProjIDList": {
+      "type": "object",
+      "properties": {
+        "projids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "model.QuerySearchUnderPath": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.LimitPath"
+          }
+        },
+        "searchName": {
+          "type": "string"
+        }
+      }
+    },
+    "model.ReNameReq": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "pathid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.RecipeChange": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "recipevalue": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.RecipeValue"
+          }
+        }
+      }
+    },
+    "model.RecipeDelete": {
+      "type": "object",
+      "properties": {
+        "recipe": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.RecipeID"
+          }
+        }
+      }
+    },
+    "model.RecipeID": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.RecipeListStruct": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "dwarea": {
+          "type": "integer"
+        },
+        "dwlevel": {
+          "type": "integer"
+        },
+        "editarea": {
+          "type": "integer"
+        },
+        "editlevel": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "readonly": {
+          "type": "boolean"
+        }
+      }
+    },
+    "model.RecipeStruct": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "dwarea": {
+          "type": "integer"
+        },
+        "dwlevel": {
+          "type": "integer"
+        },
+        "editarea": {
+          "type": "integer"
+        },
+        "editlevel": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "oriname": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "readonly": {
+          "type": "boolean"
+        },
+        "recipeunit": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/model.RecipeUnit"
+            }
+          }
+        },
+        "recipevalue": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.RecipeValue"
+          }
+        },
+        "tolerance": {
+          "type": "number"
+        }
+      }
+    },
+    "model.RecipeUnit": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "seqnbr": {
+          "type": "integer"
+        },
+        "tagname": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        }
+      }
+    },
+    "model.RecipeValue": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "seqnbr": {
+          "type": "integer"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "model.RecordDelete": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "model.RecordStruct": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "funcname": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "info": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "source": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.SecurityDetail": {
+      "type": "object",
+      "properties": {
+        "area": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "descript": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.TagConfigBody": {
+      "type": "object",
+      "properties": {
+        "displaydec": {
+          "type": "integer"
+        },
+        "displayint": {
+          "type": "integer"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "spanhi": {
+          "type": "number"
+        },
+        "spanlo": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "model.TagDelete": {
+      "type": "object",
+      "properties": {
+        "connectname": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "tagnames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "model.TagDetail": {
+      "type": "object",
+      "properties": {
+        "connectname": {
+          "type": "string"
+        },
+        "createtimestamp": {
+          "type": "string"
+        },
+        "dataType": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "displaydec": {
+          "type": "integer"
+        },
+        "displayint": {
+          "type": "integer"
+        },
+        "modifytimestamp": {
+          "type": "string"
+        },
+        "nodeid": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "spanhi": {
+          "type": "number"
+        },
+        "spanlo": {
+          "type": "number"
+        },
+        "tagname": {
+          "type": "string"
+        }
+      }
+    },
+    "model.TagListFilter": {
+      "type": "object",
+      "properties": {
+        "connname": {
+          "type": "string"
+        },
+        "getfromserver": {
+          "type": "boolean"
+        }
+      }
+    },
+    "model.TagMultiInsert": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.TagDetail"
+          }
+        }
+      }
+    },
+    "model.TagPage": {
+      "type": "object",
+      "properties": {
+        "CurrentPage": {
+          "type": "integer"
+        },
+        "TagName": {
+          "type": "string"
+        },
+        "TagType": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pageSize": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.TagPath": {
+      "type": "object",
+      "properties": {
+        "connname": {
+          "type": "string"
+        },
+        "nodeid": {
+          "type": "string"
+        }
+      }
+    },
+    "model.TemplateDetail": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "version": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.TemplateIDName": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "model.Tenant": {
+      "type": "object",
+      "properties": {
+        "__typename": {
+          "type": "string"
+        },
+        "defaultpage": {
+          "type": "string"
+        },
+        "depth": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "deviceOnBiRootOrgId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pathid": {
+          "type": "integer"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "usertype": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.TtsAudio": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parentpathid": {
+          "type": "integer"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "model.UploadAudioRes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pathid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.UploadImageRes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pathid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.UserAccess": {
+      "type": "object",
+      "properties": {
+        "ack": {
+          "type": "boolean"
+        },
+        "change": {
+          "type": "boolean"
+        },
+        "displayid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.UserDelete": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "thirdsource": {
+          "type": "boolean"
+        }
+      }
+    },
+    "model.UserEnable": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "userid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.UserFunc": {
+      "type": "object",
+      "properties": {
+        "edit": {
+          "type": "boolean"
+        },
+        "function": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.UserIDList": {
+      "type": "object",
+      "properties": {
+        "userids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "model.UserList": {
+      "type": "object",
+      "properties": {
+        "homename": {
+          "type": "string"
+        },
+        "modifytime": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "usertype": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.UserProj": {
+      "type": "object",
+      "properties": {
+        "projid": {
+          "type": "integer"
+        },
+        "usertype": {
+          "type": "string"
+        }
+      }
+    },
+    "model.UserProjNamePass": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.UserUpdate": {
+      "type": "object",
+      "properties": {
+        "access": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.UserAccess"
+          }
+        },
+        "ack": {
+          "type": "boolean"
+        },
+        "area": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "change": {
+          "type": "boolean"
+        },
+        "home": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "sourceuserid": {
+          "type": "string"
+        },
+        "thirdsource": {
+          "type": "boolean"
+        },
+        "updatepw": {
+          "type": "boolean"
+        },
+        "usertype": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.UserUpdatePW": {
+      "type": "object",
+      "properties": {
+        "newpassword": {
+          "type": "string"
+        },
+        "oldpassword": {
+          "type": "string"
+        }
+      }
+    },
+    "model.VariImport": {
+      "type": "object",
+      "properties": {
+        "displayid": {
+          "type": "integer"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/model.VariableStruct"
+          }
+        }
+      }
+    },
+    "model.VariableDelete": {
+      "type": "object",
+      "properties": {
+        "variables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "displayid": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "projid": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "model.VariableExchange": {
+      "type": "object",
+      "properties": {
+        "displayid": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "no": {
+          "type": "integer"
+        },
+        "projid": {
+          "type": "integer"
+        }
+      }
+    },
+    "model.VariableStruct": {
+      "type": "object",
+      "properties": {
+        "area": {
+          "type": "integer"
+        },
+        "consttype": {
+          "type": "string"
+        },
+        "decpl": {
+          "type": "integer"
+        },
+        "displayid": {
+          "type": "integer"
+        },
+        "displayname": {
+          "type": "string"
+        },
+        "event": {
+          "type": "boolean"
+        },
+        "info": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "interval": {
+          "type": "integer"
+        },
+        "label": {
+          "type": "string"
+        },
+        "level": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "regex": {
+          "type": "string"
+        },
+        "sequence": {
+          "type": "integer"
+        },
+        "spanhi": {
+          "type": "number"
+        },
+        "spanlo": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "model.VariableUpdate": {
+      "type": "object",
+      "properties": {
+        "area": {
+          "type": "integer"
+        },
+        "consttype": {
+          "type": "string"
+        },
+        "decpl": {
+          "type": "integer"
+        },
+        "displayid": {
+          "type": "integer"
+        },
+        "event": {
+          "type": "boolean"
+        },
+        "info": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "interval": {
+          "type": "integer"
+        },
+        "label": {
+          "type": "string"
+        },
+        "level": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "oriname": {
+          "type": "string"
+        },
+        "projid": {
+          "type": "integer"
+        },
+        "regex": {
+          "type": "string"
+        },
+        "spanhi": {
+          "type": "number"
+        },
+        "spanlo": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "service.ProductInfo": {
+      "type": "object",
+      "properties": {
+        "dataSource": {
+          "type": "string"
+        },
+        "serialNumber": {
+          "type": "string"
+        },
+        "validUntil": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "GraphicSession": {
+      "type": "apiKey",
+      "name": "graphicSession",
+      "in": "cookie"
+    },
+    "SettingSession": {
+      "type": "apiKey",
+      "name": "settingSession",
+      "in": "cookie"
+    }
+  }
+}
