@@ -6,7 +6,7 @@
 <db:titleabbrev>EdgeView</db:titleabbrev>
 <db:abstract>
 <db:para>顯示文字內容的 Widget。.</db:para>
-<db:para>This type was introduced in Qt 1.0.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
 </db:abstract>
 </db:info>
 <db:variablelist>
@@ -19,7 +19,7 @@
 <db:varlistentry>
 <db:term>Since:</db:term>
 <db:listitem>
-<db:para>Qt 1.0</db:para>
+<db:para>Qt 6.8</db:para>
 </db:listitem>
 </db:varlistentry>
 <db:varlistentry>
