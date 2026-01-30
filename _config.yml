@@ -1,0 +1,4 @@
+title: EdgeView Pages Site
+description: EdgeView site for document pages
+theme: minima       # GitHub Pages 原生支援的主題
+markdown: kramdown  # Markdown 渲染器，GitHub Pages 預設
