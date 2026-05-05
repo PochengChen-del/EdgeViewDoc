@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- Pagination.qml -->
+  <meta name="description" content="分頁切換元件。">
+  <title>Pagination QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>Pagination</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">Pagination QML Type</h1>
+<!-- $$$Pagination-brief -->
+<p>分頁切換元件。. <a href="#details">More...</a></p>
+<!-- @@@Pagination -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-inputcombo.html" translate="no">InputCombo</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-pagination-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-pagination.html#currentPage-prop" translate="no">currentPage</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagination.html#radius-prop" translate="no">radius</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagination.html#totalPage-prop" translate="no">totalPage</a></b> : int</li>
+</ul>
+<!-- $$$Pagination-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供頁碼顯示與前後頁切換控制，用於列表或資料分頁</summary>
+<p>UI。</p>
+<p>支援功能：</p>
+<ul>
+<li>主題樣式控制（themeName）</li>
+<li>多尺寸顯示（sizeType）</li>
+<li>頁碼顯示（<a href="qml-sc-pagination.html#currentPage-prop" translate="no">currentPage</a>, total）</li>
+<li>頁碼切換控制</li>
+</ul>
+<!-- @@@Pagination -->
+<h2>Property Documentation</h2>
+<!-- $$$currentPage -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentPage-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentPage</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前頁碼。範圍為 1 ~ <a href="qml-sc-pagination.html#totalPage-prop" translate="no">totalPage</a>，超出範圍會自動修正。</p>
+<p>預設 1。</p>
+</div></div><!-- @@@currentPage -->
+<br/>
+<!-- $$$radius -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="radius-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">radius</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>按鈕圓角半徑。</p>
+<p>預設 4。</p>
+</div></div><!-- @@@radius -->
+<br/>
+<!-- $$$totalPage -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="totalPage-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">totalPage</span> : <span class="type">int</span> <code class="details extra" translate="no">[required]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>總頁數。</p>
+<p><b>注意：必須大於等於</b> 1。</p>
+</div></div><!-- @@@totalPage -->
+<br/>
+</body>
+</html>

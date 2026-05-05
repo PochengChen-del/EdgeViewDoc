@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>Validators QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>驗證器集合管理元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>validators）的驗證結果，並提供批次驗證功能。</db:para>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>聚合多個驗證器</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>批次驗證（<db:link xlink:href="qml-sc-validators.xml#validateAll-method">validateAll</db:link>）</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Validator 整合管理（<db:link xlink:href="">manager）</db:link></db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="error-prop">
+<db:title>[read-only] error : bool</db:title>
+<db:para>是否存在任一驗證錯誤。</db:para>
+</db:section>
+<db:section xml:id="manager-prop">
+<db:title>manager : QtObject</db:title>
+<db:para>Validator 管理器。</db:para>
+<db:para>當設定時，會自動將此 Validators 註冊至 manager。</db:para>
+</db:section>
+<db:section xml:id="preManager-prop">
+<db:title>preManager : QtObject</db:title>
+<db:para>前一個管理器。</db:para>
+<db:para>處理 <db:link xlink:href="qml-sc-validators.xml#manager-prop">manager</db:link> 變更時，獎此驗證器從前一個 <db:link xlink:href="qml-sc-validators.xml#manager-prop">manager</db:link> 中移除。</db:para>
+</db:section>
+<db:section xml:id="target-prop">
+<db:title>target : QtObject</db:title>
+<db:para>綁定的目標元件。通常為表單容器或資料來源。</db:para>
+</db:section>
+<db:section xml:id="validators-prop">
+<db:title>validators : var</db:title>
+<db:para>驗證器列表。</db:para>
+<db:para>元素可以為：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>Validator</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Validators（巢狀）</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="add-method">
+<db:title>void add(QtObject <db:emphasis>vldr</db:emphasis>)</db:title>
+<db:para>新增驗證器。</db:para>
+<db:para><db:code role="parameter">vldr</db:code> Validator 或 Validators</db:para>
+</db:section>
+<db:section xml:id="remove-method">
+<db:title>void remove(QtObject <db:emphasis>vldr</db:emphasis>)</db:title>
+<db:para>移除驗證器。</db:para>
+<db:para><db:code role="parameter">vldr</db:code> 要移除的驗證器</db:para>
+</db:section>
+<db:section xml:id="validateAll-method">
+<db:title>validateAll()</db:title>
+<db:para>執行所有驗證器的驗證。</db:para>
+<db:para>若子項包含：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>validateAll() → 遞迴呼叫</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>validate() → 單次驗證</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>所有驗證會以 Promise.all 並行執行。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>Promise，resolve 為：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true：全部通過</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false：任一失敗</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+</db:section>
+</db:article>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- TableBodyRow.qml -->
+  <meta name="description" content="資料表資料列容器。">
+  <title>TableBodyRow QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>TableBodyRow</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">TableBodyRow QML Type</h1>
+<!-- $$$TableBodyRow-brief -->
+<p>資料表資料列容器。. <a href="#details">More...</a></p>
+<!-- @@@TableBodyRow -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-tablebodyrow-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodyrow.html#activeState-prop" translate="no">activeState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodyrow.html#actived-prop" translate="no">actived</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodyrow.html#bgColor-prop" translate="no">bgColor</a></b> : StateColor</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodyrow.html#bgCoverGradient-prop" translate="no">bgCoverGradient</a></b> : StateGradient</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodyrow.html#disableState-prop" translate="no">disableState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodyrow.html#hoverState-prop" translate="no">hoverState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodyrow.html#items-prop" translate="no">items</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodyrow.html#normalState-prop" translate="no">normalState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodyrow.html#sizeType-prop" translate="no">sizeType</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodyrow.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodyrow.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">object <b><a href="qml-sc-tablebodyrow.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+</ul>
+<!-- $$$TableBodyRow-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>TableBodyRow</summary>
+<p>用於 <a href="qml-sc-tablelist.html" translate="no">TableList</a> 的 delegate。</p>
+<p>元件內建互動狀態：</p>
+<ul>
+<li>normal</li>
+<li>hover</li>
+<li>active</li>
+<li>disable</li>
+</ul>
+<!-- @@@TableBodyRow -->
+<h2>Property Documentation</h2>
+<!-- $$$activeState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="activeState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">activeState</span> : <span class="type">State</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>active 狀態設定。</p>
+</div></div><!-- @@@activeState -->
+<br/>
+<!-- $$$actived -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="actived-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">actived</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否為 active。</p>
+<p>預設綁定 pressed。</p>
+</div></div><!-- @@@actived -->
+<br/>
+<!-- $$$bgColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bgColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bgColor</span> : <span class="type">StateColor</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>各狀態背景顏色設定。</p>
+</div></div><!-- @@@bgColor -->
+<br/>
+<!-- $$$bgCoverGradient -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bgCoverGradient-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bgCoverGradient</span> : <span class="type">StateGradient</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>各狀態背景漸層設定。</p>
+</div></div><!-- @@@bgCoverGradient -->
+<br/>
+<!-- $$$disableState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="disableState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">disableState</span> : <span class="type">State</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>disable 狀態設定。</p>
+</div></div><!-- @@@disableState -->
+<br/>
+<!-- $$$hoverState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="hoverState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">hoverState</span> : <span class="type">State</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>hover 狀態設定。</p>
+</div></div><!-- @@@hoverState -->
+<br/>
+<!-- $$$items -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="items-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">items</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>子元件列表。</p>
+</div></div><!-- @@@items -->
+<br/>
+<!-- $$$normalState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="normalState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">normalState</span> : <span class="type">State</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>normal 狀態設定。</p>
+</div></div><!-- @@@normalState -->
+<br/>
+<!-- $$$sizeType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sizeType-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">sizeType</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>尺寸類型，控制顯示的大小。</p>
+<p>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</p>
+<ul>
+<li>true → Define.SizeType.Small</li>
+<li>false → Define.SizeType.Medium</li>
+</ul>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Constant</th><th >Description</th></tr></thead>
+<tr valign="top" class="odd"><td >Define.SizeType.Small</td><td >小尺寸</td></tr>
+<tr valign="top" class="even"><td >Define.SizeType.Medium</td><td >中尺寸</td></tr>
+</table></div>
+</div></div><!-- @@@sizeType -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-tablebodyrow.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+</body>
+</html>

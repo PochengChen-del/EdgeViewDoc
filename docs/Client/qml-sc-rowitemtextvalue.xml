@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>RowItemTextValue QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>單行文字與值顯示元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-rowitembase.xml">RowItemBase</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>是 <db:link xlink:href="qml-sc-rowitembase.xml">RowItemBase</db:link> 的實作元件。</db:para>
+<db:para>提供顯示左側文字與右側對應值。</db:para>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>文字顯示（<db:link xlink:href="">text）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>值顯示（<db:link xlink:href="">value）</db:link></db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="showValue-prop">
+<db:title>showValue : bool</db:title>
+<db:para>是否顯示右側值。</db:para>
+</db:section>
+<db:section xml:id="text-prop">
+<db:title>text : string</db:title>
+<db:para>顯示文字。</db:para>
+</db:section>
+<db:section xml:id="textElide-prop">
+<db:title>textElide : enumeration</db:title>
+<db:para>文字省略模式。</db:para>
+</db:section>
+<db:section xml:id="textFont-prop">
+<db:title>textFont : font</db:title>
+<db:para>文字字型。</db:para>
+</db:section>
+<db:section xml:id="textLineCount-prop">
+<db:title>[read-only] textLineCount : int</db:title>
+<db:para>文字實際顯示行數。</db:para>
+</db:section>
+<db:section xml:id="textLineHeight-prop">
+<db:title>textLineHeight : real</db:title>
+<db:para>文字行高。</db:para>
+</db:section>
+<db:section xml:id="textMaxLineCount-prop">
+<db:title>textMaxLineCount : int</db:title>
+<db:para>文字最大行數限制。</db:para>
+<db:para>當 <db:link xlink:href="qml-sc-rowitemtextvalue.xml#textWrapMode-prop">textWrapMode</db:link> 允許多行時，此屬性用來限制最多顯示行數。設為 0 表示不限制行數。</db:para>
+</db:section>
+<db:section xml:id="textWrapMode-prop">
+<db:title>textWrapMode : enumeration</db:title>
+<db:para>文字換行模式。</db:para>
+</db:section>
+<db:section xml:id="value-prop">
+<db:title>value : string</db:title>
+<db:para>右側值文字。</db:para>
+</db:section>
+<db:section xml:id="valueElide-prop">
+<db:title>valueElide : enumeration</db:title>
+<db:para>右側值省略模式。</db:para>
+</db:section>
+<db:section xml:id="valueFont-prop">
+<db:title>valueFont : font</db:title>
+<db:para>右側值字型。</db:para>
+</db:section>
+<db:section xml:id="valueLineCount-prop">
+<db:title>[read-only] valueLineCount : int</db:title>
+<db:para>右側值實際顯示行數。</db:para>
+</db:section>
+<db:section xml:id="valueLineHeight-prop">
+<db:title>valueLineHeight : real</db:title>
+<db:para>右側值行高。</db:para>
+</db:section>
+<db:section xml:id="valueMaxLineCount-prop">
+<db:title>valueMaxLineCount : int</db:title>
+<db:para>右側值最大行數限制。</db:para>
+<db:para>當 <db:link xlink:href="qml-sc-rowitemtextvalue.xml#textWrapMode-prop">textWrapMode</db:link> 允許多行時，此屬性用來限制最多顯示行數。設為 0 表示不限制行數。</db:para>
+</db:section>
+<db:section xml:id="valueMinWidth-prop">
+<db:title>valueMinWidth : real</db:title>
+<db:para>右側值最小寬度。</db:para>
+<db:para>確保右側值在內容寬度過短時，仍保有基本顯示寬度，同時避免擠壓左側文字。</db:para>
+<db:para>預設 48。</db:para>
+</db:section>
+<db:section xml:id="valueWrapMode-prop">
+<db:title>valueWrapMode : enumeration</db:title>
+<db:para>右側值換行模式。</db:para>
+</db:section>
+</db:section>
+</db:article>

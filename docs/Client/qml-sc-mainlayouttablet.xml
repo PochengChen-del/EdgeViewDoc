@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>MainLayoutTablet QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>平板主版面配置容器。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>元件組成：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>Header：標題列與功能按鈕</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Navbar：側邊導覽</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Page：頁面內容</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Overlay：覆蓋頁面</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Header 功能觸發（<db:link xlink:href="">headerFuncModel）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>導覽列控制（<db:link xlink:href="">navModel）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>覆蓋頁面管理</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>自訂頁面內容（<db:link xlink:href="">pageItem）</db:link></db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>使用：</db:para>
+<db:programlisting language="cpp">MainLayoutTablet {
+    anchors.fill: parent
+    pageItem: Item {
+        anchors.fill: parent
+    }
+}
+</db:programlisting>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="acting-prop">
+<db:title>[read-only] acting : bool</db:title>
+<db:para>是否處於執行中狀態。</db:para>
+</db:section>
+<db:section xml:id="actionStatus-prop">
+<db:title>actionStatus : int</db:title>
+<db:para>當前操作狀態（Define.LoadStatus）。</db:para>
+</db:section>
+<db:section xml:id="bottomSafeMargins-prop">
+<db:title>bottomSafeMargins : real</db:title>
+<db:para>下方安全邊界。</db:para>
+</db:section>
+<db:section xml:id="currentNavValues-prop">
+<db:title>currentNavValues : var</db:title>
+<db:para>目前選取的導覽值。</db:para>
+</db:section>
+<db:section xml:id="headerFuncCount-prop">
+<db:title>[read-only] headerFuncCount : int</db:title>
+<db:para>Header 功能按鈕數量。</db:para>
+</db:section>
+<db:section xml:id="headerFuncIsArray-prop">
+<db:title>[read-only] headerFuncIsArray : bool</db:title>
+<db:para>判斷目前 <db:link xlink:href="qml-sc-mainlayouttablet.xml#headerFuncModel-prop">headerFuncModel</db:link> 是否為 Array 型態。</db:para>
+</db:section>
+<db:section xml:id="headerFuncModel-prop">
+<db:title>headerFuncModel : var</db:title>
+<db:para>Header 功能按鈕資料來源。</db:para>
+</db:section>
+<db:section xml:id="leftSafeMargins-prop">
+<db:title>leftSafeMargins : real</db:title>
+<db:para>左側安全邊界。</db:para>
+</db:section>
+<db:section xml:id="navCount-prop">
+<db:title>[read-only] navCount : int</db:title>
+<db:para>導覽項目數量。</db:para>
+</db:section>
+<db:section xml:id="navIsArray-prop">
+<db:title>[read-only] navIsArray : bool</db:title>
+<db:para>判斷目前 <db:link xlink:href="qml-sc-mainlayouttablet.xml#navModel-prop">navModel</db:link> 是否為 Array 型態。</db:para>
+</db:section>
+<db:section xml:id="navModel-prop">
+<db:title>navModel : var</db:title>
+<db:para>導覽列功能資料來源。</db:para>
+</db:section>
+<db:section xml:id="pageItem-prop">
+<db:title>pageItem : Item</db:title>
+<db:para>頁面內容區域的子元件。</db:para>
+</db:section>
+<db:section xml:id="rightSafeMargins-prop">
+<db:title>rightSafeMargins : real</db:title>
+<db:para>右側安全邊界。</db:para>
+</db:section>
+<db:section xml:id="showTitleBar-prop">
+<db:title>showTitleBar : bool</db:title>
+<db:para>是否顯示標題文字。</db:para>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="themeStyle-prop">
+<db:title>[read-only] themeStyle : var</db:title>
+<db:para>主題樣式設定物件。</db:para>
+<db:para>此屬性為唯讀，透過 <db:link xlink:href="qml-sc-mainlayouttablet.xml#getThemeStyle-method">getThemeStyle</db:link>() 動態產生。</db:para>
+</db:section>
+<db:section xml:id="title-prop">
+<db:title>title : string</db:title>
+<db:para>標題文字。</db:para>
+</db:section>
+<db:section xml:id="topSafeMargins-prop">
+<db:title>topSafeMargins : real</db:title>
+<db:para>上方安全邊界。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="signal-documentation">
+<db:title>Signal Documentation</db:title>
+<db:section xml:id="headerFuncClicked-signal">
+<db:title>headerFuncClicked(string <db:emphasis>funcName</db:emphasis>)</db:title>
+<db:para>點擊 Header 功能按鈕時觸發。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>funcName 功能名稱。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onHeaderFuncClicked</db:code>.</db:para>
+</db:note>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="collapseNavbar-method">
+<db:title>void collapseNavbar()</db:title>
+<db:para>收合側邊導覽。</db:para>
+</db:section>
+<db:section xml:id="expandNavbar-method">
+<db:title>void expandNavbar()</db:title>
+<db:para>展開側邊導覽。</db:para>
+</db:section>
+<db:section xml:id="getThemeStyle-method">
+<db:title>object getThemeStyle()</db:title>
+<db:para>取得主題樣式設定物件。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題樣式設定物件。</db:para>
+</db:section>
+<db:section xml:id="navCheckBeforeSelect-method">
+<db:title>Promise navCheckBeforeSelect()</db:title>
+<db:para>導覽切換前的檢查流程。</db:para>
+<db:para>可用於：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>權限驗證</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>未儲存資料確認</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>非同步流程（API 檢查）</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>Promise&lt;bool&gt;，true 表示允許切換</db:para>
+</db:section>
+<db:section xml:id="navEnabled-method">
+<db:title>bool navEnabled(var <db:emphasis>navData</db:emphasis>, array <db:emphasis>values</db:emphasis>)</db:title>
+<db:para>判斷導覽項目是否啟用。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>navData 導覽項目資料 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> values 當前導覽值 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis> bool</db:para>
+<db:para>可覆寫。</db:para>
+</db:section>
+<db:section xml:id="navI18nText-method">
+<db:title>string navI18nText(object <db:emphasis>navData</db:emphasis>, array <db:emphasis>values</db:emphasis>)</db:title>
+<db:para>取得導覽項目的顯示文字。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>navData 導覽項目資料 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> values 當前導覽值 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis> string</db:para>
+<db:para>可覆寫。</db:para>
+</db:section>
+<db:section xml:id="navNotified-method">
+<db:title>bool navNotified(var <db:emphasis>navData</db:emphasis>, var <db:emphasis>values</db:emphasis>)</db:title>
+<db:para>判斷導覽項目是否顯示通知狀態。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>navData 導覽項目資料 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> values 當前導覽值 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis> bool</db:para>
+<db:para>可覆寫。</db:para>
+</db:section>
+<db:section xml:id="navSelect-method">
+<db:title>void navSelect(var <db:emphasis>values</db:emphasis>)</db:title>
+<db:para>選擇指定導覽項目。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>values 導覽值。</db:para>
+</db:section>
+<db:section xml:id="navSelectFirst-method">
+<db:title>void navSelectFirst()</db:title>
+<db:para>選擇第一個導覽項目。</db:para>
+</db:section>
+<db:section xml:id="navVisible-method">
+<db:title>bool navVisible(var <db:emphasis>navData</db:emphasis>, array <db:emphasis>values</db:emphasis>)</db:title>
+<db:para>判斷導覽項目是否顯示。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>navData 導覽項目資料 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> values 當前導覽值 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis> bool</db:para>
+<db:para>可覆寫。</db:para>
+</db:section>
+<db:section xml:id="overlayPageClose-method">
+<db:title>void overlayPageClose()</db:title>
+<db:para>關閉 Overlay 頁面。</db:para>
+</db:section>
+<db:section xml:id="overlayPageDestroy-method">
+<db:title>void overlayPageDestroy()</db:title>
+<db:para>銷毀 Overlay 頁面。</db:para>
+</db:section>
+<db:section xml:id="overlayPageOpen-method">
+<db:title>void overlayPageOpen(string <db:emphasis>componentId</db:emphasis>, object <db:emphasis>properties</db:emphasis>)</db:title>
+<db:para>開啟 Overlay 頁面。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>componentId 元件 ID。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> properties 傳入屬性。</db:para>
+</db:section>
+</db:section>
+</db:article>

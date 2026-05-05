@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>FormSlider QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>表單滑動選擇元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>此元件與其他 Form 元件提供一致的表單互動行為與樣式，並透過 <db:link xlink:href="qml-sc-formslider.xml#wavalidator-prop">wavalidator</db:link> 提供驗證功能。</db:para>
+<db:para>元件內建互動狀態：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>normal</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>hover</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>active</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>disable</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>readonly</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>各狀態會繼承對應的 base state（例如 normal → normalbase）， 並透過 <db:link xlink:href="qml-sc-formslider.xml#themeStyle-prop">themeStyle</db:link> 套用背景、邊框與內容顏色等。</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="activeBaseState-prop">
+<db:title>[read-only] activeBaseState : State</db:title>
+<db:para>active 狀態基礎設定。由 active 繼承。</db:para>
+</db:section>
+<db:section xml:id="activeState-prop">
+<db:title>activeState : State</db:title>
+<db:para>active 狀態設定（繼承 activebase）。</db:para>
+</db:section>
+<db:section xml:id="actived-prop">
+<db:title>actived : bool</db:title>
+<db:para>是否為 active。</db:para>
+<db:para>預設綁定 focus。</db:para>
+</db:section>
+<db:section xml:id="bdColor-prop">
+<db:title>bdColor : StateColor</db:title>
+<db:para>各狀態邊框顏色設定。</db:para>
+</db:section>
+<db:section xml:id="bgColor-prop">
+<db:title>bgColor : StateColor</db:title>
+<db:para>各狀態背景顏色設定。</db:para>
+</db:section>
+<db:section xml:id="bgCoverGradient-prop">
+<db:title>bgCoverGradient : StateGradient</db:title>
+<db:para>各狀態背景漸層設定。</db:para>
+</db:section>
+<db:section xml:id="comboPosition-prop">
+<db:title>comboPosition : enumeration</db:title>
+<db:para>位於組合按鈕中的位置。</db:para>
+<db:para>預設 Define.ComboPosition.Center。</db:para>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.ComboPosition.Left</db:para>
+</db:td>
+<db:td>
+<db:para>左側。</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.ComboPosition.Center</db:para>
+</db:td>
+<db:td>
+<db:para>中間。</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.ComboPosition.Right</db:para>
+</db:td>
+<db:td>
+<db:para>右側。</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+<db:section xml:id="disableBaseState-prop">
+<db:title>[read-only] disableBaseState : State</db:title>
+<db:para>disable 狀態基礎設定。由 disable 繼承。</db:para>
+</db:section>
+<db:section xml:id="disableState-prop">
+<db:title>disableState : State</db:title>
+<db:para>disable 狀態設定（繼承 disablebase）。</db:para>
+</db:section>
+<db:section xml:id="displayValue-prop">
+<db:title>displayValue : string</db:title>
+<db:para>顯示的數值文字。</db:para>
+<db:para>預設 value 字串。</db:para>
+</db:section>
+<db:section xml:id="handleBDColor-prop">
+<db:title>handleBDColor : StateColor</db:title>
+<db:para>各狀態滑塊邊框顏色設定。</db:para>
+</db:section>
+<db:section xml:id="handleBGColor-prop">
+<db:title>handleBGColor : StateColor</db:title>
+<db:para>各狀態滑塊背景顏色設定。</db:para>
+</db:section>
+<db:section xml:id="hint-prop">
+<db:title>hint : string</db:title>
+<db:para>提示文字。</db:para>
+</db:section>
+<db:section xml:id="hintColor-prop">
+<db:title>hintColor : StateColor</db:title>
+<db:para>各狀態提示文字顏色設定。</db:para>
+</db:section>
+<db:section xml:id="hoverBaseState-prop">
+<db:title>[read-only] hoverBaseState : State</db:title>
+<db:para>hover 狀態基礎設定。由 hover 繼承。</db:para>
+</db:section>
+<db:section xml:id="hoverState-prop">
+<db:title>hoverState : State</db:title>
+<db:para>hover 狀態設定（繼承 hoverbase）。</db:para>
+</db:section>
+<db:section xml:id="inCombo-prop">
+<db:title>inCombo : bool</db:title>
+<db:para>是否為組合按鈕。</db:para>
+</db:section>
+<db:section xml:id="invalid-prop">
+<db:title>invalid : bool</db:title>
+<db:para>是否為驗證錯誤狀態。</db:para>
+<db:para>預設綁定 wavalidator.error。</db:para>
+</db:section>
+<db:section xml:id="isRequired-prop">
+<db:title>isRequired : bool</db:title>
+<db:para>是否必填。</db:para>
+</db:section>
+<db:section xml:id="leftItem-prop">
+<db:title>leftItem : Item</db:title>
+<db:para>左側自訂內容。放置圖示或其他輔助元件。</db:para>
+</db:section>
+<db:section xml:id="normalBaseState-prop">
+<db:title>[read-only] normalBaseState : State</db:title>
+<db:para>normal 狀態基礎設定。由 normal 繼承。</db:para>
+</db:section>
+<db:section xml:id="normalState-prop">
+<db:title>normalState : State</db:title>
+<db:para>normal 狀態設定（繼承 normalbase）。</db:para>
+</db:section>
+<db:section xml:id="radius-prop">
+<db:title>radius : real</db:title>
+<db:para>圓角半徑。</db:para>
+<db:para>預設 4。</db:para>
+</db:section>
+<db:section xml:id="readOnly-prop">
+<db:title>readOnly : bool</db:title>
+<db:para>是否唯讀。</db:para>
+</db:section>
+<db:section xml:id="readonlyBaseState-prop">
+<db:title>[read-only] readonlyBaseState : State</db:title>
+<db:para>readonly 狀態基礎設定。由 readonly 繼承。</db:para>
+</db:section>
+<db:section xml:id="readonlyState-prop">
+<db:title>readonlyState : State</db:title>
+<db:para>readonly 狀態設定（繼承 readonlybase）。</db:para>
+</db:section>
+<db:section xml:id="reqdColor-prop">
+<db:title>reqdColor : StateColor</db:title>
+<db:para>各狀態必填星號顏色設定。</db:para>
+</db:section>
+<db:section xml:id="rightItem-prop">
+<db:title>rightItem : Item</db:title>
+<db:para>右側自訂內容。放置圖示或其他輔助元件。</db:para>
+</db:section>
+<db:section xml:id="showHint-prop">
+<db:title>showHint : bool</db:title>
+<db:para>是否顯示提示文字。</db:para>
+</db:section>
+<db:section xml:id="showTitle-prop">
+<db:title>showTitle : bool</db:title>
+<db:para>是否顯示標題。</db:para>
+</db:section>
+<db:section xml:id="showValue-prop">
+<db:title>showValue : bool</db:title>
+<db:para>是否顯示目前數值。</db:para>
+<db:para>預設 false。</db:para>
+</db:section>
+<db:section xml:id="sizeType-prop">
+<db:title>sizeType : enumeration</db:title>
+<db:para>尺寸類型，控制顯示的大小。</db:para>
+<db:para>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → Define.SizeType.Small</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → Define.SizeType.Medium</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Small</db:para>
+</db:td>
+<db:td>
+<db:para>小尺寸</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Medium</db:para>
+</db:td>
+<db:td>
+<db:para>中尺寸</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+<db:section xml:id="textColor-prop">
+<db:title>textColor : StateColor</db:title>
+<db:para>各狀態內容文字顏色設定。</db:para>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="themeStyle-prop">
+<db:title>[read-only] themeStyle : var</db:title>
+<db:para>主題樣式設定物件。</db:para>
+<db:para>此屬性為唯讀，透過 <db:link xlink:href="qml-sc-formslider.xml#getThemeStyle-method">getThemeStyle</db:link>() 動態產生。</db:para>
+</db:section>
+<db:section xml:id="title-prop">
+<db:title>title : string</db:title>
+<db:para>標題文字。</db:para>
+</db:section>
+<db:section xml:id="titleColor-prop">
+<db:title>titleColor : StateColor</db:title>
+<db:para>各狀態標題文字顏色設定。</db:para>
+</db:section>
+<db:section xml:id="wavalidator-prop">
+<db:title>wavalidator : Validator</db:title>
+<db:para>欄位驗證器，包含錯誤訊息、必填。</db:para>
+<db:para>使用驗證時，請在 signal validated(var val) 觸發後，再確認驗證結果 -&gt; valueChanged 事件發生較晚。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="getThemeStyle-method">
+<db:title>object getThemeStyle()</db:title>
+<db:para>取得主題樣式設定物件。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題樣式設定物件。</db:para>
+</db:section>
+</db:section>
+</db:article>

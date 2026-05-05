@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>Icon QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>圖示元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherited By:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-icontext.xml" xlink:role="">IconText</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>元件用於顯示 SVG 向量圖示，並支援顏色覆蓋（Color Overlay）。 預設會保持圖示比例縮放，並可透過 <db:link xlink:href="qml-sc-icon.xml#color-prop">color</db:link> 屬性動態改變顯示顏色。</db:para>
+<db:para>元件透過 OpacityMask 機制，將 <db:link xlink:href="qml-sc-icon.xml#color-prop">color</db:link> 套用至圖示形狀。</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="color-prop">
+<db:title>color : color</db:title>
+<db:para>圖示顏色。</db:para>
+<db:para>預設 &quot;transparent&quot;，表示使用圖示原始顏色。</db:para>
+<db:para>當設定為非透明顏色時，會透過 OpacityMask 將顏色套用至圖示形狀。</db:para>
+</db:section>
+<db:section xml:id="colorEnabled-prop">
+<db:title>colorEnabled : bool</db:title>
+<db:para>是否啟用顏色覆蓋。</db:para>
+<db:para>當為 true 時，會使用 <db:link xlink:href="qml-sc-icon.xml#color-prop">color</db:link> 套用顏色覆蓋。</db:para>
+</db:section>
+<db:section xml:id="fillMode-prop">
+<db:title>fillMode : enumeration</db:title>
+<db:para>圖示填充模式。</db:para>
+<db:para>預設 Image.PreserveAspectFit。</db:para>
+<db:para>詳細格式與限制請參考 Qt 官方文件。</db:para>
+</db:section>
+<db:section xml:id="source-prop">
+<db:title>source : url</db:title>
+<db:para>圖示來源 URL，建議為 SVG 格式。</db:para>
+<db:para>詳細格式與限制請參考 Qt 官方文件。</db:para>
+</db:section>
+</db:section>
+</db:article>

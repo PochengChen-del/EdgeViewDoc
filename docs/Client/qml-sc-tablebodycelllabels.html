@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- TableBodyCellLabels.qml -->
+  <meta name="description" content="資料表資料列彩色標籤組合單元格。">
+  <title>TableBodyCellLabels QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>TableBodyCellLabels</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">TableBodyCellLabels QML Type</h1>
+<!-- $$$TableBodyCellLabels-brief -->
+<p>資料表資料列彩色標籤組合單元格。. <a href="#details">More...</a></p>
+<!-- @@@TableBodyCellLabels -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-tablebodycellbase.html" translate="no">TableBodyCellBase</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-tablebodycelllabels-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodycelllabels.html#colorTypeRole-prop" translate="no">colorTypeRole</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodycelllabels.html#isArray-prop" translate="no">isArray</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodycelllabels.html#maxImplicitHeight-prop" translate="no">maxImplicitHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodycelllabels.html#maxImplicitWidth-prop" translate="no">maxImplicitWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodycelllabels.html#minImplicitHeight-prop" translate="no">minImplicitHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodycelllabels.html#minImplicitWidth-prop" translate="no">minImplicitWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodycelllabels.html#model-prop" translate="no">model</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablebodycelllabels.html#textRole-prop" translate="no">textRole</a></b> : string</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">string <b><a href="qml-sc-tablebodycelllabels.html#i18nText-method" translate="no">i18nText</a></b>(object <i>opt</i>)</li>
+<li class="fn" translate="no">int <b><a href="qml-sc-tablebodycelllabels.html#labelColorType-method" translate="no">labelColorType</a></b>(object <i>opt</i>)</li>
+</ul>
+<!-- $$$TableBodyCellLabels-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供資料表資料列顯示彩色標籤內容。</summary>
+<p>支援功能：</p>
+<ul>
+<li>單個或多個彩色標籤顯示</li>
+</ul>
+<p>每個資料項會被渲染為一個 <a href="qml-sc-colorlabel.html" translate="no">ColorLabel</a>。</p>
+<!-- @@@TableBodyCellLabels -->
+<h2>Property Documentation</h2>
+<!-- $$$colorTypeRole -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="colorTypeRole-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">colorTypeRole</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>顏色類型欄位名稱。</p>
+<p>預設 &quot;colorType&quot;。</p>
+</div></div><!-- @@@colorTypeRole -->
+<br/>
+<!-- $$$isArray -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isArray-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isArray</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷目前 model 是否為 Array 型態。</p>
+</div></div><!-- @@@isArray -->
+<br/>
+<!-- $$$maxImplicitHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="maxImplicitHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">maxImplicitHeight</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>最大高度（所有 label 換行排列總高度，包含邊距、間距）。</p>
+</div></div><!-- @@@maxImplicitHeight -->
+<br/>
+<!-- $$$maxImplicitWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="maxImplicitWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">maxImplicitWidth</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>最大寬度（所有 label 橫向排列總寬度，包含邊距、間距）。</p>
+</div></div><!-- @@@maxImplicitWidth -->
+<br/>
+<!-- $$$minImplicitHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="minImplicitHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">minImplicitHeight</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>最小高度（所有 label 最大單一高度，包含邊距）。</p>
+</div></div><!-- @@@minImplicitHeight -->
+<br/>
+<!-- $$$minImplicitWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="minImplicitWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">minImplicitWidth</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>最小寬度（所有 label 最大單一寬度，包含邊距）。</p>
+</div></div><!-- @@@minImplicitWidth -->
+<br/>
+<!-- $$$model -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="model-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">model</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>標籤資料來源。</p>
+</div></div><!-- @@@model -->
+<br/>
+<!-- $$$textRole -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textRole-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textRole</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>顯示文字欄位名稱。</p>
+<p>預設 &quot;text&quot;。</p>
+</div></div><!-- @@@textRole -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$i18nText[overload1]$$$i18nTextobject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="i18nText-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span> <span class="name">i18nText</span>(<span class="type">object</span> <i>opt</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得顯示文字（<a href="qml-sc-tablebodycelllabels.html#textRole-prop" translate="no">textRole</a>）。</p>
+<p>可覆寫。</p>
+</div></div><!-- @@@i18nText -->
+<br/>
+<!-- $$$labelColorType[overload1]$$$labelColorTypeobject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="labelColorType-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">int</span> <span class="name">labelColorType</span>(<span class="type">object</span> <i>opt</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得 label 對應的顏色類型。</p>
+<p>若未提供或不存在，會隨機提供顏色。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>WAColor.ColorType</p>
+</div></div><!-- @@@labelColorType -->
+<br/>
+</body>
+</html>

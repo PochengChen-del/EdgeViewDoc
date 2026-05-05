@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- InputCombo.qml -->
+  <meta name="description" content="將輸入元件組合 parent 基礎元件。">
+  <title>InputCombo QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>InputCombo</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">InputCombo QML Type</h1>
+<!-- $$$InputCombo-brief -->
+<p>將輸入元件組合 parent 基礎元件。. <a href="#details">More...</a></p>
+<!-- @@@InputCombo -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-pagination.html" translate="no">Pagination</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-inputcombo-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-inputcombo.html#averageWidth-prop" translate="no">averageWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-inputcombo.html#childrenData-prop" translate="no">childrenData</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-inputcombo.html#count-prop" translate="no">count</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-inputcombo.html#isCombo-prop" translate="no">isCombo</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-inputcombo.html#sizeType-prop" translate="no">sizeType</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-inputcombo.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-inputcombo.html#visibleCount-prop" translate="no">visibleCount</a></b> : int</li>
+</ul>
+<!-- $$$InputCombo-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>InputCombo</summary>
+<p>作為 輸入元件（例如 <a href="qml-sc-watextfield.html" translate="no">WATextField</a>） 的容器，負責排列子元件並提供組合顯示所需的資訊（例如數量與位置）。</p>
+<p>子元件可透過 <a href="qml-sc-inputcombo.html#isCombo-prop" translate="no">isCombo</a> 與相關屬性，自動調整圓角與邊界重疊行為。</p>
+<!-- @@@InputCombo -->
+<h2>Property Documentation</h2>
+<!-- $$$averageWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="averageWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">averageWidth</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>可見子元件在組合元件中可用的平均寬度。</p>
+<p>用於等分子元件寬度。</p>
+</div></div><!-- @@@averageWidth -->
+<br/>
+<!-- $$$childrenData -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="childrenData-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">childrenData</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>統計子元件數量與可見數量。</p>
+</div></div><!-- @@@childrenData -->
+<br/>
+<!-- $$$count -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="count-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">count</span> : <span class="type">int</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>子元件數量。</p>
+</div></div><!-- @@@count -->
+<br/>
+<!-- $$$isCombo -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isCombo-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isCombo</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>表示此元件為組合容器。</p>
+<p>子輸入元件可透過此屬性判斷是否處於組合模式， 以調整圓角與邊界行為。</p>
+</div></div><!-- @@@isCombo -->
+<br/>
+<!-- $$$sizeType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sizeType-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">sizeType</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>尺寸類型，控制顯示的大小。</p>
+<p>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</p>
+<ul>
+<li>true → Define.SizeType.Small</li>
+<li>false → Define.SizeType.Medium</li>
+</ul>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Constant</th><th >Description</th></tr></thead>
+<tr valign="top" class="odd"><td >Define.SizeType.Small</td><td >小尺寸</td></tr>
+<tr valign="top" class="even"><td >Define.SizeType.Medium</td><td >中尺寸</td></tr>
+</table></div>
+</div></div><!-- @@@sizeType -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$visibleCount -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="visibleCount-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">visibleCount</span> : <span class="type">int</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>可見子元件數量。</p>
+<p>用於子輸入元件判斷是否為單一顯示， 例如控制圓角是否完整顯示。</p>
+</div></div><!-- @@@visibleCount -->
+<br/>
+</body>
+</html>

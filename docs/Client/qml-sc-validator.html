@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- Validator.qml -->
+  <meta name="description" content="驗證器。">
+  <title>Validator QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>Validator</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">Validator QML Type</h1>
+<!-- $$$Validator-brief -->
+<p>驗證器。. <a href="#details">More...</a></p>
+<!-- @@@Validator -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-validator-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#actived-prop" translate="no">actived</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#error-prop" translate="no">error</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#errorList-prop" translate="no">errorList</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#fieldName-prop" translate="no">fieldName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#isCompleted-prop" translate="no">isCompleted</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#isContinue-prop" translate="no">isContinue</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#isInitial-prop" translate="no">isInitial</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#manager-prop" translate="no">manager</a></b> : QtObject</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#message-prop" translate="no">message</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#mode-prop" translate="no">mode</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#preManager-prop" translate="no">preManager</a></b> : QtObject</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#required-prop" translate="no">required</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#rules-prop" translate="no">rules</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#target-prop" translate="no">target</a></b> : QtObject</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#value-prop" translate="no">value</a></b> : var</li>
+</ul>
+<h2 id="signals">Signals</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-validator.html#validated-signal" translate="no">validated</a></b>(var <i>val</i>)</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">array <b><a href="qml-sc-validator.html#getRuleList-method" translate="no">getRuleList</a></b>(string <i>ruleString</i>)</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-validator.html#isEmptyArray-method" translate="no">isEmptyArray</a></b>(var <i>arr</i>)</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-validator.html#isNullOrUndefined-method" translate="no">isNullOrUndefined</a></b>(var <i>val</i>)</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-validator.html#isNullOrWhiteSpace-method" translate="no">isNullOrWhiteSpace</a></b>(var <i>val</i>)</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-validator.html#validate-method" translate="no">validate</a></b>()</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-validator.html#validate_array-method" translate="no">validate_array</a></b>(var <i>val</i>, string <i>rule</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_between-method" translate="no">validate_between</a></b>(var <i>val</i>, real <i>min</i>, real <i>max</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_color-method" translate="no">validate_color</a></b>(var <i>val</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_confirmed-method" translate="no">validate_confirmed</a></b>(var <i>val</i>, var <i>confirmedValue</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_custom-method" translate="no">validate_custom</a></b>(var <i>val</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_date-method" translate="no">validate_date</a></b>(var <i>val</i>, string <i>format</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_decimal-method" translate="no">validate_decimal</a></b>(var <i>val</i>, string <i>decimals</i>, string <i>separator</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_email-method" translate="no">validate_email</a></b>(var <i>val</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_ext-method" translate="no">validate_ext</a></b>(var <i>val</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_integer-method" translate="no">validate_integer</a></b>(var <i>val</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_max-method" translate="no">validate_max</a></b>(var <i>val</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_max_value-method" translate="no">validate_max_value</a></b>(var <i>val</i>, real <i>max</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_min-method" translate="no">validate_min</a></b>(var <i>val</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_min_value-method" translate="no">validate_min_value</a></b>(var <i>val</i>, real <i>min</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_regex-method" translate="no">validate_regex</a></b>(var <i>val</i>, RegExp <i>regex</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_required-method" translate="no">validate_required</a></b>(var <i>val</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-validator.html#validate_size-method" translate="no">validate_size</a></b>(var <i>val</i>, int <i>max</i>)</li>
+</ul>
+<!-- $$$Validator-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供通用欄位驗證機制，支援多種規則組合，並依模式自動或延遲觸發驗證。</summary>
+<p>支援功能：</p>
+<ul>
+<li>多規則字串解析（以 | 分隔）</li>
+<li>驗證觸發模式（mode）</li>
+<li>多型態資料驗證（string/number/array/file）</li>
+<li>自動產生錯誤訊息（支援 i18n）</li>
+<li>自訂驗證規則（custom）</li>
+<li>與 Validators 整合管理（manager）</li>
+</ul>
+<!-- @@@Validator -->
+<h2>Property Documentation</h2>
+<!-- $$$actived -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="actived-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">actived</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>綁定的目標為 active 狀態。</p>
+</div></div><!-- @@@actived -->
+<br/>
+<!-- $$$error -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="error-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">error</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否有錯誤。</p>
+</div></div><!-- @@@error -->
+<br/>
+<!-- $$$errorList -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="errorList-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">errorList</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>錯誤列表。</p>
+</div></div><!-- @@@errorList -->
+<br/>
+<!-- $$$fieldName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fieldName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fieldName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>欄位名稱（用於錯誤訊息顯示）。</p>
+</div></div><!-- @@@fieldName -->
+<br/>
+<!-- $$$isCompleted -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isCompleted-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isCompleted</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>元件是否初始化完成。</p>
+</div></div><!-- @@@isCompleted -->
+<br/>
+<!-- $$$isContinue -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isContinue-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isContinue</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否持續驗證所有規則（否則遇錯即停止）。</p>
+</div></div><!-- @@@isContinue -->
+<br/>
+<!-- $$$isInitial -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isInitial-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isInitial</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否為初始狀態。</p>
+</div></div><!-- @@@isInitial -->
+<br/>
+<!-- $$$manager -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="manager-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">manager</span> : <span class="type">QtObject</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Validator 管理器。</p>
+<p>當設定時，會自動將此 Validators 註冊至 manager。</p>
+</div></div><!-- @@@manager -->
+<br/>
+<!-- $$$message -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="message-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">message</span> : <span class="type">string</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>錯誤訊息。</p>
+<p>自訂 custom 錯誤訊息（由 target 提供）。</p>
+<p>target 需實作：</p>
+<pre class="cpp" translate="no">function validate_custom_message(fieldName<span class="operator">,</span> error)</pre>
+</div></div><!-- @@@message -->
+<br/>
+<!-- $$$mode -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="mode-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">mode</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證模式，參考 ModeType。</p>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Constant</th><th >Description</th></tr></thead>
+<tr valign="top" class="odd"><td >Validator.ModeType.Aggressive</td><td >主動模式：value/rules/actived 變動時立即驗證。</td></tr>
+<tr valign="top" class="even"><td >Validator.ModeType.Passive</td><td >被動模式：被動呼叫 <a href="qml-sc-validator.html#validate-method" translate="no">validate</a>() 時驗證。</td></tr>
+<tr valign="top" class="odd"><td >Validator.ModeType.Lazy</td><td >延遲模式：在適當時機（如失焦）才驗證。</td></tr>
+</table></div>
+</div></div><!-- @@@mode -->
+<br/>
+<!-- $$$preManager -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="preManager-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">preManager</span> : <span class="type">QtObject</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>前一個管理器。</p>
+<p>處理 <a href="qml-sc-validator.html#manager-prop" translate="no">manager</a> 變更時，獎此驗證器從前一個 <a href="qml-sc-validator.html#manager-prop" translate="no">manager</a> 中移除。</p>
+</div></div><!-- @@@preManager -->
+<br/>
+<!-- $$$required -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="required-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">required</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否包含 required 規則。</p>
+</div></div><!-- @@@required -->
+<br/>
+<!-- $$$rules -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="rules-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">rules</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證規則字串，以 | 分隔（例如：&quot;required|min:3|max:10&quot;）。</p>
+</div></div><!-- @@@rules -->
+<br/>
+<!-- $$$target -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="target-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">target</span> : <span class="type">QtObject</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>綁定的目標元件。</p>
+</div></div><!-- @@@target -->
+<br/>
+<!-- $$$value -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="value-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">value</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>待驗證的值。</p>
+</div></div><!-- @@@value -->
+<br/>
+<h2>Signal Documentation</h2>
+<!-- $$$validated[overload1]$$$validatedvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validated-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">validated</span>(<span class="type">var</span> <i>val</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證完成時觸發。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onValidated</code>.</p>
+</div></div></div><!-- @@@validated -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$getRuleList[overload1]$$$getRuleListstring -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getRuleList-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">array</span> <span class="name">getRuleList</span>(<span class="type">string</span> <i>ruleString</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>解析規則字串。</p>
+<p><i translate="no">ruleString</i> 規則字串</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>規則陣列</p>
+</div></div><!-- @@@getRuleList -->
+<br/>
+<!-- $$$isEmptyArray[overload1]$$$isEmptyArrayvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isEmptyArray-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">isEmptyArray</span>(<span class="type">var</span> <i>arr</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷是否為空陣列。</p>
+</div></div><!-- @@@isEmptyArray -->
+<br/>
+<!-- $$$isNullOrUndefined[overload1]$$$isNullOrUndefinedvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isNullOrUndefined-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">isNullOrUndefined</span>(<span class="type">var</span> <i>val</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷是否為 null 或 undefined。</p>
+</div></div><!-- @@@isNullOrUndefined -->
+<br/>
+<!-- $$$isNullOrWhiteSpace[overload1]$$$isNullOrWhiteSpacevar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isNullOrWhiteSpace-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">isNullOrWhiteSpace</span>(<span class="type">var</span> <i>val</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷是否為空字串（含空白）。</p>
+</div></div><!-- @@@isNullOrWhiteSpace -->
+<br/>
+<!-- $$$validate[overload1]$$$validate -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">validate</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>執行驗證。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>是否通過驗證</p>
+</div></div><!-- @@@validate -->
+<br/>
+<!-- $$$validate_array[overload1]$$$validate_arrayvarstring -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_array-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">validate_array</span>(<span class="type">var</span> <i>val</i>, <span class="type">string</span> <i>rule</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證字串是否為合法陣列格式。</p>
+<p>支援：</p>
+<ul>
+<li>numeric</li>
+<li>decimal</li>
+<li>string</li>
+</ul>
+<p><i translate="no">val</i> 驗證值 <i translate="no">rule</i> 陣列型態</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_array -->
+<br/>
+<!-- $$$validate_between[overload1]$$$validate_betweenvarrealreal -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_between-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_between</span>(<span class="type">var</span> <i>val</i>, <span class="type">real</span> <i>min</i>, <span class="type">real</span> <i>max</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證數值範圍。</p>
+<p><i translate="no">val</i> 驗證值 <i translate="no">min</i> 最小值 <i translate="no">max</i> 最大值</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_between -->
+<br/>
+<!-- $$$validate_color[overload1]$$$validate_colorvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_color-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_color</span>(<span class="type">var</span> <i>val</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證顏色格式（#RRGGBB 或 #RRGGBBAA）。</p>
+<p><i translate="no">val</i> 驗證值</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_color -->
+<br/>
+<!-- $$$validate_confirmed[overload1]$$$validate_confirmedvarvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_confirmed-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_confirmed</span>(<span class="type">var</span> <i>val</i>, <span class="type">var</span> <i>confirmedValue</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證欄位是否一致（例如密碼確認）。</p>
+<p><i translate="no">val</i> 驗證值 <i translate="no">confirmedValue</i> 比對值</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_confirmed -->
+<br/>
+<!-- $$$validate_custom[overload1]$$$validate_customvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_custom-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_custom</span>(<span class="type">var</span> <i>val</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>自訂驗證邏輯（由 target 提供）。</p>
+<p>target 需實作：</p>
+<pre class="cpp" translate="no">function validate_custom(val)</pre>
+<p><i translate="no">val</i> 驗證值</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_custom -->
+<br/>
+<!-- $$$validate_date[overload1]$$$validate_datevarstring -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_date-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_date</span>(<span class="type">var</span> <i>val</i>, <span class="type">string</span> <i>format</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證日期格式。</p>
+<p><i translate="no">val</i> 驗證值 <i translate="no">format</i> 日期格式（可選）</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_date -->
+<br/>
+<!-- $$$validate_decimal[overload1]$$$validate_decimalvarstringstring -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_decimal-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_decimal</span>(<span class="type">var</span> <i>val</i>, <span class="type">string</span> <i>decimals</i>, <span class="type">string</span> <i>separator</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證數值（含小數）。</p>
+<p><i translate="no">val</i> 驗證值 <i translate="no">decimals</i> 小數位數（* 代表不限） <i translate="no">separator</i> 小數分隔符號（預設 &quot;.&quot;）</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_decimal -->
+<br/>
+<!-- $$$validate_email[overload1]$$$validate_emailvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_email-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_email</span>(<span class="type">var</span> <i>val</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證 Email 格式。</p>
+<p><i translate="no">val</i> 驗證值</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_email -->
+<br/>
+<!-- $$$validate_ext[overload1]$$$validate_extvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_ext-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_ext</span>(<span class="type">var</span> <i>val</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證檔案副檔名。</p>
+<p>支援單一檔案或檔案陣列。</p>
+<p><i translate="no">val</i> 檔案或檔案陣列 <i translate="no">extensions</i> 允許副檔名列表</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_ext -->
+<br/>
+<!-- $$$validate_integer[overload1]$$$validate_integervar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_integer-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_integer</span>(<span class="type">var</span> <i>val</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證整數格式。</p>
+<p>支援陣列，每個元素皆需為整數。</p>
+<p><i translate="no">val</i> 驗證值</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_integer -->
+<br/>
+<!-- $$$validate_max[overload1]$$$validate_maxvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_max-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_max</span>(<span class="type">var</span> <i>val</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證字串最大長度。</p>
+<p><i translate="no">val</i> 驗證值 <i translate="no">max</i> 最大長度</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_max -->
+<br/>
+<!-- $$$validate_max_value[overload1]$$$validate_max_valuevarreal -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_max_value-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_max_value</span>(<span class="type">var</span> <i>val</i>, <span class="type">real</span> <i>max</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證數值最大值。</p>
+<p><i translate="no">val</i> 驗證值 <i translate="no">max</i> 最大值</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_max_value -->
+<br/>
+<!-- $$$validate_min[overload1]$$$validate_minvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_min-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_min</span>(<span class="type">var</span> <i>val</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證字串最小長度。</p>
+<p><i translate="no">val</i> 驗證值 <i translate="no">min</i> 最小長度</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_min -->
+<br/>
+<!-- $$$validate_min_value[overload1]$$$validate_min_valuevarreal -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_min_value-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_min_value</span>(<span class="type">var</span> <i>val</i>, <span class="type">real</span> <i>min</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證數值最小值。</p>
+<p><i translate="no">val</i> 驗證值 <i translate="no">min</i> 最小值</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_min_value -->
+<br/>
+<!-- $$$validate_regex[overload1]$$$validate_regexvarRegExp -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_regex-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_regex</span>(<span class="type">var</span> <i>val</i>, <span class="type">RegExp</span> <i>regex</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>使用正規表達式驗證。</p>
+<p><i translate="no">val</i> 驗證值 <i translate="no">regex</i> 正規表達式</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_regex -->
+<br/>
+<!-- $$$validate_required[overload1]$$$validate_requiredvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_required-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_required</span>(<span class="type">var</span> <i>val</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證必填欄位。</p>
+<p>當值為 null、undefined、空字串或空陣列時判定為錯誤。</p>
+<p><i translate="no">val</i> 驗證值</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_required -->
+<br/>
+<!-- $$$validate_size[overload1]$$$validate_sizevarint -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validate_size-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">validate_size</span>(<span class="type">var</span> <i>val</i>, <span class="type">int</span> <i>max</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證檔案大小。</p>
+<p><i translate="no">val</i> 檔案或檔案陣列 <i translate="no">max</i> 最大大小（bytes）</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>若驗證失敗回傳錯誤物件，否則回傳 undefined</p>
+</div></div><!-- @@@validate_size -->
+<br/>
+</body>
+</html>

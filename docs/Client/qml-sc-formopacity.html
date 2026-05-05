@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- FormOpacity.qml -->
+  <meta name="description" content="表單透明度輸入元件。">
+  <title>FormOpacity QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>FormOpacity</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">FormOpacity QML Type</h1>
+<!-- $$$FormOpacity-brief -->
+<p>表單透明度輸入元件。. <a href="#details">More...</a></p>
+<!-- @@@FormOpacity -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-formcombo.html" translate="no">FormCombo</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-formopacity-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-formopacity.html#color-prop" translate="no">color</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formopacity.html#from-prop" translate="no">from</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formopacity.html#ratio-prop" translate="no">ratio</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formopacity.html#stepSize-prop" translate="no">stepSize</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formopacity.html#to-prop" translate="no">to</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formopacity.html#value-prop" translate="no">value</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formopacity.html#wavalidator-prop" translate="no">wavalidator</a></b> : Validator</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formopacity.html#wheelEnabled-prop" translate="no">wheelEnabled</a></b> : bool</li>
+</ul>
+<!-- $$$FormOpacity-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供透明度數值(0~255)輸入，並以滑桿與文字輸入框同步控制。</summary>
+<p>元件內部由 <a href="qml-sc-formslider.html" translate="no">FormSlider</a> 與 <a href="qml-sc-formtextfield.html" translate="no">FormTextField</a> 組成：</p>
+<ul>
+<li>左側滑桿用於直覺調整透明度，拖動滑桿時，文字輸入框會同步更新</li>
+<li>右側輸入框用於精確輸入數值，輸入有效數值時，滑桿位置會同步更新</li>
+</ul>
+<p>透明度會套用於顯示色塊（color），以視覺方式呈現目前 opacity。</p>
+<p>此元件與其他 Form 元件提供一致的表單互動行為與樣式，並透過 <a href="qml-sc-formopacity.html#wavalidator-prop" translate="no">wavalidator</a> 提供驗證功能。</p>
+<!-- @@@FormOpacity -->
+<h2>Property Documentation</h2>
+<!-- $$$color -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="color-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">color</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>顯示透明度效果的基底顏色。</p>
+<p>實際顯示時會依據 <a href="qml-sc-formopacity.html#value-prop" translate="no">value</a> 計算 opacity。</p>
+</div></div><!-- @@@color -->
+<br/>
+<!-- $$$from -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="from-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">from</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>最小值。</p>
+<p>預設 0。</p>
+</div></div><!-- @@@from -->
+<br/>
+<!-- $$$ratio -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="ratio-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">ratio</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>透明度比例（0.0 ~ 1.0）。計算方式為 <code translate="no">value</code> / 255。</p>
+</div></div><!-- @@@ratio -->
+<br/>
+<!-- $$$stepSize -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="stepSize-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">stepSize</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>調整步進值。</p>
+<p>預設 1。</p>
+</div></div><!-- @@@stepSize -->
+<br/>
+<!-- $$$to -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="to-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">to</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>最大值。</p>
+<p>預設 255。</p>
+</div></div><!-- @@@to -->
+<br/>
+<!-- $$$value -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="value-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">value</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前透明度數值。</p>
+<p>範圍為 <code translate="no">from</code> ~ <code translate="no">to。</code></p>
+</div></div><!-- @@@value -->
+<br/>
+<!-- $$$wavalidator -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="wavalidator-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">wavalidator</span> : <span class="type"><a href="qml-sc-validator.html" translate="no">Validator</a></span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>欄位驗證器，包含錯誤訊息、必填。</p>
+<p>使用驗證時，請在 signal validated(var val) 觸發後，再確認驗證結果 -&gt; valueChanged 事件發生較晚。</p>
+</div></div><!-- @@@wavalidator -->
+<br/>
+<!-- $$$wheelEnabled -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="wheelEnabled-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">wheelEnabled</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否允許滑鼠滾輪調整數值。</p>
+</div></div><!-- @@@wheelEnabled -->
+<br/>
+</body>
+</html>

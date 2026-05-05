@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>ColorIndicator QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>顏色滑桿指示器元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para><db:link xlink:href="qml-sc-colorslider.xml">ColorSlider</db:link> 與 <db:link xlink:href="qml-sc-colorslider2d.xml">ColorSlider2D</db:link> 使用。</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="color-prop">
+<db:title>color : color</db:title>
+<db:para>外框顏色。</db:para>
+</db:section>
+<db:section xml:id="margin-prop">
+<db:title>margin : real</db:title>
+<db:para>邊距。</db:para>
+</db:section>
+<db:section xml:id="shadowColor-prop">
+<db:title>shadowColor : color</db:title>
+<db:para>陰影顏色。</db:para>
+</db:section>
+</db:section>
+</db:article>

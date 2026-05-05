@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- ButtonSort.qml -->
+  <meta name="description" content="排序按鈕元件。">
+  <title>ButtonSort QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>ButtonSort</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">ButtonSort QML Type</h1>
+<!-- $$$ButtonSort-brief -->
+<p>排序按鈕元件。. <a href="#details">More...</a></p>
+<!-- @@@ButtonSort -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-buttonbase.html" translate="no">ButtonBase</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-buttonsort-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-buttonsort.html#contentCheckedColorType-prop" translate="no">contentCheckedColorType</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-buttonsort.html#contentThemeStyle-prop" translate="no">contentThemeStyle</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-buttonsort.html#isAscending-prop" translate="no">isAscending</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-buttonsort.html#isDescending-prop" translate="no">isDescending</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-buttonsort.html#sortType-prop" translate="no">sortType</a></b> : int</li>
+</ul>
+<!-- $$$ButtonSort-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>此元件提供列表排序切換功能，點擊時會在升冪與降冪之間切換。</summary>
+<p>圖示會依據 <a href="qml-sc-buttonsort.html#sortType-prop" translate="no">sortType</a> 自動切換對應狀態：</p>
+<ul>
+<li>無排序（-1）</li>
+<li>升冪（Qt.AscendingOrder）</li>
+<li>降冪（Qt.DescendingOrder）</li>
+</ul>
+<p>各狀態會對應不同的 SVG 圖示資源。</p>
+<!-- @@@ButtonSort -->
+<h2>Property Documentation</h2>
+<!-- $$$contentCheckedColorType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="contentCheckedColorType-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">contentCheckedColorType</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>排序啟用的圖示顏色類型。</p>
+</div></div><!-- @@@contentCheckedColorType -->
+<br/>
+<!-- $$$contentThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="contentThemeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">contentThemeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>排序啟用時的圖示顏色樣式。</p>
+</div></div><!-- @@@contentThemeStyle -->
+<br/>
+<!-- $$$isAscending -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isAscending-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isAscending</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否為升冪排序。</p>
+</div></div><!-- @@@isAscending -->
+<br/>
+<!-- $$$isDescending -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isDescending-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isDescending</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否為降冪排序。</p>
+</div></div><!-- @@@isDescending -->
+<br/>
+<!-- $$$sortType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sortType-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">sortType</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>排序類型。</p>
+<p>預設 -1。</p>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Constant</th><th >Description</th></tr></thead>
+<tr valign="top" class="odd"><td >-1</td><td >無排序。</td></tr>
+<tr valign="top" class="even"><td >Qt.AscendingOrder</td><td >升冪。</td></tr>
+<tr valign="top" class="odd"><td >Qt.DescendingOrder</td><td >降冪。</td></tr>
+</table></div>
+</div></div><!-- @@@sortType -->
+<br/>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>FormOpacity QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>表單透明度輸入元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-formcombo.xml">FormCombo</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>元件內部由 <db:link xlink:href="qml-sc-formslider.xml">FormSlider</db:link> 與 <db:link xlink:href="qml-sc-formtextfield.xml">FormTextField</db:link> 組成：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>左側滑桿用於直覺調整透明度，拖動滑桿時，文字輸入框會同步更新</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>右側輸入框用於精確輸入數值，輸入有效數值時，滑桿位置會同步更新</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>透明度會套用於顯示色塊（<db:link xlink:href="">color），以視覺方式呈現目前</db:link> opacity。</db:para>
+<db:para>此元件與其他 Form 元件提供一致的表單互動行為與樣式，並透過 <db:link xlink:href="qml-sc-formopacity.xml#wavalidator-prop">wavalidator</db:link> 提供驗證功能。</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="color-prop">
+<db:title>color : color</db:title>
+<db:para>顯示透明度效果的基底顏色。</db:para>
+<db:para>實際顯示時會依據 <db:link xlink:href="qml-sc-formopacity.xml#value-prop">value</db:link> 計算 opacity。</db:para>
+</db:section>
+<db:section xml:id="from-prop">
+<db:title>from : int</db:title>
+<db:para>最小值。</db:para>
+<db:para>預設 0。</db:para>
+</db:section>
+<db:section xml:id="ratio-prop">
+<db:title>[read-only] ratio : real</db:title>
+<db:para>透明度比例（0.0 ~ 1.0）。計算方式為 <db:code>value</db:code> / 255。</db:para>
+</db:section>
+<db:section xml:id="stepSize-prop">
+<db:title>stepSize : int</db:title>
+<db:para>調整步進值。</db:para>
+<db:para>預設 1。</db:para>
+</db:section>
+<db:section xml:id="to-prop">
+<db:title>to : int</db:title>
+<db:para>最大值。</db:para>
+<db:para>預設 255。</db:para>
+</db:section>
+<db:section xml:id="value-prop">
+<db:title>value : int</db:title>
+<db:para>目前透明度數值。</db:para>
+<db:para>範圍為 <db:code>from</db:code> ~ <db:code>to。</db:code></db:para>
+</db:section>
+<db:section xml:id="wavalidator-prop">
+<db:title>wavalidator : Validator</db:title>
+<db:para>欄位驗證器，包含錯誤訊息、必填。</db:para>
+<db:para>使用驗證時，請在 signal validated(var val) 觸發後，再確認驗證結果 -&gt; valueChanged 事件發生較晚。</db:para>
+</db:section>
+<db:section xml:id="wheelEnabled-prop">
+<db:title>wheelEnabled : bool</db:title>
+<db:para>是否允許滑鼠滾輪調整數值。</db:para>
+</db:section>
+</db:section>
+</db:article>

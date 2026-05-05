@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- FormCombo.qml -->
+  <meta name="description" content="將表單欄位組合 parent 基礎元件。">
+  <title>FormCombo QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>FormCombo</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">FormCombo QML Type</h1>
+<!-- $$$FormCombo-brief -->
+<p>將表單欄位組合 parent 基礎元件。. <a href="#details">More...</a></p>
+<!-- @@@FormCombo -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-formopacity.html" translate="no">FormOpacity</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-formcombo-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#activeState-prop" translate="no">activeState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#actived-prop" translate="no">actived</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#contentItems-prop" translate="no">contentItems</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#disableState-prop" translate="no">disableState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#hint-prop" translate="no">hint</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#hintColor-prop" translate="no">hintColor</a></b> : StateColor</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#hoverState-prop" translate="no">hoverState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#hovered-prop" translate="no">hovered</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#invalid-prop" translate="no">invalid</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#isRequired-prop" translate="no">isRequired</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#normalState-prop" translate="no">normalState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#readOnly-prop" translate="no">readOnly</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#readonlyState-prop" translate="no">readonlyState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#reqdColor-prop" translate="no">reqdColor</a></b> : StateColor</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#sizeType-prop" translate="no">sizeType</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#title-prop" translate="no">title</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formcombo.html#titleColor-prop" translate="no">titleColor</a></b> : StateColor</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">object <b><a href="qml-sc-formcombo.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+</ul>
+<!-- $$$FormCombo-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>FormCombo</summary>
+<p>作為 表單輸入元件 的容器，負責排列子元件並提供組合顯示所需的資訊（例如數量與位置）。</p>
+<p>子元件可透過 isCombo 與相關屬性，自動調整圓角與邊界重疊行為。</p>
+<!-- @@@FormCombo -->
+<h2>Property Documentation</h2>
+<!-- $$$activeState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="activeState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">activeState</span> : <span class="type">State</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>active 狀態設定。</p>
+</div></div><!-- @@@activeState -->
+<br/>
+<!-- $$$actived -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="actived-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">actived</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否有任一子元件處於 active 狀態。</p>
+<p>此屬性會統計 <a href="qml-sc-formcombo.html#contentItems-prop" translate="no">contentItems</a> 中所有子元件的 <code translate="no">actived</code> 狀態， 當任一子元件為 active（例如取得焦點或展開）時， <a href="qml-sc-formcombo.html" translate="no">FormCombo</a> 會進入 active 狀態。</p>
+<p>通常用於控制整體樣式（例如標題顏色或提示樣式）， 以反映目前操作中的欄位。</p>
+<div class="admonition note">
+<p><b>Note: </b>此屬性為唯讀聚合結果。</p>
+</div>
+</div></div><!-- @@@actived -->
+<br/>
+<!-- $$$contentItems -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="contentItems-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">contentItems</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>表單元件。</p>
+<p>限使用 Form 開頭的表單欄位元件。</p>
+</div></div><!-- @@@contentItems -->
+<br/>
+<!-- $$$disableState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="disableState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">disableState</span> : <span class="type">State</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>disable 狀態設定。</p>
+</div></div><!-- @@@disableState -->
+<br/>
+<!-- $$$hint -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="hint-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">hint</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>提示文字。</p>
+</div></div><!-- @@@hint -->
+<br/>
+<!-- $$$hintColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="hintColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">hintColor</span> : <span class="type">StateColor</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>各狀態提示文字顏色設定。</p>
+</div></div><!-- @@@hintColor -->
+<br/>
+<!-- $$$hoverState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="hoverState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">hoverState</span> : <span class="type">State</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>hover 狀態設定。</p>
+</div></div><!-- @@@hoverState -->
+<br/>
+<!-- $$$hovered -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="hovered-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">hovered</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否有任一子元件處於 hover 狀態。</p>
+<p>此屬性會統計 <a href="qml-sc-formcombo.html#contentItems-prop" translate="no">contentItems</a> 中所有子元件的 <code translate="no">hovered</code> 狀態， 當任一子元件為 hover 時，整個 <a href="qml-sc-formcombo.html" translate="no">FormCombo</a> 即視為 hover 狀態。</p>
+<p>主要用於同步控制外層容器的 state， 讓標題（title）與提示文字（l hint）能根據子元件互動狀態 顯示對應樣式。</p>
+<div class="admonition note">
+<p><b>Note: </b>此屬性為唯讀聚合結果，實際 hover 狀態由各子元件控制。</p>
+</div>
+</div></div><!-- @@@hovered -->
+<br/>
+<!-- $$$invalid -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="invalid-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">invalid</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否有任一子元件處於驗證錯誤狀態。</p>
+<p>此屬性會統計 <a href="qml-sc-formcombo.html#contentItems-prop" translate="no">contentItems</a> 中所有子元件的 <code translate="no">invalid</code> 狀態， 當任一子元件驗證失敗時，整個 <a href="qml-sc-formcombo.html" translate="no">FormCombo</a> 即視為 invalid。</p>
+<p>當為 true 時：</p>
+<ul>
+<li>標題與提示文字會套用錯誤樣式（依 themeStyle）</li>
+<li><a href="qml-sc-formassistivetext.html" translate="no">FormAssistiveText</a> 會顯示所有子元件的錯誤訊息</li>
+</ul>
+<div class="admonition note">
+<p><b>Note: </b>此屬性為唯讀聚合結果。</p>
+</div>
+</div></div><!-- @@@invalid -->
+<br/>
+<!-- $$$isRequired -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isRequired-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isRequired</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否必填。</p>
+</div></div><!-- @@@isRequired -->
+<br/>
+<!-- $$$normalState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="normalState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">normalState</span> : <span class="type">State</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>normal 狀態設定。</p>
+</div></div><!-- @@@normalState -->
+<br/>
+<!-- $$$readOnly -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="readOnly-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">readOnly</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否唯讀。</p>
+</div></div><!-- @@@readOnly -->
+<br/>
+<!-- $$$readonlyState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="readonlyState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">readonlyState</span> : <span class="type">State</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>readonly 狀態設定。</p>
+</div></div><!-- @@@readonlyState -->
+<br/>
+<!-- $$$reqdColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="reqdColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">reqdColor</span> : <span class="type">StateColor</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>各狀態必填星號顏色設定。</p>
+</div></div><!-- @@@reqdColor -->
+<br/>
+<!-- $$$sizeType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sizeType-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">sizeType</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>尺寸類型，控制顯示的大小。</p>
+<p>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</p>
+<ul>
+<li>true → Define.SizeType.Small</li>
+<li>false → Define.SizeType.Medium</li>
+</ul>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Constant</th><th >Description</th></tr></thead>
+<tr valign="top" class="odd"><td >Define.SizeType.Small</td><td >小尺寸</td></tr>
+<tr valign="top" class="even"><td >Define.SizeType.Medium</td><td >中尺寸</td></tr>
+</table></div>
+</div></div><!-- @@@sizeType -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-formcombo.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<!-- $$$title -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="title-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">title</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>標題文字。</p>
+</div></div><!-- @@@title -->
+<br/>
+<!-- $$$titleColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="titleColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">titleColor</span> : <span class="type">StateColor</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>各狀態標題文字顏色設定。</p>
+</div></div><!-- @@@titleColor -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+</body>
+</html>

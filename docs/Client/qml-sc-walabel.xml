@@ -129,4 +129,19 @@
 <db:para>文字的換行模式。</db:para>
 </db:section>
 </db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="checkPropertyValidByType-method">
+<db:title>errorObject checkPropertyValidByType(string <db:emphasis>type</db:emphasis>, var <db:emphasis>value</db:emphasis>, object <db:emphasis>args</db:emphasis>)</db:title>
+<db:para>覆寫 <db:link xlink:href="qml-basewidget.xml#checkPropertyValidByType-method">BaseWidget::checkPropertyValidByType</db:link>(string type, var value, object args)</db:para>
+</db:section>
+<db:section xml:id="getInitialProperties-method">
+<db:title>object getInitialProperties(object <db:emphasis>customProperties</db:emphasis>, object <db:emphasis>customParent</db:emphasis>)</db:title>
+<db:para>覆寫 <db:link xlink:href="qml-basewidget.xml#getInitialProperties-method">BaseWidget::getInitialProperties</db:link>(object customProperties, object customParent)。</db:para>
+</db:section>
+<db:section xml:id="getStylePropertyList-method">
+<db:title>object getStylePropertyList(bool <db:emphasis>isCreate</db:emphasis>)</db:title>
+<db:para>覆寫 <db:link xlink:href="qml-basewidget.xml#getStylePropertyList-method">BaseWidget::getStylePropertyList</db:link>(bool isCreate)。</db:para>
+</db:section>
+</db:section>
 </db:article>

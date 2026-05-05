@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>TablePagination QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>資料表分頁切換元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>元件組成：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para><db:link xlink:href="">Pagination：頁碼控制</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para><db:link xlink:href="">Dropdown：每頁顯示筆數設定</db:link></db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>多尺寸顯示（<db:link xlink:href="">sizeType）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>頁碼顯示（<db:link xlink:href="qml-sc-tablepagination.xml#currentPage-prop">currentPage</db:link>, <db:link xlink:href="">total）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>頁碼切換控制</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>每頁筆數切換（rows per page）</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="currentPage-prop">
+<db:title>currentPage : int</db:title>
+<db:para>目前頁碼。範圍為 1 ~ <db:link xlink:href="qml-sc-tablepagination.xml#totalPage-prop">totalPage</db:link>，超出範圍會自動修正。</db:para>
+</db:section>
+<db:section xml:id="pageRows-prop">
+<db:title>pageRows : var</db:title>
+<db:para>目前選擇的每頁筆數值。</db:para>
+</db:section>
+<db:section xml:id="pageRowsIndex-prop">
+<db:title>pageRowsIndex : int</db:title>
+<db:para>目前選擇的每頁筆數索引。</db:para>
+</db:section>
+<db:section xml:id="pageRowsModel-prop">
+<db:title>pageRowsModel : var</db:title>
+<db:para>每頁筆數選項資料來源。</db:para>
+<db:para>預設 Define.rowsPerPages。</db:para>
+</db:section>
+<db:section xml:id="radius-prop">
+<db:title>radius : real</db:title>
+<db:para>按鈕圓角半徑。</db:para>
+</db:section>
+<db:section xml:id="showPageRows-prop">
+<db:title>showPageRows : bool</db:title>
+<db:para>是否顯示每頁筆數選單。</db:para>
+</db:section>
+<db:section xml:id="sizeType-prop">
+<db:title>sizeType : enumeration</db:title>
+<db:para>尺寸類型，控制顯示的大小。</db:para>
+<db:para>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → Define.SizeType.Small</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → Define.SizeType.Medium</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Small</db:para>
+</db:td>
+<db:td>
+<db:para>小尺寸</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Medium</db:para>
+</db:td>
+<db:td>
+<db:para>中尺寸</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="totalPage-prop">
+<db:title>[required] totalPage : int</db:title>
+<db:para>總頁數。</db:para>
+<db:para><db:emphasis role="bold">注意：必須大於等於</db:emphasis> 1。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="rowsI18nText-method">
+<db:title>string rowsI18nText(var <db:emphasis>opt</db:emphasis>)</db:title>
+<db:para>取得每頁筆數顯示文字。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>對應的顯示文字。</db:para>
+</db:section>
+</db:section>
+</db:article>

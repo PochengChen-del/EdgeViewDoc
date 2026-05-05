@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>DatePicker QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>日期選擇器元件（年/月/日）。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>多尺寸顯示（<db:link xlink:href="">sizeType）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>年份/月份 切換控制</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>星期列顯示</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>日期 Grid 顯示</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>自訂日期狀態（selected / marked / disabled）</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="cellBottomPadding-prop">
+<db:title>cellBottomPadding : real</db:title>
+<db:para>日期下方邊距。</db:para>
+</db:section>
+<db:section xml:id="cellHorizontalPadding-prop">
+<db:title>cellHorizontalPadding : real</db:title>
+<db:para>日期水平邊距。</db:para>
+</db:section>
+<db:section xml:id="cellLeftPadding-prop">
+<db:title>cellLeftPadding : real</db:title>
+<db:para>日期左方邊距。</db:para>
+</db:section>
+<db:section xml:id="cellPadding-prop">
+<db:title>cellPadding : real</db:title>
+<db:para>日期邊距。</db:para>
+</db:section>
+<db:section xml:id="cellRightPadding-prop">
+<db:title>cellRightPadding : real</db:title>
+<db:para>日期右方邊距。</db:para>
+</db:section>
+<db:section xml:id="cellSpacing-prop">
+<db:title>cellSpacing : real</db:title>
+<db:para>日期間距。</db:para>
+</db:section>
+<db:section xml:id="cellTopPadding-prop">
+<db:title>cellTopPadding : real</db:title>
+<db:para>日期上方邊距。</db:para>
+</db:section>
+<db:section xml:id="cellVerticalPadding-prop">
+<db:title>cellVerticalPadding : real</db:title>
+<db:para>日期垂直邊距。</db:para>
+</db:section>
+<db:section xml:id="currentMonth-prop">
+<db:title>currentMonth : int</db:title>
+<db:para>目前顯示的月份（0–11）。</db:para>
+</db:section>
+<db:section xml:id="currentYear-prop">
+<db:title>currentYear : int</db:title>
+<db:para>目前顯示的年份。</db:para>
+</db:section>
+<db:section xml:id="firstWeekday-prop">
+<db:title>firstWeekday : int</db:title>
+<db:para>每週的起始日（例如週一或週日）。</db:para>
+</db:section>
+<db:section xml:id="maxCellAdvanceWidth-prop">
+<db:title>[read-only] maxCellAdvanceWidth : real</db:title>
+<db:para>日期按鈕最大寬度，用於對齊。</db:para>
+</db:section>
+<db:section xml:id="monthList-prop">
+<db:title>[read-only] monthList : var</db:title>
+<db:para>月份清單（0–11）。</db:para>
+</db:section>
+<db:section xml:id="sizeType-prop">
+<db:title>sizeType : enumeration</db:title>
+<db:para>尺寸類型，控制顯示的大小。</db:para>
+<db:para>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → Define.SizeType.Small</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → Define.SizeType.Medium</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Small</db:para>
+</db:td>
+<db:td>
+<db:para>小尺寸</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Medium</db:para>
+</db:td>
+<db:td>
+<db:para>中尺寸</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="themeStyle-prop">
+<db:title>[read-only] themeStyle : var</db:title>
+<db:para>主題樣式設定物件。</db:para>
+<db:para>此屬性為唯讀，透過 <db:link xlink:href="qml-sc-datepicker.xml#getThemeStyle-method">getThemeStyle</db:link>() 動態產生。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="signal-documentation">
+<db:title>Signal Documentation</db:title>
+<db:section xml:id="dateClicked-signal">
+<db:title>dateClicked(int <db:emphasis>year</db:emphasis>, int <db:emphasis>month</db:emphasis>, int <db:emphasis>date</db:emphasis>)</db:title>
+<db:para>點擊日期時觸發。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onDateClicked</db:code>.</db:para>
+</db:note>
+</db:section>
+<db:section xml:id="dateHovered-signal">
+<db:title>dateHovered(int <db:emphasis>year</db:emphasis>, int <db:emphasis>month</db:emphasis>, int <db:emphasis>date</db:emphasis>)</db:title>
+<db:para>hover 日期時觸發。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onDateHovered</db:code>.</db:para>
+</db:note>
+</db:section>
+<db:section xml:id="monthClicked-signal">
+<db:title>monthClicked()</db:title>
+<db:para>點擊月份按鈕時觸發。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onMonthClicked</db:code>.</db:para>
+</db:note>
+</db:section>
+<db:section xml:id="yearClicked-signal">
+<db:title>yearClicked()</db:title>
+<db:para>點擊年份按鈕時觸發。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onYearClicked</db:code>.</db:para>
+</db:note>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="dateDisabled-method">
+<db:title>bool dateDisabled(<db:emphasis>date</db:emphasis>)</db:title>
+<db:para>判斷日期是否停用。</db:para>
+<db:para>可覆寫此方法以自訂邏輯。</db:para>
+</db:section>
+<db:section xml:id="dateMarked-method">
+<db:title>bool dateMarked(<db:emphasis>date</db:emphasis>)</db:title>
+<db:para>判斷日期是否為標記狀態。</db:para>
+<db:para>可覆寫此方法以自訂邏輯。</db:para>
+</db:section>
+<db:section xml:id="dateSelected-method">
+<db:title>bool dateSelected(<db:emphasis>date</db:emphasis>)</db:title>
+<db:para>判斷日期是否為選取狀態。</db:para>
+<db:para>可覆寫此方法以自訂邏輯。</db:para>
+</db:section>
+<db:section xml:id="getThemeStyle-method">
+<db:title>object getThemeStyle()</db:title>
+<db:para>取得主題樣式設定物件。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題樣式設定物件。</db:para>
+</db:section>
+<db:section xml:id="monthShortI18NText-method">
+<db:title>string monthShortI18NText(int <db:emphasis>month</db:emphasis>)</db:title>
+<db:para>取得月份縮寫文字（i18n）。</db:para>
+<db:para><db:code role="parameter">month</db:code> 範圍為 0–11。</db:para>
+</db:section>
+<db:section xml:id="nextMonthClickedHandler-method">
+<db:title>void nextMonthClickedHandler()</db:title>
+<db:para>切換到下一個月份（含跨年處理）。</db:para>
+</db:section>
+<db:section xml:id="nextYearClickedHandler-method">
+<db:title>void nextYearClickedHandler()</db:title>
+<db:para>切換到下一年。</db:para>
+</db:section>
+<db:section xml:id="prevMonthClickedHandler-method">
+<db:title>void prevMonthClickedHandler()</db:title>
+<db:para>切換到上一個月份（含跨年處理）。</db:para>
+</db:section>
+<db:section xml:id="prevYearClickedHandler-method">
+<db:title>void prevYearClickedHandler()</db:title>
+<db:para>切換到上一年。</db:para>
+</db:section>
+</db:section>
+</db:article>

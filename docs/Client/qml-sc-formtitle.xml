@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>FormTitle QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>表單輸入元件標題。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="color-prop">
+<db:title>color : color</db:title>
+<db:para>標題顏色。</db:para>
+</db:section>
+<db:section xml:id="font-prop">
+<db:title>font : font</db:title>
+<db:para>字型。</db:para>
+</db:section>
+<db:section xml:id="isRequired-prop">
+<db:title>isRequired : bool</db:title>
+<db:para>是否必填。</db:para>
+</db:section>
+<db:section xml:id="lineHeight-prop">
+<db:title>lineHeight : real</db:title>
+<db:para>行高。</db:para>
+</db:section>
+<db:section xml:id="requiredColor-prop">
+<db:title>requiredColor : color</db:title>
+<db:para>必填 * 顏色。</db:para>
+</db:section>
+<db:section xml:id="title-prop">
+<db:title>title : string</db:title>
+<db:para>標題。</db:para>
+</db:section>
+</db:section>
+</db:article>

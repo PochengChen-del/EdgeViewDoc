@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>FormDropdownSearch QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>表單可搜尋下拉選單元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-formdropdown.xml">FormDropdown</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>此元件與其他 Form 元件提供一致的表單互動行為與樣式，並透過 <db:link xlink:href="">wavalidator</db:link> 提供驗證功能。</db:para>
+<db:para>元件內建互動狀態：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>normal</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>hover</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>active</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>disable</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>readonly</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>各狀態會繼承對應的 base state（例如 normal → normalbase）， 並透過 <db:link xlink:href="">themeStyle</db:link> 套用背景、邊框與內容顏色等。</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="matchedIndexesUnited-prop">
+<db:title>[read-only] matchedIndexesUnited : string</db:title>
+<db:para>目前 search 匹配到的 index 集合（以 &quot;,&quot; 串接）。</db:para>
+</db:section>
+<db:section xml:id="popupBindingMaxAroundHeight-prop">
+<db:title>popupBindingMaxAroundHeight : bool</db:title>
+<db:para>是否綁定最大高度。</db:para>
+</db:section>
+<db:section xml:id="popupMaxAroundHeight-prop">
+<db:title>popupMaxAroundHeight : real</db:title>
+<db:para>popup 上下可見範圍最大高度。</db:para>
+</db:section>
+<db:section xml:id="popupPosition-prop">
+<db:title>popupPosition : enumeration</db:title>
+<db:para>popup 位置。</db:para>
+</db:section>
+<db:section xml:id="searchText-prop">
+<db:title>searchText : string</db:title>
+<db:para>搜尋輸入文字。用於即時過濾 model 內容。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="searchMatched-method">
+<db:title>bool searchMatched(var <db:emphasis>opt</db:emphasis>)</db:title>
+<db:para>判斷項目是否符合 <db:link xlink:href="qml-sc-formdropdownsearch.xml#searchText-prop">searchText</db:link> 條件。</db:para>
+</db:section>
+</db:section>
+</db:article>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>TableHeaderCellBatch QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>資料表表頭批次操作單元格。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-tableheadercellbase.xml">TableHeaderCellBase</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="buttonItems-prop">
+<db:title>buttonItems : Item</db:title>
+<db:para>自訂操作按鈕。</db:para>
+<db:para>可使用 <db:link xlink:href="qml-sc-tablebuttontexticon.xml">TableButtonTextIcon</db:link>。</db:para>
+</db:section>
+<db:section xml:id="showButtons-prop">
+<db:title>showButtons : bool</db:title>
+<db:para>是否顯示批次操作按鈕。</db:para>
+</db:section>
+<db:section xml:id="text-prop">
+<db:title>text : string</db:title>
+<db:para>顯示文字。</db:para>
+<db:para>通常顯示選取數量。</db:para>
+</db:section>
+</db:section>
+</db:article>

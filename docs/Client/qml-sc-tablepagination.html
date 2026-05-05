@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- TablePagination.qml -->
+  <meta name="description" content="資料表分頁切換元件。">
+  <title>TablePagination QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>TablePagination</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">TablePagination QML Type</h1>
+<!-- $$$TablePagination-brief -->
+<p>資料表分頁切換元件。. <a href="#details">More...</a></p>
+<!-- @@@TablePagination -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-tablepagination-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-tablepagination.html#currentPage-prop" translate="no">currentPage</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablepagination.html#pageRows-prop" translate="no">pageRows</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablepagination.html#pageRowsIndex-prop" translate="no">pageRowsIndex</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablepagination.html#pageRowsModel-prop" translate="no">pageRowsModel</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablepagination.html#radius-prop" translate="no">radius</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablepagination.html#showPageRows-prop" translate="no">showPageRows</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablepagination.html#sizeType-prop" translate="no">sizeType</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablepagination.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablepagination.html#totalPage-prop" translate="no">totalPage</a></b> : int</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">string <b><a href="qml-sc-tablepagination.html#rowsI18nText-method" translate="no">rowsI18nText</a></b>(var <i>opt</i>)</li>
+</ul>
+<!-- $$$TablePagination-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供資料表（TableList）使用的分頁控制元件，整合頁碼切換與每頁筆數設定功能。</summary>
+<p>元件組成：</p>
+<ul>
+<li>Pagination：頁碼控制</li>
+<li>Dropdown：每頁顯示筆數設定</li>
+</ul>
+<p>支援功能：</p>
+<ul>
+<li>主題樣式控制（themeName）</li>
+<li>多尺寸顯示（sizeType）</li>
+<li>頁碼顯示（<a href="qml-sc-tablepagination.html#currentPage-prop" translate="no">currentPage</a>, total）</li>
+<li>頁碼切換控制</li>
+<li>每頁筆數切換（rows per page）</li>
+</ul>
+<!-- @@@TablePagination -->
+<h2>Property Documentation</h2>
+<!-- $$$currentPage -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentPage-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentPage</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前頁碼。範圍為 1 ~ <a href="qml-sc-tablepagination.html#totalPage-prop" translate="no">totalPage</a>，超出範圍會自動修正。</p>
+</div></div><!-- @@@currentPage -->
+<br/>
+<!-- $$$pageRows -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="pageRows-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">pageRows</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前選擇的每頁筆數值。</p>
+</div></div><!-- @@@pageRows -->
+<br/>
+<!-- $$$pageRowsIndex -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="pageRowsIndex-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">pageRowsIndex</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前選擇的每頁筆數索引。</p>
+</div></div><!-- @@@pageRowsIndex -->
+<br/>
+<!-- $$$pageRowsModel -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="pageRowsModel-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">pageRowsModel</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>每頁筆數選項資料來源。</p>
+<p>預設 Define.rowsPerPages。</p>
+</div></div><!-- @@@pageRowsModel -->
+<br/>
+<!-- $$$radius -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="radius-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">radius</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>按鈕圓角半徑。</p>
+</div></div><!-- @@@radius -->
+<br/>
+<!-- $$$showPageRows -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showPageRows-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showPageRows</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示每頁筆數選單。</p>
+</div></div><!-- @@@showPageRows -->
+<br/>
+<!-- $$$sizeType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sizeType-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">sizeType</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>尺寸類型，控制顯示的大小。</p>
+<p>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</p>
+<ul>
+<li>true → Define.SizeType.Small</li>
+<li>false → Define.SizeType.Medium</li>
+</ul>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Constant</th><th >Description</th></tr></thead>
+<tr valign="top" class="odd"><td >Define.SizeType.Small</td><td >小尺寸</td></tr>
+<tr valign="top" class="even"><td >Define.SizeType.Medium</td><td >中尺寸</td></tr>
+</table></div>
+</div></div><!-- @@@sizeType -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$totalPage -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="totalPage-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">totalPage</span> : <span class="type">int</span> <code class="details extra" translate="no">[required]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>總頁數。</p>
+<p><b>注意：必須大於等於</b> 1。</p>
+</div></div><!-- @@@totalPage -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$rowsI18nText[overload1]$$$rowsI18nTextvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="rowsI18nText-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span> <span class="name">rowsI18nText</span>(<span class="type">var</span> <i>opt</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得每頁筆數顯示文字。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>對應的顯示文字。</p>
+</div></div><!-- @@@rowsI18nText -->
+<br/>
+</body>
+</html>

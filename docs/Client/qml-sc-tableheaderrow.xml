@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>TableHeaderRow QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>資料表表頭容器。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>用於 <db:link xlink:href="qml-sc-tablelist.xml">TableList</db:link> 的 header。</db:para>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>子元件統計</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="availableHeight-prop">
+<db:title>[read-only] availableHeight : real</db:title>
+<db:para>可用高度（扣除 topPadding 與 bottomPadding）。</db:para>
+</db:section>
+<db:section xml:id="availableWidth-prop">
+<db:title>[read-only] availableWidth : real</db:title>
+<db:para>可用寬度（扣除 leftPadding 與 rightPadding）。</db:para>
+</db:section>
+<db:section xml:id="sizeType-prop">
+<db:title>sizeType : enumeration</db:title>
+<db:para>尺寸類型，控制顯示的大小。</db:para>
+<db:para>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → Define.SizeType.Small</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → Define.SizeType.Medium</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Small</db:para>
+</db:td>
+<db:td>
+<db:para>小尺寸</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Medium</db:para>
+</db:td>
+<db:td>
+<db:para>中尺寸</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="visibleCount-prop">
+<db:title>[read-only] visibleCount : int</db:title>
+<db:para>可見子元件數量。</db:para>
+</db:section>
+<db:section xml:id="visibleData-prop">
+<db:title>[read-only] visibleData : var</db:title>
+<db:para>統計可見子元件資訊。</db:para>
+<db:para>包含：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>count: 可見數量</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>implicitWidth: 所有子元件總寬度（含 spacing）</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>implicitHeight: 最大子元件高度</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="visibleImplicitHeight-prop">
+<db:title>[read-only] visibleImplicitHeight : real</db:title>
+<db:para>所有可見子元件中的最大 implicitHeight。</db:para>
+</db:section>
+<db:section xml:id="visibleImplicitWidth-prop">
+<db:title>[read-only] visibleImplicitWidth : real</db:title>
+<db:para>所有可見子元件的總 implicitWidth（含 spacing）。</db:para>
+</db:section>
+</db:section>
+</db:article>

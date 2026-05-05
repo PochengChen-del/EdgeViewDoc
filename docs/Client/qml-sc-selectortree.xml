@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>SelectorTree QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>行動版單選樹狀清單元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-selector.xml">Selector</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>系統主題切換（<db:link xlink:href="">systemThemeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>文字顯示（<db:link xlink:href="">textRole</db:link>, <db:link xlink:href="">descRole）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>圖示顯示</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>樹狀層級層級控制</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>選取控制</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="defaultExpanded-prop">
+<db:title>defaultExpanded : bool</db:title>
+<db:para>預設展開狀態。</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → 展開</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → 收合</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="optionShowFold-28var-opt-29-prop">
+<db:title>optionShowFold(var opt) : bool</db:title>
+<db:para>判斷該選項是否顯示收折按鈕（hideFold）。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>opt 選項資料 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis> bool</db:para>
+</db:section>
+<db:section xml:id="parentIndexesRole-prop">
+<db:title>parentIndexesRole : string</db:title>
+<db:para>父節點路徑欄位名稱。</db:para>
+<db:para>預設 &quot;parentIndexes&quot;。</db:para>
+<db:para>內容以 <db:link xlink:href="qml-sc-selectortree.xml#parentIndexesSeparator-prop">parentIndexesSeparator</db:link> 分隔的字串，例如： &quot;0.1.3&quot;。</db:para>
+</db:section>
+<db:section xml:id="parentIndexesSeparator-prop">
+<db:title>parentIndexesSeparator : string</db:title>
+<db:para>父節點索引字串的分隔符號。</db:para>
+<db:para>預設 &quot;.&quot;。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="optionShowFold-method">
+<db:title>optionShowFold(<db:emphasis>opt</db:emphasis>)</db:title>
+<db:para>判斷該選項是否顯示收折按鈕（hideFold）。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>opt 選項資料 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis> bool</db:para>
+</db:section>
+</db:section>
+</db:article>

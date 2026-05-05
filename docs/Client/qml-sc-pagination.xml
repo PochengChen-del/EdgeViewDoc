@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>Pagination QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>分頁切換元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-inputcombo.xml">InputCombo</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>UI。</db:para>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>多尺寸顯示（<db:link xlink:href="">sizeType）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>頁碼顯示（<db:link xlink:href="qml-sc-pagination.xml#currentPage-prop">currentPage</db:link>, <db:link xlink:href="">total）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>頁碼切換控制</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="currentPage-prop">
+<db:title>currentPage : int</db:title>
+<db:para>目前頁碼。範圍為 1 ~ <db:link xlink:href="qml-sc-pagination.xml#totalPage-prop">totalPage</db:link>，超出範圍會自動修正。</db:para>
+<db:para>預設 1。</db:para>
+</db:section>
+<db:section xml:id="radius-prop">
+<db:title>radius : real</db:title>
+<db:para>按鈕圓角半徑。</db:para>
+<db:para>預設 4。</db:para>
+</db:section>
+<db:section xml:id="totalPage-prop">
+<db:title>[required] totalPage : int</db:title>
+<db:para>總頁數。</db:para>
+<db:para><db:emphasis role="bold">注意：必須大於等於</db:emphasis> 1。</db:para>
+</db:section>
+</db:section>
+</db:article>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>ItemBackground QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>元件背景。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherited By:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-formbackground.xml" xlink:role="">FormBackground</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>邊框（border）</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>圓角（radius）</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>漸層覆蓋（<db:link xlink:href="">coverGradient）</db:link></db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>此元件通常搭配其他元件使用（例如 <db:link xlink:href="qml-sc-buttonbase.xml">ButtonBase</db:link>），並透過外部狀態（state）控制顏色、邊框表現。</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="coverGradient-prop">
+<db:title>coverGradient : Gradient</db:title>
+<db:para>背景漸層。</db:para>
+</db:section>
+</db:section>
+</db:article>

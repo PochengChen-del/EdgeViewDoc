@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- Subtitle.qml -->
+  <meta name="description" content="行動版副標題與描述元件。">
+  <title>Subtitle QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>Subtitle</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">Subtitle QML Type</h1>
+<!-- $$$Subtitle-brief -->
+<p>行動版副標題與描述元件。. <a href="#details">More...</a></p>
+<!-- @@@Subtitle -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-subtitle-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-subtitle.html#availableWidth-prop" translate="no">availableWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-subtitle.html#description-prop" translate="no">description</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-subtitle.html#descriptionElide-prop" translate="no">descriptionElide</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-subtitle.html#descriptionMaximumLineCount-prop" translate="no">descriptionMaximumLineCount</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-subtitle.html#descriptionWrapMode-prop" translate="no">descriptionWrapMode</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-subtitle.html#text-prop" translate="no">text</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-subtitle.html#textElide-prop" translate="no">textElide</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-subtitle.html#textMaximumLineCount-prop" translate="no">textMaximumLineCount</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-subtitle.html#textWrapMode-prop" translate="no">textWrapMode</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-subtitle.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-subtitle.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">object <b><a href="qml-sc-subtitle.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+</ul>
+<!-- $$$Subtitle-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供顯示顯示標題與補充說明的文字區塊元件，且支援單行或多行排版。</summary>
+<p>支援功能：</p>
+<ul>
+<li>系統主題切換（systemThemeName）</li>
+<li>文字排版控制（elide/wrap/line count）</li>
+</ul>
+<!-- @@@Subtitle -->
+<h2>Property Documentation</h2>
+<!-- $$$availableWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="availableWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">availableWidth</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>可用顯示寬度（扣除 leftPadding 與 rightPadding）。</p>
+</div></div><!-- @@@availableWidth -->
+<br/>
+<!-- $$$description -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="description-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">description</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字。</p>
+</div></div><!-- @@@description -->
+<br/>
+<!-- $$$descriptionElide -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="descriptionElide-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">descriptionElide</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字省略模式。</p>
+</div></div><!-- @@@descriptionElide -->
+<br/>
+<!-- $$$descriptionMaximumLineCount -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="descriptionMaximumLineCount-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">descriptionMaximumLineCount</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字最大行數限制。</p>
+<p>當 <a href="qml-sc-subtitle.html#textWrapMode-prop" translate="no">textWrapMode</a> 允許多行時，此屬性用來限制最多顯示行數。設為 0 表示不限制行數。</p>
+</div></div><!-- @@@descriptionMaximumLineCount -->
+<br/>
+<!-- $$$descriptionWrapMode -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="descriptionWrapMode-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">descriptionWrapMode</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字換行模式。</p>
+</div></div><!-- @@@descriptionWrapMode -->
+<br/>
+<!-- $$$text -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="text-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">text</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>副標題文字。</p>
+</div></div><!-- @@@text -->
+<br/>
+<!-- $$$textElide -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textElide-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textElide</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>副標題文字省略模式。</p>
+</div></div><!-- @@@textElide -->
+<br/>
+<!-- $$$textMaximumLineCount -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textMaximumLineCount-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textMaximumLineCount</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>副標題文字最大行數限制。</p>
+<p>當 <a href="qml-sc-subtitle.html#textWrapMode-prop" translate="no">textWrapMode</a> 允許多行時，此屬性用來限制最多顯示行數。設為 0 表示不限制行數。</p>
+</div></div><!-- @@@textMaximumLineCount -->
+<br/>
+<!-- $$$textWrapMode -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textWrapMode-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textWrapMode</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>副標題文字換行模式。</p>
+</div></div><!-- @@@textWrapMode -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-subtitle.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- RowSwitch.qml -->
+  <meta name="description" content="單行開關元件。">
+  <title>RowSwitch QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>RowSwitch</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">RowSwitch QML Type</h1>
+<!-- $$$RowSwitch-brief -->
+<p>單行開關元件。. <a href="#details">More...</a></p>
+<!-- @@@RowSwitch -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-rowswitch-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#activeBaseState-prop" translate="no">activeBaseState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#activeState-prop" translate="no">activeState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#actived-prop" translate="no">actived</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#bgColor-prop" translate="no">bgColor</a></b> : StateColor</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#bgCoverGradient-prop" translate="no">bgCoverGradient</a></b> : StateGradient</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#description-prop" translate="no">description</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#descriptionColor-prop" translate="no">descriptionColor</a></b> : StateColor</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#descriptionElide-prop" translate="no">descriptionElide</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#descriptionFont-prop" translate="no">descriptionFont</a></b> : font</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#descriptionLineHeight-prop" translate="no">descriptionLineHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#descriptionMaxLineCount-prop" translate="no">descriptionMaxLineCount</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#descriptionWrapMode-prop" translate="no">descriptionWrapMode</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#disableBaseState-prop" translate="no">disableBaseState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#disableState-prop" translate="no">disableState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#divColor-prop" translate="no">divColor</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#divHorizontalAlignment-prop" translate="no">divHorizontalAlignment</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#divWidth-prop" translate="no">divWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#hoverBaseState-prop" translate="no">hoverBaseState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#hoverState-prop" translate="no">hoverState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#indicatorBGColor-prop" translate="no">indicatorBGColor</a></b> : StateColor</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#normalBaseState-prop" translate="no">normalBaseState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#normalState-prop" translate="no">normalState</a></b> : State</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#showDescription-prop" translate="no">showDescription</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#showDiv-prop" translate="no">showDiv</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#textColor-prop" translate="no">textColor</a></b> : StateColor</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#textElide-prop" translate="no">textElide</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#textFont-prop" translate="no">textFont</a></b> : font</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#textLineHeight-prop" translate="no">textLineHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#textMaxLineCount-prop" translate="no">textMaxLineCount</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#textWrapMode-prop" translate="no">textWrapMode</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-rowswitch.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">object <b><a href="qml-sc-rowswitch.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+</ul>
+<!-- $$$RowSwitch-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供單行顯示的開關切換元件。</summary>
+<p>支援功能：</p>
+<ul>
+<li>主題樣式控制（themeName）</li>
+<li>開關切換（checked）</li>
+<li>文字顯示（text）</li>
+<li>指示器樣式控制（indicator）</li>
+</ul>
+<!-- @@@RowSwitch -->
+<h2>Property Documentation</h2>
+<!-- $$$activeBaseState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="activeBaseState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">activeBaseState</span> : <span class="type">State</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>active 狀態基礎設定。由 active 繼承。</p>
+</div></div><!-- @@@activeBaseState -->
+<br/>
+<!-- $$$activeState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="activeState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">activeState</span> : <span class="type">State</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>active 狀態設定（繼承 activebase）。</p>
+</div></div><!-- @@@activeState -->
+<br/>
+<!-- $$$actived -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="actived-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">actived</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否為 active。</p>
+<p>預設綁定 pressed。</p>
+</div></div><!-- @@@actived -->
+<br/>
+<!-- $$$bgColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bgColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bgColor</span> : <span class="type">StateColor</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>各狀態背景顏色設定。</p>
+</div></div><!-- @@@bgColor -->
+<br/>
+<!-- $$$bgCoverGradient -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bgCoverGradient-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bgCoverGradient</span> : <span class="type">StateGradient</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>各狀態背景漸層設定。</p>
+</div></div><!-- @@@bgCoverGradient -->
+<br/>
+<!-- $$$description -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="description-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">description</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字。</p>
+</div></div><!-- @@@description -->
+<br/>
+<!-- $$$descriptionColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="descriptionColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">descriptionColor</span> : <span class="type">StateColor</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>各狀態描述文字顏色設定。</p>
+</div></div><!-- @@@descriptionColor -->
+<br/>
+<!-- $$$descriptionElide -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="descriptionElide-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">descriptionElide</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字省略模式。</p>
+</div></div><!-- @@@descriptionElide -->
+<br/>
+<!-- $$$descriptionFont -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="descriptionFont-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">descriptionFont</span> : <span class="type">font</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字字型。</p>
+</div></div><!-- @@@descriptionFont -->
+<br/>
+<!-- $$$descriptionLineHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="descriptionLineHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">descriptionLineHeight</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字行高。</p>
+</div></div><!-- @@@descriptionLineHeight -->
+<br/>
+<!-- $$$descriptionMaxLineCount -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="descriptionMaxLineCount-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">descriptionMaxLineCount</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字最大行數限制。</p>
+<p>當 <a href="qml-sc-rowswitch.html#textWrapMode-prop" translate="no">textWrapMode</a> 允許多行時，此屬性用來限制最多顯示行數。設為 0 表示不限制行數。</p>
+</div></div><!-- @@@descriptionMaxLineCount -->
+<br/>
+<!-- $$$descriptionWrapMode -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="descriptionWrapMode-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">descriptionWrapMode</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字換行模式。</p>
+</div></div><!-- @@@descriptionWrapMode -->
+<br/>
+<!-- $$$disableBaseState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="disableBaseState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">disableBaseState</span> : <span class="type">State</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>disable 狀態基礎設定。由 disable 繼承。</p>
+</div></div><!-- @@@disableBaseState -->
+<br/>
+<!-- $$$disableState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="disableState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">disableState</span> : <span class="type">State</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>disable 狀態設定（繼承 disablebase）。</p>
+</div></div><!-- @@@disableState -->
+<br/>
+<!-- $$$divColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="divColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">divColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>分隔線顏色。</p>
+</div></div><!-- @@@divColor -->
+<br/>
+<!-- $$$divHorizontalAlignment -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="divHorizontalAlignment-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">divHorizontalAlignment</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>分隔線水平對齊方式。</p>
+<p>預設 Qt.AlignRight。</p>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Constant</th><th >Description</th></tr></thead>
+<tr valign="top" class="odd"><td >Qt.AlignLeft</td><td >靠左</td></tr>
+<tr valign="top" class="even"><td >Qt.AlignHCenter</td><td >置中</td></tr>
+<tr valign="top" class="odd"><td >Qt.AlignRight</td><td >靠右</td></tr>
+</table></div>
+</div></div><!-- @@@divHorizontalAlignment -->
+<br/>
+<!-- $$$divWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="divWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">divWidth</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>分隔線寬度。</p>
+</div></div><!-- @@@divWidth -->
+<br/>
+<!-- $$$hoverBaseState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="hoverBaseState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">hoverBaseState</span> : <span class="type">State</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>hover 狀態基礎設定。由 hover 繼承。</p>
+</div></div><!-- @@@hoverBaseState -->
+<br/>
+<!-- $$$hoverState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="hoverState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">hoverState</span> : <span class="type">State</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>hover 狀態設定（繼承 hoverbase）。</p>
+</div></div><!-- @@@hoverState -->
+<br/>
+<!-- $$$indicatorBGColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="indicatorBGColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">indicatorBGColor</span> : <span class="type">StateColor</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>各狀態開關指示器（indicator）背景顏色設定。</p>
+</div></div><!-- @@@indicatorBGColor -->
+<br/>
+<!-- $$$normalBaseState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="normalBaseState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">normalBaseState</span> : <span class="type">State</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>normal 狀態基礎設定。由 normal 繼承。</p>
+</div></div><!-- @@@normalBaseState -->
+<br/>
+<!-- $$$normalState -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="normalState-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">normalState</span> : <span class="type">State</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>normal 狀態設定（繼承 normalbase）。</p>
+</div></div><!-- @@@normalState -->
+<br/>
+<!-- $$$showDescription -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showDescription-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showDescription</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示描述。</p>
+</div></div><!-- @@@showDescription -->
+<br/>
+<!-- $$$showDiv -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showDiv-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showDiv</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示底部分隔線。</p>
+</div></div><!-- @@@showDiv -->
+<br/>
+<!-- $$$textColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textColor</span> : <span class="type">StateColor</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>各狀態文字顏色設定。</p>
+</div></div><!-- @@@textColor -->
+<br/>
+<!-- $$$textElide -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textElide-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textElide</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字省略模式。</p>
+</div></div><!-- @@@textElide -->
+<br/>
+<!-- $$$textFont -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textFont-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textFont</span> : <span class="type">font</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字字型。</p>
+</div></div><!-- @@@textFont -->
+<br/>
+<!-- $$$textLineHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textLineHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textLineHeight</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字行高。</p>
+</div></div><!-- @@@textLineHeight -->
+<br/>
+<!-- $$$textMaxLineCount -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textMaxLineCount-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textMaxLineCount</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字最大行數限制。</p>
+<p>當 <a href="qml-sc-rowswitch.html#textWrapMode-prop" translate="no">textWrapMode</a> 允許多行時，此屬性用來限制最多顯示行數。設為 0 表示不限制行數。</p>
+</div></div><!-- @@@textMaxLineCount -->
+<br/>
+<!-- $$$textWrapMode -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textWrapMode-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textWrapMode</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字換行模式。</p>
+</div></div><!-- @@@textWrapMode -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-rowswitch.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+</body>
+</html>

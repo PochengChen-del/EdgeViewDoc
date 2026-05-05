@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- WADialogErrorMessage.qml -->
+  <meta name="description" content="錯誤訊息對話框元件。">
+  <title>WADialogErrorMessage QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>WADialogErrorMessage</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">WADialogErrorMessage QML Type</h1>
+<!-- $$$WADialogErrorMessage-brief -->
+<p>錯誤訊息對話框元件。. <a href="#details">More...</a></p>
+<!-- @@@WADialogErrorMessage -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-wadialog1.html" translate="no">WADialog1</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-wadialogerrormessage-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-wadialogerrormessage.html#errorModel-prop" translate="no">errorModel</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wadialogerrormessage.html#errorTextRole-prop" translate="no">errorTextRole</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wadialogerrormessage.html#errorTitleRole-prop" translate="no">errorTitleRole</a></b> : string</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">string <b><a href="qml-sc-wadialogerrormessage.html#errorTextI18nText-method" translate="no">errorTextI18nText</a></b>(var <i>errData</i>)</li>
+<li class="fn" translate="no">string <b><a href="qml-sc-wadialogerrormessage.html#errorTitleI18nText-method" translate="no">errorTitleI18nText</a></b>(var <i>errData</i>)</li>
+</ul>
+<!-- $$$WADialogErrorMessage-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供顯示多筆錯誤訊息列表。</summary>
+<p>支援功能：</p>
+<ul>
+<li>主題樣式控制（themeName）</li>
+<li>多尺寸顯示（sizeType）</li>
+<li>顯示模式（position）<ul>
+<li>Relative（依附於來源元件）</li>
+<li>Bottom（全螢幕底部彈出）</li>
+</ul>
+</li>
+<li>大小控制</li>
+<li>滾動控制</li>
+<li>錯誤訊息列表顯示（errorModel）</li>
+</ul>
+<!-- @@@WADialogErrorMessage -->
+<h2>Property Documentation</h2>
+<!-- $$$errorModel -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="errorModel-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">errorModel</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>錯誤資料來源。</p>
+</div></div><!-- @@@errorModel -->
+<br/>
+<!-- $$$errorTextRole -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="errorTextRole-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">errorTextRole</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>錯誤內容欄位名稱。</p>
+<p>預設 &quot;text&quot;。</p>
+</div></div><!-- @@@errorTextRole -->
+<br/>
+<!-- $$$errorTitleRole -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="errorTitleRole-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">errorTitleRole</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>錯誤標題欄位名稱。</p>
+<p>預設 &quot;title&quot;。</p>
+</div></div><!-- @@@errorTitleRole -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$errorTextI18nText[overload1]$$$errorTextI18nTextvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="errorTextI18nText-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span> <span class="name">errorTextI18nText</span>(<span class="type">var</span> <i>errData</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得顯示錯誤內容文字。</p>
+<p>可覆寫。</p>
+</div></div><!-- @@@errorTextI18nText -->
+<br/>
+<!-- $$$errorTitleI18nText[overload1]$$$errorTitleI18nTextvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="errorTitleI18nText-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span> <span class="name">errorTitleI18nText</span>(<span class="type">var</span> <i>errData</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得顯示錯誤標題文字。</p>
+<p>可覆寫。</p>
+</div></div><!-- @@@errorTitleI18nText -->
+<br/>
+</body>
+</html>

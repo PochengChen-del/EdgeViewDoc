@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>BottomPopup QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>全螢幕底部彈出式選擇容器。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>元件組成：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>Header：標題列與操作區</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Body：主體內容</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Footer：底部操作區</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>大小控制</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="bodyAvailableHeight-prop">
+<db:title>[read-only] bodyAvailableHeight : real</db:title>
+<db:para>Body 可用高度（扣除 Header 與 Footer）。</db:para>
+</db:section>
+<db:section xml:id="bodyHeight-prop">
+<db:title>[read-only] bodyHeight : real</db:title>
+<db:para>Body height。</db:para>
+</db:section>
+<db:section xml:id="bodyItem-prop">
+<db:title>bodyItem : Item</db:title>
+<db:para>主體元件。</db:para>
+<db:para>Popup 主體內容（Body 區域），放置自訂 UI 元件，例如列表。</db:para>
+</db:section>
+<db:section xml:id="contentAvailableHeight-prop">
+<db:title>[read-only] contentAvailableHeight : real</db:title>
+<db:para>顯示可用高度 (扣除 minTopMargins)。</db:para>
+</db:section>
+<db:section xml:id="fixedHeight-prop">
+<db:title>fixedHeight : bool</db:title>
+<db:para>是否固定高度。</db:para>
+<db:para>預設 false。</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → 禁止拖曳修改高度。</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → 可以拖曳改變高度。</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="footerHeight-prop">
+<db:title>[read-only] footerHeight : real</db:title>
+<db:para>Footer height。</db:para>
+</db:section>
+<db:section xml:id="footerImplicitWidth-prop">
+<db:title>[read-only] footerImplicitWidth : real</db:title>
+<db:para>Footer implicitWidth。</db:para>
+</db:section>
+<db:section xml:id="footerItems-prop">
+<db:title>footerItems : Item</db:title>
+<db:para>Footer 元件。</db:para>
+</db:section>
+<db:section xml:id="headerHeight-prop">
+<db:title>[read-only] headerHeight : real</db:title>
+<db:para>Header height。</db:para>
+</db:section>
+<db:section xml:id="headerImplicitWidth-prop">
+<db:title>[read-only] headerImplicitWidth : real</db:title>
+<db:para>Header implicitWidth。</db:para>
+</db:section>
+<db:section xml:id="leftHeaderItems-prop">
+<db:title>leftHeaderItems : Item</db:title>
+<db:para>Header 左方元件。</db:para>
+</db:section>
+<db:section xml:id="maxBodyHeight-prop">
+<db:title>[read-only] maxBodyHeight : real</db:title>
+<db:para>Body 最大可用高度（扣除 Header 與 Footer）。</db:para>
+</db:section>
+<db:section xml:id="maxContentHeight-prop">
+<db:title>maxContentHeight : real</db:title>
+<db:para>最大內容高度，限制可視高度範圍。</db:para>
+</db:section>
+<db:section xml:id="minBodyHeight-prop">
+<db:title>[read-only] minBodyHeight : real</db:title>
+<db:para>Body 最小可用高度（扣除 Header 與 Footer）。</db:para>
+</db:section>
+<db:section xml:id="minContentHeight-prop">
+<db:title>minContentHeight : real</db:title>
+<db:para>最小內容高度（Header + Footer）。</db:para>
+</db:section>
+<db:section xml:id="radius-prop">
+<db:title>radius : real</db:title>
+<db:para>圓角半徑。</db:para>
+<db:para>預設 4。</db:para>
+</db:section>
+<db:section xml:id="rightHeaderItems-prop">
+<db:title>rightHeaderItems : Item</db:title>
+<db:para>Header 右方元件。</db:para>
+</db:section>
+<db:section xml:id="showClose-prop">
+<db:title>showClose : bool</db:title>
+<db:para>是否顯示關閉按鈕。</db:para>
+</db:section>
+<db:section xml:id="showFooter-prop">
+<db:title>showFooter : bool</db:title>
+<db:para>是否顯示 Footer。</db:para>
+</db:section>
+<db:section xml:id="showHeader-prop">
+<db:title>showHeader : bool</db:title>
+<db:para>是否顯示 Header。</db:para>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設綁定 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="themeStyle-prop">
+<db:title>[read-only] themeStyle : var</db:title>
+<db:para>主題樣式設定物件。</db:para>
+<db:para>此屬性為唯讀，透過 <db:link xlink:href="qml-sc-bottompopup.xml#getThemeStyle-method">getThemeStyle</db:link>() 動態產生。</db:para>
+</db:section>
+<db:section xml:id="title-prop">
+<db:title>title : string</db:title>
+<db:para>標題文字。</db:para>
+</db:section>
+<db:section xml:id="titleElide-prop">
+<db:title>titleElide : Text.ElideMode</db:title>
+<db:para>標題截斷模式。</db:para>
+</db:section>
+<db:section xml:id="titleWrapMode-prop">
+<db:title>titleWrapMode : Text.WrapMode</db:title>
+<db:para>標題換行模式。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="signal-documentation">
+<db:title>Signal Documentation</db:title>
+<db:section xml:id="closeClicked-signal">
+<db:title>closeClicked()</db:title>
+<db:para>點擊關閉按鈕時觸發。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onCloseClicked</db:code>.</db:para>
+</db:note>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="getThemeStyle-method">
+<db:title>object getThemeStyle()</db:title>
+<db:para>取得主題樣式設定物件。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題樣式設定物件。</db:para>
+</db:section>
+</db:section>
+</db:article>

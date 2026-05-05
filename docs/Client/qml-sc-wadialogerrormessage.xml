@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>WADialogErrorMessage QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>錯誤訊息對話框元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-wadialog1.xml">WADialog1</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>多尺寸顯示（<db:link xlink:href="">sizeType）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>顯示模式（<db:link xlink:href="">position）</db:link></db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>Relative（依附於來源元件）</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Bottom（全螢幕底部彈出）</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:listitem>
+<db:listitem>
+<db:para>大小控制</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>滾動控制</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>錯誤訊息列表顯示（<db:link xlink:href="">errorModel）</db:link></db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="errorModel-prop">
+<db:title>errorModel : var</db:title>
+<db:para>錯誤資料來源。</db:para>
+</db:section>
+<db:section xml:id="errorTextRole-prop">
+<db:title>errorTextRole : string</db:title>
+<db:para>錯誤內容欄位名稱。</db:para>
+<db:para>預設 &quot;text&quot;。</db:para>
+</db:section>
+<db:section xml:id="errorTitleRole-prop">
+<db:title>errorTitleRole : string</db:title>
+<db:para>錯誤標題欄位名稱。</db:para>
+<db:para>預設 &quot;title&quot;。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="errorTextI18nText-method">
+<db:title>string errorTextI18nText(var <db:emphasis>errData</db:emphasis>)</db:title>
+<db:para>取得顯示錯誤內容文字。</db:para>
+<db:para>可覆寫。</db:para>
+</db:section>
+<db:section xml:id="errorTitleI18nText-method">
+<db:title>string errorTitleI18nText(var <db:emphasis>errData</db:emphasis>)</db:title>
+<db:para>取得顯示錯誤標題文字。</db:para>
+<db:para>可覆寫。</db:para>
+</db:section>
+</db:section>
+</db:article>

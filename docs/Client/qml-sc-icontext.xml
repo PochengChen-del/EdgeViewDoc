@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>IconText QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>含文字圖示。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-icon.xml">Icon</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="font-prop">
+<db:title>font : font</db:title>
+<db:para>圖示文字字型。</db:para>
+</db:section>
+<db:section xml:id="isFilled-prop">
+<db:title>isFilled : bool</db:title>
+<db:para>是否為填滿樣式的圖示字型。預設 false。</db:para>
+</db:section>
+<db:section xml:id="lineHeight-prop">
+<db:title>lineHeight : real</db:title>
+<db:para>圖示文字行高。</db:para>
+</db:section>
+<db:section xml:id="showText-prop">
+<db:title>showText : bool</db:title>
+<db:para>是否顯示圖示文字。</db:para>
+</db:section>
+<db:section xml:id="text-prop">
+<db:title>text : string</db:title>
+<db:para>顯示於圖示中央的文字內容。</db:para>
+</db:section>
+<db:section xml:id="textColor-prop">
+<db:title>textColor : color</db:title>
+<db:para>圖示文字顏色。</db:para>
+</db:section>
+</db:section>
+</db:article>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>TableBodyCellLabels QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>資料表資料列彩色標籤組合單元格。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-tablebodycellbase.xml">TableBodyCellBase</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>單個或多個彩色標籤顯示</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>每個資料項會被渲染為一個 <db:link xlink:href="qml-sc-colorlabel.xml">ColorLabel</db:link>。</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="colorTypeRole-prop">
+<db:title>colorTypeRole : string</db:title>
+<db:para>顏色類型欄位名稱。</db:para>
+<db:para>預設 &quot;colorType&quot;。</db:para>
+</db:section>
+<db:section xml:id="isArray-prop">
+<db:title>[read-only] isArray : bool</db:title>
+<db:para>判斷目前 model 是否為 Array 型態。</db:para>
+</db:section>
+<db:section xml:id="maxImplicitHeight-prop">
+<db:title>[read-only] maxImplicitHeight : real</db:title>
+<db:para>最大高度（所有 label 換行排列總高度，包含邊距、間距）。</db:para>
+</db:section>
+<db:section xml:id="maxImplicitWidth-prop">
+<db:title>[read-only] maxImplicitWidth : real</db:title>
+<db:para>最大寬度（所有 label 橫向排列總寬度，包含邊距、間距）。</db:para>
+</db:section>
+<db:section xml:id="minImplicitHeight-prop">
+<db:title>[read-only] minImplicitHeight : real</db:title>
+<db:para>最小高度（所有 label 最大單一高度，包含邊距）。</db:para>
+</db:section>
+<db:section xml:id="minImplicitWidth-prop">
+<db:title>[read-only] minImplicitWidth : real</db:title>
+<db:para>最小寬度（所有 label 最大單一寬度，包含邊距）。</db:para>
+</db:section>
+<db:section xml:id="model-prop">
+<db:title>model : var</db:title>
+<db:para>標籤資料來源。</db:para>
+</db:section>
+<db:section xml:id="textRole-prop">
+<db:title>textRole : string</db:title>
+<db:para>顯示文字欄位名稱。</db:para>
+<db:para>預設 &quot;text&quot;。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="i18nText-method">
+<db:title>string i18nText(object <db:emphasis>opt</db:emphasis>)</db:title>
+<db:para>取得顯示文字（<db:link xlink:href="qml-sc-tablebodycelllabels.xml#textRole-prop">textRole</db:link>）。</db:para>
+<db:para>可覆寫。</db:para>
+</db:section>
+<db:section xml:id="labelColorType-method">
+<db:title>int labelColorType(object <db:emphasis>opt</db:emphasis>)</db:title>
+<db:para>取得 label 對應的顏色類型。</db:para>
+<db:para>若未提供或不存在，會隨機提供顏色。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>WAColor.ColorType</db:para>
+</db:section>
+</db:section>
+</db:article>

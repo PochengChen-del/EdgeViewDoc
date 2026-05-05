@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>FormCombo QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>將表單欄位組合 parent 基礎元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherited By:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-formopacity.xml" xlink:role="">FormOpacity</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>作為 表單輸入元件 的容器，負責排列子元件並提供組合顯示所需的資訊（例如數量與位置）。</db:para>
+<db:para>子元件可透過 <db:link xlink:href="">isCombo</db:link> 與相關屬性，自動調整圓角與邊界重疊行為。</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="activeState-prop">
+<db:title>[read-only] activeState : State</db:title>
+<db:para>active 狀態設定。</db:para>
+</db:section>
+<db:section xml:id="actived-prop">
+<db:title>actived : bool</db:title>
+<db:para>是否有任一子元件處於 active 狀態。</db:para>
+<db:para>此屬性會統計 <db:link xlink:href="qml-sc-formcombo.xml#contentItems-prop">contentItems</db:link> 中所有子元件的 <db:code>actived</db:code> 狀態， 當任一子元件為 active（例如取得焦點或展開）時， <db:link xlink:href="qml-sc-formcombo.xml">FormCombo</db:link> 會進入 active 狀態。</db:para>
+<db:para>通常用於控制整體樣式（例如標題顏色或提示樣式）， 以反映目前操作中的欄位。</db:para>
+<db:note>
+<db:para>此屬性為唯讀聚合結果。</db:para>
+</db:note>
+</db:section>
+<db:section xml:id="contentItems-prop">
+<db:title>contentItems : Item</db:title>
+<db:para>表單元件。</db:para>
+<db:para>限使用 Form 開頭的表單欄位元件。</db:para>
+</db:section>
+<db:section xml:id="disableState-prop">
+<db:title>[read-only] disableState : State</db:title>
+<db:para>disable 狀態設定。</db:para>
+</db:section>
+<db:section xml:id="hint-prop">
+<db:title>hint : string</db:title>
+<db:para>提示文字。</db:para>
+</db:section>
+<db:section xml:id="hintColor-prop">
+<db:title>hintColor : StateColor</db:title>
+<db:para>各狀態提示文字顏色設定。</db:para>
+</db:section>
+<db:section xml:id="hoverState-prop">
+<db:title>[read-only] hoverState : State</db:title>
+<db:para>hover 狀態設定。</db:para>
+</db:section>
+<db:section xml:id="hovered-prop">
+<db:title>hovered : bool</db:title>
+<db:para>是否有任一子元件處於 hover 狀態。</db:para>
+<db:para>此屬性會統計 <db:link xlink:href="qml-sc-formcombo.xml#contentItems-prop">contentItems</db:link> 中所有子元件的 <db:code>hovered</db:code> 狀態， 當任一子元件為 hover 時，整個 <db:link xlink:href="qml-sc-formcombo.xml">FormCombo</db:link> 即視為 hover 狀態。</db:para>
+<db:para>主要用於同步控制外層容器的 <db:link xlink:href="">state，</db:link> 讓標題（<db:link xlink:href="">title）與提示文字（l</db:link> hint）能根據子元件互動狀態 顯示對應樣式。</db:para>
+<db:note>
+<db:para>此屬性為唯讀聚合結果，實際 hover 狀態由各子元件控制。</db:para>
+</db:note>
+</db:section>
+<db:section xml:id="invalid-prop">
+<db:title>invalid : bool</db:title>
+<db:para>是否有任一子元件處於驗證錯誤狀態。</db:para>
+<db:para>此屬性會統計 <db:link xlink:href="qml-sc-formcombo.xml#contentItems-prop">contentItems</db:link> 中所有子元件的 <db:code>invalid</db:code> 狀態， 當任一子元件驗證失敗時，整個 <db:link xlink:href="qml-sc-formcombo.xml">FormCombo</db:link> 即視為 invalid。</db:para>
+<db:para>當為 true 時：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>標題與提示文字會套用錯誤樣式（依 <db:link xlink:href="">themeStyle）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-formassistivetext.xml">FormAssistiveText</db:link> 會顯示所有子元件的錯誤訊息</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:note>
+<db:para>此屬性為唯讀聚合結果。</db:para>
+</db:note>
+</db:section>
+<db:section xml:id="isRequired-prop">
+<db:title>isRequired : bool</db:title>
+<db:para>是否必填。</db:para>
+</db:section>
+<db:section xml:id="normalState-prop">
+<db:title>[read-only] normalState : State</db:title>
+<db:para>normal 狀態設定。</db:para>
+</db:section>
+<db:section xml:id="readOnly-prop">
+<db:title>readOnly : bool</db:title>
+<db:para>是否唯讀。</db:para>
+</db:section>
+<db:section xml:id="readonlyState-prop">
+<db:title>[read-only] readonlyState : State</db:title>
+<db:para>readonly 狀態設定。</db:para>
+</db:section>
+<db:section xml:id="reqdColor-prop">
+<db:title>reqdColor : StateColor</db:title>
+<db:para>各狀態必填星號顏色設定。</db:para>
+</db:section>
+<db:section xml:id="sizeType-prop">
+<db:title>sizeType : enumeration</db:title>
+<db:para>尺寸類型，控制顯示的大小。</db:para>
+<db:para>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → Define.SizeType.Small</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → Define.SizeType.Medium</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Small</db:para>
+</db:td>
+<db:td>
+<db:para>小尺寸</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Medium</db:para>
+</db:td>
+<db:td>
+<db:para>中尺寸</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="themeStyle-prop">
+<db:title>[read-only] themeStyle : var</db:title>
+<db:para>主題樣式設定物件。</db:para>
+<db:para>此屬性為唯讀，透過 <db:link xlink:href="qml-sc-formcombo.xml#getThemeStyle-method">getThemeStyle</db:link>() 動態產生。</db:para>
+</db:section>
+<db:section xml:id="title-prop">
+<db:title>title : string</db:title>
+<db:para>標題文字。</db:para>
+</db:section>
+<db:section xml:id="titleColor-prop">
+<db:title>titleColor : StateColor</db:title>
+<db:para>各狀態標題文字顏色設定。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="getThemeStyle-method">
+<db:title>object getThemeStyle()</db:title>
+<db:para>取得主題樣式設定物件。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題樣式設定物件。</db:para>
+</db:section>
+</db:section>
+</db:article>

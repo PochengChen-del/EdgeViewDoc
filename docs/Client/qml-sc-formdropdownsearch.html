@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- FormDropdownSearch.qml -->
+  <meta name="description" content="表單可搜尋下拉選單元件。">
+  <title>FormDropdownSearch QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>FormDropdownSearch</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">FormDropdownSearch QML Type</h1>
+<!-- $$$FormDropdownSearch-brief -->
+<p>表單可搜尋下拉選單元件。. <a href="#details">More...</a></p>
+<!-- @@@FormDropdownSearch -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-formdropdown.html" translate="no">FormDropdown</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-formdropdownsearch-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-formdropdownsearch.html#matchedIndexesUnited-prop" translate="no">matchedIndexesUnited</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formdropdownsearch.html#popupBindingMaxAroundHeight-prop" translate="no">popupBindingMaxAroundHeight</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formdropdownsearch.html#popupMaxAroundHeight-prop" translate="no">popupMaxAroundHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formdropdownsearch.html#popupPosition-prop" translate="no">popupPosition</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-formdropdownsearch.html#searchText-prop" translate="no">searchText</a></b> : string</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">bool <b><a href="qml-sc-formdropdownsearch.html#searchMatched-method" translate="no">searchMatched</a></b>(var <i>opt</i>)</li>
+</ul>
+<!-- $$$FormDropdownSearch-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供清單彈出選擇，且提供輸入文字篩選清單。</summary>
+<p>此元件與其他 Form 元件提供一致的表單互動行為與樣式，並透過 wavalidator 提供驗證功能。</p>
+<p>元件內建互動狀態：</p>
+<ul>
+<li>normal</li>
+<li>hover</li>
+<li>active</li>
+<li>disable</li>
+<li>readonly</li>
+</ul>
+<p>各狀態會繼承對應的 base state（例如 normal → normalbase）， 並透過 themeStyle 套用背景、邊框與內容顏色等。</p>
+<!-- @@@FormDropdownSearch -->
+<h2>Property Documentation</h2>
+<!-- $$$matchedIndexesUnited -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="matchedIndexesUnited-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">matchedIndexesUnited</span> : <span class="type">string</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前 search 匹配到的 index 集合（以 &quot;,&quot; 串接）。</p>
+</div></div><!-- @@@matchedIndexesUnited -->
+<br/>
+<!-- $$$popupBindingMaxAroundHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="popupBindingMaxAroundHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">popupBindingMaxAroundHeight</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否綁定最大高度。</p>
+</div></div><!-- @@@popupBindingMaxAroundHeight -->
+<br/>
+<!-- $$$popupMaxAroundHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="popupMaxAroundHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">popupMaxAroundHeight</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>popup 上下可見範圍最大高度。</p>
+</div></div><!-- @@@popupMaxAroundHeight -->
+<br/>
+<!-- $$$popupPosition -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="popupPosition-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">popupPosition</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>popup 位置。</p>
+</div></div><!-- @@@popupPosition -->
+<br/>
+<!-- $$$searchText -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="searchText-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">searchText</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>搜尋輸入文字。用於即時過濾 model 內容。</p>
+</div></div><!-- @@@searchText -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$searchMatched[overload1]$$$searchMatchedvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="searchMatched-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">searchMatched</span>(<span class="type">var</span> <i>opt</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷項目是否符合 <a href="qml-sc-formdropdownsearch.html#searchText-prop" translate="no">searchText</a> 條件。</p>
+</div></div><!-- @@@searchMatched -->
+<br/>
+</body>
+</html>

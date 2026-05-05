@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- Validators.qml -->
+  <meta name="description" content="驗證器集合管理元件。">
+  <title>Validators QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>Validators</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">Validators QML Type</h1>
+<!-- $$$Validators-brief -->
+<p>驗證器集合管理元件。. <a href="#details">More...</a></p>
+<!-- @@@Validators -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-validators-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-validators.html#error-prop" translate="no">error</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validators.html#manager-prop" translate="no">manager</a></b> : QtObject</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validators.html#preManager-prop" translate="no">preManager</a></b> : QtObject</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validators.html#target-prop" translate="no">target</a></b> : QtObject</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validators.html#validators-prop" translate="no">validators</a></b> : var</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">void <b><a href="qml-sc-validators.html#add-method" translate="no">add</a></b>(QtObject <i>vldr</i>)</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-validators.html#remove-method" translate="no">remove</a></b>(QtObject <i>vldr</i>)</li>
+<li class="fn" translate="no"><b><a href="qml-sc-validators.html#validateAll-method" translate="no">validateAll</a></b>()</li>
+</ul>
+<!-- $$$Validators-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>用於集中管理多個驗證器（l</summary>
+<p>validators）的驗證結果，並提供批次驗證功能。</p>
+<p>支援功能：</p>
+<ul>
+<li>聚合多個驗證器</li>
+<li>批次驗證（<a href="qml-sc-validators.html#validateAll-method" translate="no">validateAll</a>）</li>
+<li>Validator 整合管理（manager）</li>
+</ul>
+<!-- @@@Validators -->
+<h2>Property Documentation</h2>
+<!-- $$$error -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="error-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">error</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否存在任一驗證錯誤。</p>
+</div></div><!-- @@@error -->
+<br/>
+<!-- $$$manager -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="manager-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">manager</span> : <span class="type">QtObject</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Validator 管理器。</p>
+<p>當設定時，會自動將此 Validators 註冊至 manager。</p>
+</div></div><!-- @@@manager -->
+<br/>
+<!-- $$$preManager -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="preManager-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">preManager</span> : <span class="type">QtObject</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>前一個管理器。</p>
+<p>處理 <a href="qml-sc-validators.html#manager-prop" translate="no">manager</a> 變更時，獎此驗證器從前一個 <a href="qml-sc-validators.html#manager-prop" translate="no">manager</a> 中移除。</p>
+</div></div><!-- @@@preManager -->
+<br/>
+<!-- $$$target -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="target-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">target</span> : <span class="type">QtObject</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>綁定的目標元件。通常為表單容器或資料來源。</p>
+</div></div><!-- @@@target -->
+<br/>
+<!-- $$$validators -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validators-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">validators</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證器列表。</p>
+<p>元素可以為：</p>
+<ul>
+<li>Validator</li>
+<li>Validators（巢狀）</li>
+</ul>
+</div></div><!-- @@@validators -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$add[overload1]$$$addQtObject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="add-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">add</span>(<span class="type">QtObject</span> <i>vldr</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>新增驗證器。</p>
+<p><i translate="no">vldr</i> Validator 或 Validators</p>
+</div></div><!-- @@@add -->
+<br/>
+<!-- $$$remove[overload1]$$$removeQtObject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="remove-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">remove</span>(<span class="type">QtObject</span> <i>vldr</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>移除驗證器。</p>
+<p><i translate="no">vldr</i> 要移除的驗證器</p>
+</div></div><!-- @@@remove -->
+<br/>
+<!-- $$$validateAll[overload1]$$$validateAll -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="validateAll-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">validateAll</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>執行所有驗證器的驗證。</p>
+<p>若子項包含：</p>
+<ul>
+<li>validateAll() → 遞迴呼叫</li>
+<li>validate() → 單次驗證</li>
+</ul>
+<p>所有驗證會以 Promise.all 並行執行。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>Promise，resolve 為：</p>
+<ul>
+<li>true：全部通過</li>
+<li>false：任一失敗</li>
+</ul>
+</div></div><!-- @@@validateAll -->
+<br/>
+</body>
+</html>

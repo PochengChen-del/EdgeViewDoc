@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- SelectorMultiple.qml -->
+  <meta name="description" content="行動版多選清單元件。">
+  <title>SelectorMultiple QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>SelectorMultiple</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">SelectorMultiple QML Type</h1>
+<!-- $$$SelectorMultiple-brief -->
+<p>行動版多選清單元件。. <a href="#details">More...</a></p>
+<!-- @@@SelectorMultiple -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-walistview.html" translate="no">WAListView</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-selectormultiple-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#availableWidth-prop" translate="no">availableWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#currentIndexes-prop" translate="no">currentIndexes</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#currentIndexesUnited-prop" translate="no">currentIndexesUnited</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#currentValues-prop" translate="no">currentValues</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#defaultExpanded-prop" translate="no">defaultExpanded</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#descElide-prop" translate="no">descElide</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#descFont-prop" translate="no">descFont</a></b> : font</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#descLineHeight-prop" translate="no">descLineHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#descMaxLineCount-prop" translate="no">descMaxLineCount</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#descRole-prop" translate="no">descRole</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#descWrapMode-prop" translate="no">descWrapMode</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#isArray-prop" translate="no">isArray</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#lastOptionFullDiv-prop" translate="no">lastOptionFullDiv</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#leftPadding-prop" translate="no">leftPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#optionBottomPadding-prop" translate="no">optionBottomPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#optionLeftPadding-prop" translate="no">optionLeftPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#optionRightPadding-prop" translate="no">optionRightPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#optionTopPadding-prop" translate="no">optionTopPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#rightPadding-prop" translate="no">rightPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#sectionRole-prop" translate="no">sectionRole</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#selectAllText-prop" translate="no">selectAllText</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#selectedStatus-prop" translate="no">selectedStatus</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#showDesc-prop" translate="no">showDesc</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#showSelectAll-prop" translate="no">showSelectAll</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#textElide-prop" translate="no">textElide</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#textFont-prop" translate="no">textFont</a></b> : font</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#textLineHeight-prop" translate="no">textLineHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#textMaxLineCount-prop" translate="no">textMaxLineCount</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#textRole-prop" translate="no">textRole</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#textWrapMode-prop" translate="no">textWrapMode</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#useSection-prop" translate="no">useSection</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#valueRole-prop" translate="no">valueRole</a></b> : string</li>
+</ul>
+<h2 id="signals">Signals</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-selectormultiple.html#optionClicked-signal" translate="no">optionClicked</a></b>(var <i>opt</i>)</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">int <b><a href="qml-sc-selectormultiple.html#getModelCount-method" translate="no">getModelCount</a></b>()</li>
+<li class="fn" translate="no">string <b><a href="qml-sc-selectormultiple.html#i18nDesc-method" translate="no">i18nDesc</a></b>(object <i>opt</i>)</li>
+<li class="fn" translate="no">string <b><a href="qml-sc-selectormultiple.html#i18nSectionDesc-method" translate="no">i18nSectionDesc</a></b>(string <i>section</i>)</li>
+<li class="fn" translate="no">string <b><a href="qml-sc-selectormultiple.html#i18nSectionText-method" translate="no">i18nSectionText</a></b>(string <i>section</i>)</li>
+<li class="fn" translate="no">string <b><a href="qml-sc-selectormultiple.html#i18nText-method" translate="no">i18nText</a></b>(object <i>opt</i>)</li>
+<li class="fn" translate="no">string <b><a href="qml-sc-selectormultiple.html#optionIconSource-method" translate="no">optionIconSource</a></b>(object <i>opt</i>)</li>
+<li class="fn" translate="no">string <b><a href="qml-sc-selectormultiple.html#sectionIconSource-method" translate="no">sectionIconSource</a></b>(string <i>section</i>)</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-selectormultiple.html#sectionShowFold-method" translate="no">sectionShowFold</a></b>(string <i>section</i>)</li>
+</ul>
+<!-- $$$SelectorMultiple-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供顯示選項清單。</summary>
+<p>支援功能：</p>
+<ul>
+<li>系統主題切換（systemThemeName）</li>
+<li>文字顯示（<a href="qml-sc-selectormultiple.html#textRole-prop" translate="no">textRole</a>, descRole）</li>
+<li>圖示顯示</li>
+<li>分組控制</li>
+<li>選取控制</li>
+</ul>
+<!-- @@@SelectorMultiple -->
+<h2>Property Documentation</h2>
+<!-- $$$availableWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="availableWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">availableWidth</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>可用顯示寬度（扣除 <a href="qml-sc-selectormultiple.html#leftPadding-prop" translate="no">leftPadding</a> 與 <a href="qml-sc-selectormultiple.html#rightPadding-prop" translate="no">rightPadding</a>）。</p>
+</div></div><!-- @@@availableWidth -->
+<br/>
+<!-- $$$currentIndexes -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentIndexes-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentIndexes</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前已選取的 index 陣列。</p>
+</div></div><!-- @@@currentIndexes -->
+<br/>
+<!-- $$$currentIndexesUnited -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentIndexesUnited-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentIndexesUnited</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前選擇的 index 集合（以 &quot;,&quot; 串接）。</p>
+<p>使用 string 組合，減少 changed 觸發的頻率。</p>
+</div></div><!-- @@@currentIndexesUnited -->
+<br/>
+<!-- $$$currentValues -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentValues-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentValues</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前已選取的 value 陣列。</p>
+</div></div><!-- @@@currentValues -->
+<br/>
+<!-- $$$defaultExpanded -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="defaultExpanded-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">defaultExpanded</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>分組預設展開狀態。</p>
+<ul>
+<li>true → 展開</li>
+<li>false → 收合</li>
+</ul>
+</div></div><!-- @@@defaultExpanded -->
+<br/>
+<!-- $$$descElide -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="descElide-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">descElide</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字省略模式。</p>
+</div></div><!-- @@@descElide -->
+<br/>
+<!-- $$$descFont -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="descFont-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">descFont</span> : <span class="type">font</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字字型。</p>
+</div></div><!-- @@@descFont -->
+<br/>
+<!-- $$$descLineHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="descLineHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">descLineHeight</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字行高。</p>
+</div></div><!-- @@@descLineHeight -->
+<br/>
+<!-- $$$descMaxLineCount -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="descMaxLineCount-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">descMaxLineCount</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字最大行數限制。</p>
+<p>當 <a href="qml-sc-selectormultiple.html#textWrapMode-prop" translate="no">textWrapMode</a> 允許多行時，此屬性用來限制最多顯示行數。設為 0 表示不限制行數。</p>
+</div></div><!-- @@@descMaxLineCount -->
+<br/>
+<!-- $$$descRole -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="descRole-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">descRole</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述欄位 key。用於從 model object 中取得描述文字的 key。</p>
+<p>預設 &quot;desc&quot;。</p>
+</div></div><!-- @@@descRole -->
+<br/>
+<!-- $$$descWrapMode -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="descWrapMode-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">descWrapMode</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字換行模式。</p>
+</div></div><!-- @@@descWrapMode -->
+<br/>
+<!-- $$$isArray -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isArray-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isArray</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷目前 model 是否為 Array 型態。</p>
+</div></div><!-- @@@isArray -->
+<br/>
+<!-- $$$lastOptionFullDiv -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="lastOptionFullDiv-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">lastOptionFullDiv</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否將最後一個選項的分隔線延伸至全寬。</p>
+<ul>
+<li>true → 最後一個 item divider 使用 full width</li>
+<li>false → 與一般 item 對齊 padding</li>
+</ul>
+</div></div><!-- @@@lastOptionFullDiv -->
+<br/>
+<!-- $$$leftPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="leftPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">leftPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>左側邊距，整體左側縮排距離。</p>
+</div></div><!-- @@@leftPadding -->
+<br/>
+<!-- $$$optionBottomPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="optionBottomPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">optionBottomPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>選項下方邊距。</p>
+</div></div><!-- @@@optionBottomPadding -->
+<br/>
+<!-- $$$optionLeftPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="optionLeftPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">optionLeftPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>選項左方邊距。</p>
+</div></div><!-- @@@optionLeftPadding -->
+<br/>
+<!-- $$$optionRightPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="optionRightPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">optionRightPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>選項上方邊距。</p>
+</div></div><!-- @@@optionRightPadding -->
+<br/>
+<!-- $$$optionTopPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="optionTopPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">optionTopPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>選項上方邊距。</p>
+</div></div><!-- @@@optionTopPadding -->
+<br/>
+<!-- $$$rightPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="rightPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">rightPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>右側邊距，整體右側縮排距離。</p>
+</div></div><!-- @@@rightPadding -->
+<br/>
+<!-- $$$sectionRole -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sectionRole-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">sectionRole</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>分組欄位 key，用於從 model object 中取得分組文字的 key。</p>
+</div></div><!-- @@@sectionRole -->
+<br/>
+<!-- $$$selectAllText -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="selectAllText-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">selectAllText</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>全選選項顯示文字。</p>
+</div></div><!-- @@@selectAllText -->
+<br/>
+<!-- $$$selectedStatus -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="selectedStatus-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">selectedStatus</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>選取狀態統計資訊（含全選 / 部分選取 / 分組統計）。</p>
+<p>回傳結構：</p>
+<pre class="cpp" translate="no">{
+    any: 是否有任一選取<span class="operator">,</span>
+    all: 是否全部選取<span class="operator">,</span>
+    count: 已選數量<span class="operator">,</span>
+    total: 總項目數<span class="operator">,</span>
+    sections: 分組統計（若 useSection <span class="operator">=</span> <span class="keyword">true</span>）
+}</pre>
+</div></div><!-- @@@selectedStatus -->
+<br/>
+<!-- $$$showDesc -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showDesc-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showDesc</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示描述。</p>
+</div></div><!-- @@@showDesc -->
+<br/>
+<!-- $$$showSelectAll -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showSelectAll-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showSelectAll</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示全選選項。</p>
+</div></div><!-- @@@showSelectAll -->
+<br/>
+<!-- $$$textElide -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textElide-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textElide</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字省略模式。</p>
+</div></div><!-- @@@textElide -->
+<br/>
+<!-- $$$textFont -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textFont-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textFont</span> : <span class="type">font</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字字型。</p>
+</div></div><!-- @@@textFont -->
+<br/>
+<!-- $$$textLineHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textLineHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textLineHeight</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字行高。</p>
+</div></div><!-- @@@textLineHeight -->
+<br/>
+<!-- $$$textMaxLineCount -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textMaxLineCount-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textMaxLineCount</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字最大行數限制。</p>
+<p>當 <a href="qml-sc-selectormultiple.html#textWrapMode-prop" translate="no">textWrapMode</a> 允許多行時，此屬性用來限制最多顯示行數。設為 0 表示不限制行數。</p>
+</div></div><!-- @@@textMaxLineCount -->
+<br/>
+<!-- $$$textRole -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textRole-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textRole</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>顯示文字欄位名稱。</p>
+<p>預設 &quot;text&quot;。</p>
+</div></div><!-- @@@textRole -->
+<br/>
+<!-- $$$textWrapMode -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="textWrapMode-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">textWrapMode</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>文字換行模式。</p>
+</div></div><!-- @@@textWrapMode -->
+<br/>
+<!-- $$$useSection -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="useSection-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">useSection</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否啟用分組。</p>
+</div></div><!-- @@@useSection -->
+<br/>
+<!-- $$$valueRole -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="valueRole-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">valueRole</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>選項值欄位名稱。</p>
+<p>預設 &quot;value&quot;。</p>
+</div></div><!-- @@@valueRole -->
+<br/>
+<h2>Signal Documentation</h2>
+<!-- $$$optionClicked[overload1]$$$optionClickedvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="optionClicked-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">optionClicked</span>(<span class="type">var</span> <i>opt</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>當選項被點擊時觸發。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>opt 被選取的資料項目</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onOptionClicked</code>.</p>
+</div></div></div><!-- @@@optionClicked -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$getModelCount[overload1]$$$getModelCount -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getModelCount-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">int</span> <span class="name">getModelCount</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得 model 數量。</p>
+</div></div><!-- @@@getModelCount -->
+<br/>
+<!-- $$$i18nDesc[overload1]$$$i18nDescobject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="i18nDesc-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span> <span class="name">i18nDesc</span>(<span class="type">object</span> <i>opt</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得描述文字（<a href="qml-sc-selectormultiple.html#descRole-prop" translate="no">descRole</a>）。</p>
+<p>可覆寫。</p>
+</div></div><!-- @@@i18nDesc -->
+<br/>
+<!-- $$$i18nSectionDesc[overload1]$$$i18nSectionDescstring -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="i18nSectionDesc-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span> <span class="name">i18nSectionDesc</span>(<span class="type">string</span> <i>section</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得分組描述文字。</p>
+<p>可覆寫。</p>
+</div></div><!-- @@@i18nSectionDesc -->
+<br/>
+<!-- $$$i18nSectionText[overload1]$$$i18nSectionTextstring -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="i18nSectionText-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span> <span class="name">i18nSectionText</span>(<span class="type">string</span> <i>section</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得分組顯示文字。</p>
+<p>可覆寫。</p>
+</div></div><!-- @@@i18nSectionText -->
+<br/>
+<!-- $$$i18nText[overload1]$$$i18nTextobject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="i18nText-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span> <span class="name">i18nText</span>(<span class="type">object</span> <i>opt</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得顯示文字（優先 <a href="qml-sc-selectormultiple.html#textRole-prop" translate="no">textRole</a>，其次 <a href="qml-sc-selectormultiple.html#valueRole-prop" translate="no">valueRole</a>）。</p>
+<p>可覆寫。</p>
+</div></div><!-- @@@i18nText -->
+<br/>
+<!-- $$$optionIconSource[overload1]$$$optionIconSourceobject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="optionIconSource-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span> <span class="name">optionIconSource</span>(<span class="type">object</span> <i>opt</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得圖示 source（支援 string URL）。</p>
+<p>可覆寫。</p>
+</div></div><!-- @@@optionIconSource -->
+<br/>
+<!-- $$$sectionIconSource[overload1]$$$sectionIconSourcestring -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sectionIconSource-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span> <span class="name">sectionIconSource</span>(<span class="type">string</span> <i>section</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得分組圖示 source（支援 string URL）。</p>
+<p>可覆寫。</p>
+</div></div><!-- @@@sectionIconSource -->
+<br/>
+<!-- $$$sectionShowFold[overload1]$$$sectionShowFoldstring -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sectionShowFold-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">sectionShowFold</span>(<span class="type">string</span> <i>section</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示該分組的展開/收合控制。</p>
+<p>可覆寫。</p>
+</div></div><!-- @@@sectionShowFold -->
+<br/>
+</body>
+</html>

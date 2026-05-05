@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>CalendarTime QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>日期時間選擇器。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:itemizedlist>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-calendarx.xml">CalendarX</db:link>（日期/月/年選擇）</db:para>
+</db:listitem>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-timepresetpicker.xml">TimePresetPicker</db:link>（時間選擇）</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="currentDate-prop">
+<db:title>[read-only] currentDate : int</db:title>
+<db:para>目前日期（1–31）。</db:para>
+</db:section>
+<db:section xml:id="currentDateTime-prop">
+<db:title>currentDateTime : date</db:title>
+<db:para>目前完整日期時間。</db:para>
+</db:section>
+<db:section xml:id="currentMonth-prop">
+<db:title>[read-only] currentMonth : int</db:title>
+<db:para>目前月份（0–11）。</db:para>
+</db:section>
+<db:section xml:id="currentPickType-prop">
+<db:title>currentPickType : string</db:title>
+<db:para>目前選擇模式（year/month/date）。</db:para>
+</db:section>
+<db:section xml:id="currentYear-prop">
+<db:title>[read-only] currentYear : int</db:title>
+<db:para>目前年份。</db:para>
+</db:section>
+<db:section xml:id="is24Hour-prop">
+<db:title>is24Hour : bool</db:title>
+<db:para>是否使用 24 小時制。</db:para>
+</db:section>
+<db:section xml:id="meridiemPosition-prop">
+<db:title>meridiemPosition : int</db:title>
+<db:para>AM/PM 顯示位置。</db:para>
+</db:section>
+<db:section xml:id="showMinute-prop">
+<db:title>showMinute : bool</db:title>
+<db:para>是否顯示分鐘。</db:para>
+</db:section>
+<db:section xml:id="showSecond-prop">
+<db:title>showSecond : bool</db:title>
+<db:para>是否顯示秒數。</db:para>
+</db:section>
+<db:section xml:id="showTimePreset-prop">
+<db:title>showTimePreset : bool</db:title>
+<db:para>是否顯示時間選擇。</db:para>
+</db:section>
+<db:section xml:id="sizeType-prop">
+<db:title>sizeType : enumeration</db:title>
+<db:para>尺寸類型，控制顯示的大小。</db:para>
+<db:para>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → Define.SizeType.Small</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → Define.SizeType.Medium</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Small</db:para>
+</db:td>
+<db:td>
+<db:para>小尺寸</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Medium</db:para>
+</db:td>
+<db:td>
+<db:para>中尺寸</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="themeStyle-prop">
+<db:title>[read-only] themeStyle : var</db:title>
+<db:para>主題樣式設定物件。</db:para>
+<db:para>此屬性為唯讀，透過 <db:link xlink:href="qml-sc-calendartime.xml#getThemeStyle-method">getThemeStyle</db:link>() 動態產生。</db:para>
+</db:section>
+<db:section xml:id="timeList-prop">
+<db:title>timeList : var</db:title>
+<db:para>時間資料來源。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="signal-documentation">
+<db:title>Signal Documentation</db:title>
+<db:section xml:id="dateClicked-signal">
+<db:title>dateClicked(date <db:emphasis>date</db:emphasis>)</db:title>
+<db:para>點擊日期時觸發。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onDateClicked</db:code>.</db:para>
+</db:note>
+</db:section>
+<db:section xml:id="dateHovered-signal">
+<db:title>dateHovered(date <db:emphasis>date</db:emphasis>)</db:title>
+<db:para>hover 日期時觸發。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onDateHovered</db:code>.</db:para>
+</db:note>
+</db:section>
+<db:section xml:id="timeClicked-signal">
+<db:title>timeClicked(date <db:emphasis>time</db:emphasis>)</db:title>
+<db:para>點擊時間時觸發。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onTimeClicked</db:code>.</db:para>
+</db:note>
+</db:section>
+<db:section xml:id="timeHovered-signal">
+<db:title>timeHovered(date <db:emphasis>time</db:emphasis>)</db:title>
+<db:para>hover 時間時觸發。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onTimeHovered</db:code>.</db:para>
+</db:note>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="dateDisabled-method">
+<db:title>bool dateDisabled(<db:emphasis>date</db:emphasis>)</db:title>
+<db:para>判斷日期是否停用。</db:para>
+<db:para>可覆寫此方法以自訂邏輯。</db:para>
+</db:section>
+<db:section xml:id="dateMarked-method">
+<db:title>bool dateMarked(<db:emphasis>date</db:emphasis>)</db:title>
+<db:para>判斷日期是否為標記狀態。</db:para>
+<db:para>可覆寫此方法以自訂邏輯。</db:para>
+</db:section>
+<db:section xml:id="dateSelected-method">
+<db:title>bool dateSelected(<db:emphasis>date</db:emphasis>)</db:title>
+<db:para>判斷日期是否為選取狀態。</db:para>
+<db:para>可覆寫此方法以自訂邏輯。</db:para>
+</db:section>
+<db:section xml:id="getThemeStyle-method">
+<db:title>object getThemeStyle()</db:title>
+<db:para>取得主題樣式設定物件。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題樣式設定物件。</db:para>
+</db:section>
+<db:section xml:id="monthDisabled-method">
+<db:title>bool monthDisabled(<db:emphasis>month</db:emphasis>)</db:title>
+<db:para>判斷月份是否停用。</db:para>
+<db:para>可覆寫此方法以自訂邏輯。</db:para>
+</db:section>
+<db:section xml:id="monthSelected-method">
+<db:title>bool monthSelected(<db:emphasis>month</db:emphasis>)</db:title>
+<db:para>判斷月份是否為選取狀態。</db:para>
+<db:para>可覆寫此方法以自訂邏輯。</db:para>
+</db:section>
+<db:section xml:id="showSelectDate-method">
+<db:title>void showSelectDate()</db:title>
+<db:para>切換至日期選擇頁。</db:para>
+</db:section>
+<db:section xml:id="showSelectMonth-method">
+<db:title>void showSelectMonth()</db:title>
+<db:para>切換至月份選擇頁。</db:para>
+</db:section>
+<db:section xml:id="showSelectYear-method">
+<db:title>void showSelectYear()</db:title>
+<db:para>切換至年份選擇頁。</db:para>
+</db:section>
+<db:section xml:id="timeDisabled-method">
+<db:title>bool timeDisabled(object <db:emphasis>time</db:emphasis>)</db:title>
+<db:para>判斷時間是否停用。</db:para>
+<db:para>可覆寫此方法以自訂邏輯。</db:para>
+</db:section>
+<db:section xml:id="timeSelected-method">
+<db:title>bool timeSelected(object <db:emphasis>time</db:emphasis>)</db:title>
+<db:para>判斷時間是否被選取。</db:para>
+<db:para>可覆寫此方法以自訂邏輯。</db:para>
+</db:section>
+<db:section xml:id="yearDisabled-method">
+<db:title>bool yearDisabled(<db:emphasis>year</db:emphasis>)</db:title>
+<db:para>判斷年份是否停用。</db:para>
+<db:para>可覆寫此方法以自訂邏輯。</db:para>
+</db:section>
+<db:section xml:id="yearSelected-method">
+<db:title>bool yearSelected(<db:emphasis>year</db:emphasis>)</db:title>
+<db:para>判斷年份是否為選取狀態。</db:para>
+<db:para>可覆寫此方法以自訂邏輯。</db:para>
+</db:section>
+</db:section>
+</db:article>

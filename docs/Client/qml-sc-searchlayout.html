@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- SearchLayout.qml -->
+  <meta name="description" content="行動版查詢版面配置容器。">
+  <title>SearchLayout QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>SearchLayout</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">SearchLayout QML Type</h1>
+<!-- $$$SearchLayout-brief -->
+<p>行動版查詢版面配置容器。. <a href="#details">More...</a></p>
+<!-- @@@SearchLayout -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-searchlayout-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-searchlayout.html#backEnabled-prop" translate="no">backEnabled</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-searchlayout.html#bottomSafeMargins-prop" translate="no">bottomSafeMargins</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-searchlayout.html#leftSafeMargins-prop" translate="no">leftSafeMargins</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-searchlayout.html#pageItem-prop" translate="no">pageItem</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-searchlayout.html#rightSafeMargins-prop" translate="no">rightSafeMargins</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-searchlayout.html#searchText-prop" translate="no">searchText</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-searchlayout.html#showBack-prop" translate="no">showBack</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-searchlayout.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-searchlayout.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-searchlayout.html#topSafeMargins-prop" translate="no">topSafeMargins</a></b> : real</li>
+</ul>
+<h2 id="signals">Signals</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-searchlayout.html#backClicked-signal" translate="no">backClicked</a></b>()</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">void <b><a href="qml-sc-searchlayout.html#clearSearchText-method" translate="no">clearSearchText</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-searchlayout.html#focusSearchText-method" translate="no">focusSearchText</a></b>()</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-searchlayout.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-searchlayout.html#search-method" translate="no">search</a></b>()</li>
+</ul>
+<!-- $$$SearchLayout-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供行動裝置搜尋頁面框架。</summary>
+<p>搜尋邏輯需由外部覆寫 <a href="qml-sc-searchlayout.html#search-method" translate="no">search</a>() 進行實作。</p>
+<p>元件組成：</p>
+<ul>
+<li>Header：返回按鈕、搜尋輸入框與清除按鈕</li>
+<li>Page：搜尋結果區域</li>
+</ul>
+<p>支援功能：</p>
+<ul>
+<li>主題樣式控制（themeName）</li>
+<li>搜尋控制（<a href="qml-sc-searchlayout.html#searchText-prop" translate="no">searchText</a>, search()）</li>
+</ul>
+<p>使用：</p>
+<pre class="cpp" translate="no"><span class="type"><a href="qml-sc-searchlayout.html" translate="no">SearchLayout</a></span> {
+    <span class="name">anchors</span>.fill: <span class="name">parent</span>
+    <span class="name">pageItem</span>: <span class="name">Item</span> {
+        <span class="name">anchors</span>.fill: <span class="name">parent</span>
+    }
+
+    <span class="keyword">function</span> <span class="name">search</span>() {
+        <span class="comment">// 實作搜尋</span>
+    }
+}</pre>
+<!-- @@@SearchLayout -->
+<h2>Property Documentation</h2>
+<!-- $$$backEnabled -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="backEnabled-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">backEnabled</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>返回按鈕是否啟用。</p>
+</div></div><!-- @@@backEnabled -->
+<br/>
+<!-- $$$bottomSafeMargins -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bottomSafeMargins-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bottomSafeMargins</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>下方安全邊界。</p>
+</div></div><!-- @@@bottomSafeMargins -->
+<br/>
+<!-- $$$leftSafeMargins -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="leftSafeMargins-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">leftSafeMargins</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>左側安全邊界。</p>
+</div></div><!-- @@@leftSafeMargins -->
+<br/>
+<!-- $$$pageItem -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="pageItem-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">pageItem</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>查詢頁面內容區域的子元件，用於自訂搜尋結果內容。</p>
+</div></div><!-- @@@pageItem -->
+<br/>
+<!-- $$$rightSafeMargins -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="rightSafeMargins-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">rightSafeMargins</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>右側安全邊界。</p>
+</div></div><!-- @@@rightSafeMargins -->
+<br/>
+<!-- $$$searchText -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="searchText-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">searchText</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>查詢文字。</p>
+</div></div><!-- @@@searchText -->
+<br/>
+<!-- $$$showBack -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showBack-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showBack</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示返回按鈕。</p>
+</div></div><!-- @@@showBack -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-searchlayout.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<!-- $$$topSafeMargins -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="topSafeMargins-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">topSafeMargins</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>上方安全邊界。</p>
+</div></div><!-- @@@topSafeMargins -->
+<br/>
+<h2>Signal Documentation</h2>
+<!-- $$$backClicked[overload1]$$$backClicked -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="backClicked-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">backClicked</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>點擊返回按鈕時觸發。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onBackClicked</code>.</p>
+</div></div></div><!-- @@@backClicked -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$clearSearchText[overload1]$$$clearSearchText -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="clearSearchText-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">clearSearchText</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>清空搜尋文字，並觸發 <a href="qml-sc-searchlayout.html#search-method" translate="no">search</a>()。</p>
+</div></div><!-- @@@clearSearchText -->
+<br/>
+<!-- $$$focusSearchText[overload1]$$$focusSearchText -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="focusSearchText-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">focusSearchText</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>將輸入框設為 focus。</p>
+</div></div><!-- @@@focusSearchText -->
+<br/>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+<!-- $$$search[overload1]$$$search -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="search-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">search</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>執行搜尋。</p>
+<p>外部覆寫實作：</p>
+<pre class="cpp" translate="no">function search()</pre>
+</div></div><!-- @@@search -->
+<br/>
+</body>
+</html>

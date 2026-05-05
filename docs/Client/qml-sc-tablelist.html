@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- TableList.qml -->
+  <meta name="description" content="資料表顯示元件。">
+  <title>TableList QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>TableList</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">TableList QML Type</h1>
+<!-- $$$TableList-brief -->
+<p>資料表顯示元件。. <a href="#details">More...</a></p>
+<!-- @@@TableList -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-tablelist-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#bodyContentHeight-prop" translate="no">bodyContentHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#bodyContentWidth-prop" translate="no">bodyContentWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#delegate-prop" translate="no">delegate</a></b> : Component</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#editable-prop" translate="no">editable</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#header-prop" translate="no">header</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#hint-prop" translate="no">hint</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#invalid-prop" translate="no">invalid</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#leftFooterItems-prop" translate="no">leftFooterItems</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#leftTopBarItems-prop" translate="no">leftTopBarItems</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#model-prop" translate="no">model</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#radius-prop" translate="no">radius</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#readOnly-prop" translate="no">readOnly</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#rightFooterItems-prop" translate="no">rightFooterItems</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#rightTopBarItems-prop" translate="no">rightTopBarItems</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#showFooter-prop" translate="no">showFooter</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#showHeader-prop" translate="no">showHeader</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#showHint-prop" translate="no">showHint</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#showTopBar-prop" translate="no">showTopBar</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#sizeType-prop" translate="no">sizeType</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">object <b><a href="qml-sc-tablelist.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-tablelist.html#scrollToEnd-method" translate="no">scrollToEnd</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-tablelist.html#scrollToRow-method" translate="no">scrollToRow</a></b>(int <i>rowIndex</i>)</li>
+</ul>
+<!-- $$$TableList-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供完整資料表結構，包含</summary>
+<p>TopBar、Header、Body、Footer 與提示訊息區域， 並支援資料顯示、滾動控制與操作區域配置。</p>
+<p>元件組成：</p>
+<ul>
+<li>TopBar：上方操作區</li>
+<li>Header：欄位標題列（可水平同步滾動）</li>
+<li>Body：資料列表（WAListView）</li>
+<li>Footer：底部操作區</li>
+<li>Assistive：提示訊息</li>
+</ul>
+<p>支援功能：</p>
+<ul>
+<li>主題樣式控制（themeName）</li>
+<li>多尺寸顯示（sizeType）</li>
+<li>滾動控制<ul>
+<li>垂直滾動：Body</li>
+<li>水平滾動：Header 與 Body 同步</li>
+</ul>
+</li>
+<li>動態內容尺寸計算</li>
+<li>自訂操作元件<ul>
+<li>TopBar（<a href="qml-sc-tablelist.html#rightTopBarItems-prop" translate="no">rightTopBarItems</a>, leftTopBarItems）</li>
+<li>Header（header）</li>
+<li>Body（delegate）</li>
+<li>Footer（<a href="qml-sc-tablelist.html#rightFooterItems-prop" translate="no">rightFooterItems</a>, leftFooterItems）</li>
+</ul>
+</li>
+<li>提示文字顯示（<a href="qml-sc-tablelist.html#showHint-prop" translate="no">showHint</a>, hint）</li>
+</ul>
+<!-- @@@TableList -->
+<h2>Property Documentation</h2>
+<!-- $$$bodyContentHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bodyContentHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bodyContentHeight</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Body 內容高度（ListView.contentHeight）。</p>
+</div></div><!-- @@@bodyContentHeight -->
+<br/>
+<!-- $$$bodyContentWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bodyContentWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bodyContentWidth</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Body 內容寬度（ListView.contentWidth）。</p>
+</div></div><!-- @@@bodyContentWidth -->
+<br/>
+<!-- $$$delegate -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="delegate-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">delegate</span> : <span class="type">Component</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>每列項目委派。</p>
+</div></div><!-- @@@delegate -->
+<br/>
+<!-- $$$editable -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="editable-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">editable</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否為編輯模式。</p>
+<p>影響外框顯示與提示訊息。</p>
+</div></div><!-- @@@editable -->
+<br/>
+<!-- $$$header -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="header-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">header</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Header 內容元件。</p>
+<p>使用 <a href="qml-sc-tableheaderrow.html" translate="no">TableHeaderRow</a>。</p>
+</div></div><!-- @@@header -->
+<br/>
+<!-- $$$hint -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="hint-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">hint</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>提示文字。</p>
+</div></div><!-- @@@hint -->
+<br/>
+<!-- $$$invalid -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="invalid-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">invalid</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否為驗證錯誤狀態。</p>
+<p>預設 false。</p>
+</div></div><!-- @@@invalid -->
+<br/>
+<!-- $$$leftFooterItems -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="leftFooterItems-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">leftFooterItems</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Footer 左側擴展元件。</p>
+</div></div><!-- @@@leftFooterItems -->
+<br/>
+<!-- $$$leftTopBarItems -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="leftTopBarItems-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">leftTopBarItems</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>TopBar 左側擴展元件。</p>
+</div></div><!-- @@@leftTopBarItems -->
+<br/>
+<!-- $$$model -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="model-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">model</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>資料來源。</p>
+</div></div><!-- @@@model -->
+<br/>
+<!-- $$$radius -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="radius-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">radius</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>圓角半徑。</p>
+</div></div><!-- @@@radius -->
+<br/>
+<!-- $$$readOnly -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="readOnly-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">readOnly</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否唯讀。</p>
+</div></div><!-- @@@readOnly -->
+<br/>
+<!-- $$$rightFooterItems -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="rightFooterItems-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">rightFooterItems</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Footer 右側擴展元件。</p>
+</div></div><!-- @@@rightFooterItems -->
+<br/>
+<!-- $$$rightTopBarItems -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="rightTopBarItems-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">rightTopBarItems</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>TopBar 右側擴展元件。</p>
+</div></div><!-- @@@rightTopBarItems -->
+<br/>
+<!-- $$$showFooter -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showFooter-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showFooter</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示 Footer。</p>
+</div></div><!-- @@@showFooter -->
+<br/>
+<!-- $$$showHeader -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showHeader-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showHeader</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示 Header。</p>
+</div></div><!-- @@@showHeader -->
+<br/>
+<!-- $$$showHint -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showHint-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showHint</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示提示文字。</p>
+</div></div><!-- @@@showHint -->
+<br/>
+<!-- $$$showTopBar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showTopBar-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showTopBar</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示 TopBar。</p>
+</div></div><!-- @@@showTopBar -->
+<br/>
+<!-- $$$sizeType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sizeType-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">sizeType</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>尺寸類型，控制顯示的大小。</p>
+<p>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</p>
+<ul>
+<li>true → Define.SizeType.Small</li>
+<li>false → Define.SizeType.Medium</li>
+</ul>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Constant</th><th >Description</th></tr></thead>
+<tr valign="top" class="odd"><td >Define.SizeType.Small</td><td >小尺寸</td></tr>
+<tr valign="top" class="even"><td >Define.SizeType.Medium</td><td >中尺寸</td></tr>
+</table></div>
+</div></div><!-- @@@sizeType -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-tablelist.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+<!-- $$$scrollToEnd[overload1]$$$scrollToEnd -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="scrollToEnd-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">scrollToEnd</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>捲動至底部。</p>
+</div></div><!-- @@@scrollToEnd -->
+<br/>
+<!-- $$$scrollToRow[overload1]$$$scrollToRowint -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="scrollToRow-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">scrollToRow</span>(<span class="type">int</span> <i>rowIndex</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>捲動至指定列。</p>
+<p><i translate="no">rowIndex</i> 列索引。</p>
+</div></div><!-- @@@scrollToRow -->
+<br/>
+</body>
+</html>

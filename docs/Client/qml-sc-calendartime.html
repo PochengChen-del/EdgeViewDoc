@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- CalendarTime.qml -->
+  <meta name="description" content="日期時間選擇器。">
+  <title>CalendarTime QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>CalendarTime</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">CalendarTime QML Type</h1>
+<!-- $$$CalendarTime-brief -->
+<p>日期時間選擇器。. <a href="#details">More...</a></p>
+<!-- @@@CalendarTime -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-calendartime-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#currentDate-prop" translate="no">currentDate</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#currentDateTime-prop" translate="no">currentDateTime</a></b> : date</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#currentMonth-prop" translate="no">currentMonth</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#currentPickType-prop" translate="no">currentPickType</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#currentYear-prop" translate="no">currentYear</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#is24Hour-prop" translate="no">is24Hour</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#meridiemPosition-prop" translate="no">meridiemPosition</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#showMinute-prop" translate="no">showMinute</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#showSecond-prop" translate="no">showSecond</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#showTimePreset-prop" translate="no">showTimePreset</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#sizeType-prop" translate="no">sizeType</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#timeList-prop" translate="no">timeList</a></b> : var</li>
+</ul>
+<h2 id="signals">Signals</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#dateClicked-signal" translate="no">dateClicked</a></b>(date <i>date</i>)</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#dateHovered-signal" translate="no">dateHovered</a></b>(date <i>date</i>)</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#timeClicked-signal" translate="no">timeClicked</a></b>(date <i>time</i>)</li>
+<li class="fn" translate="no"><b><a href="qml-sc-calendartime.html#timeHovered-signal" translate="no">timeHovered</a></b>(date <i>time</i>)</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">bool <b><a href="qml-sc-calendartime.html#dateDisabled-method" translate="no">dateDisabled</a></b>(<i>date</i>)</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-calendartime.html#dateMarked-method" translate="no">dateMarked</a></b>(<i>date</i>)</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-calendartime.html#dateSelected-method" translate="no">dateSelected</a></b>(<i>date</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-calendartime.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-calendartime.html#monthDisabled-method" translate="no">monthDisabled</a></b>(<i>month</i>)</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-calendartime.html#monthSelected-method" translate="no">monthSelected</a></b>(<i>month</i>)</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-calendartime.html#showSelectDate-method" translate="no">showSelectDate</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-calendartime.html#showSelectMonth-method" translate="no">showSelectMonth</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-calendartime.html#showSelectYear-method" translate="no">showSelectYear</a></b>()</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-calendartime.html#timeDisabled-method" translate="no">timeDisabled</a></b>(object <i>time</i>)</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-calendartime.html#timeSelected-method" translate="no">timeSelected</a></b>(object <i>time</i>)</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-calendartime.html#yearDisabled-method" translate="no">yearDisabled</a></b>(<i>year</i>)</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-calendartime.html#yearSelected-method" translate="no">yearSelected</a></b>(<i>year</i>)</li>
+</ul>
+<!-- $$$CalendarTime-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>此元件整合：</summary>
+<ul>
+<li><a href="qml-sc-calendarx.html" translate="no">CalendarX</a>（日期/月/年選擇）</li>
+<li><a href="qml-sc-timepresetpicker.html" translate="no">TimePresetPicker</a>（時間選擇）</li>
+</ul>
+<!-- @@@CalendarTime -->
+<h2>Property Documentation</h2>
+<!-- $$$currentDate -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentDate-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentDate</span> : <span class="type">int</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前日期（1&ndash;31）。</p>
+</div></div><!-- @@@currentDate -->
+<br/>
+<!-- $$$currentDateTime -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentDateTime-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentDateTime</span> : <span class="type">date</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前完整日期時間。</p>
+</div></div><!-- @@@currentDateTime -->
+<br/>
+<!-- $$$currentMonth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentMonth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentMonth</span> : <span class="type">int</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前月份（0&ndash;11）。</p>
+</div></div><!-- @@@currentMonth -->
+<br/>
+<!-- $$$currentPickType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentPickType-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentPickType</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前選擇模式（year/month/date）。</p>
+</div></div><!-- @@@currentPickType -->
+<br/>
+<!-- $$$currentYear -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentYear-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentYear</span> : <span class="type">int</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前年份。</p>
+</div></div><!-- @@@currentYear -->
+<br/>
+<!-- $$$is24Hour -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="is24Hour-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">is24Hour</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否使用 24 小時制。</p>
+</div></div><!-- @@@is24Hour -->
+<br/>
+<!-- $$$meridiemPosition -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="meridiemPosition-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">meridiemPosition</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>AM/PM 顯示位置。</p>
+</div></div><!-- @@@meridiemPosition -->
+<br/>
+<!-- $$$showMinute -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showMinute-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showMinute</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示分鐘。</p>
+</div></div><!-- @@@showMinute -->
+<br/>
+<!-- $$$showSecond -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showSecond-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showSecond</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示秒數。</p>
+</div></div><!-- @@@showSecond -->
+<br/>
+<!-- $$$showTimePreset -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showTimePreset-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showTimePreset</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示時間選擇。</p>
+</div></div><!-- @@@showTimePreset -->
+<br/>
+<!-- $$$sizeType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sizeType-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">sizeType</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>尺寸類型，控制顯示的大小。</p>
+<p>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</p>
+<ul>
+<li>true → Define.SizeType.Small</li>
+<li>false → Define.SizeType.Medium</li>
+</ul>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Constant</th><th >Description</th></tr></thead>
+<tr valign="top" class="odd"><td >Define.SizeType.Small</td><td >小尺寸</td></tr>
+<tr valign="top" class="even"><td >Define.SizeType.Medium</td><td >中尺寸</td></tr>
+</table></div>
+</div></div><!-- @@@sizeType -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-calendartime.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<!-- $$$timeList -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="timeList-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">timeList</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>時間資料來源。</p>
+</div></div><!-- @@@timeList -->
+<br/>
+<h2>Signal Documentation</h2>
+<!-- $$$dateClicked[overload1]$$$dateClickeddate -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dateClicked-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">dateClicked</span>(<span class="type">date</span> <i>date</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>點擊日期時觸發。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onDateClicked</code>.</p>
+</div></div></div><!-- @@@dateClicked -->
+<br/>
+<!-- $$$dateHovered[overload1]$$$dateHovereddate -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dateHovered-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">dateHovered</span>(<span class="type">date</span> <i>date</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>hover 日期時觸發。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onDateHovered</code>.</p>
+</div></div></div><!-- @@@dateHovered -->
+<br/>
+<!-- $$$timeClicked[overload1]$$$timeClickeddate -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="timeClicked-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">timeClicked</span>(<span class="type">date</span> <i>time</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>點擊時間時觸發。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onTimeClicked</code>.</p>
+</div></div></div><!-- @@@timeClicked -->
+<br/>
+<!-- $$$timeHovered[overload1]$$$timeHovereddate -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="timeHovered-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">timeHovered</span>(<span class="type">date</span> <i>time</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>hover 時間時觸發。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onTimeHovered</code>.</p>
+</div></div></div><!-- @@@timeHovered -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$dateDisabled[overload1]$$$dateDisabled -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dateDisabled-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">dateDisabled</span>(<i>date</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷日期是否停用。</p>
+<p>可覆寫此方法以自訂邏輯。</p>
+</div></div><!-- @@@dateDisabled -->
+<br/>
+<!-- $$$dateMarked[overload1]$$$dateMarked -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dateMarked-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">dateMarked</span>(<i>date</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷日期是否為標記狀態。</p>
+<p>可覆寫此方法以自訂邏輯。</p>
+</div></div><!-- @@@dateMarked -->
+<br/>
+<!-- $$$dateSelected[overload1]$$$dateSelected -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dateSelected-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">dateSelected</span>(<i>date</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷日期是否為選取狀態。</p>
+<p>可覆寫此方法以自訂邏輯。</p>
+</div></div><!-- @@@dateSelected -->
+<br/>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+<!-- $$$monthDisabled[overload1]$$$monthDisabled -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="monthDisabled-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">monthDisabled</span>(<i>month</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷月份是否停用。</p>
+<p>可覆寫此方法以自訂邏輯。</p>
+</div></div><!-- @@@monthDisabled -->
+<br/>
+<!-- $$$monthSelected[overload1]$$$monthSelected -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="monthSelected-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">monthSelected</span>(<i>month</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷月份是否為選取狀態。</p>
+<p>可覆寫此方法以自訂邏輯。</p>
+</div></div><!-- @@@monthSelected -->
+<br/>
+<!-- $$$showSelectDate[overload1]$$$showSelectDate -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showSelectDate-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">showSelectDate</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>切換至日期選擇頁。</p>
+</div></div><!-- @@@showSelectDate -->
+<br/>
+<!-- $$$showSelectMonth[overload1]$$$showSelectMonth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showSelectMonth-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">showSelectMonth</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>切換至月份選擇頁。</p>
+</div></div><!-- @@@showSelectMonth -->
+<br/>
+<!-- $$$showSelectYear[overload1]$$$showSelectYear -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showSelectYear-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">showSelectYear</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>切換至年份選擇頁。</p>
+</div></div><!-- @@@showSelectYear -->
+<br/>
+<!-- $$$timeDisabled[overload1]$$$timeDisabledobject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="timeDisabled-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">timeDisabled</span>(<span class="type">object</span> <i>time</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷時間是否停用。</p>
+<p>可覆寫此方法以自訂邏輯。</p>
+</div></div><!-- @@@timeDisabled -->
+<br/>
+<!-- $$$timeSelected[overload1]$$$timeSelectedobject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="timeSelected-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">timeSelected</span>(<span class="type">object</span> <i>time</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷時間是否被選取。</p>
+<p>可覆寫此方法以自訂邏輯。</p>
+</div></div><!-- @@@timeSelected -->
+<br/>
+<!-- $$$yearDisabled[overload1]$$$yearDisabled -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="yearDisabled-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">yearDisabled</span>(<i>year</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷年份是否停用。</p>
+<p>可覆寫此方法以自訂邏輯。</p>
+</div></div><!-- @@@yearDisabled -->
+<br/>
+<!-- $$$yearSelected[overload1]$$$yearSelected -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="yearSelected-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">yearSelected</span>(<i>year</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷年份是否為選取狀態。</p>
+<p>可覆寫此方法以自訂邏輯。</p>
+</div></div><!-- @@@yearSelected -->
+<br/>
+</body>
+</html>

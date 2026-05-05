@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>WADialogMessage QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>彈跳訊息對話框元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>元件組成：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>Header：標題列與操作區</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Body：標題與描述內容</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Footer：底部操作區</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>多尺寸顯示（<db:link xlink:href="">sizeType）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>大小控制</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>滾動控制</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="contentAvailableHeight-prop">
+<db:title>[read-only] contentAvailableHeight : real</db:title>
+<db:para>顯示可用高度 (扣除 <db:link xlink:href="qml-sc-wadialogmessage.xml#minVertMargins-prop">minVertMargins</db:link>)。</db:para>
+</db:section>
+<db:section xml:id="contentAvailableWidth-prop">
+<db:title>[read-only] contentAvailableWidth : real</db:title>
+<db:para>顯示可用寬度 (扣除 <db:link xlink:href="qml-sc-wadialogmessage.xml#minHorizMargins-prop">minHorizMargins</db:link>)。</db:para>
+</db:section>
+<db:section xml:id="descript-prop">
+<db:title>descript : string</db:title>
+<db:para>描述文字。</db:para>
+</db:section>
+<db:section xml:id="descriptElide-prop">
+<db:title>descriptElide : enumeration</db:title>
+<db:para>描述文字省略模式。</db:para>
+</db:section>
+<db:section xml:id="descriptWrapMode-prop">
+<db:title>descriptWrapMode : enumeration</db:title>
+<db:para>描述文字換行模式。</db:para>
+</db:section>
+<db:section xml:id="footerHeight-prop">
+<db:title>[read-only] footerHeight : real</db:title>
+<db:para>Footer height。</db:para>
+</db:section>
+<db:section xml:id="headerHeight-prop">
+<db:title>[read-only] headerHeight : real</db:title>
+<db:para>Header height。</db:para>
+</db:section>
+<db:section xml:id="leftFooterItems-prop">
+<db:title>leftFooterItems : Item</db:title>
+<db:para>Footer 左方元件。</db:para>
+</db:section>
+<db:section xml:id="maxContentHeight-prop">
+<db:title>maxContentHeight : real</db:title>
+<db:para>最大內容高度限制。</db:para>
+</db:section>
+<db:section xml:id="maxContentWidth-prop">
+<db:title>maxContentWidth : real</db:title>
+<db:para>最大內容寬度限制。</db:para>
+</db:section>
+<db:section xml:id="minContentHeight-prop">
+<db:title>minContentHeight : real</db:title>
+<db:para>最小內容高度限制。</db:para>
+</db:section>
+<db:section xml:id="minContentWidth-prop">
+<db:title>minContentWidth : real</db:title>
+<db:para>最小內容寬度限制。</db:para>
+</db:section>
+<db:section xml:id="minHorizMargins-prop">
+<db:title>minHorizMargins : real</db:title>
+<db:para>與邊界最小水平邊距。</db:para>
+</db:section>
+<db:section xml:id="minMargins-prop">
+<db:title>minMargins : real</db:title>
+<db:para>與邊界最小邊距。</db:para>
+</db:section>
+<db:section xml:id="minVertMargins-prop">
+<db:title>minVertMargins : real</db:title>
+<db:para>與邊界最小垂直邊距。</db:para>
+</db:section>
+<db:section xml:id="radius-prop">
+<db:title>radius : real</db:title>
+<db:para>圓角半徑。</db:para>
+</db:section>
+<db:section xml:id="rightFooterItems-prop">
+<db:title>rightFooterItems : Item</db:title>
+<db:para>Footer 右方元件。</db:para>
+</db:section>
+<db:section xml:id="showClose-prop">
+<db:title>showClose : bool</db:title>
+<db:para>是否顯示關閉按鈕。</db:para>
+</db:section>
+<db:section xml:id="showDescript-prop">
+<db:title>showDescript : bool</db:title>
+<db:para>是否顯示描述。</db:para>
+</db:section>
+<db:section xml:id="sizeType-prop">
+<db:title>sizeType : enumeration</db:title>
+<db:para>尺寸類型，控制顯示的大小。</db:para>
+<db:para>預設依據 Global.mobile 和 Global.tablet 決定：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true →</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → Define.SizeType.Small</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → Define.SizeType.ExtraSmall</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:listitem>
+<db:listitem>
+<db:para>false → Define.SizeType.Medium</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.ExtraSmall</db:para>
+</db:td>
+<db:td>
+<db:para>超小尺寸</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Small</db:para>
+</db:td>
+<db:td>
+<db:para>小尺寸</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Medium</db:para>
+</db:td>
+<db:td>
+<db:para>中尺寸</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設綁定 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="themeStyle-prop">
+<db:title>[read-only] themeStyle : var</db:title>
+<db:para>主題樣式設定物件。</db:para>
+<db:para>此屬性為唯讀，透過 <db:link xlink:href="qml-sc-wadialogmessage.xml#getThemeStyle-method">getThemeStyle</db:link>() 動態產生。</db:para>
+</db:section>
+<db:section xml:id="title-prop">
+<db:title>title : string</db:title>
+<db:para>標題文字。</db:para>
+</db:section>
+<db:section xml:id="titleElide-prop">
+<db:title>titleElide : Text.ElideMode</db:title>
+<db:para>標題截斷模式。</db:para>
+</db:section>
+<db:section xml:id="titleWrapMode-prop">
+<db:title>titleWrapMode : Text.WrapMode</db:title>
+<db:para>標題換行模式。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="signal-documentation">
+<db:title>Signal Documentation</db:title>
+<db:section xml:id="closeClicked-signal">
+<db:title>closeClicked()</db:title>
+<db:para>點擊關閉按鈕時觸發。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onCloseClicked</db:code>.</db:para>
+</db:note>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="getThemeStyle-method">
+<db:title>object getThemeStyle()</db:title>
+<db:para>取得主題樣式設定物件。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題樣式設定物件。</db:para>
+</db:section>
+</db:section>
+</db:article>

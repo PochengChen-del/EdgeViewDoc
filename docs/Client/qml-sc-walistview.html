@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- WAListView.qml -->
+  <meta name="description" content="自訂 ListView。">
+  <title>WAListView QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>WAListView</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">WAListView QML Type</h1>
+<!-- $$$WAListView-brief -->
+<p>自訂 ListView。. <a href="#details">More...</a></p>
+<!-- @@@WAListView -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-selector.html" translate="no">Selector</a>, <a href="qml-sc-selectormultiple.html" translate="no">SelectorMultiple</a>, and <a href="qml-sc-timepresetpicker.html" translate="no">TimePresetPicker</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-walistview-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-walistview.html#scrollBarColor-prop" translate="no">scrollBarColor</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walistview.html#scrollBarWidth-prop" translate="no">scrollBarWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walistview.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-walistview.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">object <b><a href="qml-sc-walistview.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+</ul>
+<!-- $$$WAListView-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供可滾動清單顯示，並針對</summary>
+<p>ScrollBar 進行樣式客製。</p>
+<p>此元件延續 SC 主題系統（<a href="qml-sc-walistview.html#themeName-prop" translate="no">themeName</a> / themeStyle）， 使 ScrollBar 的顏色與風格能統一管理。</p>
+<p>支援功能：</p>
+<ul>
+<li>垂直與水平滾動</li>
+<li>自動顯示/隱藏捲軸（依內容尺寸判斷）<ul>
+<li>垂直捲軸：當 contentHeight &gt; height 時顯示</li>
+<li>水平捲軸：當 contentWidth &gt; width 時顯示</li>
+</ul>
+</li>
+<li>自訂捲軸（<a href="qml-sc-walistview.html#scrollBarWidth-prop" translate="no">scrollBarWidth</a>, scrollBarColor）</li>
+<li>主題樣式控制（themeName）</li>
+</ul>
+<!-- @@@WAListView -->
+<h2>Property Documentation</h2>
+<!-- $$$scrollBarColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="scrollBarColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">scrollBarColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>捲軸顏色。</p>
+</div></div><!-- @@@scrollBarColor -->
+<br/>
+<!-- $$$scrollBarWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="scrollBarWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">scrollBarWidth</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>捲軸寬度。</p>
+</div></div><!-- @@@scrollBarWidth -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-walistview.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+</body>
+</html>

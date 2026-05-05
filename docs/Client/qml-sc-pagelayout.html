@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- PageLayout.qml -->
+  <meta name="description" content="頁面版面配置容器。">
+  <title>PageLayout QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>PageLayout</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">PageLayout QML Type</h1>
+<!-- $$$PageLayout-brief -->
+<p>頁面版面配置容器。. <a href="#details">More...</a></p>
+<!-- @@@PageLayout -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-pagelayout-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#actions-prop" translate="no">actions</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#breadcrumbDatas-prop" translate="no">breadcrumbDatas</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#buttonWidth-prop" translate="no">buttonWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#buttons-prop" translate="no">buttons</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#headerHeight-prop" translate="no">headerHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#headerTitleImplicitWidth-prop" translate="no">headerTitleImplicitWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#minContentWidth-prop" translate="no">minContentWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#pageContent-prop" translate="no">pageContent</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#showBack-prop" translate="no">showBack</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#showRequired-prop" translate="no">showRequired</a></b> : alias</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#sidebarItem-prop" translate="no">sidebarItem</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#sidebarRoot-prop" translate="no">sidebarRoot</a></b> : Rectangle</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#title-prop" translate="no">title</a></b> : string</li>
+</ul>
+<h2 id="signals">Signals</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-pagelayout.html#backClicked-signal" translate="no">backClicked</a></b>()</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">string <b><a href="qml-sc-pagelayout.html#breadcrumbI18nText-method" translate="no">breadcrumbI18nText</a></b>(object <i>breadcrumb</i>)</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-pagelayout.html#collapseNavbar-method" translate="no">collapseNavbar</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-pagelayout.html#collapseSidebar-method" translate="no">collapseSidebar</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-pagelayout.html#expandNavbar-method" translate="no">expandNavbar</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-pagelayout.html#expandSidebar-method" translate="no">expandSidebar</a></b>()</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-pagelayout.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+</ul>
+<!-- $$$PageLayout-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供頁面框架。</summary>
+<p>元件組成：</p>
+<ul>
+<li>Header：標題列、麵包屑、返回與操作/功能按鈕</li>
+<li>Sidebar：側邊欄</li>
+<li>Page：頁面內容</li>
+</ul>
+<p>支援功能：</p>
+<ul>
+<li>主題樣式控制（themeName）</li>
+<li>側邊欄控制</li>
+<li>操作/功能按鈕顯示（<a href="qml-sc-pagelayout.html#actions-prop" translate="no">actions</a>, buttons）</li>
+<li>自訂頁面內容（pageContent）</li>
+<li>自訂側邊欄內容（sidebarItem）</li>
+</ul>
+<p>使用：</p>
+<pre class="cpp" translate="no"><span class="type"><a href="qml-sc-pagelayout.html" translate="no">PageLayout</a></span> {
+    <span class="name">anchors</span>.fill: <span class="name">parent</span>
+    <span class="name">pageContent</span>: <span class="name">Item</span> {
+        <span class="name">anchors</span>.fill: <span class="name">parent</span>
+    }
+}</pre>
+<!-- @@@PageLayout -->
+<h2>Property Documentation</h2>
+<!-- $$$actions -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="actions-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">actions</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Header 操作按鈕資料來源。</p>
+</div></div><!-- @@@actions -->
+<br/>
+<!-- $$$breadcrumbDatas -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="breadcrumbDatas-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">breadcrumbDatas</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>麵包屑資料來源。</p>
+</div></div><!-- @@@breadcrumbDatas -->
+<br/>
+<!-- $$$buttonWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="buttonWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">buttonWidth</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Header 按鈕自動計算寬度。</p>
+</div></div><!-- @@@buttonWidth -->
+<br/>
+<!-- $$$buttons -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="buttons-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">buttons</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Header 功能按鈕資料來源。</p>
+</div></div><!-- @@@buttons -->
+<br/>
+<!-- $$$headerHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="headerHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">headerHeight</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Header height。</p>
+</div></div><!-- @@@headerHeight -->
+<br/>
+<!-- $$$headerTitleImplicitWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="headerTitleImplicitWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">headerTitleImplicitWidth</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>標題 implicitWidth。</p>
+</div></div><!-- @@@headerTitleImplicitWidth -->
+<br/>
+<!-- $$$minContentWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="minContentWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">minContentWidth</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>最小頁面內容寬度限制。</p>
+</div></div><!-- @@@minContentWidth -->
+<br/>
+<!-- $$$pageContent -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="pageContent-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">pageContent</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>頁面內容區域的子元件。</p>
+</div></div><!-- @@@pageContent -->
+<br/>
+<!-- $$$showBack -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showBack-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showBack</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示必填。</p>
+</div></div><!-- @@@showBack -->
+<br/>
+<!-- $$$showRequired -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showRequired-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showRequired</span> : <span class="type">alias</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示必填。</p>
+</div></div><!-- @@@showRequired -->
+<br/>
+<!-- $$$sidebarItem -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sidebarItem-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">sidebarItem</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>側邊欄區域的子元件。</p>
+</div></div><!-- @@@sidebarItem -->
+<br/>
+<!-- $$$sidebarRoot -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sidebarRoot-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">sidebarRoot</span> : <span class="type">Rectangle</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>側邊欄容器。</p>
+</div></div><!-- @@@sidebarRoot -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-pagelayout.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<!-- $$$title -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="title-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">title</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>標題文字。</p>
+</div></div><!-- @@@title -->
+<br/>
+<h2>Signal Documentation</h2>
+<!-- $$$backClicked[overload1]$$$backClicked -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="backClicked-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">backClicked</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>點擊返回按鈕時觸發。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onBackClicked</code>.</p>
+</div></div></div><!-- @@@backClicked -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$breadcrumbI18nText[overload1]$$$breadcrumbI18nTextobject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="breadcrumbI18nText-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span> <span class="name">breadcrumbI18nText</span>(<span class="type">object</span> <i>breadcrumb</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得麵包屑項目的顯示文字。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>breadcrumb 麵包屑項目資料 <b class="redFont"><code translate=\"no\">\return</code></b> string</p>
+<p>可覆寫。</p>
+</div></div><!-- @@@breadcrumbI18nText -->
+<br/>
+<!-- $$$collapseNavbar[overload1]$$$collapseNavbar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="collapseNavbar-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">collapseNavbar</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>收合父層側邊導覽列。</p>
+</div></div><!-- @@@collapseNavbar -->
+<br/>
+<!-- $$$collapseSidebar[overload1]$$$collapseSidebar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="collapseSidebar-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">collapseSidebar</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>收合側邊欄。</p>
+</div></div><!-- @@@collapseSidebar -->
+<br/>
+<!-- $$$expandNavbar[overload1]$$$expandNavbar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="expandNavbar-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">expandNavbar</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>展開父層側邊導覽列。</p>
+</div></div><!-- @@@expandNavbar -->
+<br/>
+<!-- $$$expandSidebar[overload1]$$$expandSidebar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="expandSidebar-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">expandSidebar</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>展開側邊欄。</p>
+</div></div><!-- @@@expandSidebar -->
+<br/>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+</body>
+</html>

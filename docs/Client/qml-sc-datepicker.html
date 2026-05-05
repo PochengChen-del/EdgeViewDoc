@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- DatePicker.qml -->
+  <meta name="description" content="日期選擇器元件（年/月/日）。">
+  <title>DatePicker QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>DatePicker</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">DatePicker QML Type</h1>
+<!-- $$$DatePicker-brief -->
+<p>日期選擇器元件（年/月/日）。. <a href="#details">More...</a></p>
+<!-- @@@DatePicker -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-datepicker-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#cellBottomPadding-prop" translate="no">cellBottomPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#cellHorizontalPadding-prop" translate="no">cellHorizontalPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#cellLeftPadding-prop" translate="no">cellLeftPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#cellPadding-prop" translate="no">cellPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#cellRightPadding-prop" translate="no">cellRightPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#cellSpacing-prop" translate="no">cellSpacing</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#cellTopPadding-prop" translate="no">cellTopPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#cellVerticalPadding-prop" translate="no">cellVerticalPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#currentMonth-prop" translate="no">currentMonth</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#currentYear-prop" translate="no">currentYear</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#firstWeekday-prop" translate="no">firstWeekday</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#maxCellAdvanceWidth-prop" translate="no">maxCellAdvanceWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#monthList-prop" translate="no">monthList</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#sizeType-prop" translate="no">sizeType</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+</ul>
+<h2 id="signals">Signals</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#dateClicked-signal" translate="no">dateClicked</a></b>(int <i>year</i>, int <i>month</i>, int <i>date</i>)</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#dateHovered-signal" translate="no">dateHovered</a></b>(int <i>year</i>, int <i>month</i>, int <i>date</i>)</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#monthClicked-signal" translate="no">monthClicked</a></b>()</li>
+<li class="fn" translate="no"><b><a href="qml-sc-datepicker.html#yearClicked-signal" translate="no">yearClicked</a></b>()</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">bool <b><a href="qml-sc-datepicker.html#dateDisabled-method" translate="no">dateDisabled</a></b>(<i>date</i>)</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-datepicker.html#dateMarked-method" translate="no">dateMarked</a></b>(<i>date</i>)</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-datepicker.html#dateSelected-method" translate="no">dateSelected</a></b>(<i>date</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-datepicker.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+<li class="fn" translate="no">string <b><a href="qml-sc-datepicker.html#monthShortI18NText-method" translate="no">monthShortI18NText</a></b>(int <i>month</i>)</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-datepicker.html#nextMonthClickedHandler-method" translate="no">nextMonthClickedHandler</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-datepicker.html#nextYearClickedHandler-method" translate="no">nextYearClickedHandler</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-datepicker.html#prevMonthClickedHandler-method" translate="no">prevMonthClickedHandler</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-datepicker.html#prevYearClickedHandler-method" translate="no">prevYearClickedHandler</a></b>()</li>
+</ul>
+<!-- $$$DatePicker-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供完整的日期瀏覽與選擇功能。</summary>
+<p>支援功能：</p>
+<ul>
+<li>主題樣式控制（themeName）</li>
+<li>多尺寸顯示（sizeType）</li>
+<li>年份/月份 切換控制</li>
+<li>星期列顯示</li>
+<li>日期 Grid 顯示</li>
+<li>自訂日期狀態（selected / marked / disabled）</li>
+</ul>
+<!-- @@@DatePicker -->
+<h2>Property Documentation</h2>
+<!-- $$$cellBottomPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="cellBottomPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">cellBottomPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>日期下方邊距。</p>
+</div></div><!-- @@@cellBottomPadding -->
+<br/>
+<!-- $$$cellHorizontalPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="cellHorizontalPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">cellHorizontalPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>日期水平邊距。</p>
+</div></div><!-- @@@cellHorizontalPadding -->
+<br/>
+<!-- $$$cellLeftPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="cellLeftPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">cellLeftPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>日期左方邊距。</p>
+</div></div><!-- @@@cellLeftPadding -->
+<br/>
+<!-- $$$cellPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="cellPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">cellPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>日期邊距。</p>
+</div></div><!-- @@@cellPadding -->
+<br/>
+<!-- $$$cellRightPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="cellRightPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">cellRightPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>日期右方邊距。</p>
+</div></div><!-- @@@cellRightPadding -->
+<br/>
+<!-- $$$cellSpacing -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="cellSpacing-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">cellSpacing</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>日期間距。</p>
+</div></div><!-- @@@cellSpacing -->
+<br/>
+<!-- $$$cellTopPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="cellTopPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">cellTopPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>日期上方邊距。</p>
+</div></div><!-- @@@cellTopPadding -->
+<br/>
+<!-- $$$cellVerticalPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="cellVerticalPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">cellVerticalPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>日期垂直邊距。</p>
+</div></div><!-- @@@cellVerticalPadding -->
+<br/>
+<!-- $$$currentMonth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentMonth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentMonth</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前顯示的月份（0&ndash;11）。</p>
+</div></div><!-- @@@currentMonth -->
+<br/>
+<!-- $$$currentYear -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentYear-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentYear</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前顯示的年份。</p>
+</div></div><!-- @@@currentYear -->
+<br/>
+<!-- $$$firstWeekday -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="firstWeekday-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">firstWeekday</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>每週的起始日（例如週一或週日）。</p>
+</div></div><!-- @@@firstWeekday -->
+<br/>
+<!-- $$$maxCellAdvanceWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="maxCellAdvanceWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">maxCellAdvanceWidth</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>日期按鈕最大寬度，用於對齊。</p>
+</div></div><!-- @@@maxCellAdvanceWidth -->
+<br/>
+<!-- $$$monthList -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="monthList-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">monthList</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>月份清單（0&ndash;11）。</p>
+</div></div><!-- @@@monthList -->
+<br/>
+<!-- $$$sizeType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sizeType-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">sizeType</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>尺寸類型，控制顯示的大小。</p>
+<p>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</p>
+<ul>
+<li>true → Define.SizeType.Small</li>
+<li>false → Define.SizeType.Medium</li>
+</ul>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Constant</th><th >Description</th></tr></thead>
+<tr valign="top" class="odd"><td >Define.SizeType.Small</td><td >小尺寸</td></tr>
+<tr valign="top" class="even"><td >Define.SizeType.Medium</td><td >中尺寸</td></tr>
+</table></div>
+</div></div><!-- @@@sizeType -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-datepicker.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<h2>Signal Documentation</h2>
+<!-- $$$dateClicked[overload1]$$$dateClickedintintint -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dateClicked-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">dateClicked</span>(<span class="type">int</span> <i>year</i>, <span class="type">int</span> <i>month</i>, <span class="type">int</span> <i>date</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>點擊日期時觸發。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onDateClicked</code>.</p>
+</div></div></div><!-- @@@dateClicked -->
+<br/>
+<!-- $$$dateHovered[overload1]$$$dateHoveredintintint -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dateHovered-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">dateHovered</span>(<span class="type">int</span> <i>year</i>, <span class="type">int</span> <i>month</i>, <span class="type">int</span> <i>date</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>hover 日期時觸發。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onDateHovered</code>.</p>
+</div></div></div><!-- @@@dateHovered -->
+<br/>
+<!-- $$$monthClicked[overload1]$$$monthClicked -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="monthClicked-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">monthClicked</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>點擊月份按鈕時觸發。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onMonthClicked</code>.</p>
+</div></div></div><!-- @@@monthClicked -->
+<br/>
+<!-- $$$yearClicked[overload1]$$$yearClicked -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="yearClicked-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">yearClicked</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>點擊年份按鈕時觸發。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onYearClicked</code>.</p>
+</div></div></div><!-- @@@yearClicked -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$dateDisabled[overload1]$$$dateDisabled -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dateDisabled-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">dateDisabled</span>(<i>date</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷日期是否停用。</p>
+<p>可覆寫此方法以自訂邏輯。</p>
+</div></div><!-- @@@dateDisabled -->
+<br/>
+<!-- $$$dateMarked[overload1]$$$dateMarked -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dateMarked-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">dateMarked</span>(<i>date</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷日期是否為標記狀態。</p>
+<p>可覆寫此方法以自訂邏輯。</p>
+</div></div><!-- @@@dateMarked -->
+<br/>
+<!-- $$$dateSelected[overload1]$$$dateSelected -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dateSelected-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">dateSelected</span>(<i>date</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷日期是否為選取狀態。</p>
+<p>可覆寫此方法以自訂邏輯。</p>
+</div></div><!-- @@@dateSelected -->
+<br/>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+<!-- $$$monthShortI18NText[overload1]$$$monthShortI18NTextint -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="monthShortI18NText-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span> <span class="name">monthShortI18NText</span>(<span class="type">int</span> <i>month</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得月份縮寫文字（i18n）。</p>
+<p><i translate="no">month</i> 範圍為 0&ndash;11。</p>
+</div></div><!-- @@@monthShortI18NText -->
+<br/>
+<!-- $$$nextMonthClickedHandler[overload1]$$$nextMonthClickedHandler -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="nextMonthClickedHandler-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">nextMonthClickedHandler</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>切換到下一個月份（含跨年處理）。</p>
+</div></div><!-- @@@nextMonthClickedHandler -->
+<br/>
+<!-- $$$nextYearClickedHandler[overload1]$$$nextYearClickedHandler -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="nextYearClickedHandler-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">nextYearClickedHandler</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>切換到下一年。</p>
+</div></div><!-- @@@nextYearClickedHandler -->
+<br/>
+<!-- $$$prevMonthClickedHandler[overload1]$$$prevMonthClickedHandler -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="prevMonthClickedHandler-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">prevMonthClickedHandler</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>切換到上一個月份（含跨年處理）。</p>
+</div></div><!-- @@@prevMonthClickedHandler -->
+<br/>
+<!-- $$$prevYearClickedHandler[overload1]$$$prevYearClickedHandler -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="prevYearClickedHandler-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">prevYearClickedHandler</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>切換到上一年。</p>
+</div></div><!-- @@@prevYearClickedHandler -->
+<br/>
+</body>
+</html>

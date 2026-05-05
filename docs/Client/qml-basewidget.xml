@@ -89,4 +89,70 @@
 </db:note>
 </db:section>
 </db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="underscore.applyThemeProperty-method">
+<db:title>var _applyThemeProperty(<db:emphasis>propertyName</db:emphasis>, <db:emphasis>propertyValue</db:emphasis>, <db:emphasis>theme</db:emphasis>)</db:title>
+<db:para>屬性值套用主題。 共用 function。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>套用主題後屬性值。</db:para>
+</db:section>
+<db:section xml:id="underscore.validateValue-method">
+<db:title>errorObject _validateValue(string <db:emphasis>type</db:emphasis>, var <db:emphasis>value</db:emphasis>, object <db:emphasis>args</db:emphasis>)</db:title>
+<db:para>驗證值是否正確。 共用 function。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>type 驗證型別。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> value 值。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> args 驗證相關參數。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis> 驗證錯誤內容。驗鄭成功為 undefined；驗鄭失敗為 errorObject, errorObject format: { &quot;type&quot;: &quot;type&quot;, &quot;valueType&quot;: &quot;prototype value&quot;, &quot;errors&quot;: [ { &quot;name&quot;: &quot;key&quot;, &quot;error&quot;: errorObject } ] } ex: { &quot;type&quot;: &quot;gradient&quot;, &quot;valueType&quot;: &quot;object&quot;,, &quot;errors&quot;: [ { &quot;name&quot;: &quot;color&quot;, &quot;error&quot;: { &quot;type&quot;: &quot;color&quot;, &quot;valueType&quot;: &quot;number&quot;, } } ] }</db:para>
+</db:section>
+<db:section xml:id="applyTheme-method">
+<db:title>void applyTheme()</db:title>
+<db:para>widget 套用主題。 共用 function。</db:para>
+</db:section>
+<db:section xml:id="applyThemeAll-method">
+<db:title>void applyThemeAll()</db:title>
+<db:para>widget 與 下一層 widget 套用主題。 共用 function。</db:para>
+</db:section>
+<db:section xml:id="applyThemeProperties-method">
+<db:title>void applyThemeProperties(object <db:emphasis>theme</db:emphasis>, bool <db:emphasis>deep</db:emphasis>, bool <db:emphasis>isRecord</db:emphasis>, int <db:emphasis>recordIndex</db:emphasis>, var <db:emphasis>refObjRecord</db:emphasis>)</db:title>
+<db:para>所有樣式屬性套用主題。 共用 function。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>theme 主題。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> deep 是否處理下一層 widget，預設 true。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> isRecord 是否記錄復原/重作，預設 true。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> recordIndex 記錄索引，預設 -1。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> refObjRecord 記錄的資訊參考物件。</db:para>
+</db:section>
+<db:section xml:id="checkPropertyValid-method">
+<db:title>object checkPropertyValid(string <db:emphasis>propertyName</db:emphasis>, var <db:emphasis>propertyValue</db:emphasis>, object <db:emphasis>referenceProperties</db:emphasis>)</db:title>
+<db:para>驗證屬性值是否正確。 共用 function。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>propertyName 屬性名稱。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> propertyValue 屬性值。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> referenceProperties 關聯屬性。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis> 驗證錯誤內容。驗鄭成功為 null；驗鄭失敗為 object, format: { &quot;name&quot;: property name, &quot;error&quot;: errorObject, } ex: { &quot;name&quot;: &quot;width&quot;, &quot;error&quot;: { &quot;type&quot;: &quot;double&quot;, &quot;valueType&quot;: &quot;string&quot;, } }</db:para>
+</db:section>
+<db:section xml:id="checkPropertyValidByType-method">
+<db:title>errorObject checkPropertyValidByType(string <db:emphasis>type</db:emphasis>, var <db:emphasis>value</db:emphasis>, object <db:emphasis>args</db:emphasis>)</db:title>
+<db:para>驗證值是否正確。 此方法可以由繼承 Widget 覆寫。</db:para>
+<db:para>param 和 return 請參考 <db:link xlink:href="qml-basewidget.xml#underscore.validateValue-method">BaseWidget::_validateValue</db:link>(string type, var value, object args) args.propertyName 為驗證的屬性名稱。 args.referenceProperties 為關聯屬性。</db:para>
+</db:section>
+<db:section xml:id="getCurrentTheme-method">
+<db:title>object getCurrentTheme()</db:title>
+<db:para>取得目前所屬圖紙的主題設定。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題設定。</db:para>
+</db:section>
+<db:section xml:id="getCurrentThemeName-method">
+<db:title>object getCurrentThemeName()</db:title>
+<db:para>取得目前所屬圖紙的主題名稱。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題設定。</db:para>
+</db:section>
+<db:section xml:id="getInitialProperties-method">
+<db:title>object getInitialProperties(object <db:emphasis>customProperties</db:emphasis>, object <db:emphasis>customParent</db:emphasis>)</db:title>
+<db:para>取得初始化的屬性值。主要提供 與原本屬性預設值不同 或 會依其他屬性而有不同初始值的屬性。 此方法由繼承 Widget 覆寫。未覆寫會預設提供 { width: 50, height: 50 } 主要在建立 widget 時取用。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>customProperties 指定屬性值。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> customParent 指定 parent。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis> 初始化的屬性值。object, format: { property name: property value } ex: { width: 50, height: 50 }</db:para>
+</db:section>
+<db:section xml:id="getPropertyDefaultValue-method">
+<db:title>var getPropertyDefaultValue(string <db:emphasis>propertyName</db:emphasis>, object <db:emphasis>theme</db:emphasis>, ... <db:emphasis>args</db:emphasis>)</db:title>
+<db:para>取得屬性預設值，並套用主題設定。 此方法由繼承 Widget 覆寫。 主要在 widget 取得屬性內容預設值，並套用主題設定。例如： dataList。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>propertyName 完整的屬性名稱組合，使用 . 串聯。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> theme 主題設定。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> args 其他參數。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis> 屬性預設值。</db:para>
+</db:section>
+<db:section xml:id="getPropertyValue-method">
+<db:title>var getPropertyValue(string <db:emphasis>propertyName</db:emphasis>, object <db:emphasis>theme</db:emphasis>, bool <db:emphasis>allowNonExist</db:emphasis>)</db:title>
+<db:para>取得目前屬性值，並套用主題。 共用 function。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>propertyName 完整的屬性名稱組合，使用 . 串聯。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> theme 主題設定。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis> allowNonExist 是否允許屬性不存回傳 undefined。false：取得預設值，<db:link xlink:href="qml-basewidget.xml#getPropertyDefaultValue-method">getPropertyDefaultValue</db:link>()。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis> 套用主題後目前屬性值。</db:para>
+</db:section>
+<db:section xml:id="getStylePropertyList-method">
+<db:title>object[] getStylePropertyList(bool <db:emphasis>isCreate</db:emphasis> = false)</db:title>
+<db:para>取得樣式屬性清單。與主題套用樣式相關的屬性。 此方法由繼承 Widget 覆寫。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>isCreate 是否包含建立。 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis> 樣式屬性清單。object[], format: [ { &quot;name&quot;: property name, // 完整的屬性名稱組合，使用 . 串聯，陣列非特定數量可以使用 [] 表示所有項目。 &quot;createOnly&quot;: bool, // 只有在建立時套用 } ] ex: { width: 50, height: 50 }</db:para>
+</db:section>
+</db:section>
 </db:article>

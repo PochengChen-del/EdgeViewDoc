@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- MainLayout.qml -->
+  <meta name="description" content="主版面配置容器。">
+  <title>MainLayout QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>MainLayout</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">MainLayout QML Type</h1>
+<!-- $$$MainLayout-brief -->
+<p>主版面配置容器。. <a href="#details">More...</a></p>
+<!-- @@@MainLayout -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-mainlayout-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayout.html#headerHeight-prop" translate="no">headerHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayout.html#pageItem-prop" translate="no">pageItem</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayout.html#pageRoot-prop" translate="no">pageRoot</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayout.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayout.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">void <b><a href="qml-sc-mainlayout.html#collapseNavbar-method" translate="no">collapseNavbar</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-mainlayout.html#expandNavbar-method" translate="no">expandNavbar</a></b>()</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-mainlayout.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+</ul>
+<!-- $$$MainLayout-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供應用程式的主要框架。</summary>
+<p>元件組成：</p>
+<ul>
+<li>Header：系統標題與功能按鈕</li>
+<li>Navbar：側邊導覽</li>
+<li>Page：頁面內容</li>
+</ul>
+<p>支援功能：</p>
+<ul>
+<li>主題樣式控制（themeName）</li>
+<li>Header 功能觸發</li>
+<li>導覽列控制</li>
+<li>自訂頁面內容（pageItem）</li>
+</ul>
+<p>使用：</p>
+<pre class="cpp" translate="no"><span class="type"><a href="qml-sc-mainlayout.html" translate="no">MainLayout</a></span> {
+    <span class="name">anchors</span>.fill: <span class="name">parent</span>
+    <span class="name">pageItem</span>: <span class="name">PageLayout</span> {
+        <span class="name">anchors</span>.fill: <span class="name">parent</span>
+    }
+}</pre>
+<!-- @@@MainLayout -->
+<h2>Property Documentation</h2>
+<!-- $$$headerHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="headerHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">headerHeight</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Header height。</p>
+</div></div><!-- @@@headerHeight -->
+<br/>
+<!-- $$$pageItem -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="pageItem-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">pageItem</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>頁面內容區域的子元件。</p>
+</div></div><!-- @@@pageItem -->
+<br/>
+<!-- $$$pageRoot -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="pageRoot-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">pageRoot</span> : <span class="type">Item</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>頁面內容區域容器。</p>
+</div></div><!-- @@@pageRoot -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-mainlayout.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$collapseNavbar[overload1]$$$collapseNavbar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="collapseNavbar-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">collapseNavbar</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>收合側邊導覽列。</p>
+</div></div><!-- @@@collapseNavbar -->
+<br/>
+<!-- $$$expandNavbar[overload1]$$$expandNavbar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="expandNavbar-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">expandNavbar</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>展開側邊導覽列。</p>
+</div></div><!-- @@@expandNavbar -->
+<br/>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+</body>
+</html>

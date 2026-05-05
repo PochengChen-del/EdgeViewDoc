@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>RowItemText QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>單行文字顯示元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-rowitembase.xml">RowItemBase</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>是 <db:link xlink:href="qml-sc-rowitembase.xml">RowItemBase</db:link> 的實作元件。</db:para>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>文字顯示（<db:link xlink:href="qml-sc-rowitemtext.xml#text-prop">text</db:link>, <db:link xlink:href="">description）</db:link></db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="description-prop">
+<db:title>description : string</db:title>
+<db:para>描述文字。</db:para>
+</db:section>
+<db:section xml:id="descriptionElide-prop">
+<db:title>descriptionElide : enumeration</db:title>
+<db:para>描述文字省略模式。</db:para>
+</db:section>
+<db:section xml:id="descriptionFont-prop">
+<db:title>descriptionFont : font</db:title>
+<db:para>描述文字字型。</db:para>
+</db:section>
+<db:section xml:id="descriptionLineHeight-prop">
+<db:title>descriptionLineHeight : real</db:title>
+<db:para>描述文字行高。</db:para>
+</db:section>
+<db:section xml:id="descriptionMaximumLineCount-prop">
+<db:title>descriptionMaximumLineCount : int</db:title>
+<db:para>描述文字最大行數限制。</db:para>
+<db:para>當 <db:link xlink:href="qml-sc-rowitemtext.xml#textWrapMode-prop">textWrapMode</db:link> 允許多行時，此屬性用來限制最多顯示行數。設為 0 表示不限制行數。</db:para>
+</db:section>
+<db:section xml:id="descriptionWrapMode-prop">
+<db:title>descriptionWrapMode : enumeration</db:title>
+<db:para>描述文字換行模式。</db:para>
+</db:section>
+<db:section xml:id="showDescription-prop">
+<db:title>showDescription : bool</db:title>
+<db:para>是否顯示描述。</db:para>
+</db:section>
+<db:section xml:id="text-prop">
+<db:title>text : string</db:title>
+<db:para>顯示文字。</db:para>
+</db:section>
+<db:section xml:id="textElide-prop">
+<db:title>textElide : enumeration</db:title>
+<db:para>文字省略模式。</db:para>
+</db:section>
+<db:section xml:id="textFont-prop">
+<db:title>textFont : font</db:title>
+<db:para>文字字型。</db:para>
+</db:section>
+<db:section xml:id="textLineHeight-prop">
+<db:title>textLineHeight : real</db:title>
+<db:para>文字行高。</db:para>
+</db:section>
+<db:section xml:id="textMaxLineCount-prop">
+<db:title>textMaxLineCount : int</db:title>
+<db:para>文字最大行數限制。</db:para>
+<db:para>當 <db:link xlink:href="qml-sc-rowitemtext.xml#textWrapMode-prop">textWrapMode</db:link> 允許多行時，此屬性用來限制最多顯示行數。設為 0 表示不限制行數。</db:para>
+</db:section>
+<db:section xml:id="textWrapMode-prop">
+<db:title>textWrapMode : enumeration</db:title>
+<db:para>文字換行模式。</db:para>
+</db:section>
+</db:section>
+</db:article>

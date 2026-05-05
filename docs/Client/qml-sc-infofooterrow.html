@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- InfoFooterRow.qml -->
+  <meta name="description" content="水平排列未登入頁面 Footer。">
+  <title>InfoFooterRow QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>InfoFooterRow</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">InfoFooterRow QML Type</h1>
+<!-- $$$InfoFooterRow-brief -->
+<p>水平排列未登入頁面 Footer。. <a href="#details">More...</a></p>
+<!-- @@@InfoFooterRow -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-infofooterrow-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-infofooterrow.html#bottomPadding-prop" translate="no">bottomPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofooterrow.html#buttonKeyRole-prop" translate="no">buttonKeyRole</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofooterrow.html#buttonModel-prop" translate="no">buttonModel</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofooterrow.html#buttonOpenUrlRole-prop" translate="no">buttonOpenUrlRole</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofooterrow.html#leftPadding-prop" translate="no">leftPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofooterrow.html#padding-prop" translate="no">padding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofooterrow.html#rightPadding-prop" translate="no">rightPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofooterrow.html#showVersion-prop" translate="no">showVersion</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofooterrow.html#sizeType-prop" translate="no">sizeType</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofooterrow.html#spacing-prop" translate="no">spacing</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofooterrow.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofooterrow.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofooterrow.html#today-prop" translate="no">today</a></b> : date</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofooterrow.html#topPadding-prop" translate="no">topPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofooterrow.html#versionText-prop" translate="no">versionText</a></b> : string</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">void <b><a href="qml-sc-infofooterrow.html#buttonClicked-method" translate="no">buttonClicked</a></b>(var <i>btn</i>)</li>
+<li class="fn" translate="no">string <b><a href="qml-sc-infofooterrow.html#buttonI18nText-method" translate="no">buttonI18nText</a></b>(var <i>btn</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-infofooterrow.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+</ul>
+<!-- $$$InfoFooterRow-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供未登入頁面的底部資訊與功能按鈕。</summary>
+<p>元件組成：</p>
+<ul>
+<li>公司版權資訊</li>
+<li>系統版本資訊（自訂）</li>
+<li>功能按鈕列表</li>
+<li>語言切換下拉選單</li>
+</ul>
+<p>支援功能：</p>
+<ul>
+<li>主題樣式控制（themeName）</li>
+<li>多尺寸顯示（sizeType）</li>
+<li>功能按鈕控制</li>
+<li>語言切換</li>
+</ul>
+<!-- @@@InfoFooterRow -->
+<h2>Property Documentation</h2>
+<!-- $$$bottomPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bottomPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bottomPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>下方邊距。</p>
+</div></div><!-- @@@bottomPadding -->
+<br/>
+<!-- $$$buttonKeyRole -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="buttonKeyRole-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">buttonKeyRole</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>按鈕文字欄位名稱。</p>
+<p>預設 &quot;key&quot;。</p>
+</div></div><!-- @@@buttonKeyRole -->
+<br/>
+<!-- $$$buttonModel -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="buttonModel-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">buttonModel</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>功能按鈕來源。</p>
+</div></div><!-- @@@buttonModel -->
+<br/>
+<!-- $$$buttonOpenUrlRole -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="buttonOpenUrlRole-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">buttonOpenUrlRole</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>按鈕開啟 URL 欄位名稱。</p>
+<p>若存在且為有效字串，點擊時會呼叫 Global.openUrlExternally()。</p>
+</div></div><!-- @@@buttonOpenUrlRole -->
+<br/>
+<!-- $$$leftPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="leftPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">leftPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>左方邊距。</p>
+</div></div><!-- @@@leftPadding -->
+<br/>
+<!-- $$$padding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="padding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">padding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>邊距。</p>
+</div></div><!-- @@@padding -->
+<br/>
+<!-- $$$rightPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="rightPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">rightPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>右方邊距。</p>
+</div></div><!-- @@@rightPadding -->
+<br/>
+<!-- $$$showVersion -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showVersion-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showVersion</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示版本資訊。</p>
+<p>預設 true。</p>
+</div></div><!-- @@@showVersion -->
+<br/>
+<!-- $$$sizeType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sizeType-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">sizeType</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>尺寸類型，控制顯示的大小。</p>
+<p>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</p>
+<ul>
+<li>true → Define.SizeType.Small</li>
+<li>false → Define.SizeType.Medium</li>
+</ul>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Constant</th><th >Description</th></tr></thead>
+<tr valign="top" class="odd"><td >Define.SizeType.Small</td><td >小尺寸</td></tr>
+<tr valign="top" class="even"><td >Define.SizeType.Medium</td><td >中尺寸</td></tr>
+</table></div>
+</div></div><!-- @@@sizeType -->
+<br/>
+<!-- $$$spacing -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="spacing-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">spacing</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>間距。</p>
+</div></div><!-- @@@spacing -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-infofooterrow.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<!-- $$$today -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="today-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">today</span> : <span class="type">date</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>今日日期，用於顯示版權年份。</p>
+</div></div><!-- @@@today -->
+<br/>
+<!-- $$$topPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="topPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">topPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>上方邊距。</p>
+</div></div><!-- @@@topPadding -->
+<br/>
+<!-- $$$versionText -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="versionText-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">versionText</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>系統版本資訊文字，使用換行字元（\n）分隔多組。</p>
+</div></div><!-- @@@versionText -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$buttonClicked[overload1]$$$buttonClickedvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="buttonClicked-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">buttonClicked</span>(<span class="type">var</span> <i>btn</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>自訂按鈕點擊行為。</p>
+<p>當按鈕未設定 openUrl 時會觸發此方法。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>btn 按鈕資料</p>
+</div></div><!-- @@@buttonClicked -->
+<br/>
+<!-- $$$buttonI18nText[overload1]$$$buttonI18nTextvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="buttonI18nText-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span> <span class="name">buttonI18nText</span>(<span class="type">var</span> <i>btn</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得按鈕顯示文字（含 i18n）。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>btn 按鈕資料物件或字串 <b class="redFont"><code translate=\"no\">\return</code></b> 對應顯示文字</p>
+</div></div><!-- @@@buttonI18nText -->
+<br/>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+</body>
+</html>

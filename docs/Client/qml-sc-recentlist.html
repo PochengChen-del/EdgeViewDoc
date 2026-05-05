@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- RecentList.qml -->
+  <meta name="description" content="行動版最近搜尋紀錄清單元件。">
+  <title>RecentList QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>RecentList</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">RecentList QML Type</h1>
+<!-- $$$RecentList-brief -->
+<p>行動版最近搜尋紀錄清單元件。. <a href="#details">More...</a></p>
+<!-- @@@RecentList -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-recentlist-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-recentlist.html#bottomPadding-prop" translate="no">bottomPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-recentlist.html#cacheGroupName-prop" translate="no">cacheGroupName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-recentlist.html#leftPadding-prop" translate="no">leftPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-recentlist.html#maxRecent-prop" translate="no">maxRecent</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-recentlist.html#recentKey-prop" translate="no">recentKey</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-recentlist.html#rightPadding-prop" translate="no">rightPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-recentlist.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-recentlist.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+</ul>
+<h2 id="signals">Signals</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-recentlist.html#recentSelected-signal" translate="no">recentSelected</a></b>(string <i>recentText</i>)</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">void <b><a href="qml-sc-recentlist.html#addRecent-method" translate="no">addRecent</a></b>(string <i>recentText</i>)</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-recentlist.html#clearRecent-method" translate="no">clearRecent</a></b>()</li>
+<li class="fn" translate="no">string[] <b><a href="qml-sc-recentlist.html#getRecents-method" translate="no">getRecents</a></b>()</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-recentlist.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-recentlist.html#removeRecent-method" translate="no">removeRecent</a></b>(string <i>recentText</i>)</li>
+</ul>
+<!-- $$$RecentList-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供顯示與管理使用者最近的搜尋紀錄。</summary>
+<p>支援功能：</p>
+<ul>
+<li>系統主題切換（systemThemeName）</li>
+<li>紀錄處理（<a href="qml-sc-recentlist.html#recentKey-prop" translate="no">recentKey</a>, maxRecent）<ul>
+<li>本機快取儲存（wacache）</li>
+<li>紀錄新增/刪除/清除</li>
+<li>最大筆數限制</li>
+</ul>
+</li>
+<li>點擊選取事件</li>
+</ul>
+<!-- @@@RecentList -->
+<h2>Property Documentation</h2>
+<!-- $$$bottomPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bottomPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bottomPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>下方邊距。</p>
+</div></div><!-- @@@bottomPadding -->
+<br/>
+<!-- $$$cacheGroupName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="cacheGroupName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">cacheGroupName</span> : <span class="type">string</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>快取分組名稱。</p>
+<p>依據環境（host）動態產生，用於區分不同後端環境的資料。</p>
+</div></div><!-- @@@cacheGroupName -->
+<br/>
+<!-- $$$leftPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="leftPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">leftPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>左方邊距。</p>
+</div></div><!-- @@@leftPadding -->
+<br/>
+<!-- $$$maxRecent -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="maxRecent-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">maxRecent</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>最近紀錄的最大保留數量。</p>
+<p>預設 5。</p>
+</div></div><!-- @@@maxRecent -->
+<br/>
+<!-- $$$recentKey -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="recentKey-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">recentKey</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>最近紀錄分類的 key，區分不同搜尋紀錄。</p>
+</div></div><!-- @@@recentKey -->
+<br/>
+<!-- $$$rightPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="rightPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">rightPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>右方邊距。</p>
+</div></div><!-- @@@rightPadding -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-recentlist.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<h2>Signal Documentation</h2>
+<!-- $$$recentSelected[overload1]$$$recentSelectedstring -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="recentSelected-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">recentSelected</span>(<span class="type">string</span> <i>recentText</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>點擊最近紀錄時觸發。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>recentText 被選取的搜尋文字</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onRecentSelected</code>.</p>
+</div></div></div><!-- @@@recentSelected -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$addRecent[overload1]$$$addRecentstring -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="addRecent-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">addRecent</span>(<span class="type">string</span> <i>recentText</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>新增一筆最近紀錄。</p>
+<p>若已存在相同文字會自動移到最前面。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>recentText 新增文字</p>
+</div></div><!-- @@@addRecent -->
+<br/>
+<!-- $$$clearRecent[overload1]$$$clearRecent -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="clearRecent-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">clearRecent</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>清除所有最近紀錄。</p>
+</div></div><!-- @@@clearRecent -->
+<br/>
+<!-- $$$getRecents[overload1]$$$getRecents -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getRecents-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span>[] <span class="name">getRecents</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得最近紀錄清單。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>string[]</p>
+</div></div><!-- @@@getRecents -->
+<br/>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+<!-- $$$removeRecent[overload1]$$$removeRecentstring -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="removeRecent-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">removeRecent</span>(<span class="type">string</span> <i>recentText</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>移除單筆最近紀錄。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>recentText 刪除文字</p>
+</div></div><!-- @@@removeRecent -->
+<br/>
+</body>
+</html>

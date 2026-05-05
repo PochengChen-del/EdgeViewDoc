@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>InputCombo QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>將輸入元件組合 parent 基礎元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherited By:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-pagination.xml" xlink:role="">Pagination</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>作為 輸入元件（例如 <db:link xlink:href="qml-sc-watextfield.xml">WATextField</db:link>） 的容器，負責排列子元件並提供組合顯示所需的資訊（例如數量與位置）。</db:para>
+<db:para>子元件可透過 <db:link xlink:href="qml-sc-inputcombo.xml#isCombo-prop">isCombo</db:link> 與相關屬性，自動調整圓角與邊界重疊行為。</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="averageWidth-prop">
+<db:title>[read-only] averageWidth : real</db:title>
+<db:para>可見子元件在組合元件中可用的平均寬度。</db:para>
+<db:para>用於等分子元件寬度。</db:para>
+</db:section>
+<db:section xml:id="childrenData-prop">
+<db:title>[read-only] childrenData : var</db:title>
+<db:para>統計子元件數量與可見數量。</db:para>
+</db:section>
+<db:section xml:id="count-prop">
+<db:title>[read-only] count : int</db:title>
+<db:para>子元件數量。</db:para>
+</db:section>
+<db:section xml:id="isCombo-prop">
+<db:title>[read-only] isCombo : bool</db:title>
+<db:para>表示此元件為組合容器。</db:para>
+<db:para>子輸入元件可透過此屬性判斷是否處於組合模式， 以調整圓角與邊界行為。</db:para>
+</db:section>
+<db:section xml:id="sizeType-prop">
+<db:title>sizeType : enumeration</db:title>
+<db:para>尺寸類型，控制顯示的大小。</db:para>
+<db:para>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → Define.SizeType.Small</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → Define.SizeType.Medium</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Small</db:para>
+</db:td>
+<db:td>
+<db:para>小尺寸</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Medium</db:para>
+</db:td>
+<db:td>
+<db:para>中尺寸</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="visibleCount-prop">
+<db:title>[read-only] visibleCount : int</db:title>
+<db:para>可見子元件數量。</db:para>
+<db:para>用於子輸入元件判斷是否為單一顯示， 例如控制圓角是否完整顯示。</db:para>
+</db:section>
+</db:section>
+</db:article>

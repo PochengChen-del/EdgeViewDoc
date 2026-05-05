@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>ButtonCombo QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>將按鈕組合 parent 基礎元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>作為 按鈕（例如 <db:link xlink:href="qml-sc-buttonicon.xml">ButtonIcon</db:link>）的容器，負責排列子元件並提供組合顯示所需的資訊（例如數量與位置）。</db:para>
+<db:para>子按鈕可透過 <db:link xlink:href="qml-sc-buttoncombo.xml#isCombo-prop">isCombo</db:link> 與相關屬性，自動調整圓角與邊界重疊行為。</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="childrenData-prop">
+<db:title>[read-only] childrenData : var</db:title>
+<db:para>統計子元件數量與可見數量。</db:para>
+</db:section>
+<db:section xml:id="count-prop">
+<db:title>[read-only] count : int</db:title>
+<db:para>子元件數量。</db:para>
+</db:section>
+<db:section xml:id="isCombo-prop">
+<db:title>[read-only] isCombo : bool</db:title>
+<db:para>表示此元件為組合容器。</db:para>
+<db:para>子按鈕可透過此屬性判斷是否處於組合模式， 以調整圓角與邊界行為。</db:para>
+</db:section>
+<db:section xml:id="sizeType-prop">
+<db:title>sizeType : enumeration</db:title>
+<db:para>尺寸類型，控制顯示的大小。</db:para>
+<db:para>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → Define.SizeType.Small</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → Define.SizeType.Medium</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Small</db:para>
+</db:td>
+<db:td>
+<db:para>小尺寸</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Medium</db:para>
+</db:td>
+<db:td>
+<db:para>中尺寸</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+<db:section xml:id="style-prop">
+<db:title>style : enumeration</db:title>
+<db:para>按鈕樣式類型。</db:para>
+<db:para>預設 Define.ButtonStyle.Text。</db:para>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.ButtonStyle.Outline</db:para>
+</db:td>
+<db:td>
+<db:para>外框樣式。</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.ButtonStyle.Text</db:para>
+</db:td>
+<db:td>
+<db:para>純文字樣式。</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.ButtonStyle.Filled</db:para>
+</db:td>
+<db:td>
+<db:para>填充樣式。</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.ButtonStyle.Hyperlink</db:para>
+</db:td>
+<db:td>
+<db:para>超連結樣式。</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="visibleCount-prop">
+<db:title>[read-only] visibleCount : int</db:title>
+<db:para>可見子元件數量。</db:para>
+<db:para>用於子按鈕判斷是否為單一顯示， 例如控制圓角是否完整顯示。</db:para>
+</db:section>
+</db:section>
+</db:article>

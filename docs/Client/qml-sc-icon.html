@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- Icon.qml -->
+  <meta name="description" content="圖示元件。">
+  <title>Icon QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>Icon</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">Icon QML Type</h1>
+<!-- $$$Icon-brief -->
+<p>圖示元件。. <a href="#details">More...</a></p>
+<!-- @@@Icon -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-icontext.html" translate="no">IconText</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-icon-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-icon.html#color-prop" translate="no">color</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-sc-icon.html#colorEnabled-prop" translate="no">colorEnabled</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-icon.html#fillMode-prop" translate="no">fillMode</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-icon.html#source-prop" translate="no">source</a></b> : url</li>
+</ul>
+<!-- $$$Icon-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>Icon</summary>
+<p>元件用於顯示 SVG 向量圖示，並支援顏色覆蓋（Color Overlay）。 預設會保持圖示比例縮放，並可透過 <a href="qml-sc-icon.html#color-prop" translate="no">color</a> 屬性動態改變顯示顏色。</p>
+<p>元件透過 OpacityMask 機制，將 <a href="qml-sc-icon.html#color-prop" translate="no">color</a> 套用至圖示形狀。</p>
+<!-- @@@Icon -->
+<h2>Property Documentation</h2>
+<!-- $$$color -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="color-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">color</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>圖示顏色。</p>
+<p>預設 &quot;transparent&quot;，表示使用圖示原始顏色。</p>
+<p>當設定為非透明顏色時，會透過 OpacityMask 將顏色套用至圖示形狀。</p>
+</div></div><!-- @@@color -->
+<br/>
+<!-- $$$colorEnabled -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="colorEnabled-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">colorEnabled</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否啟用顏色覆蓋。</p>
+<p>當為 true 時，會使用 <a href="qml-sc-icon.html#color-prop" translate="no">color</a> 套用顏色覆蓋。</p>
+</div></div><!-- @@@colorEnabled -->
+<br/>
+<!-- $$$fillMode -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fillMode-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fillMode</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>圖示填充模式。</p>
+<p>預設 Image.PreserveAspectFit。</p>
+<p>詳細格式與限制請參考 Qt 官方文件。</p>
+</div></div><!-- @@@fillMode -->
+<br/>
+<!-- $$$source -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="source-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">source</span> : <span class="type">url</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>圖示來源 URL，建議為 SVG 格式。</p>
+<p>詳細格式與限制請參考 Qt 官方文件。</p>
+</div></div><!-- @@@source -->
+<br/>
+</body>
+</html>

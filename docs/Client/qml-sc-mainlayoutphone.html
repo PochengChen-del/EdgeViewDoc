@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- MainLayoutPhone.qml -->
+  <meta name="description" content="手機版主版面配置容器。">
+  <title>MainLayoutPhone QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>MainLayoutPhone</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">MainLayoutPhone QML Type</h1>
+<!-- $$$MainLayoutPhone-brief -->
+<p>手機版主版面配置容器。. <a href="#details">More...</a></p>
+<!-- @@@MainLayoutPhone -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-mainlayoutphone-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#acting-prop" translate="no">acting</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#actionStatus-prop" translate="no">actionStatus</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#bottomSafeMargins-prop" translate="no">bottomSafeMargins</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#currentNavValues-prop" translate="no">currentNavValues</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#headerFuncCount-prop" translate="no">headerFuncCount</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#headerFuncIsArray-prop" translate="no">headerFuncIsArray</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#headerFuncModel-prop" translate="no">headerFuncModel</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#leftSafeMargins-prop" translate="no">leftSafeMargins</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#navCount-prop" translate="no">navCount</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#navIsArray-prop" translate="no">navIsArray</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#navModel-prop" translate="no">navModel</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#pageItem-prop" translate="no">pageItem</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#rightSafeMargins-prop" translate="no">rightSafeMargins</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#showHeader-prop" translate="no">showHeader</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#showLogo-prop" translate="no">showLogo</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#title-prop" translate="no">title</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#topSafeMargins-prop" translate="no">topSafeMargins</a></b> : real</li>
+</ul>
+<h2 id="signals">Signals</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-mainlayoutphone.html#headerFuncClicked-signal" translate="no">headerFuncClicked</a></b>(string <i>funcName</i>)</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">void <b><a href="qml-sc-mainlayoutphone.html#collapseNavbar-method" translate="no">collapseNavbar</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-mainlayoutphone.html#expandNavbar-method" translate="no">expandNavbar</a></b>()</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-mainlayoutphone.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+<li class="fn" translate="no">Promise <b><a href="qml-sc-mainlayoutphone.html#navCheckBeforeSelect-method" translate="no">navCheckBeforeSelect</a></b>()</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-mainlayoutphone.html#navEnabled-method" translate="no">navEnabled</a></b>(var <i>navData</i>, array <i>values</i>)</li>
+<li class="fn" translate="no">string <b><a href="qml-sc-mainlayoutphone.html#navI18nText-method" translate="no">navI18nText</a></b>(object <i>navData</i>, array <i>values</i>)</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-mainlayoutphone.html#navNotified-method" translate="no">navNotified</a></b>(var <i>navData</i>, var <i>values</i>)</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-mainlayoutphone.html#navSelect-method" translate="no">navSelect</a></b>(var <i>values</i>)</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-mainlayoutphone.html#navSelectFirst-method" translate="no">navSelectFirst</a></b>()</li>
+<li class="fn" translate="no">bool <b><a href="qml-sc-mainlayoutphone.html#navVisible-method" translate="no">navVisible</a></b>(var <i>navData</i>, array <i>values</i>)</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-mainlayoutphone.html#overlayPageClose-method" translate="no">overlayPageClose</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-mainlayoutphone.html#overlayPageDestroy-method" translate="no">overlayPageDestroy</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-mainlayoutphone.html#overlayPageOpen-method" translate="no">overlayPageOpen</a></b>(string <i>componentId</i>, object <i>properties</i>)</li>
+</ul>
+<!-- $$$MainLayoutPhone-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供手機裝置應用程式的主要框架。</summary>
+<p>元件組成：</p>
+<ul>
+<li>Header：標題列與功能按鈕</li>
+<li>Navbar：側邊導覽</li>
+<li>Page：頁面內容</li>
+<li>Overlay：覆蓋頁面</li>
+</ul>
+<p>支援功能：</p>
+<ul>
+<li>主題樣式控制（themeName）</li>
+<li>Header 功能觸發（headerFuncModel）</li>
+<li>導覽列控制（navModel）</li>
+<li>覆蓋頁面管理</li>
+<li>自訂頁面內容（pageItem）</li>
+</ul>
+<p>使用：</p>
+<pre class="cpp" translate="no"><span class="type"><a href="qml-sc-mainlayoutphone.html" translate="no">MainLayoutPhone</a></span> {
+    <span class="name">anchors</span>.fill: <span class="name">parent</span>
+    <span class="name">pageItem</span>: <span class="name">Item</span> {
+        <span class="name">anchors</span>.fill: <span class="name">parent</span>
+    }
+}</pre>
+<!-- @@@MainLayoutPhone -->
+<h2>Property Documentation</h2>
+<!-- $$$acting -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="acting-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">acting</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否處於執行中狀態。</p>
+</div></div><!-- @@@acting -->
+<br/>
+<!-- $$$actionStatus -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="actionStatus-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">actionStatus</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>當前操作狀態（Define.LoadStatus）。</p>
+</div></div><!-- @@@actionStatus -->
+<br/>
+<!-- $$$bottomSafeMargins -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bottomSafeMargins-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bottomSafeMargins</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>下方安全邊界。</p>
+</div></div><!-- @@@bottomSafeMargins -->
+<br/>
+<!-- $$$currentNavValues -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentNavValues-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentNavValues</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前選取的導覽值。</p>
+</div></div><!-- @@@currentNavValues -->
+<br/>
+<!-- $$$headerFuncCount -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="headerFuncCount-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">headerFuncCount</span> : <span class="type">int</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Header 功能按鈕數量。</p>
+</div></div><!-- @@@headerFuncCount -->
+<br/>
+<!-- $$$headerFuncIsArray -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="headerFuncIsArray-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">headerFuncIsArray</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷目前 <a href="qml-sc-mainlayoutphone.html#headerFuncModel-prop" translate="no">headerFuncModel</a> 是否為 Array 型態。</p>
+</div></div><!-- @@@headerFuncIsArray -->
+<br/>
+<!-- $$$headerFuncModel -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="headerFuncModel-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">headerFuncModel</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Header 功能按鈕資料來源。</p>
+</div></div><!-- @@@headerFuncModel -->
+<br/>
+<!-- $$$leftSafeMargins -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="leftSafeMargins-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">leftSafeMargins</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>左側安全邊界。</p>
+</div></div><!-- @@@leftSafeMargins -->
+<br/>
+<!-- $$$navCount -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="navCount-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">navCount</span> : <span class="type">int</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>導覽項目數量。</p>
+</div></div><!-- @@@navCount -->
+<br/>
+<!-- $$$navIsArray -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="navIsArray-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">navIsArray</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷目前 <a href="qml-sc-mainlayoutphone.html#navModel-prop" translate="no">navModel</a> 是否為 Array 型態。</p>
+</div></div><!-- @@@navIsArray -->
+<br/>
+<!-- $$$navModel -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="navModel-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">navModel</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>導覽列功能資料來源。</p>
+</div></div><!-- @@@navModel -->
+<br/>
+<!-- $$$pageItem -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="pageItem-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">pageItem</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>頁面內容區域的子元件。</p>
+</div></div><!-- @@@pageItem -->
+<br/>
+<!-- $$$rightSafeMargins -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="rightSafeMargins-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">rightSafeMargins</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>右側安全邊界。</p>
+</div></div><!-- @@@rightSafeMargins -->
+<br/>
+<!-- $$$showHeader -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showHeader-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showHeader</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示 Header。</p>
+</div></div><!-- @@@showHeader -->
+<br/>
+<!-- $$$showLogo -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showLogo-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showLogo</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示 Logo。</p>
+<p>預設當不顯示 Navbar 時。</p>
+</div></div><!-- @@@showLogo -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-mainlayoutphone.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<!-- $$$title -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="title-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">title</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>標題文字。</p>
+</div></div><!-- @@@title -->
+<br/>
+<!-- $$$topSafeMargins -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="topSafeMargins-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">topSafeMargins</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>上方安全邊界。</p>
+</div></div><!-- @@@topSafeMargins -->
+<br/>
+<h2>Signal Documentation</h2>
+<!-- $$$headerFuncClicked[overload1]$$$headerFuncClickedstring -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="headerFuncClicked-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">headerFuncClicked</span>(<span class="type">string</span> <i>funcName</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>點擊 Header 功能按鈕時觸發。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>funcName 功能名稱。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onHeaderFuncClicked</code>.</p>
+</div></div></div><!-- @@@headerFuncClicked -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$collapseNavbar[overload1]$$$collapseNavbar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="collapseNavbar-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">collapseNavbar</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>收合側邊導覽。</p>
+</div></div><!-- @@@collapseNavbar -->
+<br/>
+<!-- $$$expandNavbar[overload1]$$$expandNavbar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="expandNavbar-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">expandNavbar</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>展開側邊導覽。</p>
+</div></div><!-- @@@expandNavbar -->
+<br/>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+<!-- $$$navCheckBeforeSelect[overload1]$$$navCheckBeforeSelect -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="navCheckBeforeSelect-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">Promise</span> <span class="name">navCheckBeforeSelect</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>導覽切換前的檢查流程。</p>
+<p>可用於：</p>
+<ul>
+<li>權限驗證</li>
+<li>未儲存資料確認</li>
+<li>非同步流程（API 檢查）</li>
+</ul>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>Promise&lt;bool&gt;，true 表示允許切換</p>
+</div></div><!-- @@@navCheckBeforeSelect -->
+<br/>
+<!-- $$$navEnabled[overload1]$$$navEnabledvararray -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="navEnabled-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">navEnabled</span>(<span class="type">var</span> <i>navData</i>, <span class="type">array</span> <i>values</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷導覽項目是否啟用。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>navData 導覽項目資料 <b class="redFont"><code translate=\"no\">\param</code></b> values 當前導覽值 <b class="redFont"><code translate=\"no\">\return</code></b> bool</p>
+<p>可覆寫。</p>
+</div></div><!-- @@@navEnabled -->
+<br/>
+<!-- $$$navI18nText[overload1]$$$navI18nTextobjectarray -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="navI18nText-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">string</span> <span class="name">navI18nText</span>(<span class="type">object</span> <i>navData</i>, <span class="type">array</span> <i>values</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得導覽項目的顯示文字。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>navData 導覽項目資料 <b class="redFont"><code translate=\"no\">\param</code></b> values 當前導覽值 <b class="redFont"><code translate=\"no\">\return</code></b> string</p>
+<p>可覆寫。</p>
+</div></div><!-- @@@navI18nText -->
+<br/>
+<!-- $$$navNotified[overload1]$$$navNotifiedvarvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="navNotified-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">navNotified</span>(<span class="type">var</span> <i>navData</i>, <span class="type">var</span> <i>values</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷導覽項目是否顯示通知狀態。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>navData 導覽項目資料 <b class="redFont"><code translate=\"no\">\param</code></b> values 當前導覽值 <b class="redFont"><code translate=\"no\">\return</code></b> bool</p>
+<p>可覆寫。</p>
+</div></div><!-- @@@navNotified -->
+<br/>
+<!-- $$$navSelect[overload1]$$$navSelectvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="navSelect-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">navSelect</span>(<span class="type">var</span> <i>values</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>選擇指定導覽項目。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>values 導覽值。</p>
+</div></div><!-- @@@navSelect -->
+<br/>
+<!-- $$$navSelectFirst[overload1]$$$navSelectFirst -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="navSelectFirst-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">navSelectFirst</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>選擇第一個導覽項目。</p>
+</div></div><!-- @@@navSelectFirst -->
+<br/>
+<!-- $$$navVisible[overload1]$$$navVisiblevararray -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="navVisible-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">navVisible</span>(<span class="type">var</span> <i>navData</i>, <span class="type">array</span> <i>values</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷導覽項目是否顯示。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>navData 導覽項目資料 <b class="redFont"><code translate=\"no\">\param</code></b> values 當前導覽值 <b class="redFont"><code translate=\"no\">\return</code></b> bool</p>
+<p>可覆寫。</p>
+</div></div><!-- @@@navVisible -->
+<br/>
+<!-- $$$overlayPageClose[overload1]$$$overlayPageClose -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="overlayPageClose-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">overlayPageClose</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>關閉 Overlay 頁面。</p>
+</div></div><!-- @@@overlayPageClose -->
+<br/>
+<!-- $$$overlayPageDestroy[overload1]$$$overlayPageDestroy -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="overlayPageDestroy-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">overlayPageDestroy</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>銷毀 Overlay 頁面。</p>
+</div></div><!-- @@@overlayPageDestroy -->
+<br/>
+<!-- $$$overlayPageOpen[overload1]$$$overlayPageOpenstringobject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="overlayPageOpen-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">overlayPageOpen</span>(<span class="type">string</span> <i>componentId</i>, <span class="type">object</span> <i>properties</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>開啟 Overlay 頁面。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>componentId 元件 ID。 <b class="redFont"><code translate=\"no\">\param</code></b> properties 傳入屬性。</p>
+</div></div><!-- @@@overlayPageOpen -->
+<br/>
+</body>
+</html>

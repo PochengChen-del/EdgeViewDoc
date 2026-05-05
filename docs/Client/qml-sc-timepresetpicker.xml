@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>TimePresetPicker QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>時間選擇器（小時/分鐘/秒）。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-walistview.xml">WAListView</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>多尺寸顯示（<db:link xlink:href="">sizeType）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>時間清單顯示（<db:link xlink:href="">model）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>點擊選取事件</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="cellBottomPadding-prop">
+<db:title>cellBottomPadding : real</db:title>
+<db:para>時間項目下方邊距。</db:para>
+</db:section>
+<db:section xml:id="cellHorizontalPadding-prop">
+<db:title>cellHorizontalPadding : real</db:title>
+<db:para>時間項目水平邊距。</db:para>
+</db:section>
+<db:section xml:id="cellLeftPadding-prop">
+<db:title>cellLeftPadding : real</db:title>
+<db:para>時間項目左方邊距。</db:para>
+</db:section>
+<db:section xml:id="cellPadding-prop">
+<db:title>cellPadding : real</db:title>
+<db:para>時間項目邊距。</db:para>
+</db:section>
+<db:section xml:id="cellRightPadding-prop">
+<db:title>cellRightPadding : real</db:title>
+<db:para>時間項目右方邊距。</db:para>
+</db:section>
+<db:section xml:id="cellSpacing-prop">
+<db:title>cellSpacing : real</db:title>
+<db:para>時間項目間距。</db:para>
+</db:section>
+<db:section xml:id="cellTopPadding-prop">
+<db:title>cellTopPadding : real</db:title>
+<db:para>時間項目上方邊距。</db:para>
+</db:section>
+<db:section xml:id="cellVerticalPadding-prop">
+<db:title>cellVerticalPadding : real</db:title>
+<db:para>時間垂直邊距。</db:para>
+</db:section>
+<db:section xml:id="is24Hour-prop">
+<db:title>is24Hour : bool</db:title>
+<db:para>是否使用 24 小時制。</db:para>
+<db:para>預設依據 Define.dateDisplayFormat 判斷。</db:para>
+</db:section>
+<db:section xml:id="maxCellAdvanceWidth-prop">
+<db:title>[read-only] maxCellAdvanceWidth : real</db:title>
+<db:para>時間項目最大寬度。</db:para>
+</db:section>
+<db:section xml:id="meridiemPosition-prop">
+<db:title>meridiemPosition : int</db:title>
+<db:para>AM/PM 顯示位置。</db:para>
+</db:section>
+<db:section xml:id="showMinute-prop">
+<db:title>showMinute : bool</db:title>
+<db:para>是否顯示分鐘。</db:para>
+</db:section>
+<db:section xml:id="showSecond-prop">
+<db:title>showSecond : bool</db:title>
+<db:para>是否顯示秒數。</db:para>
+</db:section>
+<db:section xml:id="sizeType-prop">
+<db:title>sizeType : enumeration</db:title>
+<db:para>尺寸類型，控制顯示的大小。</db:para>
+<db:para>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → Define.SizeType.Small</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → Define.SizeType.Medium</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Small</db:para>
+</db:td>
+<db:td>
+<db:para>小尺寸</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Medium</db:para>
+</db:td>
+<db:td>
+<db:para>中尺寸</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+</db:section>
+<db:section xml:id="signal-documentation">
+<db:title>Signal Documentation</db:title>
+<db:section xml:id="timeClicked-signal">
+<db:title>timeClicked(int <db:emphasis>hour</db:emphasis>, int <db:emphasis>minute</db:emphasis>, int <db:emphasis>second</db:emphasis>)</db:title>
+<db:para>點擊時間項目時觸發。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onTimeClicked</db:code>.</db:para>
+</db:note>
+</db:section>
+<db:section xml:id="timeHovered-signal">
+<db:title>timeHovered(int <db:emphasis>hour</db:emphasis>, int <db:emphasis>minute</db:emphasis>, int <db:emphasis>second</db:emphasis>)</db:title>
+<db:para>hover 時間項目時觸發。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onTimeHovered</db:code>.</db:para>
+</db:note>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="getThemeStyle-method">
+<db:title>object getThemeStyle()</db:title>
+<db:para>取得主題樣式設定物件。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題樣式設定物件。</db:para>
+</db:section>
+<db:section xml:id="timeDisabled-method">
+<db:title>bool timeDisabled(object <db:emphasis>time</db:emphasis>)</db:title>
+<db:para>判斷時間是否停用。</db:para>
+<db:para>可覆寫此方法以自訂邏輯。</db:para>
+</db:section>
+<db:section xml:id="timeDisplayText-method">
+<db:title>string timeDisplayText(int <db:emphasis>hour</db:emphasis>, int <db:emphasis>minute</db:emphasis>, int <db:emphasis>second</db:emphasis>)</db:title>
+<db:para>取得時間顯示字串（依格式與 locale）。</db:para>
+</db:section>
+<db:section xml:id="timeSelected-method">
+<db:title>bool timeSelected(object <db:emphasis>time</db:emphasis>)</db:title>
+<db:para>判斷時間是否被選取。</db:para>
+<db:para>可覆寫此方法以自訂邏輯。</db:para>
+</db:section>
+</db:section>
+</db:article>

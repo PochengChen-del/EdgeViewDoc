@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>PageLayout QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>頁面版面配置容器。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>元件組成：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>Header：標題列、麵包屑、返回與操作/功能按鈕</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Sidebar：側邊欄</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Page：頁面內容</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>側邊欄控制</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>操作/功能按鈕顯示（<db:link xlink:href="qml-sc-pagelayout.xml#actions-prop">actions</db:link>, <db:link xlink:href="">buttons）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>自訂頁面內容（<db:link xlink:href="">pageContent）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>自訂側邊欄內容（<db:link xlink:href="">sidebarItem）</db:link></db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>使用：</db:para>
+<db:programlisting language="cpp">PageLayout {
+    anchors.fill: parent
+    pageContent: Item {
+        anchors.fill: parent
+    }
+}
+</db:programlisting>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="actions-prop">
+<db:title>actions : var</db:title>
+<db:para>Header 操作按鈕資料來源。</db:para>
+</db:section>
+<db:section xml:id="breadcrumbDatas-prop">
+<db:title>breadcrumbDatas : var</db:title>
+<db:para>麵包屑資料來源。</db:para>
+</db:section>
+<db:section xml:id="buttonWidth-prop">
+<db:title>[read-only] buttonWidth : real</db:title>
+<db:para>Header 按鈕自動計算寬度。</db:para>
+</db:section>
+<db:section xml:id="buttons-prop">
+<db:title>buttons : var</db:title>
+<db:para>Header 功能按鈕資料來源。</db:para>
+</db:section>
+<db:section xml:id="headerHeight-prop">
+<db:title>[read-only] headerHeight : real</db:title>
+<db:para>Header height。</db:para>
+</db:section>
+<db:section xml:id="headerTitleImplicitWidth-prop">
+<db:title>[read-only] headerTitleImplicitWidth : real</db:title>
+<db:para>標題 implicitWidth。</db:para>
+</db:section>
+<db:section xml:id="minContentWidth-prop">
+<db:title>[read-only] minContentWidth : real</db:title>
+<db:para>最小頁面內容寬度限制。</db:para>
+</db:section>
+<db:section xml:id="pageContent-prop">
+<db:title>pageContent : Item</db:title>
+<db:para>頁面內容區域的子元件。</db:para>
+</db:section>
+<db:section xml:id="showBack-prop">
+<db:title>showBack : bool</db:title>
+<db:para>是否顯示必填。</db:para>
+</db:section>
+<db:section xml:id="showRequired-prop">
+<db:title>showRequired : alias</db:title>
+<db:para>是否顯示必填。</db:para>
+</db:section>
+<db:section xml:id="sidebarItem-prop">
+<db:title>sidebarItem : Item</db:title>
+<db:para>側邊欄區域的子元件。</db:para>
+</db:section>
+<db:section xml:id="sidebarRoot-prop">
+<db:title>[read-only] sidebarRoot : Rectangle</db:title>
+<db:para>側邊欄容器。</db:para>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="themeStyle-prop">
+<db:title>[read-only] themeStyle : var</db:title>
+<db:para>主題樣式設定物件。</db:para>
+<db:para>此屬性為唯讀，透過 <db:link xlink:href="qml-sc-pagelayout.xml#getThemeStyle-method">getThemeStyle</db:link>() 動態產生。</db:para>
+</db:section>
+<db:section xml:id="title-prop">
+<db:title>title : string</db:title>
+<db:para>標題文字。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="signal-documentation">
+<db:title>Signal Documentation</db:title>
+<db:section xml:id="backClicked-signal">
+<db:title>backClicked()</db:title>
+<db:para>點擊返回按鈕時觸發。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onBackClicked</db:code>.</db:para>
+</db:note>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="breadcrumbI18nText-method">
+<db:title>string breadcrumbI18nText(object <db:emphasis>breadcrumb</db:emphasis>)</db:title>
+<db:para>取得麵包屑項目的顯示文字。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>breadcrumb 麵包屑項目資料 <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis> string</db:para>
+<db:para>可覆寫。</db:para>
+</db:section>
+<db:section xml:id="collapseNavbar-method">
+<db:title>void collapseNavbar()</db:title>
+<db:para>收合父層側邊導覽列。</db:para>
+</db:section>
+<db:section xml:id="collapseSidebar-method">
+<db:title>void collapseSidebar()</db:title>
+<db:para>收合側邊欄。</db:para>
+</db:section>
+<db:section xml:id="expandNavbar-method">
+<db:title>void expandNavbar()</db:title>
+<db:para>展開父層側邊導覽列。</db:para>
+</db:section>
+<db:section xml:id="expandSidebar-method">
+<db:title>void expandSidebar()</db:title>
+<db:para>展開側邊欄。</db:para>
+</db:section>
+<db:section xml:id="getThemeStyle-method">
+<db:title>object getThemeStyle()</db:title>
+<db:para>取得主題樣式設定物件。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題樣式設定物件。</db:para>
+</db:section>
+</db:section>
+</db:article>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- PopupSeletor.qml -->
+  <meta name="description" content="選擇元件的彈跳框。">
+  <title>PopupSeletor QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>PopupSeletor</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">PopupSeletor QML Type</h1>
+<!-- $$$PopupSeletor-brief -->
+<p>選擇元件的彈跳框。. <a href="#details">More...</a></p>
+<!-- @@@PopupSeletor -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-popupseletor-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#backgroundColor-prop" translate="no">backgroundColor</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#backgroundGradient-prop" translate="no">backgroundGradient</a></b> : Gradient</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#bindingMaxAroundHeight-prop" translate="no">bindingMaxAroundHeight</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#bodyAvailableHeight-prop" translate="no">bodyAvailableHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#bodyHeight-prop" translate="no">bodyHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#bodyItem-prop" translate="no">bodyItem</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#borderColor-prop" translate="no">borderColor</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#borderWidth-prop" translate="no">borderWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#contentAvailableHeight-prop" translate="no">contentAvailableHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#dividerColor-prop" translate="no">dividerColor</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#dragHandleColor-prop" translate="no">dragHandleColor</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#fixedHeight-prop" translate="no">fixedHeight</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#footerBackgroundColor-prop" translate="no">footerBackgroundColor</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#footerHeight-prop" translate="no">footerHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#footerImplicitWidth-prop" translate="no">footerImplicitWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#footerItems-prop" translate="no">footerItems</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#headerBackgroundColor-prop" translate="no">headerBackgroundColor</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#headerHeight-prop" translate="no">headerHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#headerImplicitWidth-prop" translate="no">headerImplicitWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#leftHeaderItems-prop" translate="no">leftHeaderItems</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#maskColor-prop" translate="no">maskColor</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#maxAroundHeight-prop" translate="no">maxAroundHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#maxBodyHeight-prop" translate="no">maxBodyHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#maxContentHeight-prop" translate="no">maxContentHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#minBodyHeight-prop" translate="no">minBodyHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#minContentHeight-prop" translate="no">minContentHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#minTopMargins-prop" translate="no">minTopMargins</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#openTop-prop" translate="no">openTop</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#posBottom-prop" translate="no">posBottom</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#position-prop" translate="no">position</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#radius-prop" translate="no">radius</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#rightHeaderItems-prop" translate="no">rightHeaderItems</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#shadowColor-prop" translate="no">shadowColor</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#showClose-prop" translate="no">showClose</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#showFooter-prop" translate="no">showFooter</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#showHeader-prop" translate="no">showHeader</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#title-prop" translate="no">title</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#titleElide-prop" translate="no">titleElide</a></b> : Text.ElideMode</li>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#titleWrapMode-prop" translate="no">titleWrapMode</a></b> : Text.WrapMode</li>
+</ul>
+<h2 id="signals">Signals</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-popupseletor.html#closeClicked-signal" translate="no">closeClicked</a></b>()</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">void <b><a href="qml-sc-popupseletor.html#bindingHeight-method" translate="no">bindingHeight</a></b>()</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-popupseletor.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-popupseletor.html#resetPopupRect-method" translate="no">resetPopupRect</a></b>()</li>
+</ul>
+<!-- $$$PopupSeletor-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>選擇輸入元件的彈出容器，用於有彈跳框的輸入元件。</summary>
+<p>元件組成：</p>
+<ul>
+<li>Header：標題列與操作區</li>
+<li>Body：主體內容</li>
+<li>Footer：底部操作區</li>
+</ul>
+<p>支援功能：</p>
+<ul>
+<li>主題樣式控制（themeName）</li>
+<li>顯示模式（position）<ul>
+<li>Relative（依附於來源元件）</li>
+<li>Bottom（全螢幕底部彈出）</li>
+</ul>
+</li>
+<li>大小控制</li>
+</ul>
+<!-- @@@PopupSeletor -->
+<h2>Property Documentation</h2>
+<!-- $$$backgroundColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="backgroundColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">backgroundColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>背景顏色。</p>
+</div></div><!-- @@@backgroundColor -->
+<br/>
+<!-- $$$backgroundGradient -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="backgroundGradient-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">backgroundGradient</span> : <span class="type">Gradient</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>背景漸層。</p>
+</div></div><!-- @@@backgroundGradient -->
+<br/>
+<!-- $$$bindingMaxAroundHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bindingMaxAroundHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bindingMaxAroundHeight</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否綁定最大高度。 開啟時 預設 true。</p>
+</div></div><!-- @@@bindingMaxAroundHeight -->
+<br/>
+<!-- $$$bodyAvailableHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bodyAvailableHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bodyAvailableHeight</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Body 可用高度（扣除 Header 與 Footer）。</p>
+</div></div><!-- @@@bodyAvailableHeight -->
+<br/>
+<!-- $$$bodyHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bodyHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bodyHeight</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Body height。</p>
+</div></div><!-- @@@bodyHeight -->
+<br/>
+<!-- $$$bodyItem -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bodyItem-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bodyItem</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主體元件。</p>
+<p>Popup 主體內容（Body 區域），放置自訂 UI 元件，例如列表、表單、選擇器...。</p>
+</div></div><!-- @@@bodyItem -->
+<br/>
+<!-- $$$borderColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="borderColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">borderColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>邊框顏色。</p>
+</div></div><!-- @@@borderColor -->
+<br/>
+<!-- $$$borderWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="borderWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">borderWidth</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>邊框寬度。</p>
+</div></div><!-- @@@borderWidth -->
+<br/>
+<!-- $$$contentAvailableHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="contentAvailableHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">contentAvailableHeight</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>顯示可用高度 (扣除 <a href="qml-sc-popupseletor.html#minTopMargins-prop" translate="no">minTopMargins</a>)。</p>
+</div></div><!-- @@@contentAvailableHeight -->
+<br/>
+<!-- $$$dividerColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dividerColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">dividerColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>分隔線顏色。</p>
+</div></div><!-- @@@dividerColor -->
+<br/>
+<!-- $$$dragHandleColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dragHandleColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">dragHandleColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>拖曳把手顏色。</p>
+</div></div><!-- @@@dragHandleColor -->
+<br/>
+<!-- $$$fixedHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fixedHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fixedHeight</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否固定高度。</p>
+<p>預設 false。</p>
+<ul>
+<li>true → 禁止拖曳修改高度。</li>
+<li>false → 可以拖曳改變高度。</li>
+</ul>
+</div></div><!-- @@@fixedHeight -->
+<br/>
+<!-- $$$footerBackgroundColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="footerBackgroundColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">footerBackgroundColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Footer 背景顏色。</p>
+</div></div><!-- @@@footerBackgroundColor -->
+<br/>
+<!-- $$$footerHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="footerHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">footerHeight</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Footer height。</p>
+</div></div><!-- @@@footerHeight -->
+<br/>
+<!-- $$$footerImplicitWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="footerImplicitWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">footerImplicitWidth</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Footer implicitWidth。</p>
+</div></div><!-- @@@footerImplicitWidth -->
+<br/>
+<!-- $$$footerItems -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="footerItems-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">footerItems</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Footer 元件。</p>
+</div></div><!-- @@@footerItems -->
+<br/>
+<!-- $$$headerBackgroundColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="headerBackgroundColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">headerBackgroundColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Header 背景顏色。</p>
+</div></div><!-- @@@headerBackgroundColor -->
+<br/>
+<!-- $$$headerHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="headerHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">headerHeight</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Header height。</p>
+</div></div><!-- @@@headerHeight -->
+<br/>
+<!-- $$$headerImplicitWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="headerImplicitWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">headerImplicitWidth</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Header implicitWidth。</p>
+</div></div><!-- @@@headerImplicitWidth -->
+<br/>
+<!-- $$$leftHeaderItems -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="leftHeaderItems-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">leftHeaderItems</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Header 左方元件。</p>
+</div></div><!-- @@@leftHeaderItems -->
+<br/>
+<!-- $$$maskColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="maskColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">maskColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Bottom 模式遮罩顏色。</p>
+</div></div><!-- @@@maskColor -->
+<br/>
+<!-- $$$maxAroundHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="maxAroundHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">maxAroundHeight</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>上下可見範圍最大高度。</p>
+<p><a href="qml-sc-popupseletor.html#bindingMaxAroundHeight-prop" translate="no">bindingMaxAroundHeight</a> = true，每次 open 時計算。</p>
+</div></div><!-- @@@maxAroundHeight -->
+<br/>
+<!-- $$$maxBodyHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="maxBodyHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">maxBodyHeight</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Body 最大可用高度（扣除 Header 與 Footer）。</p>
+</div></div><!-- @@@maxBodyHeight -->
+<br/>
+<!-- $$$maxContentHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="maxContentHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">maxContentHeight</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>最大內容高度，限制可視高度範圍。</p>
+</div></div><!-- @@@maxContentHeight -->
+<br/>
+<!-- $$$minBodyHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="minBodyHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">minBodyHeight</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Body 最小可用高度（扣除 Header 與 Footer）。</p>
+</div></div><!-- @@@minBodyHeight -->
+<br/>
+<!-- $$$minContentHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="minContentHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">minContentHeight</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>最小內容高度（Header + Footer）。</p>
+</div></div><!-- @@@minContentHeight -->
+<br/>
+<!-- $$$minTopMargins -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="minTopMargins-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">minTopMargins</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>與上方邊界最小邊距。</p>
+</div></div><!-- @@@minTopMargins -->
+<br/>
+<!-- $$$openTop -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="openTop-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">openTop</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否向上展開。</p>
+</div></div><!-- @@@openTop -->
+<br/>
+<!-- $$$posBottom -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="posBottom-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">posBottom</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否為 Bottom 模式。</p>
+</div></div><!-- @@@posBottom -->
+<br/>
+<!-- $$$position -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="position-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">position</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>彈跳套框的位置。</p>
+<p>預設依據 Global.mobile 決定：</p>
+<ul>
+<li>true → <a href="qml-sc-popupseletor.html" translate="no">PopupSeletor</a>.Position.Bottom</li>
+<li>false → <a href="qml-sc-popupseletor.html" translate="no">PopupSeletor</a>.Position.Relative</li>
+</ul>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Constant</th><th >Description</th></tr></thead>
+<tr valign="top" class="odd"><td ><a href="qml-sc-popupseletor.html" translate="no">PopupSeletor</a>.Position.Relative</td><td >相依。</td></tr>
+<tr valign="top" class="even"><td ><a href="qml-sc-popupseletor.html" translate="no">PopupSeletor</a>.Position.Bottom</td><td >下方。</td></tr>
+</table></div>
+</div></div><!-- @@@position -->
+<br/>
+<!-- $$$radius -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="radius-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">radius</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>圓角半徑。</p>
+<p>預設 4。</p>
+</div></div><!-- @@@radius -->
+<br/>
+<!-- $$$rightHeaderItems -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="rightHeaderItems-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">rightHeaderItems</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Header 右方元件。</p>
+</div></div><!-- @@@rightHeaderItems -->
+<br/>
+<!-- $$$shadowColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="shadowColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">shadowColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>陰影顏色。</p>
+</div></div><!-- @@@shadowColor -->
+<br/>
+<!-- $$$showClose -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showClose-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showClose</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示關閉按鈕。</p>
+</div></div><!-- @@@showClose -->
+<br/>
+<!-- $$$showFooter -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showFooter-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showFooter</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示 Footer。</p>
+</div></div><!-- @@@showFooter -->
+<br/>
+<!-- $$$showHeader -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showHeader-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showHeader</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示 Header。</p>
+</div></div><!-- @@@showHeader -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設綁定 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-popupseletor.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<!-- $$$title -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="title-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">title</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>標題文字。</p>
+</div></div><!-- @@@title -->
+<br/>
+<!-- $$$titleElide -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="titleElide-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">titleElide</span> : <span class="type">Text</span>.<span class="type">ElideMode</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>標題截斷模式。</p>
+</div></div><!-- @@@titleElide -->
+<br/>
+<!-- $$$titleWrapMode -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="titleWrapMode-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">titleWrapMode</span> : <span class="type">Text</span>.<span class="type">WrapMode</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>標題換行模式。</p>
+</div></div><!-- @@@titleWrapMode -->
+<br/>
+<h2>Signal Documentation</h2>
+<!-- $$$closeClicked[overload1]$$$closeClicked -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="closeClicked-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">closeClicked</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>點擊關閉按鈕時觸發。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onCloseClicked</code>.</p>
+</div></div></div><!-- @@@closeClicked -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$bindingHeight[overload1]$$$bindingHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bindingHeight-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">bindingHeight</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>綁定內容高度計算。</p>
+</div></div><!-- @@@bindingHeight -->
+<br/>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+<!-- $$$resetPopupRect[overload1]$$$resetPopupRect -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="resetPopupRect-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">resetPopupRect</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>重算上下可用高度區域。</p>
+</div></div><!-- @@@resetPopupRect -->
+<br/>
+</body>
+</html>

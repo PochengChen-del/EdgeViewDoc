@@ -15,6 +15,7 @@
 <ul>
 <li class="level1"><a href="#properties">Properties</a></li>
 <li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
 <li class="level1"><a href="#details">Detailed Description</a></li>
 </ul>
 </div>
@@ -45,6 +46,22 @@
 <ul>
 <li class="fn" translate="no"><b><a href="qml-basewidget.html#afterPositionChanged-signal" translate="no">afterPositionChanged</a></b>(real <i>diffX</i>, real <i>diffY</i>)</li>
 <li class="fn" translate="no"><b><a href="qml-basewidget.html#afterSizeChanged-signal" translate="no">afterSizeChanged</a></b>(real <i>diffWidth</i>, real <i>diffHeight</i>)</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">var <b><a href="qml-basewidget.html#underscore.applyThemeProperty-method" translate="no">_applyThemeProperty</a></b>(<i>propertyName</i>, <i>propertyValue</i>, <i>theme</i>)</li>
+<li class="fn" translate="no">errorObject <b><a href="qml-basewidget.html#underscore.validateValue-method" translate="no">_validateValue</a></b>(string <i>type</i>, var <i>value</i>, object <i>args</i>)</li>
+<li class="fn" translate="no">void <b><a href="qml-basewidget.html#applyTheme-method" translate="no">applyTheme</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-basewidget.html#applyThemeAll-method" translate="no">applyThemeAll</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-basewidget.html#applyThemeProperties-method" translate="no">applyThemeProperties</a></b>(object <i>theme</i>, bool <i>deep</i>, bool <i>isRecord</i>, int <i>recordIndex</i>, var <i>refObjRecord</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-basewidget.html#checkPropertyValid-method" translate="no">checkPropertyValid</a></b>(string <i>propertyName</i>, var <i>propertyValue</i>, object <i>referenceProperties</i>)</li>
+<li class="fn" translate="no">errorObject <b><a href="qml-basewidget.html#checkPropertyValidByType-method" translate="no">checkPropertyValidByType</a></b>(string <i>type</i>, var <i>value</i>, object <i>args</i>)</li>
+<li class="fn" translate="no">object <b><a href="qml-basewidget.html#getCurrentTheme-method" translate="no">getCurrentTheme</a></b>()</li>
+<li class="fn" translate="no">object <b><a href="qml-basewidget.html#getCurrentThemeName-method" translate="no">getCurrentThemeName</a></b>()</li>
+<li class="fn" translate="no">object <b><a href="qml-basewidget.html#getInitialProperties-method" translate="no">getInitialProperties</a></b>(object <i>customProperties</i>, object <i>customParent</i>)</li>
+<li class="fn" translate="no">var <b><a href="qml-basewidget.html#getPropertyDefaultValue-method" translate="no">getPropertyDefaultValue</a></b>(string <i>propertyName</i>, object <i>theme</i>, ... <i>args</i>)</li>
+<li class="fn" translate="no">var <b><a href="qml-basewidget.html#getPropertyValue-method" translate="no">getPropertyValue</a></b>(string <i>propertyName</i>, object <i>theme</i>, bool <i>allowNonExist</i>)</li>
+<li class="fn" translate="no">object[] <b><a href="qml-basewidget.html#getStylePropertyList-method" translate="no">getStylePropertyList</a></b>(bool <i>isCreate</i>)</li>
 </ul>
 <!-- $$$BaseWidget-description -->
 <h2 id="details">Detailed Description</h2>
@@ -135,6 +152,148 @@
 <div class="qmldoc"><p>在 Widget 尺寸變更完成後發送。</p>
 <div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onAfterSizeChanged</code>.</p>
 </div></div></div><!-- @@@afterSizeChanged -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$_applyThemeProperty[overload1]$$$_applyThemeProperty -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="underscore.applyThemeProperty-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">var</span> <span class="name">_applyThemeProperty</span>(<i>propertyName</i>, <i>propertyValue</i>, <i>theme</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>屬性值套用主題。 共用 function。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>套用主題後屬性值。</p>
+</div></div><!-- @@@_applyThemeProperty -->
+<br/>
+<!-- $$$_validateValue[overload1]$$$_validateValuestringvarobject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="underscore.validateValue-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">errorObject</span> <span class="name">_validateValue</span>(<span class="type">string</span> <i>type</i>, <span class="type">var</span> <i>value</i>, <span class="type">object</span> <i>args</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證值是否正確。 共用 function。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>type 驗證型別。 <b class="redFont"><code translate=\"no\">\param</code></b> value 值。 <b class="redFont"><code translate=\"no\">\param</code></b> args 驗證相關參數。 <b class="redFont"><code translate=\"no\">\return</code></b> 驗證錯誤內容。驗鄭成功為 undefined；驗鄭失敗為 errorObject, errorObject format: { &quot;type&quot;: &quot;type&quot;, &quot;valueType&quot;: &quot;prototype value&quot;, &quot;errors&quot;: [ { &quot;name&quot;: &quot;key&quot;, &quot;error&quot;: errorObject } ] } ex: { &quot;type&quot;: &quot;gradient&quot;, &quot;valueType&quot;: &quot;object&quot;,, &quot;errors&quot;: [ { &quot;name&quot;: &quot;color&quot;, &quot;error&quot;: { &quot;type&quot;: &quot;color&quot;, &quot;valueType&quot;: &quot;number&quot;, } } ] }</p>
+</div></div><!-- @@@_validateValue -->
+<br/>
+<!-- $$$applyTheme[overload1]$$$applyTheme -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="applyTheme-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">applyTheme</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>widget 套用主題。 共用 function。</p>
+</div></div><!-- @@@applyTheme -->
+<br/>
+<!-- $$$applyThemeAll[overload1]$$$applyThemeAll -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="applyThemeAll-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">applyThemeAll</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>widget 與 下一層 widget 套用主題。 共用 function。</p>
+</div></div><!-- @@@applyThemeAll -->
+<br/>
+<!-- $$$applyThemeProperties[overload1]$$$applyThemePropertiesobjectboolboolintvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="applyThemeProperties-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">applyThemeProperties</span>(<span class="type">object</span> <i>theme</i>, <span class="type">bool</span> <i>deep</i>, <span class="type">bool</span> <i>isRecord</i>, <span class="type">int</span> <i>recordIndex</i>, <span class="type">var</span> <i>refObjRecord</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>所有樣式屬性套用主題。 共用 function。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>theme 主題。 <b class="redFont"><code translate=\"no\">\param</code></b> deep 是否處理下一層 widget，預設 true。 <b class="redFont"><code translate=\"no\">\param</code></b> isRecord 是否記錄復原/重作，預設 true。 <b class="redFont"><code translate=\"no\">\param</code></b> recordIndex 記錄索引，預設 -1。 <b class="redFont"><code translate=\"no\">\param</code></b> refObjRecord 記錄的資訊參考物件。</p>
+</div></div><!-- @@@applyThemeProperties -->
+<br/>
+<!-- $$$checkPropertyValid[overload1]$$$checkPropertyValidstringvarobject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="checkPropertyValid-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">checkPropertyValid</span>(<span class="type">string</span> <i>propertyName</i>, <span class="type">var</span> <i>propertyValue</i>, <span class="type">object</span> <i>referenceProperties</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證屬性值是否正確。 共用 function。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>propertyName 屬性名稱。 <b class="redFont"><code translate=\"no\">\param</code></b> propertyValue 屬性值。 <b class="redFont"><code translate=\"no\">\param</code></b> referenceProperties 關聯屬性。 <b class="redFont"><code translate=\"no\">\return</code></b> 驗證錯誤內容。驗鄭成功為 null；驗鄭失敗為 object, format: { &quot;name&quot;: property name, &quot;error&quot;: errorObject, } ex: { &quot;name&quot;: &quot;width&quot;, &quot;error&quot;: { &quot;type&quot;: &quot;double&quot;, &quot;valueType&quot;: &quot;string&quot;, } }</p>
+</div></div><!-- @@@checkPropertyValid -->
+<br/>
+<!-- $$$checkPropertyValidByType[overload1]$$$checkPropertyValidByTypestringvarobject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="checkPropertyValidByType-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">errorObject</span> <span class="name">checkPropertyValidByType</span>(<span class="type">string</span> <i>type</i>, <span class="type">var</span> <i>value</i>, <span class="type">object</span> <i>args</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>驗證值是否正確。 此方法可以由繼承 Widget 覆寫。</p>
+<p>param 和 return 請參考 <a href="qml-basewidget.html#underscore.validateValue-method" translate="no">BaseWidget::_validateValue</a>(string type, var value, object args) args.propertyName 為驗證的屬性名稱。 args.referenceProperties 為關聯屬性。</p>
+</div></div><!-- @@@checkPropertyValidByType -->
+<br/>
+<!-- $$$getCurrentTheme[overload1]$$$getCurrentTheme -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getCurrentTheme-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getCurrentTheme</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得目前所屬圖紙的主題設定。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題設定。</p>
+</div></div><!-- @@@getCurrentTheme -->
+<br/>
+<!-- $$$getCurrentThemeName[overload1]$$$getCurrentThemeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getCurrentThemeName-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getCurrentThemeName</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得目前所屬圖紙的主題名稱。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題設定。</p>
+</div></div><!-- @@@getCurrentThemeName -->
+<br/>
+<!-- $$$getInitialProperties[overload1]$$$getInitialPropertiesobjectobject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getInitialProperties-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getInitialProperties</span>(<span class="type">object</span> <i>customProperties</i>, <span class="type">object</span> <i>customParent</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得初始化的屬性值。主要提供 與原本屬性預設值不同 或 會依其他屬性而有不同初始值的屬性。 此方法由繼承 Widget 覆寫。未覆寫會預設提供 { width: 50, height: 50 } 主要在建立 widget 時取用。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>customProperties 指定屬性值。 <b class="redFont"><code translate=\"no\">\param</code></b> customParent 指定 parent。 <b class="redFont"><code translate=\"no\">\return</code></b> 初始化的屬性值。object, format: { property name: property value } ex: { width: 50, height: 50 }</p>
+</div></div><!-- @@@getInitialProperties -->
+<br/>
+<!-- $$$getPropertyDefaultValue[overload1]$$$getPropertyDefaultValuestringobject... -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getPropertyDefaultValue-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">var</span> <span class="name">getPropertyDefaultValue</span>(<span class="type">string</span> <i>propertyName</i>, <span class="type">object</span> <i>theme</i>, ... <i>args</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得屬性預設值，並套用主題設定。 此方法由繼承 Widget 覆寫。 主要在 widget 取得屬性內容預設值，並套用主題設定。例如： dataList。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>propertyName 完整的屬性名稱組合，使用 . 串聯。 <b class="redFont"><code translate=\"no\">\param</code></b> theme 主題設定。 <b class="redFont"><code translate=\"no\">\param</code></b> args 其他參數。 <b class="redFont"><code translate=\"no\">\return</code></b> 屬性預設值。</p>
+</div></div><!-- @@@getPropertyDefaultValue -->
+<br/>
+<!-- $$$getPropertyValue[overload1]$$$getPropertyValuestringobjectbool -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getPropertyValue-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">var</span> <span class="name">getPropertyValue</span>(<span class="type">string</span> <i>propertyName</i>, <span class="type">object</span> <i>theme</i>, <span class="type">bool</span> <i>allowNonExist</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得目前屬性值，並套用主題。 共用 function。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>propertyName 完整的屬性名稱組合，使用 . 串聯。 <b class="redFont"><code translate=\"no\">\param</code></b> theme 主題設定。 <b class="redFont"><code translate=\"no\">\param</code></b> allowNonExist 是否允許屬性不存回傳 undefined。false：取得預設值，<a href="qml-basewidget.html#getPropertyDefaultValue-method" translate="no">getPropertyDefaultValue</a>()。 <b class="redFont"><code translate=\"no\">\return</code></b> 套用主題後目前屬性值。</p>
+</div></div><!-- @@@getPropertyValue -->
+<br/>
+<!-- $$$getStylePropertyList[overload1]$$$getStylePropertyListbool -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getStylePropertyList-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span>[] <span class="name">getStylePropertyList</span>(<span class="type">bool</span> <i>isCreate</i> = false)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得樣式屬性清單。與主題套用樣式相關的屬性。 此方法由繼承 Widget 覆寫。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>isCreate 是否包含建立。 <b class="redFont"><code translate=\"no\">\return</code></b> 樣式屬性清單。object[], format: [ { &quot;name&quot;: property name, // 完整的屬性名稱組合，使用 . 串聯，陣列非特定數量可以使用 [] 表示所有項目。 &quot;createOnly&quot;: bool, // 只有在建立時套用 } ] ex: { width: 50, height: 50 }</p>
+</div></div><!-- @@@getStylePropertyList -->
 <br/>
 </body>
 </html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- TableHeaderRow.qml -->
+  <meta name="description" content="資料表表頭容器。">
+  <title>TableHeaderRow QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>TableHeaderRow</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">TableHeaderRow QML Type</h1>
+<!-- $$$TableHeaderRow-brief -->
+<p>資料表表頭容器。. <a href="#details">More...</a></p>
+<!-- @@@TableHeaderRow -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-tableheaderrow-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-tableheaderrow.html#availableHeight-prop" translate="no">availableHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tableheaderrow.html#availableWidth-prop" translate="no">availableWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tableheaderrow.html#sizeType-prop" translate="no">sizeType</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tableheaderrow.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tableheaderrow.html#visibleCount-prop" translate="no">visibleCount</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tableheaderrow.html#visibleData-prop" translate="no">visibleData</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tableheaderrow.html#visibleImplicitHeight-prop" translate="no">visibleImplicitHeight</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tableheaderrow.html#visibleImplicitWidth-prop" translate="no">visibleImplicitWidth</a></b> : real</li>
+</ul>
+<!-- $$$TableHeaderRow-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>TableHeaderRow</summary>
+<p>用於 <a href="qml-sc-tablelist.html" translate="no">TableList</a> 的 header。</p>
+<p>支援功能：</p>
+<ul>
+<li>子元件統計</li>
+</ul>
+<!-- @@@TableHeaderRow -->
+<h2>Property Documentation</h2>
+<!-- $$$availableHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="availableHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">availableHeight</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>可用高度（扣除 topPadding 與 bottomPadding）。</p>
+</div></div><!-- @@@availableHeight -->
+<br/>
+<!-- $$$availableWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="availableWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">availableWidth</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>可用寬度（扣除 leftPadding 與 rightPadding）。</p>
+</div></div><!-- @@@availableWidth -->
+<br/>
+<!-- $$$sizeType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sizeType-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">sizeType</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>尺寸類型，控制顯示的大小。</p>
+<p>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</p>
+<ul>
+<li>true → Define.SizeType.Small</li>
+<li>false → Define.SizeType.Medium</li>
+</ul>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Constant</th><th >Description</th></tr></thead>
+<tr valign="top" class="odd"><td >Define.SizeType.Small</td><td >小尺寸</td></tr>
+<tr valign="top" class="even"><td >Define.SizeType.Medium</td><td >中尺寸</td></tr>
+</table></div>
+</div></div><!-- @@@sizeType -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$visibleCount -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="visibleCount-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">visibleCount</span> : <span class="type">int</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>可見子元件數量。</p>
+</div></div><!-- @@@visibleCount -->
+<br/>
+<!-- $$$visibleData -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="visibleData-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">visibleData</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>統計可見子元件資訊。</p>
+<p>包含：</p>
+<ul>
+<li>count: 可見數量</li>
+<li>implicitWidth: 所有子元件總寬度（含 spacing）</li>
+<li>implicitHeight: 最大子元件高度</li>
+</ul>
+</div></div><!-- @@@visibleData -->
+<br/>
+<!-- $$$visibleImplicitHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="visibleImplicitHeight-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">visibleImplicitHeight</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>所有可見子元件中的最大 implicitHeight。</p>
+</div></div><!-- @@@visibleImplicitHeight -->
+<br/>
+<!-- $$$visibleImplicitWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="visibleImplicitWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">visibleImplicitWidth</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>所有可見子元件的總 implicitWidth（含 spacing）。</p>
+</div></div><!-- @@@visibleImplicitWidth -->
+<br/>
+</body>
+</html>

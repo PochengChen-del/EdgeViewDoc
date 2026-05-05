@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>Selector QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>行動版單選清單元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherited By:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-selectortree.xml" xlink:role="">SelectorTree</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-walistview.xml">WAListView</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>系統主題切換（<db:link xlink:href="">systemThemeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>文字顯示（<db:link xlink:href="qml-sc-selector.xml#textRole-prop">textRole</db:link>, <db:link xlink:href="">descRole）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>圖示顯示</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>選取控制</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="availableWidth-prop">
+<db:title>[read-only] availableWidth : real</db:title>
+<db:para>可用顯示寬度（扣除 <db:link xlink:href="qml-sc-selector.xml#leftPadding-prop">leftPadding</db:link> 與 <db:link xlink:href="qml-sc-selector.xml#rightPadding-prop">rightPadding</db:link>）。</db:para>
+</db:section>
+<db:section xml:id="currentValue-prop">
+<db:title>[read-only] currentValue : var</db:title>
+<db:para>目前選取的 value。</db:para>
+</db:section>
+<db:section xml:id="descElide-prop">
+<db:title>descElide : enumeration</db:title>
+<db:para>描述文字省略模式。</db:para>
+</db:section>
+<db:section xml:id="descFont-prop">
+<db:title>descFont : font</db:title>
+<db:para>描述文字字型。</db:para>
+</db:section>
+<db:section xml:id="descLineHeight-prop">
+<db:title>descLineHeight : real</db:title>
+<db:para>描述文字行高。</db:para>
+</db:section>
+<db:section xml:id="descMaxLineCount-prop">
+<db:title>descMaxLineCount : int</db:title>
+<db:para>描述文字最大行數限制。</db:para>
+<db:para>當 <db:link xlink:href="qml-sc-selector.xml#textWrapMode-prop">textWrapMode</db:link> 允許多行時，此屬性用來限制最多顯示行數。設為 0 表示不限制行數。</db:para>
+</db:section>
+<db:section xml:id="descRole-prop">
+<db:title>descRole : string</db:title>
+<db:para>描述欄位 key。用於從 model object 中取得描述文字的 key。</db:para>
+<db:para>預設 &quot;desc&quot;。</db:para>
+</db:section>
+<db:section xml:id="descWrapMode-prop">
+<db:title>descWrapMode : enumeration</db:title>
+<db:para>描述文字換行模式。</db:para>
+</db:section>
+<db:section xml:id="isArray-prop">
+<db:title>[read-only] isArray : bool</db:title>
+<db:para>判斷目前 model 是否為 Array 型態。</db:para>
+</db:section>
+<db:section xml:id="lastOptionFullDiv-prop">
+<db:title>lastOptionFullDiv : bool</db:title>
+<db:para>是否將最後一個選項的分隔線延伸至全寬。</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → 最後一個 item divider 使用 full width</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → 與一般 item 對齊 padding</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="leftPadding-prop">
+<db:title>leftPadding : real</db:title>
+<db:para>左側邊距，整體左側縮排距離。</db:para>
+</db:section>
+<db:section xml:id="optionBottomPadding-prop">
+<db:title>optionBottomPadding : real</db:title>
+<db:para>選項下方邊距。</db:para>
+</db:section>
+<db:section xml:id="optionLeftPadding-prop">
+<db:title>optionLeftPadding : real</db:title>
+<db:para>選項左方邊距。</db:para>
+</db:section>
+<db:section xml:id="optionRightPadding-prop">
+<db:title>optionRightPadding : real</db:title>
+<db:para>選項上方邊距。</db:para>
+</db:section>
+<db:section xml:id="optionTopPadding-prop">
+<db:title>optionTopPadding : real</db:title>
+<db:para>選項上方邊距。</db:para>
+</db:section>
+<db:section xml:id="rightPadding-prop">
+<db:title>rightPadding : real</db:title>
+<db:para>右側邊距，整體右側縮排距離。</db:para>
+</db:section>
+<db:section xml:id="showDesc-prop">
+<db:title>showDesc : bool</db:title>
+<db:para>是否顯示描述。</db:para>
+</db:section>
+<db:section xml:id="textElide-prop">
+<db:title>textElide : enumeration</db:title>
+<db:para>文字省略模式。</db:para>
+</db:section>
+<db:section xml:id="textFont-prop">
+<db:title>textFont : font</db:title>
+<db:para>文字字型。</db:para>
+</db:section>
+<db:section xml:id="textLineHeight-prop">
+<db:title>textLineHeight : real</db:title>
+<db:para>文字行高。</db:para>
+</db:section>
+<db:section xml:id="textMaxLineCount-prop">
+<db:title>textMaxLineCount : int</db:title>
+<db:para>文字最大行數限制。</db:para>
+<db:para>當 <db:link xlink:href="qml-sc-selector.xml#textWrapMode-prop">textWrapMode</db:link> 允許多行時，此屬性用來限制最多顯示行數。設為 0 表示不限制行數。</db:para>
+</db:section>
+<db:section xml:id="textRole-prop">
+<db:title>textRole : string</db:title>
+<db:para>顯示文字欄位名稱。</db:para>
+<db:para>預設 &quot;text&quot;。</db:para>
+</db:section>
+<db:section xml:id="textWrapMode-prop">
+<db:title>textWrapMode : enumeration</db:title>
+<db:para>文字換行模式。</db:para>
+</db:section>
+<db:section xml:id="valueRole-prop">
+<db:title>valueRole : string</db:title>
+<db:para>選項值欄位名稱。</db:para>
+<db:para>預設 &quot;value&quot;。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="signal-documentation">
+<db:title>Signal Documentation</db:title>
+<db:section xml:id="optionClicked-signal">
+<db:title>optionClicked(var <db:emphasis>opt</db:emphasis>)</db:title>
+<db:para>當選項被點擊時觸發。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>opt 被選取的資料項目</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onOptionClicked</db:code>.</db:para>
+</db:note>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="getModelCount-method">
+<db:title>int getModelCount()</db:title>
+<db:para>取得 model 數量。</db:para>
+</db:section>
+<db:section xml:id="i18nDesc-method">
+<db:title>string i18nDesc(object <db:emphasis>opt</db:emphasis>)</db:title>
+<db:para>取得描述文字（<db:link xlink:href="qml-sc-selector.xml#descRole-prop">descRole</db:link>）。</db:para>
+<db:para>可覆寫。</db:para>
+</db:section>
+<db:section xml:id="i18nText-method">
+<db:title>string i18nText(object <db:emphasis>opt</db:emphasis>)</db:title>
+<db:para>取得顯示文字（優先 <db:link xlink:href="qml-sc-selector.xml#textRole-prop">textRole</db:link>，其次 <db:link xlink:href="qml-sc-selector.xml#valueRole-prop">valueRole</db:link>）。</db:para>
+<db:para>可覆寫。</db:para>
+</db:section>
+<db:section xml:id="optionIconSource-method">
+<db:title>string optionIconSource(object <db:emphasis>opt</db:emphasis>)</db:title>
+<db:para>取得圖示 source（支援 string URL）。</db:para>
+<db:para>可覆寫。</db:para>
+</db:section>
+</db:section>
+</db:article>

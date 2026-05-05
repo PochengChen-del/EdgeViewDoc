@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>TableList QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>資料表顯示元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>TopBar、Header、Body、Footer 與提示訊息區域， 並支援資料顯示、滾動控制與操作區域配置。</db:para>
+<db:para>元件組成：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>TopBar：上方操作區</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Header：欄位標題列（可水平同步滾動）</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Body：資料列表（<db:link xlink:href="">WAListView）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Footer：底部操作區</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Assistive：提示訊息</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>多尺寸顯示（<db:link xlink:href="">sizeType）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>滾動控制</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>垂直滾動：Body</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>水平滾動：Header 與 Body 同步</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:listitem>
+<db:listitem>
+<db:para>動態內容尺寸計算</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>自訂操作元件</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>TopBar（<db:link xlink:href="qml-sc-tablelist.xml#rightTopBarItems-prop">rightTopBarItems</db:link>, <db:link xlink:href="">leftTopBarItems）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Header（<db:link xlink:href="">header）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Body（<db:link xlink:href="">delegate）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Footer（<db:link xlink:href="qml-sc-tablelist.xml#rightFooterItems-prop">rightFooterItems</db:link>, <db:link xlink:href="">leftFooterItems）</db:link></db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:listitem>
+<db:listitem>
+<db:para>提示文字顯示（<db:link xlink:href="qml-sc-tablelist.xml#showHint-prop">showHint</db:link>, <db:link xlink:href="">hint）</db:link></db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="bodyContentHeight-prop">
+<db:title>bodyContentHeight : real</db:title>
+<db:para>Body 內容高度（ListView.contentHeight）。</db:para>
+</db:section>
+<db:section xml:id="bodyContentWidth-prop">
+<db:title>bodyContentWidth : real</db:title>
+<db:para>Body 內容寬度（ListView.contentWidth）。</db:para>
+</db:section>
+<db:section xml:id="delegate-prop">
+<db:title>delegate : Component</db:title>
+<db:para>每列項目委派。</db:para>
+</db:section>
+<db:section xml:id="editable-prop">
+<db:title>editable : bool</db:title>
+<db:para>是否為編輯模式。</db:para>
+<db:para>影響外框顯示與提示訊息。</db:para>
+</db:section>
+<db:section xml:id="header-prop">
+<db:title>header : Item</db:title>
+<db:para>Header 內容元件。</db:para>
+<db:para>使用 <db:link xlink:href="qml-sc-tableheaderrow.xml">TableHeaderRow</db:link>。</db:para>
+</db:section>
+<db:section xml:id="hint-prop">
+<db:title>hint : string</db:title>
+<db:para>提示文字。</db:para>
+</db:section>
+<db:section xml:id="invalid-prop">
+<db:title>invalid : bool</db:title>
+<db:para>是否為驗證錯誤狀態。</db:para>
+<db:para>預設 false。</db:para>
+</db:section>
+<db:section xml:id="leftFooterItems-prop">
+<db:title>leftFooterItems : Item</db:title>
+<db:para>Footer 左側擴展元件。</db:para>
+</db:section>
+<db:section xml:id="leftTopBarItems-prop">
+<db:title>leftTopBarItems : Item</db:title>
+<db:para>TopBar 左側擴展元件。</db:para>
+</db:section>
+<db:section xml:id="model-prop">
+<db:title>model : var</db:title>
+<db:para>資料來源。</db:para>
+</db:section>
+<db:section xml:id="radius-prop">
+<db:title>radius : real</db:title>
+<db:para>圓角半徑。</db:para>
+</db:section>
+<db:section xml:id="readOnly-prop">
+<db:title>readOnly : bool</db:title>
+<db:para>是否唯讀。</db:para>
+</db:section>
+<db:section xml:id="rightFooterItems-prop">
+<db:title>rightFooterItems : Item</db:title>
+<db:para>Footer 右側擴展元件。</db:para>
+</db:section>
+<db:section xml:id="rightTopBarItems-prop">
+<db:title>rightTopBarItems : Item</db:title>
+<db:para>TopBar 右側擴展元件。</db:para>
+</db:section>
+<db:section xml:id="showFooter-prop">
+<db:title>showFooter : bool</db:title>
+<db:para>是否顯示 Footer。</db:para>
+</db:section>
+<db:section xml:id="showHeader-prop">
+<db:title>showHeader : bool</db:title>
+<db:para>是否顯示 Header。</db:para>
+</db:section>
+<db:section xml:id="showHint-prop">
+<db:title>showHint : bool</db:title>
+<db:para>是否顯示提示文字。</db:para>
+</db:section>
+<db:section xml:id="showTopBar-prop">
+<db:title>showTopBar : bool</db:title>
+<db:para>是否顯示 TopBar。</db:para>
+</db:section>
+<db:section xml:id="sizeType-prop">
+<db:title>sizeType : enumeration</db:title>
+<db:para>尺寸類型，控制顯示的大小。</db:para>
+<db:para>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → Define.SizeType.Small</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → Define.SizeType.Medium</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Small</db:para>
+</db:td>
+<db:td>
+<db:para>小尺寸</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Medium</db:para>
+</db:td>
+<db:td>
+<db:para>中尺寸</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="themeStyle-prop">
+<db:title>[read-only] themeStyle : var</db:title>
+<db:para>主題樣式設定物件。</db:para>
+<db:para>此屬性為唯讀，透過 <db:link xlink:href="qml-sc-tablelist.xml#getThemeStyle-method">getThemeStyle</db:link>() 動態產生。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="getThemeStyle-method">
+<db:title>object getThemeStyle()</db:title>
+<db:para>取得主題樣式設定物件。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題樣式設定物件。</db:para>
+</db:section>
+<db:section xml:id="scrollToEnd-method">
+<db:title>void scrollToEnd()</db:title>
+<db:para>捲動至底部。</db:para>
+</db:section>
+<db:section xml:id="scrollToRow-method">
+<db:title>void scrollToRow(int <db:emphasis>rowIndex</db:emphasis>)</db:title>
+<db:para>捲動至指定列。</db:para>
+<db:para><db:code role="parameter">rowIndex</db:code> 列索引。</db:para>
+</db:section>
+</db:section>
+</db:article>

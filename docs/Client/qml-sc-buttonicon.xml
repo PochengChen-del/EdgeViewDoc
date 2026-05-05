@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>ButtonIcon QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>圖示按鈕元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherited By:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-tablebuttonicon.xml" xlink:role="">TableButtonIcon</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-buttonbase.xml">ButtonBase</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>為以圖示為主要內容的按鈕元件， 繼承自 <db:link xlink:href="qml-sc-buttonbase.xml">ButtonBase</db:link>，並擴充圖示（Icon）相關狀態控制。</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="iconColor-prop">
+<db:title>iconColor : StateColor</db:title>
+<db:para>各狀態圖示顏色設定。</db:para>
+</db:section>
+<db:section xml:id="iconSourceUrl-prop">
+<db:title>iconSourceUrl : url</db:title>
+<db:para>圖示來源 URL。</db:para>
+<db:para>詳細格式與限制請參考 Qt 官方文件。</db:para>
+<db:para>暫時使用 string 型別。</db:para>
+</db:section>
+<db:section xml:id="iconText-prop">
+<db:title>iconText : string</db:title>
+<db:para>圖示文字內容。</db:para>
+</db:section>
+<db:section xml:id="iconTextColor-prop">
+<db:title>iconTextColor : StateColor</db:title>
+<db:para>各狀態圖示文字顏色設定。</db:para>
+</db:section>
+<db:section xml:id="showIconText-prop">
+<db:title>showIconText : bool</db:title>
+<db:para>是否顯示圖示文字。</db:para>
+</db:section>
+</db:section>
+</db:article>
