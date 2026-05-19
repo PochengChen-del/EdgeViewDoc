@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>WAMenuItemTextAvatar QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>彈出式菜單項目元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-wamenuitembase.xml">WAMenuItemBase</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>為顯示文字與 <db:link xlink:href="qml-sc-avatartext.xml">AvatarText</db:link> 的菜單項目。 繼承 <db:link xlink:href="qml-sc-wamenuitembase.xml">WAMenuItemBase</db:link>，並擴充文字相關狀態控制。</db:para>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>文字顯示（<db:link xlink:href="">text</db:link>, <db:emphasis role="bold">&lt;Unknown command&gt;<db:code>lsuffix</db:code></db:emphasis>）</db:para>
+</db:listitem>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-avatartext.xml">AvatarText</db:link> 顯示（<db:link xlink:href="">avatarText）</db:link></db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="avatarColorType-prop">
+<db:title>avatarColorType : enumeration</db:title>
+<db:para>Avatar 顏色類型（WAColor.ColorType）。</db:para>
+</db:section>
+<db:section xml:id="avatarText-prop">
+<db:title>avatarText : string</db:title>
+<db:para>Avatar 顯示文字。</db:para>
+</db:section>
+<db:section xml:id="description-prop">
+<db:title>description : string</db:title>
+<db:para>描述文字。</db:para>
+</db:section>
+<db:section xml:id="descriptionColor-prop">
+<db:title>descriptionColor : StateColor</db:title>
+<db:para>各狀態描述文字顏色設定。</db:para>
+</db:section>
+<db:section xml:id="padAvatar-prop">
+<db:title>padAvatar : bool</db:title>
+<db:para>是否保留 Avatar 區域寬度。</db:para>
+<db:para>啟用後即使未顯示 Avatar，仍會保留對應空間，用於維持多個 MenuItem 的對齊。</db:para>
+</db:section>
+<db:section xml:id="rightItem-prop">
+<db:title>rightItem : Item</db:title>
+<db:para>右側擴展元件。</db:para>
+<db:para>可放置自訂 UI 元件（如按鈕、圖示或狀態指示），</db:para>
+</db:section>
+<db:section xml:id="showAvatar-prop">
+<db:title>showAvatar : bool</db:title>
+<db:para>是否顯示 <db:link xlink:href="qml-sc-avatartext.xml">AvatarText</db:link>。</db:para>
+</db:section>
+<db:section xml:id="showDescription-prop">
+<db:title>showDescription : bool</db:title>
+<db:para>是否顯示描述。</db:para>
+</db:section>
+<db:section xml:id="showSuffix-prop">
+<db:title>showSuffix : bool</db:title>
+<db:para>是否顯示後綴文字。</db:para>
+</db:section>
+<db:section xml:id="suffix-prop">
+<db:title>suffix : string</db:title>
+<db:para>後綴文字。</db:para>
+</db:section>
+<db:section xml:id="suffixColor-prop">
+<db:title>suffixColor : StateColor</db:title>
+<db:para>各狀態後綴文字顏色設定。</db:para>
+</db:section>
+<db:section xml:id="textColor-prop">
+<db:title>textColor : StateColor</db:title>
+<db:para>各狀態文字顏色設定。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="getThemeStyle-method">
+<db:title>object getThemeStyle()</db:title>
+<db:para>取得主題樣式設定物件。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題樣式設定物件。</db:para>
+</db:section>
+</db:section>
+</db:article>

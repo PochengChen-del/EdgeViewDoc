@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>WANotification QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>通知提示元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>通知會自動由畫面右側滑入，並支援自動關閉與手動關閉。</db:para>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>多尺寸顯示（<db:link xlink:href="">sizeType）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>通知狀態顯示（<db:link xlink:href="">notifyType）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>訊息顯示（<db:link xlink:href="">message）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>自動關閉控制（<db:link xlink:href="">interval）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>詳細內容視窗控制（<db:link xlink:href="">detail）</db:link></db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="colorInverse-prop">
+<db:title>colorInverse : bool</db:title>
+<db:para>是否反轉顏色樣式。</db:para>
+<db:para>小尺寸模式預設為 true。</db:para>
+</db:section>
+<db:section xml:id="detail-prop">
+<db:title>detail : string</db:title>
+<db:para>詳細訊息內容。</db:para>
+</db:section>
+<db:section xml:id="dlgDetail-prop">
+<db:title>dlgDetail : QtObject</db:title>
+<db:para>詳細內容對話框物件，由 <db:link xlink:href="qml-sc-wanotification.xml#openDetail-method">openDetail</db:link>() 動態建立，關閉時自動銷毀。</db:para>
+</db:section>
+<db:section xml:id="interval-prop">
+<db:title>interval : int</db:title>
+<db:para>自動關閉時間（毫秒）。</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>&gt; 0：通知開啟後會於指定時間自動關閉。</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>&lt;= 0：不自動關閉。</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="isError-prop">
+<db:title>[read-only] isError : bool</db:title>
+<db:para>是否為 error 通知類型。</db:para>
+</db:section>
+<db:section xml:id="isSuccess-prop">
+<db:title>[read-only] isSuccess : bool</db:title>
+<db:para>是否為 success 通知類型。</db:para>
+</db:section>
+<db:section xml:id="isWarn-prop">
+<db:title>[read-only] isWarn : bool</db:title>
+<db:para>是否為 warn 通知類型。</db:para>
+</db:section>
+<db:section xml:id="maxWidth-prop">
+<db:title>maxWidth : real</db:title>
+<db:para>通知視窗最大寬度。</db:para>
+</db:section>
+<db:section xml:id="message-prop">
+<db:title>message : string</db:title>
+<db:para>通知訊息內容。</db:para>
+</db:section>
+<db:section xml:id="minWidth-prop">
+<db:title>minWidth : real</db:title>
+<db:para>通知視窗最小寬度。</db:para>
+<db:para>預設 164。</db:para>
+</db:section>
+<db:section xml:id="notifyType-prop">
+<db:title>notifyType : string</db:title>
+<db:para>通知類型。</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>&quot;info&quot;</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>&quot;success&quot;</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>&quot;warn&quot;</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>&quot;error&quot;</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>預設 &quot;info&quot;。</db:para>
+</db:section>
+<db:section xml:id="rightGap-prop">
+<db:title>rightGap : real</db:title>
+<db:para>通知視窗與右側邊界的間距。</db:para>
+<db:para>預設 24。</db:para>
+</db:section>
+<db:section xml:id="showDetail-prop">
+<db:title>showDetail : bool</db:title>
+<db:para>是否顯示詳細內容功能。</db:para>
+<db:para>當為 true 時，可透過詳細按鈕開啟詳細訊息視窗。</db:para>
+</db:section>
+<db:section xml:id="showNotifyTypeArea-prop">
+<db:title>showNotifyTypeArea : bool</db:title>
+<db:para>是否顯示通知類型顏色區塊。</db:para>
+<db:para>小尺寸預設不顯示。</db:para>
+</db:section>
+<db:section xml:id="sizeType-prop">
+<db:title>sizeType : enumeration</db:title>
+<db:para>尺寸類型，控制顯示的大小。</db:para>
+<db:para>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → Define.SizeType.Small</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → Define.SizeType.Medium</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Small</db:para>
+</db:td>
+<db:td>
+<db:para>小尺寸</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Medium</db:para>
+</db:td>
+<db:td>
+<db:para>中尺寸</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="themeStyle-prop">
+<db:title>[read-only] themeStyle : var</db:title>
+<db:para>主題樣式設定物件。</db:para>
+<db:para>此屬性為唯讀，透過 <db:link xlink:href="qml-sc-wanotification.xml#getThemeStyle-method">getThemeStyle</db:link>() 動態產生。</db:para>
+</db:section>
+<db:section xml:id="title-prop">
+<db:title>title : string</db:title>
+<db:para>通知標題文字。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="getThemeStyle-method">
+<db:title>object getThemeStyle()</db:title>
+<db:para>取得主題樣式設定物件。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題樣式設定物件。</db:para>
+</db:section>
+<db:section xml:id="openDetail-method">
+<db:title>openDetail()</db:title>
+<db:para>開啟詳細內容視窗。</db:para>
+<db:para>若 detail 存在，會建立並顯示詳細訊息對話框。</db:para>
+<db:para>開啟詳細視窗期間，自動關閉計時器會暫停，關閉後自動恢復。</db:para>
+</db:section>
+</db:section>
+</db:article>

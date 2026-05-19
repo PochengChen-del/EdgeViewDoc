@@ -75,6 +75,7 @@
 <db:para>靠左</db:para>
 </db:td>
 </db:tr>
+</db:informaltable>
 <db:tr valign="top">
 <db:td>
 <db:para>Qt.AlignHCenter</db:para>
@@ -91,7 +92,7 @@
 <db:para>靠右</db:para>
 </db:td>
 </db:tr>
-</db:informaltable>
+</db:section>
 </db:section>
 <db:section xml:id="divWidth-prop">
 <db:title>divWidth : real</db:title>
@@ -176,13 +177,13 @@
 <db:title>topPadding : real</db:title>
 <db:para>上方邊距。</db:para>
 </db:section>
-</db:section>
-<db:section xml:id="method-documentation">
-<db:title>Method Documentation</db:title>
-<db:section xml:id="getThemeStyle-method">
-<db:title>object getThemeStyle()</db:title>
-<db:para>取得主題樣式設定物件。</db:para>
-<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題樣式設定物件。</db:para>
-</db:section>
-</db:section>
 </db:article>
+<n1:section xmlns:n1="http://docbook.org/ns/docbook" xml:id="method-documentation">
+<n1:title>Method Documentation</n1:title>
+<n1:section xml:id="getThemeStyle-method">
+<n1:title>object getThemeStyle()</n1:title>
+<n1:para>取得主題樣式設定物件。</n1:para>
+<n1:para><n1:emphasis role="bold">&lt;Unknown command&gt;<n1:code>return</n1:code></n1:emphasis>主題樣式設定物件。</n1:para>
+</n1:section>
+</n1:section>
+

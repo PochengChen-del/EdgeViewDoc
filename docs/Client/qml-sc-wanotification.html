@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- WANotification.qml -->
+  <meta name="description" content="通知提示元件。">
+  <title>WANotification QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>WANotification</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">WANotification QML Type</h1>
+<!-- $$$WANotification-brief -->
+<p>通知提示元件。. <a href="#details">More...</a></p>
+<!-- @@@WANotification -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-wanotification-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#colorInverse-prop" translate="no">colorInverse</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#detail-prop" translate="no">detail</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#dlgDetail-prop" translate="no">dlgDetail</a></b> : QtObject</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#interval-prop" translate="no">interval</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#isError-prop" translate="no">isError</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#isSuccess-prop" translate="no">isSuccess</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#isWarn-prop" translate="no">isWarn</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#maxWidth-prop" translate="no">maxWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#message-prop" translate="no">message</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#minWidth-prop" translate="no">minWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#notifyType-prop" translate="no">notifyType</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#rightGap-prop" translate="no">rightGap</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#showDetail-prop" translate="no">showDetail</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#showNotifyTypeArea-prop" translate="no">showNotifyTypeArea</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#sizeType-prop" translate="no">sizeType</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#title-prop" translate="no">title</a></b> : string</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">object <b><a href="qml-sc-wanotification.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotification.html#openDetail-method" translate="no">openDetail</a></b>()</li>
+</ul>
+<!-- $$$WANotification-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供顯示訊息、詳細內容與狀態的通知提示框。</summary>
+<p>通知會自動由畫面右側滑入，並支援自動關閉與手動關閉。</p>
+<p>支援功能：</p>
+<ul>
+<li>主題樣式控制（themeName）</li>
+<li>多尺寸顯示（sizeType）</li>
+<li>通知狀態顯示（notifyType）</li>
+<li>訊息顯示（message）</li>
+<li>自動關閉控制（interval）</li>
+<li>詳細內容視窗控制（detail）</li>
+</ul>
+<!-- @@@WANotification -->
+<h2>Property Documentation</h2>
+<!-- $$$colorInverse -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="colorInverse-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">colorInverse</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否反轉顏色樣式。</p>
+<p>小尺寸模式預設為 true。</p>
+</div></div><!-- @@@colorInverse -->
+<br/>
+<!-- $$$detail -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="detail-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">detail</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>詳細訊息內容。</p>
+</div></div><!-- @@@detail -->
+<br/>
+<!-- $$$dlgDetail -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="dlgDetail-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">dlgDetail</span> : <span class="type">QtObject</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>詳細內容對話框物件，由 <a href="qml-sc-wanotification.html#openDetail-method" translate="no">openDetail</a>() 動態建立，關閉時自動銷毀。</p>
+</div></div><!-- @@@dlgDetail -->
+<br/>
+<!-- $$$interval -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="interval-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">interval</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>自動關閉時間（毫秒）。</p>
+<ul>
+<li>&gt; 0：通知開啟後會於指定時間自動關閉。</li>
+<li>&lt;= 0：不自動關閉。</li>
+</ul>
+</div></div><!-- @@@interval -->
+<br/>
+<!-- $$$isError -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isError-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isError</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否為 error 通知類型。</p>
+</div></div><!-- @@@isError -->
+<br/>
+<!-- $$$isSuccess -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isSuccess-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isSuccess</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否為 success 通知類型。</p>
+</div></div><!-- @@@isSuccess -->
+<br/>
+<!-- $$$isWarn -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isWarn-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isWarn</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否為 warn 通知類型。</p>
+</div></div><!-- @@@isWarn -->
+<br/>
+<!-- $$$maxWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="maxWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">maxWidth</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>通知視窗最大寬度。</p>
+</div></div><!-- @@@maxWidth -->
+<br/>
+<!-- $$$message -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="message-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">message</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>通知訊息內容。</p>
+</div></div><!-- @@@message -->
+<br/>
+<!-- $$$minWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="minWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">minWidth</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>通知視窗最小寬度。</p>
+<p>預設 164。</p>
+</div></div><!-- @@@minWidth -->
+<br/>
+<!-- $$$notifyType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="notifyType-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">notifyType</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>通知類型。</p>
+<ul>
+<li>&quot;info&quot;</li>
+<li>&quot;success&quot;</li>
+<li>&quot;warn&quot;</li>
+<li>&quot;error&quot;</li>
+</ul>
+<p>預設 &quot;info&quot;。</p>
+</div></div><!-- @@@notifyType -->
+<br/>
+<!-- $$$rightGap -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="rightGap-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">rightGap</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>通知視窗與右側邊界的間距。</p>
+<p>預設 24。</p>
+</div></div><!-- @@@rightGap -->
+<br/>
+<!-- $$$showDetail -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showDetail-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showDetail</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示詳細內容功能。</p>
+<p>當為 true 時，可透過詳細按鈕開啟詳細訊息視窗。</p>
+</div></div><!-- @@@showDetail -->
+<br/>
+<!-- $$$showNotifyTypeArea -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showNotifyTypeArea-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showNotifyTypeArea</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示通知類型顏色區塊。</p>
+<p>小尺寸預設不顯示。</p>
+</div></div><!-- @@@showNotifyTypeArea -->
+<br/>
+<!-- $$$sizeType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sizeType-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">sizeType</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>尺寸類型，控制顯示的大小。</p>
+<p>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</p>
+<ul>
+<li>true → Define.SizeType.Small</li>
+<li>false → Define.SizeType.Medium</li>
+</ul>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Constant</th><th >Description</th></tr></thead>
+<tr valign="top" class="odd"><td >Define.SizeType.Small</td><td >小尺寸</td></tr>
+<tr valign="top" class="even"><td >Define.SizeType.Medium</td><td >中尺寸</td></tr>
+</table></div>
+</div></div><!-- @@@sizeType -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-wanotification.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<!-- $$$title -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="title-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">title</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>通知標題文字。</p>
+</div></div><!-- @@@title -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+<!-- $$$openDetail[overload1]$$$openDetail -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="openDetail-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">openDetail</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>開啟詳細內容視窗。</p>
+<p>若 detail 存在，會建立並顯示詳細訊息對話框。</p>
+<p>開啟詳細視窗期間，自動關閉計時器會暫停，關閉後自動恢復。</p>
+</div></div><!-- @@@openDetail -->
+<br/>
+</body>
+</html>

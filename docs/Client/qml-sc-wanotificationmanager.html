@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- WANotificationManager.qml -->
+  <meta name="description" content="通知提示管理器。">
+  <title>WANotificationManager QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>WANotificationManager</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">WANotificationManager QML Type</h1>
+<!-- $$$WANotificationManager-brief -->
+<p>通知提示管理器。. <a href="#details">More...</a></p>
+<!-- @@@WANotificationManager -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-wanotificationmanager-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotificationmanager.html#cmpWADialogErrorMessage-prop" translate="no">cmpWADialogErrorMessage</a></b> : Component</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotificationmanager.html#notifications-prop" translate="no">notifications</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotificationmanager.html#parent-prop" translate="no">parent</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotificationmanager.html#queue-prop" translate="no">queue</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotificationmanager.html#rightPadding-prop" translate="no">rightPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotificationmanager.html#timer-prop" translate="no">timer</a></b> : QtObject</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotificationmanager.html#topPadding-prop" translate="no">topPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotificationmanager.html#vSpacing-prop" translate="no">vSpacing</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotificationmanager.html#wanotiCom-prop" translate="no">wanotiCom</a></b> : Component</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotificationmanager.html#addNotify-method" translate="no">addNotify</a></b>(var <i>notifyData</i>)</li>
+<li class="fn" translate="no">real <b><a href="qml-sc-wanotificationmanager.html#getRootHeight-method" translate="no">getRootHeight</a></b>()</li>
+<li class="fn" translate="no">real <b><a href="qml-sc-wanotificationmanager.html#getTotalNotificationHeight-method" translate="no">getTotalNotificationHeight</a></b>()</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotificationmanager.html#notify-method" translate="no">notify</a></b>()</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wanotificationmanager.html#onResized-method" translate="no">onResized</a></b>()</li>
+</ul>
+<!-- $$$WANotificationManager-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>用於集中管理通知提示元件。</summary>
+<p>負責處理通知佇列、顯示排序、自動位置調整與通知生命週期管理。</p>
+<p>當畫面空間不足時，新通知會暫存於佇列中，待空間可用後再顯示。</p>
+<p>支援功能：</p>
+<ul>
+<li>通知佇列管理（queue）</li>
+<li>通知堆疊顯示（notifications）</li>
+<li>自動位置排列</li>
+<li>通知自動建立與銷毀</li>
+</ul>
+<!-- @@@WANotificationManager -->
+<h2>Property Documentation</h2>
+<!-- $$$cmpWADialogErrorMessage -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="cmpWADialogErrorMessage-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">cmpWADialogErrorMessage</span> : <span class="type">Component</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>詳細訊息對話框元件。</p>
+<p>用於顯示通知詳細內容。</p>
+</div></div><!-- @@@cmpWADialogErrorMessage -->
+<br/>
+<!-- $$$notifications -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="notifications-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">notifications</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前顯示中的通知列表。</p>
+</div></div><!-- @@@notifications -->
+<br/>
+<!-- $$$parent -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="parent-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">parent</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>通知管理器所屬父物件。</p>
+<p>用於取得畫面尺寸資訊。</p>
+</div></div><!-- @@@parent -->
+<br/>
+<!-- $$$queue -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="queue-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">queue</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>等待顯示的通知佇列。</p>
+</div></div><!-- @@@queue -->
+<br/>
+<!-- $$$rightPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="rightPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">rightPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>通知區域右側間距。</p>
+</div></div><!-- @@@rightPadding -->
+<br/>
+<!-- $$$timer -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="timer-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">timer</span> : <span class="type">QtObject</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>通知排程計時器。</p>
+<p>當畫面空間不足時，會延遲重新檢查通知顯示。</p>
+</div></div><!-- @@@timer -->
+<br/>
+<!-- $$$topPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="topPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">topPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>通知區域上方間距。</p>
+</div></div><!-- @@@topPadding -->
+<br/>
+<!-- $$$vSpacing -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="vSpacing-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">vSpacing</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>通知之間的垂直間距。</p>
+</div></div><!-- @@@vSpacing -->
+<br/>
+<!-- $$$wanotiCom -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="wanotiCom-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">wanotiCom</span> : <span class="type">Component</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p><a href="qml-sc-wanotification.html" translate="no">WANotification</a> 元件建立器。</p>
+<p>用於動態建立通知元件。</p>
+</div></div><!-- @@@wanotiCom -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$addNotify[overload1]$$$addNotifyvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="addNotify-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">addNotify</span>(<span class="type">var</span> <i>notifyData</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>加入通知至通知佇列。</p>
+<p>若通知空間足夠，會立即顯示通知。</p>
+<p><b class="redFont"><code translate=\"no\">\param</code></b>notifyData 通知資料物件。 結構：</p>
+<pre class="cpp" translate="no">{
+    notifyType<span class="operator">,</span>
+    title<span class="operator">,</span>
+    message<span class="operator">,</span>
+    detail<span class="operator">,</span>
+    interval
+}</pre>
+</div></div><!-- @@@addNotify -->
+<br/>
+<!-- $$$getRootHeight[overload1]$$$getRootHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getRootHeight-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">real</span> <span class="name">getRootHeight</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得通知可用區域高度。</p>
+<p>會優先使用 Global.root 高度， 若不存在則使用 parent 高度。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>可用高度。</p>
+</div></div><!-- @@@getRootHeight -->
+<br/>
+<!-- $$$getTotalNotificationHeight[overload1]$$$getTotalNotificationHeight -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getTotalNotificationHeight-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">real</span> <span class="name">getTotalNotificationHeight</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得目前所有通知總高度。</p>
+<p>包含通知間距與頂部間距。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>通知總高度。</p>
+</div></div><!-- @@@getTotalNotificationHeight -->
+<br/>
+<!-- $$$notify[overload1]$$$notify -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="notify-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">notify</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>顯示下一筆通知。</p>
+<p>若畫面空間不足，會延後重新檢查並等待顯示。</p>
+</div></div><!-- @@@notify -->
+<br/>
+<!-- $$$onResized[overload1]$$$onResized -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="onResized-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">onResized</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>重新排列所有通知位置。</p>
+<p>會依照通知高度重新計算 Y 座標。</p>
+</div></div><!-- @@@onResized -->
+<br/>
+</body>
+</html>

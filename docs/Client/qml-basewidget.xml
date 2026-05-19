@@ -130,7 +130,7 @@
 <db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題設定。</db:para>
 </db:section>
 <db:section xml:id="getCurrentThemeName-method">
-<db:title>object getCurrentThemeName()</db:title>
+<db:title>string getCurrentThemeName()</db:title>
 <db:para>取得目前所屬圖紙的主題名稱。</db:para>
 <db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題設定。</db:para>
 </db:section>

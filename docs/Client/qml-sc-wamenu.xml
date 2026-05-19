@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>WAMenu QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>彈出式菜單元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>為 Menu 的擴充元件，提供符合系統樣式的彈出式菜單。</db:para>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>多尺寸顯示（<db:link xlink:href="">sizeType）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>MenuItem 顯示與控制（<db:link xlink:href="">delegate）</db:link></db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="checkStyle-prop">
+<db:title>checkStyle : enumeration</db:title>
+<db:para>選取樣式類型，控制作為子項目時 indicator 的顯示方式。</db:para>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para><db:link xlink:href="qml-sc-wamenuitembase.xml">WAMenuItemBase</db:link>.CheckStyle.Check</db:para>
+</db:td>
+<db:td>
+<db:para>使用勾選圖示。</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para><db:link xlink:href="qml-sc-wamenuitembase.xml">WAMenuItemBase</db:link>.CheckStyle.Switch</db:para>
+</db:td>
+<db:td>
+<db:para>使用開關樣式。</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para><db:link xlink:href="qml-sc-wamenuitembase.xml">WAMenuItemBase</db:link>.CheckStyle.Checkbox</db:para>
+</db:td>
+<db:td>
+<db:para>使用 Checkbox 樣式。</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+<db:section xml:id="checkable-prop">
+<db:title>checkable : bool</db:title>
+<db:para>是否可勾選。</db:para>
+<db:para>啟用後可搭配 <db:link xlink:href="qml-sc-wamenu.xml#checked-prop">checked</db:link> 與 <db:link xlink:href="qml-sc-wamenu.xml#checkStyle-prop">checkStyle</db:link> 使用。</db:para>
+</db:section>
+<db:section xml:id="checked-prop">
+<db:title>checked : bool</db:title>
+<db:para>目前是否為選取狀態。</db:para>
+</db:section>
+<db:section xml:id="customBarItem-prop">
+<db:title>customBarItem : Component</db:title>
+<db:para>自訂 MenuBar 項目元件。</db:para>
+<db:para>可用於覆寫預設 MenuBar 顯示內容。</db:para>
+</db:section>
+<db:section xml:id="description-prop">
+<db:title>description : string</db:title>
+<db:para>描述文字。</db:para>
+</db:section>
+<db:section xml:id="iconSourceUrl-prop">
+<db:title>iconSourceUrl : string</db:title>
+<db:para>圖示來源 URL。</db:para>
+</db:section>
+<db:section xml:id="maxWidth-prop">
+<db:title>maxWidth : real</db:title>
+<db:para>菜單最大寬度。</db:para>
+</db:section>
+<db:section xml:id="menuBarItemEnable-prop">
+<db:title>menuBarItemEnable : bool</db:title>
+<db:para>是否啟用 MenuBar 項目。</db:para>
+</db:section>
+<db:section xml:id="minWidth-prop">
+<db:title>minWidth : real</db:title>
+<db:para>菜單最小寬度。</db:para>
+</db:section>
+<db:section xml:id="padIcon-prop">
+<db:title>padIcon : bool</db:title>
+<db:para>是否保留圖示區域寬度。</db:para>
+<db:para>啟用後即使未顯示圖示，仍會保留對應空間，用於維持多個 MenuItem 的對齊。</db:para>
+</db:section>
+<db:section xml:id="padIndicator-prop">
+<db:title>padIndicator : bool</db:title>
+<db:para>是否保留圖示區域寬度。</db:para>
+<db:para>啟用後即使未顯示圖示，仍會保留對應空間，用於維持多個 MenuItem 的對齊。</db:para>
+</db:section>
+<db:section xml:id="show-prop">
+<db:title>show : bool</db:title>
+<db:para>是否顯示此選單。</db:para>
+<db:para>作為子選單時，可控制是否顯示於父選單中。</db:para>
+</db:section>
+<db:section xml:id="showDescription-prop">
+<db:title>showDescription : bool</db:title>
+<db:para>是否顯示描述。</db:para>
+</db:section>
+<db:section xml:id="showIcon-prop">
+<db:title>showIcon : bool</db:title>
+<db:para>是否顯示圖示。</db:para>
+</db:section>
+<db:section xml:id="showSuffix-prop">
+<db:title>showSuffix : bool</db:title>
+<db:para>是否顯示後綴文字。</db:para>
+</db:section>
+<db:section xml:id="sizeType-prop">
+<db:title>sizeType : enumeration</db:title>
+<db:para>尺寸類型，控制顯示的大小。</db:para>
+<db:para>預設會從父元件繼承，若未提供則依據 Global.mobile 決定：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>true → Define.SizeType.Small</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>false → Define.SizeType.Medium</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Small</db:para>
+</db:td>
+<db:td>
+<db:para>小尺寸</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>Define.SizeType.Medium</db:para>
+</db:td>
+<db:td>
+<db:para>中尺寸</db:para>
+</db:td>
+</db:tr>
+</db:informaltable>
+</db:section>
+<db:section xml:id="suffix-prop">
+<db:title>suffix : string</db:title>
+<db:para>後綴文字。</db:para>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="themeStyle-prop">
+<db:title>[read-only] themeStyle : var</db:title>
+<db:para>主題樣式設定物件。</db:para>
+<db:para>此屬性為唯讀，透過 <db:link xlink:href="qml-sc-wamenu.xml#getThemeStyle-method">getThemeStyle</db:link>() 動態產生。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="getThemeStyle-method">
+<db:title>object getThemeStyle()</db:title>
+<db:para>取得主題樣式設定物件。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題樣式設定物件。</db:para>
+</db:section>
+</db:section>
+</db:article>

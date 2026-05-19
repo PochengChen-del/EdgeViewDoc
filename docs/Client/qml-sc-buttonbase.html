@@ -27,7 +27,7 @@
 <div class="table"><table class="alignedsummary requisites" translate="no">
 <tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
-<tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-buttonicon.html" translate="no">ButtonIcon</a>, <a href="qml-sc-buttonsort.html" translate="no">ButtonSort</a>, <a href="qml-sc-buttontext.html" translate="no">ButtonText</a>, and <a href="qml-sc-buttontexticon.html" translate="no">ButtonTextIcon</a></p>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-buttonavatartext.html" translate="no">ButtonAvatarText</a>, <a href="qml-sc-buttonicon.html" translate="no">ButtonIcon</a>, <a href="qml-sc-buttonsort.html" translate="no">ButtonSort</a>, <a href="qml-sc-buttontext.html" translate="no">ButtonText</a>, and <a href="qml-sc-buttontexticon.html" translate="no">ButtonTextIcon</a></p>
 </td></tr>
 </table></div>
 <ul>
@@ -42,6 +42,7 @@
 <li class="fn" translate="no"><b><a href="qml-sc-buttonbase.html#bdWidth-prop" translate="no">bdWidth</a></b> : StateReal</li>
 <li class="fn" translate="no"><b><a href="qml-sc-buttonbase.html#bgColor-prop" translate="no">bgColor</a></b> : StateColor</li>
 <li class="fn" translate="no"><b><a href="qml-sc-buttonbase.html#bgCoverGradient-prop" translate="no">bgCoverGradient</a></b> : StateGradient</li>
+<li class="fn" translate="no"><b><a href="qml-sc-buttonbase.html#colorInverse-prop" translate="no">colorInverse</a></b> : bool</li>
 <li class="fn" translate="no"><b><a href="qml-sc-buttonbase.html#colorType-prop" translate="no">colorType</a></b> : enumeration</li>
 <li class="fn" translate="no"><b><a href="qml-sc-buttonbase.html#contentColorType-prop" translate="no">contentColorType</a></b> : enumeration</li>
 <li class="fn" translate="no"><b><a href="qml-sc-buttonbase.html#disableBaseState-prop" translate="no">disableBaseState</a></b> : State</li>
@@ -78,7 +79,7 @@
 <li>disable</li>
 </ul>
 <p>各狀態會繼承對應的 base state（例如 normal → normalbase）， 並透過 <a href="qml-sc-buttonbase.html#themeStyle-prop" translate="no">themeStyle</a> 套用背景、邊框與內容顏色等。</p>
-<p>樣式由 style、l <a href="qml-sc-buttonbase.html#colorType-prop" translate="no">colorType</a> 與 <a href="qml-sc-buttonbase.html#contentColorType-prop" translate="no">contentColorType</a> 決定。</p>
+<p>樣式由 style、l <a href="qml-sc-buttonbase.html#colorType-prop" translate="no">colorType</a>、<a href="qml-sc-buttonbase.html#contentColorType-prop" translate="no">contentColorType</a> 與 <a href="qml-sc-buttonbase.html#colorInverse-prop" translate="no">colorInverse</a> 決定。</p>
 <!-- @@@ButtonBase -->
 <h2>Property Documentation</h2>
 <!-- $$$activeBaseState -->
@@ -151,6 +152,18 @@
 </table></div></div>
 <div class="qmldoc"><p>各狀態背景漸層設定。</p>
 </div></div><!-- @@@bgCoverGradient -->
+<br/>
+<!-- $$$colorInverse -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="colorInverse-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">colorInverse</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否反轉顏色樣式。</p>
+<p>僅對 Hyperlink 樣式有效。</p>
+<p>預設 false。</p>
+</div></div><!-- @@@colorInverse -->
 <br/>
 <!-- $$$colorType -->
 <div class="qmlitem"><div class="qmlproto" translate="no">

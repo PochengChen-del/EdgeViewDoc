@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>SidebarSearchTarget QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>搜尋目標列表的側邊欄元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-sidebarlayout.xml">SidebarLayout</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>類型處理與顯示（<db:link xlink:href="">type）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>搜尋控制（<db:link xlink:href="">search）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>分頁控制</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>搜尋結果選取與提交</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="actived-prop">
+<db:title>[read-only] actived : bool</db:title>
+<db:para>是否為 active。</db:para>
+</db:section>
+<db:section xml:id="addEnabled-prop">
+<db:title>addEnabled : bool</db:title>
+<db:para>是否允許新增項目。</db:para>
+<db:para>預設 true。</db:para>
+</db:section>
+<db:section xml:id="currentPage-prop">
+<db:title>[read-only] currentPage : int</db:title>
+<db:para>目前頁數。</db:para>
+</db:section>
+<db:section xml:id="currentPrefix-prop">
+<db:title>[read-only] currentPrefix : string</db:title>
+<db:para>目前搜尋結果使用的前綴字串。</db:para>
+<db:para>在 BI Tag 搜尋模式下，會自動組合 Group/Object 路徑。</db:para>
+</db:section>
+<db:section xml:id="currentSearchObject-prop">
+<db:title>[read-only] currentSearchObject : var</db:title>
+<db:para>目前搜尋使用的 Object。</db:para>
+</db:section>
+<db:section xml:id="currentSearchTarget-prop">
+<db:title>[read-only] currentSearchTarget : string</db:title>
+<db:para>目前搜尋關鍵字。</db:para>
+</db:section>
+<db:section xml:id="drawId-prop">
+<db:title>drawId : var</db:title>
+<db:para>搜尋使用的圖紙或 model ID。</db:para>
+</db:section>
+<db:section xml:id="editEnabled-prop">
+<db:title>editEnabled : bool</db:title>
+<db:para>是否允許編輯項目。</db:para>
+<db:para>預設 true。</db:para>
+</db:section>
+<db:section xml:id="filters-prop">
+<db:title>filters : var</db:title>
+<db:para>搜尋使用的篩選條件。</db:para>
+</db:section>
+<db:section xml:id="fromVariableManager-prop">
+<db:title>fromVariableManager : bool</db:title>
+<db:para>是否由 WAVariableManager 呼叫搜尋變數。</db:para>
+</db:section>
+<db:section xml:id="globalVariable-prop">
+<db:title>globalVariable : bool</db:title>
+<db:para>是否包含 Global 變數。</db:para>
+</db:section>
+<db:section xml:id="includeValue-prop">
+<db:title>includeValue : var</db:title>
+<db:para>搜尋時額外包含的項目值。</db:para>
+</db:section>
+<db:section xml:id="isCompleted-prop">
+<db:title>isCompleted : bool</db:title>
+<db:para>元件是否已完成初始化。</db:para>
+</db:section>
+<db:section xml:id="list-prop">
+<db:title>list : var</db:title>
+<db:para>目前搜尋結果列表。</db:para>
+</db:section>
+<db:section xml:id="loadStatus-prop">
+<db:title>loadStatus : int</db:title>
+<db:para>資料載入狀態（Define.LoadStatus）。</db:para>
+</db:section>
+<db:section xml:id="loading-prop">
+<db:title>[read-only] loading : bool</db:title>
+<db:para>是否正在載入資料。</db:para>
+</db:section>
+<db:section xml:id="pageRows-prop">
+<db:title>[read-only] pageRows : int</db:title>
+<db:para>每頁顯示筆數。</db:para>
+</db:section>
+<db:section xml:id="privateVariable-prop">
+<db:title>privateVariable : bool</db:title>
+<db:para>是否包含 Private 變數。</db:para>
+</db:section>
+<db:section xml:id="proj-prop">
+<db:title>proj : var</db:title>
+<db:para>搜尋使用的專案資訊。</db:para>
+</db:section>
+<db:section xml:id="record-prop">
+<db:title>record : var</db:title>
+<db:para>搜尋使用的 Record 資訊。</db:para>
+</db:section>
+<db:section xml:id="searchStatus-prop">
+<db:title>searchStatus : int</db:title>
+<db:para>搜尋狀態（Define.LoadStatus）。</db:para>
+</db:section>
+<db:section xml:id="searching-prop">
+<db:title>[read-only] searching : bool</db:title>
+<db:para>是否正在搜尋。</db:para>
+</db:section>
+<db:section xml:id="selected-prop">
+<db:title>[read-only] selected : bool</db:title>
+<db:para>是否已有選取項目。</db:para>
+</db:section>
+<db:section xml:id="selectedName-prop">
+<db:title>selectedName : var</db:title>
+<db:para>目前選取項目的名稱。</db:para>
+</db:section>
+<db:section xml:id="total-prop">
+<db:title>total : int</db:title>
+<db:para>搜尋結果總筆數。</db:para>
+</db:section>
+<db:section xml:id="type-prop">
+<db:title>type : string</db:title>
+<db:para>目前類型。</db:para>
+<db:informaltable style="generic">
+<db:thead>
+<db:tr>
+<db:th>
+<db:para>Constant</db:para>
+</db:th>
+<db:th>
+<db:para>Description</db:para>
+</db:th>
+</db:tr>
+</db:thead>
+<db:tr valign="top">
+<db:td>
+<db:para>&quot;tag&quot;</db:para>
+</db:td>
+<db:td>
+<db:para>測點</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>&quot;variable&quot;</db:para>
+</db:td>
+<db:td>
+<db:para>變數</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+<db:td>
+<db:para>&quot;record&quot;</db:para>
+</db:td>
+<db:td>
+<db:para>紀錄</db:para>
+</db:td>
+</db:tr>
+<db:tr valign="top">
+</db:tr>
+<db:para>預設 &quot;tag&quot;。</db:para>
+</db:informaltable>
+</db:section>
+<db:section xml:id="signal-documentation">
+<db:title>Signal Documentation</db:title>
+<db:section xml:id="submitClicked-signal">
+<db:title>submitClicked(var <db:emphasis>target</db:emphasis>)</db:title>
+<db:para>點擊提交按鈕或雙擊項目時觸發。</db:para>
+<db:para><db:code role="parameter">target</db:code> 為目前選取的搜尋目標名稱。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onSubmitClicked</db:code>.</db:para>
+</db:note>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="checkSelected-method">
+<db:title>bool checkSelected()</db:title>
+<db:para>檢查目前是否已有選取項目。</db:para>
+</db:section>
+<db:section xml:id="formatTreeData-method">
+<db:title>array formatTreeData(var <db:emphasis>data</db:emphasis>)</db:title>
+<db:para>將樹狀資料轉換為 Dropdown 可使用的扁平結構。</db:para>
+<db:para><db:code role="parameter">data</db:code> 為原始樹狀資料。</db:para>
+</db:section>
+<db:section xml:id="loadGetway-method">
+<db:title>void loadGetway()</db:title>
+<db:para>載入 Gateway 列表。</db:para>
+<db:para>當搜尋來源為 Device 時使用。</db:para>
+</db:section>
+<db:section xml:id="loadGroup-method">
+<db:title>void loadGroup()</db:title>
+<db:para>載入 BI DataSource Group 列表。</db:para>
+</db:section>
+<db:section xml:id="loadObject-method">
+<db:title>void loadObject(var <db:emphasis>objID</db:emphasis>)</db:title>
+<db:para>載入指定 Group 的 Object 列表。</db:para>
+<db:para><db:code role="parameter">objID</db:code> 為 Group ID。</db:para>
+</db:section>
+<db:section xml:id="reset-method">
+<db:title>void reset()</db:title>
+<db:para>重設搜尋條件與搜尋結果。</db:para>
+</db:section>
+<db:section xml:id="search-method">
+<db:title>void search(var <db:emphasis>searchObject</db:emphasis>, string <db:emphasis>searchTarget</db:emphasis>, int <db:emphasis>page</db:emphasis> = 1, bool <db:emphasis>reload</db:emphasis> = false)</db:title>
+<db:para>執行搜尋。</db:para>
+<db:para><db:code role="parameter">searchObject</db:code> 為搜尋 Object。 <db:code role="parameter">searchTarget</db:code> 為搜尋關鍵字。 <db:code role="parameter">page</db:code> 為頁數。 <db:code role="parameter">reload</db:code> 表示是否強制重新搜尋。</db:para>
+</db:section>
+<db:section xml:id="set-method">
+<db:title>void set(var <db:emphasis>searchObject</db:emphasis>, string <db:emphasis>searchTarget</db:emphasis>, int <db:emphasis>page</db:emphasis> = 1, bool <db:emphasis>reload</db:emphasis> = false)</db:title>
+<db:para>設定搜尋條件並執行搜尋。</db:para>
+<db:para><db:code role="parameter">searchObject</db:code> 為搜尋 Object。 <db:code role="parameter">searchTarget</db:code> 為搜尋關鍵字。 <db:code role="parameter">page</db:code> 為頁數。 <db:code role="parameter">reload</db:code> 表示是否強制重新搜尋。</db:para>
+</db:section>
+</db:section>
+</db:section></db:article>

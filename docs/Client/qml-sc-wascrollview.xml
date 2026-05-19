@@ -22,12 +22,21 @@
 <db:para>Qt 6.8</db:para>
 </db:listitem>
 </db:varlistentry>
+<db:varlistentry>
+<db:term>Inherited By:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-navigationfunclist.xml" xlink:role="">NavigationFuncList</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
 </db:variablelist>
 <db:section xml:id="details">
 <db:title>Detailed Description</db:title>
 <db:para>ScrollBar 進行樣式客製。</db:para>
 <db:para>支援功能：</db:para>
 <db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
 <db:listitem>
 <db:para>垂直與水平滾動</db:para>
 </db:listitem>
@@ -46,7 +55,7 @@
 <db:para>自訂捲軸（<db:link xlink:href="qml-sc-wascrollview.xml#scrollBarWidth-prop">scrollBarWidth</db:link>, <db:link xlink:href="">scrollBarColor）</db:link></db:para>
 </db:listitem>
 <db:listitem>
-<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+<db:para>滾動邊界限制（<db:link xlink:href="">scrollOver）</db:link></db:para>
 </db:listitem>
 </db:itemizedlist>
 </db:section>
@@ -59,6 +68,11 @@
 <db:section xml:id="scrollBarWidth-prop">
 <db:title>scrollBarWidth : real</db:title>
 <db:para>捲軸寬度。</db:para>
+</db:section>
+<db:section xml:id="scrollOver-prop">
+<db:title>scrollOver : bool</db:title>
+<db:para>是否允許 ScrollBar 超出有效範圍。</db:para>
+<db:para>預設 false。</db:para>
 </db:section>
 <db:section xml:id="themeName-prop">
 <db:title>themeName : string</db:title>

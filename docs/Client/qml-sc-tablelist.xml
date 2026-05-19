@@ -90,6 +90,10 @@
 </db:section>
 <db:section xml:id="property-documentation">
 <db:title>Property Documentation</db:title>
+<db:section xml:id="backgroundColor-prop">
+<db:title>backgroundColor : color</db:title>
+<db:para>背景顏色。</db:para>
+</db:section>
 <db:section xml:id="bodyContentHeight-prop">
 <db:title>bodyContentHeight : real</db:title>
 <db:para>Body 內容高度（ListView.contentHeight）。</db:para>
@@ -97,6 +101,14 @@
 <db:section xml:id="bodyContentWidth-prop">
 <db:title>bodyContentWidth : real</db:title>
 <db:para>Body 內容寬度（ListView.contentWidth）。</db:para>
+</db:section>
+<db:section xml:id="borderColor-prop">
+<db:title>borderColor : color</db:title>
+<db:para>邊框顏色。</db:para>
+</db:section>
+<db:section xml:id="borderWidth-prop">
+<db:title>borderWidth : real</db:title>
+<db:para>邊框寬度。</db:para>
 </db:section>
 <db:section xml:id="delegate-prop">
 <db:title>delegate : Component</db:title>
@@ -121,6 +133,10 @@
 <db:para>是否為驗證錯誤狀態。</db:para>
 <db:para>預設 false。</db:para>
 </db:section>
+<db:section xml:id="isArray-prop">
+<db:title>[read-only] isArray : bool</db:title>
+<db:para>判斷目前 model 是否為 Array 型態。</db:para>
+</db:section>
 <db:section xml:id="leftFooterItems-prop">
 <db:title>leftFooterItems : Item</db:title>
 <db:para>Footer 左側擴展元件。</db:para>
@@ -132,6 +148,10 @@
 <db:section xml:id="model-prop">
 <db:title>model : var</db:title>
 <db:para>資料來源。</db:para>
+</db:section>
+<db:section xml:id="padding-prop">
+<db:title>padding : real</db:title>
+<db:para>邊距。</db:para>
 </db:section>
 <db:section xml:id="radius-prop">
 <db:title>radius : real</db:title>
@@ -148,6 +168,10 @@
 <db:section xml:id="rightTopBarItems-prop">
 <db:title>rightTopBarItems : Item</db:title>
 <db:para>TopBar 右側擴展元件。</db:para>
+</db:section>
+<db:section xml:id="showBackground-prop">
+<db:title>showBackground : bool</db:title>
+<db:para>是否顯示背景。</db:para>
 </db:section>
 <db:section xml:id="showFooter-prop">
 <db:title>showFooter : bool</db:title>
@@ -219,6 +243,10 @@
 </db:section>
 <db:section xml:id="method-documentation">
 <db:title>Method Documentation</db:title>
+<db:section xml:id="getModelCount-method">
+<db:title>int getModelCount()</db:title>
+<db:para>取得 model 數量。</db:para>
+</db:section>
 <db:section xml:id="getThemeStyle-method">
 <db:title>object getThemeStyle()</db:title>
 <db:para>取得主題樣式設定物件。</db:para>

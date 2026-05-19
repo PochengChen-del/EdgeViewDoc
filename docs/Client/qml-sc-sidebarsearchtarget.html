@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- SidebarSearchTarget.qml -->
+  <meta name="description" content="搜尋目標列表的側邊欄元件。">
+  <title>SidebarSearchTarget QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>SidebarSearchTarget</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">SidebarSearchTarget QML Type</h1>
+<!-- $$$SidebarSearchTarget-brief -->
+<p>搜尋目標列表的側邊欄元件。. <a href="#details">More...</a></p>
+<!-- @@@SidebarSearchTarget -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-sidebarlayout.html" translate="no">SidebarLayout</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-sidebarsearchtarget-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#actived-prop" translate="no">actived</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#addEnabled-prop" translate="no">addEnabled</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#currentPage-prop" translate="no">currentPage</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#currentPrefix-prop" translate="no">currentPrefix</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#currentSearchObject-prop" translate="no">currentSearchObject</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#currentSearchTarget-prop" translate="no">currentSearchTarget</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#drawId-prop" translate="no">drawId</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#editEnabled-prop" translate="no">editEnabled</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#filters-prop" translate="no">filters</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#fromVariableManager-prop" translate="no">fromVariableManager</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#globalVariable-prop" translate="no">globalVariable</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#includeValue-prop" translate="no">includeValue</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#isCompleted-prop" translate="no">isCompleted</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#list-prop" translate="no">list</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#loadStatus-prop" translate="no">loadStatus</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#loading-prop" translate="no">loading</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#pageRows-prop" translate="no">pageRows</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#privateVariable-prop" translate="no">privateVariable</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#proj-prop" translate="no">proj</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#record-prop" translate="no">record</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#searchStatus-prop" translate="no">searchStatus</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#searching-prop" translate="no">searching</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#selected-prop" translate="no">selected</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#selectedName-prop" translate="no">selectedName</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#total-prop" translate="no">total</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#type-prop" translate="no">type</a></b> : string</li>
+</ul>
+<h2 id="signals">Signals</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarsearchtarget.html#submitClicked-signal" translate="no">submitClicked</a></b>(var <i>target</i>)</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">bool <b><a href="qml-sc-sidebarsearchtarget.html#checkSelected-method" translate="no">checkSelected</a></b>()</li>
+<li class="fn" translate="no">array <b><a href="qml-sc-sidebarsearchtarget.html#formatTreeData-method" translate="no">formatTreeData</a></b>(var <i>data</i>)</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-sidebarsearchtarget.html#loadGetway-method" translate="no">loadGetway</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-sidebarsearchtarget.html#loadGroup-method" translate="no">loadGroup</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-sidebarsearchtarget.html#loadObject-method" translate="no">loadObject</a></b>(var <i>objID</i>)</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-sidebarsearchtarget.html#reset-method" translate="no">reset</a></b>()</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-sidebarsearchtarget.html#search-method" translate="no">search</a></b>(var <i>searchObject</i>, string <i>searchTarget</i>, int <i>page</i>, bool <i>reload</i>)</li>
+<li class="fn" translate="no">void <b><a href="qml-sc-sidebarsearchtarget.html#set-method" translate="no">set</a></b>(var <i>searchObject</i>, string <i>searchTarget</i>, int <i>page</i>, bool <i>reload</i>)</li>
+</ul>
+<!-- $$$SidebarSearchTarget-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供搜尋目標選擇、條件輸入、分頁與結果列表功能。</summary>
+<p>支援功能：</p>
+<ul>
+<li>類型處理與顯示（type）</li>
+<li>搜尋控制（search）</li>
+<li>分頁控制</li>
+<li>搜尋結果選取與提交</li>
+</ul>
+<!-- @@@SidebarSearchTarget -->
+<h2>Property Documentation</h2>
+<!-- $$$actived -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="actived-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">actived</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否為 active。</p>
+</div></div><!-- @@@actived -->
+<br/>
+<!-- $$$addEnabled -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="addEnabled-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">addEnabled</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否允許新增項目。</p>
+<p>預設 true。</p>
+</div></div><!-- @@@addEnabled -->
+<br/>
+<!-- $$$currentPage -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentPage-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentPage</span> : <span class="type">int</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前頁數。</p>
+</div></div><!-- @@@currentPage -->
+<br/>
+<!-- $$$currentPrefix -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentPrefix-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentPrefix</span> : <span class="type">string</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前搜尋結果使用的前綴字串。</p>
+<p>在 BI Tag 搜尋模式下，會自動組合 Group/Object 路徑。</p>
+</div></div><!-- @@@currentPrefix -->
+<br/>
+<!-- $$$currentSearchObject -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentSearchObject-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentSearchObject</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前搜尋使用的 Object。</p>
+</div></div><!-- @@@currentSearchObject -->
+<br/>
+<!-- $$$currentSearchTarget -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="currentSearchTarget-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">currentSearchTarget</span> : <span class="type">string</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前搜尋關鍵字。</p>
+</div></div><!-- @@@currentSearchTarget -->
+<br/>
+<!-- $$$drawId -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="drawId-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">drawId</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>搜尋使用的圖紙或 model ID。</p>
+</div></div><!-- @@@drawId -->
+<br/>
+<!-- $$$editEnabled -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="editEnabled-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">editEnabled</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否允許編輯項目。</p>
+<p>預設 true。</p>
+</div></div><!-- @@@editEnabled -->
+<br/>
+<!-- $$$filters -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="filters-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">filters</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>搜尋使用的篩選條件。</p>
+</div></div><!-- @@@filters -->
+<br/>
+<!-- $$$fromVariableManager -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="fromVariableManager-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">fromVariableManager</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否由 WAVariableManager 呼叫搜尋變數。</p>
+</div></div><!-- @@@fromVariableManager -->
+<br/>
+<!-- $$$globalVariable -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="globalVariable-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">globalVariable</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否包含 Global 變數。</p>
+</div></div><!-- @@@globalVariable -->
+<br/>
+<!-- $$$includeValue -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="includeValue-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">includeValue</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>搜尋時額外包含的項目值。</p>
+</div></div><!-- @@@includeValue -->
+<br/>
+<!-- $$$isCompleted -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isCompleted-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isCompleted</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>元件是否已完成初始化。</p>
+</div></div><!-- @@@isCompleted -->
+<br/>
+<!-- $$$list -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="list-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">list</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前搜尋結果列表。</p>
+</div></div><!-- @@@list -->
+<br/>
+<!-- $$$loadStatus -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="loadStatus-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">loadStatus</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>資料載入狀態（Define.LoadStatus）。</p>
+</div></div><!-- @@@loadStatus -->
+<br/>
+<!-- $$$loading -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="loading-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">loading</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否正在載入資料。</p>
+</div></div><!-- @@@loading -->
+<br/>
+<!-- $$$pageRows -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="pageRows-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">pageRows</span> : <span class="type">int</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>每頁顯示筆數。</p>
+</div></div><!-- @@@pageRows -->
+<br/>
+<!-- $$$privateVariable -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="privateVariable-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">privateVariable</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否包含 Private 變數。</p>
+</div></div><!-- @@@privateVariable -->
+<br/>
+<!-- $$$proj -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="proj-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">proj</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>搜尋使用的專案資訊。</p>
+</div></div><!-- @@@proj -->
+<br/>
+<!-- $$$record -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="record-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">record</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>搜尋使用的 Record 資訊。</p>
+</div></div><!-- @@@record -->
+<br/>
+<!-- $$$searchStatus -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="searchStatus-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">searchStatus</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>搜尋狀態（Define.LoadStatus）。</p>
+</div></div><!-- @@@searchStatus -->
+<br/>
+<!-- $$$searching -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="searching-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">searching</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否正在搜尋。</p>
+</div></div><!-- @@@searching -->
+<br/>
+<!-- $$$selected -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="selected-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">selected</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否已有選取項目。</p>
+</div></div><!-- @@@selected -->
+<br/>
+<!-- $$$selectedName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="selectedName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">selectedName</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前選取項目的名稱。</p>
+</div></div><!-- @@@selectedName -->
+<br/>
+<!-- $$$total -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="total-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">total</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>搜尋結果總筆數。</p>
+</div></div><!-- @@@total -->
+<br/>
+<!-- $$$type -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="type-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">type</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>目前類型。</p>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Constant</th><th >Description</th></tr></thead>
+<tr valign="top" class="odd"><td >&quot;tag&quot;</td><td >測點</td></tr>
+<tr valign="top" class="even"><td >&quot;variable&quot;</td><td >變數</td></tr>
+<tr valign="top" class="odd"><td >&quot;record&quot;</td><td >紀錄</td></tr>
+<tr valign="top" class="even"><p>預設 &quot;tag&quot;。</p>
+</div></div><!-- @@@type -->
+<br/>
+<h2>Signal Documentation</h2>
+<!-- $$$submitClicked[overload1]$$$submitClickedvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="submitClicked-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">submitClicked</span>(<span class="type">var</span> <i>target</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>點擊提交按鈕或雙擊項目時觸發。</p>
+<p><i translate="no">target</i> 為目前選取的搜尋目標名稱。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onSubmitClicked</code>.</p>
+</div></div></div><!-- @@@submitClicked -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$checkSelected[overload1]$$$checkSelected -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="checkSelected-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">bool</span> <span class="name">checkSelected</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>檢查目前是否已有選取項目。</p>
+</div></div><!-- @@@checkSelected -->
+<br/>
+<!-- $$$formatTreeData[overload1]$$$formatTreeDatavar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="formatTreeData-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">array</span> <span class="name">formatTreeData</span>(<span class="type">var</span> <i>data</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>將樹狀資料轉換為 Dropdown 可使用的扁平結構。</p>
+<p><i translate="no">data</i> 為原始樹狀資料。</p>
+</div></div><!-- @@@formatTreeData -->
+<br/>
+<!-- $$$loadGetway[overload1]$$$loadGetway -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="loadGetway-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">loadGetway</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>載入 Gateway 列表。</p>
+<p>當搜尋來源為 Device 時使用。</p>
+</div></div><!-- @@@loadGetway -->
+<br/>
+<!-- $$$loadGroup[overload1]$$$loadGroup -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="loadGroup-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">loadGroup</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>載入 BI DataSource Group 列表。</p>
+</div></div><!-- @@@loadGroup -->
+<br/>
+<!-- $$$loadObject[overload1]$$$loadObjectvar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="loadObject-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">loadObject</span>(<span class="type">var</span> <i>objID</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>載入指定 Group 的 Object 列表。</p>
+<p><i translate="no">objID</i> 為 Group ID。</p>
+</div></div><!-- @@@loadObject -->
+<br/>
+<!-- $$$reset[overload1]$$$reset -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="reset-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">reset</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>重設搜尋條件與搜尋結果。</p>
+</div></div><!-- @@@reset -->
+<br/>
+<!-- $$$search[overload1]$$$searchvarstringintbool -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="search-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">search</span>(<span class="type">var</span> <i>searchObject</i>, <span class="type">string</span> <i>searchTarget</i>, <span class="type">int</span> <i>page</i> = 1, <span class="type">bool</span> <i>reload</i> = false)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>執行搜尋。</p>
+<p><i translate="no">searchObject</i> 為搜尋 Object。 <i translate="no">searchTarget</i> 為搜尋關鍵字。 <i translate="no">page</i> 為頁數。 <i translate="no">reload</i> 表示是否強制重新搜尋。</p>
+</div></div><!-- @@@search -->
+<br/>
+<!-- $$$set[overload1]$$$setvarstringintbool -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="set-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">void</span> <span class="name">set</span>(<span class="type">var</span> <i>searchObject</i>, <span class="type">string</span> <i>searchTarget</i>, <span class="type">int</span> <i>page</i> = 1, <span class="type">bool</span> <i>reload</i> = false)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>設定搜尋條件並執行搜尋。</p>
+<p><i translate="no">searchObject</i> 為搜尋 Object。 <i translate="no">searchTarget</i> 為搜尋關鍵字。 <i translate="no">page</i> 為頁數。 <i translate="no">reload</i> 表示是否強制重新搜尋。</p>
+</div></div><!-- @@@set -->
+<br/>
+</body>
+</html>

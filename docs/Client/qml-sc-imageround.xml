@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>ImageRound QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>支援圓角遮罩的圖片元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>圓角圖片顯示</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>邊框與背景設定</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="borderColor-prop">
+<db:title>borderColor : color</db:title>
+<db:para>邊框顏色。</db:para>
+</db:section>
+<db:section xml:id="borderWidth-prop">
+<db:title>borderWidth : real</db:title>
+<db:para>邊框寬度。</db:para>
+<db:para>預設 0。</db:para>
+</db:section>
+<db:section xml:id="fillMode-prop">
+<db:title>fillMode : enumeration</db:title>
+<db:para>圖片填滿模式。</db:para>
+<db:para>預設 <db:link xlink:href="">Image.PreserveAspectFit</db:link> 。</db:para>
+</db:section>
+<db:section xml:id="source-prop">
+<db:title>source : url</db:title>
+<db:para>圖片來源 URL。</db:para>
+<db:para>詳細格式與限制請參考 Qt 官方文件。</db:para>
+</db:section>
+<db:section xml:id="sourceSize-prop">
+<db:title>sourceSize : size</db:title>
+<db:para>圖片載入尺寸。</db:para>
+</db:section>
+<db:section xml:id="status-prop">
+<db:title>status : enumeration</db:title>
+<db:para>目前圖片載入狀態。</db:para>
+</db:section>
+</db:section>
+</db:article>

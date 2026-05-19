@@ -23,6 +23,12 @@
 </db:listitem>
 </db:varlistentry>
 <db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-buttonavatartext.xml" xlink:role="">ButtonAvatarText</db:link></db:term>
+<db:listitem>
+<db:para>圓形彩色文字按鈕元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
 <db:term><db:link xlink:href="qml-sc-buttonbase.xml" xlink:role="">ButtonBase</db:link></db:term>
 <db:listitem>
 <db:para>按鈕基礎元件。</db:para>
@@ -311,6 +317,12 @@
 </db:listitem>
 </db:varlistentry>
 <db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-imageround.xml" xlink:role="">ImageRound</db:link></db:term>
+<db:listitem>
+<db:para>支援圓角遮罩的圖片元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
 <db:term><db:link xlink:href="qml-sc-infofootercolumn.xml" xlink:role="">InfoFooterColumn</db:link></db:term>
 <db:listitem>
 <db:para>垂直排列未登入頁面 Footer。</db:para>
@@ -341,6 +353,18 @@
 </db:listitem>
 </db:varlistentry>
 <db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-loading.xml" xlink:role="">Loading</db:link></db:term>
+<db:listitem>
+<db:para>載入狀態元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-loadingcover.xml" xlink:role="">LoadingCover</db:link></db:term>
+<db:listitem>
+<db:para>畫面遮罩載入狀態元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
 <db:term><db:link xlink:href="qml-sc-mainlayout.xml" xlink:role="">MainLayout</db:link></db:term>
 <db:listitem>
 <db:para>主版面配置容器。</db:para>
@@ -362,6 +386,18 @@
 <db:term><db:link xlink:href="qml-sc-monthpicker.xml" xlink:role="">MonthPicker</db:link></db:term>
 <db:listitem>
 <db:para>月份選擇器元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-navigationfunclist.xml" xlink:role="">NavigationFuncList</db:link></db:term>
+<db:listitem>
+<db:para>階層式導覽列表元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-navigationitem.xml" xlink:role="">NavigationItem</db:link></db:term>
+<db:listitem>
+<db:para>導覽項目元件。</db:para>
 </db:listitem>
 </db:varlistentry>
 <db:varlistentry>
@@ -416,6 +452,12 @@
 <db:term><db:link xlink:href="qml-sc-rowitembase.xml" xlink:role="">RowItemBase</db:link></db:term>
 <db:listitem>
 <db:para>行動版單行顯示基礎元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-rowitemheadertext.xml" xlink:role="">RowItemHeaderText</db:link></db:term>
+<db:listitem>
+<db:para>單行 Header 文字顯示元件。</db:para>
 </db:listitem>
 </db:varlistentry>
 <db:varlistentry>
@@ -515,9 +557,27 @@
 </db:listitem>
 </db:varlistentry>
 <db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-sidebarlayout.xml" xlink:role="">SidebarLayout</db:link></db:term>
+<db:listitem>
+<db:para>側邊欄面配置容器。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-sidebarsearchtarget.xml" xlink:role="">SidebarSearchTarget</db:link></db:term>
+<db:listitem>
+<db:para>搜尋目標列表的側邊欄元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
 <db:term><db:link xlink:href="qml-sc-subtitle.xml" xlink:role="">Subtitle</db:link></db:term>
 <db:listitem>
 <db:para>行動版副標題與描述元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-switchindicator.xml" xlink:role="">SwitchIndicator</db:link></db:term>
+<db:listitem>
+<db:para>開關（Switch）指示器元件。</db:para>
 </db:listitem>
 </db:varlistentry>
 <db:varlistentry>
@@ -695,6 +755,54 @@
 </db:listitem>
 </db:varlistentry>
 <db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-wamenu.xml" xlink:role="">WAMenu</db:link></db:term>
+<db:listitem>
+<db:para>彈出式菜單元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-wamenubar.xml" xlink:role="">WAMenuBar</db:link></db:term>
+<db:listitem>
+<db:para>菜單列元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-wamenuitembase.xml" xlink:role="">WAMenuItemBase</db:link></db:term>
+<db:listitem>
+<db:para>彈出式菜單項目基礎元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-wamenuitemtextavatar.xml" xlink:role="">WAMenuItemTextAvatar</db:link></db:term>
+<db:listitem>
+<db:para>彈出式菜單項目元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-wamenuitemtexticon.xml" xlink:role="">WAMenuItemTextIcon</db:link></db:term>
+<db:listitem>
+<db:para>彈出式菜單項目元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-wamenuseparator.xml" xlink:role="">WAMenuSeparator</db:link></db:term>
+<db:listitem>
+<db:para>彈出式菜單分隔線元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-wanotification.xml" xlink:role="">WANotification</db:link></db:term>
+<db:listitem>
+<db:para>通知提示元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-wanotificationmanager.xml" xlink:role="">WANotificationManager</db:link></db:term>
+<db:listitem>
+<db:para>通知提示管理器。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
 <db:term><db:link xlink:href="qml-sc-waradiobutton.xml" xlink:role="">WARadioButton</db:link></db:term>
 <db:listitem>
 <db:para>單選輸入元件。</db:para>
@@ -728,6 +836,24 @@
 <db:term><db:link xlink:href="qml-sc-watextfield.xml" xlink:role="">WATextField</db:link></db:term>
 <db:listitem>
 <db:para>文字輸入元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-watooltip1.xml" xlink:role="">WAToolTip1</db:link></db:term>
+<db:listitem>
+<db:para>提示框元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-watooltiptext.xml" xlink:role="">WAToolTipText</db:link></db:term>
+<db:listitem>
+<db:para>提示框基礎元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-watooltipthumbnail.xml" xlink:role="">WAToolTipThumbnail</db:link></db:term>
+<db:listitem>
+<db:para>縮圖提示框元件。</db:para>
 </db:listitem>
 </db:varlistentry>
 <db:varlistentry>

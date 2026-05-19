@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>WAToolTipText QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>提示框基礎元件。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-watooltip1.xml">WAToolTip1</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>為 <db:link xlink:href="qml-sc-watooltip1.xml">WAToolTip1</db:link> 的擴充元件，提供文字提示框。</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="elide-prop">
+<db:title>elide : enumeration</db:title>
+<db:para>文字省略模式。</db:para>
+</db:section>
+<db:section xml:id="lineHeight-prop">
+<db:title>lineHeight : real</db:title>
+<db:para>文字行高。</db:para>
+</db:section>
+<db:section xml:id="maximumLineCount-prop">
+<db:title>maximumLineCount : int</db:title>
+<db:para>文字最大行數限制。</db:para>
+<db:para>當 <db:link xlink:href="qml-sc-watooltiptext.xml#wrapMode-prop">wrapMode</db:link> 允許多行時，此屬性用來限制最多顯示行數。設為 0 表示不限制行數。</db:para>
+</db:section>
+<db:section xml:id="textHorizontalAlignment-prop">
+<db:title>textHorizontalAlignment : enumeration</db:title>
+<db:para>文字水平對齊方式。</db:para>
+</db:section>
+<db:section xml:id="textVerticalAlignment-prop">
+<db:title>textVerticalAlignment : enumeration</db:title>
+<db:para>文字垂直對齊方式。</db:para>
+</db:section>
+<db:section xml:id="wrapMode-prop">
+<db:title>wrapMode : enumeration</db:title>
+<db:para>文字換行模式。</db:para>
+</db:section>
+</db:section>
+</db:article>

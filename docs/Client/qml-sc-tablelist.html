@@ -33,20 +33,26 @@
 </ul>
 <h2 id="properties">Properties</h2>
 <ul>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#backgroundColor-prop" translate="no">backgroundColor</a></b> : color</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#bodyContentHeight-prop" translate="no">bodyContentHeight</a></b> : real</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#bodyContentWidth-prop" translate="no">bodyContentWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#borderColor-prop" translate="no">borderColor</a></b> : color</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#borderWidth-prop" translate="no">borderWidth</a></b> : real</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#delegate-prop" translate="no">delegate</a></b> : Component</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#editable-prop" translate="no">editable</a></b> : bool</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#header-prop" translate="no">header</a></b> : Item</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#hint-prop" translate="no">hint</a></b> : string</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#invalid-prop" translate="no">invalid</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#isArray-prop" translate="no">isArray</a></b> : bool</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#leftFooterItems-prop" translate="no">leftFooterItems</a></b> : Item</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#leftTopBarItems-prop" translate="no">leftTopBarItems</a></b> : Item</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#model-prop" translate="no">model</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#padding-prop" translate="no">padding</a></b> : real</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#radius-prop" translate="no">radius</a></b> : real</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#readOnly-prop" translate="no">readOnly</a></b> : bool</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#rightFooterItems-prop" translate="no">rightFooterItems</a></b> : Item</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#rightTopBarItems-prop" translate="no">rightTopBarItems</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#showBackground-prop" translate="no">showBackground</a></b> : bool</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#showFooter-prop" translate="no">showFooter</a></b> : bool</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#showHeader-prop" translate="no">showHeader</a></b> : bool</li>
 <li class="fn" translate="no"><b><a href="qml-sc-tablelist.html#showHint-prop" translate="no">showHint</a></b> : bool</li>
@@ -57,6 +63,7 @@
 </ul>
 <h2 id="methods">Methods</h2>
 <ul>
+<li class="fn" translate="no">int <b><a href="qml-sc-tablelist.html#getModelCount-method" translate="no">getModelCount</a></b>()</li>
 <li class="fn" translate="no">object <b><a href="qml-sc-tablelist.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
 <li class="fn" translate="no">void <b><a href="qml-sc-tablelist.html#scrollToEnd-method" translate="no">scrollToEnd</a></b>()</li>
 <li class="fn" translate="no">void <b><a href="qml-sc-tablelist.html#scrollToRow-method" translate="no">scrollToRow</a></b>(int <i>rowIndex</i>)</li>
@@ -95,6 +102,16 @@
 </ul>
 <!-- @@@TableList -->
 <h2>Property Documentation</h2>
+<!-- $$$backgroundColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="backgroundColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">backgroundColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>背景顏色。</p>
+</div></div><!-- @@@backgroundColor -->
+<br/>
 <!-- $$$bodyContentHeight -->
 <div class="qmlitem"><div class="qmlproto" translate="no">
 <div class="table"><table class="qmlname">
@@ -114,6 +131,26 @@
 </table></div></div>
 <div class="qmldoc"><p>Body 內容寬度（ListView.contentWidth）。</p>
 </div></div><!-- @@@bodyContentWidth -->
+<br/>
+<!-- $$$borderColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="borderColor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">borderColor</span> : <span class="type">color</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>邊框顏色。</p>
+</div></div><!-- @@@borderColor -->
+<br/>
+<!-- $$$borderWidth -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="borderWidth-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">borderWidth</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>邊框寬度。</p>
+</div></div><!-- @@@borderWidth -->
 <br/>
 <!-- $$$delegate -->
 <div class="qmlitem"><div class="qmlproto" translate="no">
@@ -168,6 +205,16 @@
 <p>預設 false。</p>
 </div></div><!-- @@@invalid -->
 <br/>
+<!-- $$$isArray -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isArray-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isArray</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>判斷目前 model 是否為 Array 型態。</p>
+</div></div><!-- @@@isArray -->
+<br/>
 <!-- $$$leftFooterItems -->
 <div class="qmlitem"><div class="qmlproto" translate="no">
 <div class="table"><table class="qmlname">
@@ -197,6 +244,16 @@
 </table></div></div>
 <div class="qmldoc"><p>資料來源。</p>
 </div></div><!-- @@@model -->
+<br/>
+<!-- $$$padding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="padding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">padding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>邊距。</p>
+</div></div><!-- @@@padding -->
 <br/>
 <!-- $$$radius -->
 <div class="qmlitem"><div class="qmlproto" translate="no">
@@ -237,6 +294,16 @@
 </table></div></div>
 <div class="qmldoc"><p>TopBar 右側擴展元件。</p>
 </div></div><!-- @@@rightTopBarItems -->
+<br/>
+<!-- $$$showBackground -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showBackground-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showBackground</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示背景。</p>
+</div></div><!-- @@@showBackground -->
 <br/>
 <!-- $$$showFooter -->
 <div class="qmlitem"><div class="qmlproto" translate="no">
@@ -321,6 +388,16 @@
 </div></div><!-- @@@themeStyle -->
 <br/>
 <h2>Method Documentation</h2>
+<!-- $$$getModelCount[overload1]$$$getModelCount -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getModelCount-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">int</span> <span class="name">getModelCount</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得 model 數量。</p>
+</div></div><!-- @@@getModelCount -->
+<br/>
 <!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
 <div class="qmlitem"><div class="qmlproto" translate="no">
 <div class="table"><table class="qmlname">

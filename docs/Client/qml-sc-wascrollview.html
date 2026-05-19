@@ -27,6 +27,8 @@
 <div class="table"><table class="alignedsummary requisites" translate="no">
 <tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-navigationfunclist.html" translate="no">NavigationFuncList</a></p>
+</td></tr>
 </table></div>
 <ul>
 <li><a href="qml-sc-wascrollview-members.html">List of all members, including inherited members</a></li>
@@ -35,6 +37,7 @@
 <ul>
 <li class="fn" translate="no"><b><a href="qml-sc-wascrollview.html#scrollBarColor-prop" translate="no">scrollBarColor</a></b> : color</li>
 <li class="fn" translate="no"><b><a href="qml-sc-wascrollview.html#scrollBarWidth-prop" translate="no">scrollBarWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-wascrollview.html#scrollOver-prop" translate="no">scrollOver</a></b> : bool</li>
 <li class="fn" translate="no"><b><a href="qml-sc-wascrollview.html#themeName-prop" translate="no">themeName</a></b> : string</li>
 <li class="fn" translate="no"><b><a href="qml-sc-wascrollview.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
 </ul>
@@ -49,6 +52,7 @@
 <p>ScrollBar 進行樣式客製。</p>
 <p>支援功能：</p>
 <ul>
+<li>主題樣式控制（themeName）</li>
 <li>垂直與水平滾動</li>
 <li>自動顯示/隱藏捲軸（依內容尺寸判斷）<ul>
 <li>垂直捲軸：當 contentHeight &gt; height 時顯示</li>
@@ -56,7 +60,7 @@
 </ul>
 </li>
 <li>自訂捲軸（<a href="qml-sc-wascrollview.html#scrollBarWidth-prop" translate="no">scrollBarWidth</a>, scrollBarColor）</li>
-<li>主題樣式控制（themeName）</li>
+<li>滾動邊界限制（scrollOver）</li>
 </ul>
 <!-- @@@WAScrollView -->
 <h2>Property Documentation</h2>
@@ -79,6 +83,17 @@
 </table></div></div>
 <div class="qmldoc"><p>捲軸寬度。</p>
 </div></div><!-- @@@scrollBarWidth -->
+<br/>
+<!-- $$$scrollOver -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="scrollOver-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">scrollOver</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否允許 ScrollBar 超出有效範圍。</p>
+<p>預設 false。</p>
+</div></div><!-- @@@scrollOver -->
 <br/>
 <!-- $$$themeName -->
 <div class="qmlitem"><div class="qmlproto" translate="no">

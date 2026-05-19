@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- SidebarLayout.qml -->
+  <meta name="description" content="側邊欄面配置容器。">
+  <title>SidebarLayout QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>SidebarLayout</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">SidebarLayout QML Type</h1>
+<!-- $$$SidebarLayout-brief -->
+<p>側邊欄面配置容器。. <a href="#details">More...</a></p>
+<!-- @@@SidebarLayout -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-sidebarsearchtarget.html" translate="no">SidebarSearchTarget</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-sidebarlayout-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarlayout.html#contentItem-prop" translate="no">contentItem</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarlayout.html#expanded-prop" translate="no">expanded</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarlayout.html#footerItems-prop" translate="no">footerItems</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarlayout.html#showFooter-prop" translate="no">showFooter</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarlayout.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarlayout.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarlayout.html#title-prop" translate="no">title</a></b> : string</li>
+</ul>
+<h2 id="signals">Signals</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarlayout.html#closeClicked-signal" translate="no">closeClicked</a></b>()</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarlayout.html#collapse-method" translate="no">collapse</a></b>()</li>
+<li class="fn" translate="no"><b><a href="qml-sc-sidebarlayout.html#expand-method" translate="no">expand</a></b>()</li>
+<li class="fn" translate="no">object <b><a href="qml-sc-sidebarlayout.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+</ul>
+<!-- $$$SidebarLayout-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供側邊欄框架。</summary>
+<p>元件組成：</p>
+<ul>
+<li>Header：標題列與關閉按鈕</li>
+<li>Content：主要內容區域</li>
+<li>Footer：底部操作區域</li>
+</ul>
+<p>支援功能：</p>
+<ul>
+<li>主題樣式控制（themeName）</li>
+<li>自訂內容區（contentItem）</li>
+<li>自訂 Footer 區域（footerItems）</li>
+<li>展開/收合控制（<a href="qml-sc-sidebarlayout.html#expand-method" translate="no">expand</a>() / collapse()）</li>
+</ul>
+<!-- @@@SidebarLayout -->
+<h2>Property Documentation</h2>
+<!-- $$$contentItem -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="contentItem-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">contentItem</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>內容區域的子元件。</p>
+</div></div><!-- @@@contentItem -->
+<br/>
+<!-- $$$expanded -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="expanded-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">expanded</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否展開。</p>
+<p>此屬性會同步父層容器的 expanded 狀態。</p>
+</div></div><!-- @@@expanded -->
+<br/>
+<!-- $$$footerItems -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="footerItems-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">footerItems</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Footer 元件。</p>
+</div></div><!-- @@@footerItems -->
+<br/>
+<!-- $$$showFooter -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showFooter-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showFooter</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示 Footer。</p>
+</div></div><!-- @@@showFooter -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-sidebarlayout.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<!-- $$$title -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="title-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">title</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>標題文字。</p>
+</div></div><!-- @@@title -->
+<br/>
+<h2>Signal Documentation</h2>
+<!-- $$$closeClicked[overload1]$$$closeClicked -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="closeClicked-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">closeClicked</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>點擊關閉按鈕時觸發。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onCloseClicked</code>.</p>
+</div></div></div><!-- @@@closeClicked -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$collapse[overload1]$$$collapse -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="collapse-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">collapse</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>收合側邊欄。</p>
+<p>若父元件存在 collapse() 方法則會自動呼叫。</p>
+</div></div><!-- @@@collapse -->
+<br/>
+<!-- $$$expand[overload1]$$$expand -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="expand-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">expand</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>展開側邊欄。</p>
+<p>若父元件存在 expand() 方法則會自動呼叫。</p>
+</div></div><!-- @@@expand -->
+<br/>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+</body>
+</html>

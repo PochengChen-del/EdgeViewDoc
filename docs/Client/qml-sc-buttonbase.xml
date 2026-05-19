@@ -25,7 +25,7 @@
 <db:varlistentry>
 <db:term>Inherited By:</db:term>
 <db:listitem>
-<db:para><db:link xlink:href="qml-sc-buttonicon.xml" xlink:role="">ButtonIcon</db:link>, <db:link xlink:href="qml-sc-buttonsort.xml" xlink:role="">ButtonSort</db:link>, <db:link xlink:href="qml-sc-buttontext.xml" xlink:role="">ButtonText</db:link>, and <db:link xlink:href="qml-sc-buttontexticon.xml" xlink:role="">ButtonTextIcon</db:link></db:para>
+<db:para><db:link xlink:href="qml-sc-buttonavatartext.xml" xlink:role="">ButtonAvatarText</db:link>, <db:link xlink:href="qml-sc-buttonicon.xml" xlink:role="">ButtonIcon</db:link>, <db:link xlink:href="qml-sc-buttonsort.xml" xlink:role="">ButtonSort</db:link>, <db:link xlink:href="qml-sc-buttontext.xml" xlink:role="">ButtonText</db:link>, and <db:link xlink:href="qml-sc-buttontexticon.xml" xlink:role="">ButtonTextIcon</db:link></db:para>
 </db:listitem>
 </db:varlistentry>
 </db:variablelist>
@@ -48,7 +48,7 @@
 </db:listitem>
 </db:itemizedlist>
 <db:para>各狀態會繼承對應的 base state（例如 normal → normalbase）， 並透過 <db:link xlink:href="qml-sc-buttonbase.xml#themeStyle-prop">themeStyle</db:link> 套用背景、邊框與內容顏色等。</db:para>
-<db:para>樣式由 <db:link xlink:href="">style、l</db:link> <db:link xlink:href="qml-sc-buttonbase.xml#colorType-prop">colorType</db:link> 與 <db:link xlink:href="qml-sc-buttonbase.xml#contentColorType-prop">contentColorType</db:link> 決定。</db:para>
+<db:para>樣式由 <db:link xlink:href="">style、l</db:link> <db:link xlink:href="qml-sc-buttonbase.xml#colorType-prop">colorType</db:link>、<db:link xlink:href="qml-sc-buttonbase.xml#contentColorType-prop">contentColorType</db:link> 與 <db:link xlink:href="qml-sc-buttonbase.xml#colorInverse-prop">colorInverse</db:link> 決定。</db:para>
 </db:section>
 <db:section xml:id="property-documentation">
 <db:title>Property Documentation</db:title>
@@ -80,6 +80,12 @@
 <db:section xml:id="bgCoverGradient-prop">
 <db:title>bgCoverGradient : StateGradient</db:title>
 <db:para>各狀態背景漸層設定。</db:para>
+</db:section>
+<db:section xml:id="colorInverse-prop">
+<db:title>colorInverse : bool</db:title>
+<db:para>是否反轉顏色樣式。</db:para>
+<db:para>僅對 Hyperlink 樣式有效。</db:para>
+<db:para>預設 false。</db:para>
 </db:section>
 <db:section xml:id="colorType-prop">
 <db:title>colorType : enumeration</db:title>

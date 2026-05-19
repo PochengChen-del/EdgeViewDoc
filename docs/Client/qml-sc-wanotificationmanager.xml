@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>WANotificationManager QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>通知提示管理器。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>負責處理通知佇列、顯示排序、自動位置調整與通知生命週期管理。</db:para>
+<db:para>當畫面空間不足時，新通知會暫存於佇列中，待空間可用後再顯示。</db:para>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>通知佇列管理（<db:link xlink:href="">queue）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>通知堆疊顯示（<db:link xlink:href="">notifications）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>自動位置排列</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>通知自動建立與銷毀</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="cmpWADialogErrorMessage-prop">
+<db:title>cmpWADialogErrorMessage : Component</db:title>
+<db:para>詳細訊息對話框元件。</db:para>
+<db:para>用於顯示通知詳細內容。</db:para>
+</db:section>
+<db:section xml:id="notifications-prop">
+<db:title>notifications : var</db:title>
+<db:para>目前顯示中的通知列表。</db:para>
+</db:section>
+<db:section xml:id="parent-prop">
+<db:title>parent : var</db:title>
+<db:para>通知管理器所屬父物件。</db:para>
+<db:para>用於取得畫面尺寸資訊。</db:para>
+</db:section>
+<db:section xml:id="queue-prop">
+<db:title>queue : var</db:title>
+<db:para>等待顯示的通知佇列。</db:para>
+</db:section>
+<db:section xml:id="rightPadding-prop">
+<db:title>rightPadding : real</db:title>
+<db:para>通知區域右側間距。</db:para>
+</db:section>
+<db:section xml:id="timer-prop">
+<db:title>timer : QtObject</db:title>
+<db:para>通知排程計時器。</db:para>
+<db:para>當畫面空間不足時，會延遲重新檢查通知顯示。</db:para>
+</db:section>
+<db:section xml:id="topPadding-prop">
+<db:title>topPadding : real</db:title>
+<db:para>通知區域上方間距。</db:para>
+</db:section>
+<db:section xml:id="vSpacing-prop">
+<db:title>vSpacing : int</db:title>
+<db:para>通知之間的垂直間距。</db:para>
+</db:section>
+<db:section xml:id="wanotiCom-prop">
+<db:title>wanotiCom : Component</db:title>
+<db:para><db:link xlink:href="qml-sc-wanotification.xml">WANotification</db:link> 元件建立器。</db:para>
+<db:para>用於動態建立通知元件。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="addNotify-method">
+<db:title>addNotify(var <db:emphasis>notifyData</db:emphasis>)</db:title>
+<db:para>加入通知至通知佇列。</db:para>
+<db:para>若通知空間足夠，會立即顯示通知。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>param</db:code></db:emphasis>notifyData 通知資料物件。 結構：</db:para>
+<db:programlisting language="cpp">{
+    notifyType,
+    title,
+    message,
+    detail,
+    interval
+}
+</db:programlisting>
+</db:section>
+<db:section xml:id="getRootHeight-method">
+<db:title>real getRootHeight()</db:title>
+<db:para>取得通知可用區域高度。</db:para>
+<db:para>會優先使用 Global.root 高度， 若不存在則使用 parent 高度。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>可用高度。</db:para>
+</db:section>
+<db:section xml:id="getTotalNotificationHeight-method">
+<db:title>real getTotalNotificationHeight()</db:title>
+<db:para>取得目前所有通知總高度。</db:para>
+<db:para>包含通知間距與頂部間距。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>通知總高度。</db:para>
+</db:section>
+<db:section xml:id="notify-method">
+<db:title>notify()</db:title>
+<db:para>顯示下一筆通知。</db:para>
+<db:para>若畫面空間不足，會延後重新檢查並等待顯示。</db:para>
+</db:section>
+<db:section xml:id="onResized-method">
+<db:title>onResized()</db:title>
+<db:para>重新排列所有通知位置。</db:para>
+<db:para>會依照通知高度重新計算 Y 座標。</db:para>
+</db:section>
+</db:section>
+</db:article>
