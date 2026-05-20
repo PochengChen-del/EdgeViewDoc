@@ -100,10 +100,10 @@
 </db:section>
 <db:section xml:id="showBack-prop">
 <db:title>showBack : bool</db:title>
-<db:para>是否顯示必填。</db:para>
+<db:para>是否顯示返回按鈕。</db:para>
 </db:section>
 <db:section xml:id="showRequired-prop">
-<db:title>showRequired : alias</db:title>
+<db:title>showRequired : bool</db:title>
 <db:para>是否顯示必填。</db:para>
 </db:section>
 <db:section xml:id="sidebarItem-prop">

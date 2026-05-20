@@ -5,7 +5,7 @@
 <db:productname>EdgeView</db:productname>
 <db:titleabbrev>EdgeView</db:titleabbrev>
 <db:abstract>
-<db:para>手機版主版面配置容器。.</db:para>
+<db:para>手機主版面配置容器。.</db:para>
 <db:para>This type was introduced in Qt 6.8.</db:para>
 </db:abstract>
 </db:info>
@@ -37,7 +37,7 @@
 <db:para>Page：頁面內容</db:para>
 </db:listitem>
 <db:listitem>
-<db:para>Overlay：覆蓋頁面</db:para>
+<db:para>Overlay Page：覆蓋頁面</db:para>
 </db:listitem>
 </db:itemizedlist>
 <db:para>支援功能：</db:para>

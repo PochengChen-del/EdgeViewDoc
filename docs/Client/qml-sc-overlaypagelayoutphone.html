@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- OverlayPageLayoutPhone.qml -->
+  <meta name="description" content="手機 Overlay 頁面版面配置容器。">
+  <title>OverlayPageLayoutPhone QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>OverlayPageLayoutPhone</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">OverlayPageLayoutPhone QML Type</h1>
+<!-- $$$OverlayPageLayoutPhone-brief -->
+<p>手機 Overlay 頁面版面配置容器。. <a href="#details">More...</a></p>
+<!-- @@@OverlayPageLayoutPhone -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Since:</td><td class="memItemRight bottomAlign"> Qt 6.8</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-sc-waobject.html" translate="no">WaObject</a></p>
+</td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-overlaypagelayoutphone-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#acting-prop" translate="no">acting</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#actionStatus-prop" translate="no">actionStatus</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#bottomSafeMargins-prop" translate="no">bottomSafeMargins</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#description-prop" translate="no">description</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#leftSafeMargins-prop" translate="no">leftSafeMargins</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#leftTopBarItems-prop" translate="no">leftTopBarItems</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#pageContent-prop" translate="no">pageContent</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#rightSafeMargins-prop" translate="no">rightSafeMargins</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#rightTopBarItems-prop" translate="no">rightTopBarItems</a></b> : Item</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#showBack-prop" translate="no">showBack</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#showDescription-prop" translate="no">showDescription</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#showTopBar-prop" translate="no">showTopBar</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#themeName-prop" translate="no">themeName</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#title-prop" translate="no">title</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#topBarTitle-prop" translate="no">topBarTitle</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#topSafeMargins-prop" translate="no">topSafeMargins</a></b> : real</li>
+</ul>
+<h2 id="signals">Signals</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-overlaypagelayoutphone.html#backClicked-signal" translate="no">backClicked</a></b>()</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no">object <b><a href="qml-sc-overlaypagelayoutphone.html#getThemeStyle-method" translate="no">getThemeStyle</a></b>()</li>
+</ul>
+<!-- $$$OverlayPageLayoutPhone-description -->
+<h2 id="details">Detailed Description</h2>
+<details>
+<summary>提供頁面框架。</summary>
+<p>元件組成：</p>
+<ul>
+<li>Top Bar：頂部工具列</li>
+<li>Header：標題列與返回按鈕</li>
+<li>Page：頁面內容</li>
+</ul>
+<p>支援功能：</p>
+<ul>
+<li>主題樣式控制（themeName）</li>
+<li>自訂 TopBar 左右功能區塊（leftTopBarItems、l <a href="qml-sc-overlaypagelayoutphone.html#rightTopBarItems-prop" translate="no">rightTopBarItems</a>）</li>
+<li>自訂頁面內容（pageContent）</li>
+</ul>
+<p>使用：</p>
+<pre class="cpp" translate="no"><span class="type"><a href="qml-sc-overlaypagelayoutphone.html" translate="no">OverlayPageLayoutPhone</a></span> {
+    <span class="name">anchors</span>.fill: <span class="name">parent</span>
+    <span class="name">pageContent</span>: <span class="name">Item</span> {
+        <span class="name">anchors</span>.fill: <span class="name">parent</span>
+    }
+}</pre>
+<!-- @@@OverlayPageLayoutPhone -->
+<h2>Property Documentation</h2>
+<!-- $$$acting -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="acting-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">acting</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否處於執行中狀態。</p>
+</div></div><!-- @@@acting -->
+<br/>
+<!-- $$$actionStatus -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="actionStatus-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">actionStatus</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>當前操作狀態（Define.LoadStatus）。</p>
+</div></div><!-- @@@actionStatus -->
+<br/>
+<!-- $$$bottomSafeMargins -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bottomSafeMargins-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bottomSafeMargins</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>下方安全邊界。</p>
+</div></div><!-- @@@bottomSafeMargins -->
+<br/>
+<!-- $$$description -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="description-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">description</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>描述文字。</p>
+</div></div><!-- @@@description -->
+<br/>
+<!-- $$$leftSafeMargins -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="leftSafeMargins-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">leftSafeMargins</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>左側安全邊界。</p>
+</div></div><!-- @@@leftSafeMargins -->
+<br/>
+<!-- $$$leftTopBarItems -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="leftTopBarItems-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">leftTopBarItems</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>TopBar 左方的子元件。</p>
+</div></div><!-- @@@leftTopBarItems -->
+<br/>
+<!-- $$$pageContent -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="pageContent-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">pageContent</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>頁面內容區域的子元件。</p>
+</div></div><!-- @@@pageContent -->
+<br/>
+<!-- $$$rightSafeMargins -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="rightSafeMargins-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">rightSafeMargins</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>右側安全邊界。</p>
+</div></div><!-- @@@rightSafeMargins -->
+<br/>
+<!-- $$$rightTopBarItems -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="rightTopBarItems-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">rightTopBarItems</span> : <span class="type">Item</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>TopBar 右方的子元件。</p>
+</div></div><!-- @@@rightTopBarItems -->
+<br/>
+<!-- $$$showBack -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showBack-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showBack</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示返回按鈕。</p>
+</div></div><!-- @@@showBack -->
+<br/>
+<!-- $$$showDescription -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showDescription-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showDescription</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示描述。</p>
+</div></div><!-- @@@showDescription -->
+<br/>
+<!-- $$$showTopBar -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="showTopBar-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">showTopBar</span> : <span class="type">bool</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>是否顯示 TopBar。</p>
+<p>當顯示 TopBar 時，會隱藏 <a href="qml-sc-mainlayoutphone.html" translate="no">MainLayoutPhone</a> 的 Header。</p>
+</div></div><!-- @@@showTopBar -->
+<br/>
+<!-- $$$themeName -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeName-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeName</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題名稱。</p>
+<p>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</p>
+</div></div><!-- @@@themeName -->
+<br/>
+<!-- $$$themeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="themeStyle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">themeStyle</span> : <span class="type">var</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>主題樣式設定物件。</p>
+<p>此屬性為唯讀，透過 <a href="qml-sc-overlaypagelayoutphone.html#getThemeStyle-method" translate="no">getThemeStyle</a>() 動態產生。</p>
+</div></div><!-- @@@themeStyle -->
+<br/>
+<!-- $$$title -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="title-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">title</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>標題文字。</p>
+</div></div><!-- @@@title -->
+<br/>
+<!-- $$$topBarTitle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="topBarTitle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">topBarTitle</span> : <span class="type">string</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>TopBar 顯示標題文字。</p>
+<p>當隱藏 TopBar 時，會取代 <a href="qml-sc-mainlayoutphone.html" translate="no">MainLayoutPhone</a> 的 title。</p>
+</div></div><!-- @@@topBarTitle -->
+<br/>
+<!-- $$$topSafeMargins -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="topSafeMargins-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">topSafeMargins</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>上方安全邊界。</p>
+</div></div><!-- @@@topSafeMargins -->
+<br/>
+<h2>Signal Documentation</h2>
+<!-- $$$backClicked[overload1]$$$backClicked -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="backClicked-signal">
+<td class="tblQmlFuncNode"><p>
+<span class="name">backClicked</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>點擊返回按鈕時觸發。</p>
+<div class="admonition note"><p><b>Note: </b>The corresponding handler is <code translate="no">onBackClicked</code>.</p>
+</div></div></div><!-- @@@backClicked -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$getThemeStyle[overload1]$$$getThemeStyle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getThemeStyle-method">
+<td class="tblQmlFuncNode"><p>
+<span class="type">object</span> <span class="name">getThemeStyle</span>()</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>取得主題樣式設定物件。</p>
+<p><b class="redFont"><code translate=\"no\">\return</code></b>主題樣式設定物件。</p>
+</div></div><!-- @@@getThemeStyle -->
+<br/>
+</body>
+</html>

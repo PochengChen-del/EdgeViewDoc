@@ -25,7 +25,7 @@
 <db:varlistentry>
 <db:term>Inherited By:</db:term>
 <db:listitem>
-<db:para><db:link xlink:href="qml-sc-rowitemheadertext.xml" xlink:role="">RowItemHeaderText</db:link>, <db:link xlink:href="qml-sc-rowitemtext.xml" xlink:role="">RowItemText</db:link>, <db:link xlink:href="qml-sc-rowitemtexticon.xml" xlink:role="">RowItemTextIcon</db:link>, and <db:link xlink:href="qml-sc-rowitemtextvalue.xml" xlink:role="">RowItemTextValue</db:link></db:para>
+<db:para><db:link xlink:href="qml-sc-rowitemcaptiontext.xml" xlink:role="">RowItemCaptionText</db:link>, <db:link xlink:href="qml-sc-rowitemheadertext.xml" xlink:role="">RowItemHeaderText</db:link>, <db:link xlink:href="qml-sc-rowitemtext.xml" xlink:role="">RowItemText</db:link>, <db:link xlink:href="qml-sc-rowitemtexticon.xml" xlink:role="">RowItemTextIcon</db:link>, and <db:link xlink:href="qml-sc-rowitemtextvalue.xml" xlink:role="">RowItemTextValue</db:link></db:para>
 </db:listitem>
 </db:varlistentry>
 </db:variablelist>

@@ -373,7 +373,7 @@
 <db:varlistentry>
 <db:term><db:link xlink:href="qml-sc-mainlayoutphone.xml" xlink:role="">MainLayoutPhone</db:link></db:term>
 <db:listitem>
-<db:para>手機版主版面配置容器。</db:para>
+<db:para>手機主版面配置容器。</db:para>
 </db:listitem>
 </db:varlistentry>
 <db:varlistentry>
@@ -398,6 +398,18 @@
 <db:term><db:link xlink:href="qml-sc-navigationitem.xml" xlink:role="">NavigationItem</db:link></db:term>
 <db:listitem>
 <db:para>導覽項目元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-overlaypagelayoutphone.xml" xlink:role="">OverlayPageLayoutPhone</db:link></db:term>
+<db:listitem>
+<db:para>手機 Overlay 頁面版面配置容器。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-overlaypagelayouttablet.xml" xlink:role="">OverlayPageLayoutTablet</db:link></db:term>
+<db:listitem>
+<db:para>平板 Overlay 頁面版面配置容器。</db:para>
 </db:listitem>
 </db:varlistentry>
 <db:varlistentry>
@@ -452,6 +464,12 @@
 <db:term><db:link xlink:href="qml-sc-rowitembase.xml" xlink:role="">RowItemBase</db:link></db:term>
 <db:listitem>
 <db:para>行動版單行顯示基礎元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-rowitemcaptiontext.xml" xlink:role="">RowItemCaptionText</db:link></db:term>
+<db:listitem>
+<db:para>單行標題與文字顯示元件。</db:para>
 </db:listitem>
 </db:varlistentry>
 <db:varlistentry>

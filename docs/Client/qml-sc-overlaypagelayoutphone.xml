@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>OverlayPageLayoutPhone QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>手機 Overlay 頁面版面配置容器。.</db:para>
+<db:para>This type was introduced in Qt 6.8.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Since:</db:term>
+<db:listitem>
+<db:para>Qt 6.8</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Inherits:</db:term>
+<db:listitem>
+<db:para><db:link xlink:href="qml-sc-waobject.xml">WaObject</db:link></db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para>元件組成：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>Top Bar：頂部工具列</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Header：標題列與返回按鈕</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Page：頁面內容</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>支援功能：</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>主題樣式控制（<db:link xlink:href="">themeName）</db:link></db:para>
+</db:listitem>
+<db:listitem>
+<db:para>自訂 TopBar 左右功能區塊（<db:link xlink:href="">leftTopBarItems、l</db:link> <db:link xlink:href="qml-sc-overlaypagelayoutphone.xml#rightTopBarItems-prop">rightTopBarItems</db:link>）</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>自訂頁面內容（<db:link xlink:href="">pageContent）</db:link></db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>使用：</db:para>
+<db:programlisting language="cpp">OverlayPageLayoutPhone {
+    anchors.fill: parent
+    pageContent: Item {
+        anchors.fill: parent
+    }
+}
+</db:programlisting>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="acting-prop">
+<db:title>[read-only] acting : bool</db:title>
+<db:para>是否處於執行中狀態。</db:para>
+</db:section>
+<db:section xml:id="actionStatus-prop">
+<db:title>actionStatus : int</db:title>
+<db:para>當前操作狀態（Define.LoadStatus）。</db:para>
+</db:section>
+<db:section xml:id="bottomSafeMargins-prop">
+<db:title>bottomSafeMargins : real</db:title>
+<db:para>下方安全邊界。</db:para>
+</db:section>
+<db:section xml:id="description-prop">
+<db:title>description : string</db:title>
+<db:para>描述文字。</db:para>
+</db:section>
+<db:section xml:id="leftSafeMargins-prop">
+<db:title>leftSafeMargins : real</db:title>
+<db:para>左側安全邊界。</db:para>
+</db:section>
+<db:section xml:id="leftTopBarItems-prop">
+<db:title>leftTopBarItems : Item</db:title>
+<db:para>TopBar 左方的子元件。</db:para>
+</db:section>
+<db:section xml:id="pageContent-prop">
+<db:title>pageContent : Item</db:title>
+<db:para>頁面內容區域的子元件。</db:para>
+</db:section>
+<db:section xml:id="rightSafeMargins-prop">
+<db:title>rightSafeMargins : real</db:title>
+<db:para>右側安全邊界。</db:para>
+</db:section>
+<db:section xml:id="rightTopBarItems-prop">
+<db:title>rightTopBarItems : Item</db:title>
+<db:para>TopBar 右方的子元件。</db:para>
+</db:section>
+<db:section xml:id="showBack-prop">
+<db:title>showBack : bool</db:title>
+<db:para>是否顯示返回按鈕。</db:para>
+</db:section>
+<db:section xml:id="showDescription-prop">
+<db:title>showDescription : bool</db:title>
+<db:para>是否顯示描述。</db:para>
+</db:section>
+<db:section xml:id="showTopBar-prop">
+<db:title>showTopBar : bool</db:title>
+<db:para>是否顯示 TopBar。</db:para>
+<db:para>當顯示 TopBar 時，會隱藏 <db:link xlink:href="qml-sc-mainlayoutphone.xml">MainLayoutPhone</db:link> 的 Header。</db:para>
+</db:section>
+<db:section xml:id="themeName-prop">
+<db:title>themeName : string</db:title>
+<db:para>主題名稱。</db:para>
+<db:para>預設會從父元件繼承，若未提供則使用 WATheme.systemThemeName。</db:para>
+</db:section>
+<db:section xml:id="themeStyle-prop">
+<db:title>[read-only] themeStyle : var</db:title>
+<db:para>主題樣式設定物件。</db:para>
+<db:para>此屬性為唯讀，透過 <db:link xlink:href="qml-sc-overlaypagelayoutphone.xml#getThemeStyle-method">getThemeStyle</db:link>() 動態產生。</db:para>
+</db:section>
+<db:section xml:id="title-prop">
+<db:title>title : string</db:title>
+<db:para>標題文字。</db:para>
+</db:section>
+<db:section xml:id="topBarTitle-prop">
+<db:title>topBarTitle : string</db:title>
+<db:para>TopBar 顯示標題文字。</db:para>
+<db:para>當隱藏 TopBar 時，會取代 <db:link xlink:href="qml-sc-mainlayoutphone.xml">MainLayoutPhone</db:link> 的 title。</db:para>
+</db:section>
+<db:section xml:id="topSafeMargins-prop">
+<db:title>topSafeMargins : real</db:title>
+<db:para>上方安全邊界。</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="signal-documentation">
+<db:title>Signal Documentation</db:title>
+<db:section xml:id="backClicked-signal">
+<db:title>backClicked()</db:title>
+<db:para>點擊返回按鈕時觸發。</db:para>
+<db:note>
+<db:para>The corresponding handler is <db:code>onBackClicked</db:code>.</db:para>
+</db:note>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="getThemeStyle-method">
+<db:title>object getThemeStyle()</db:title>
+<db:para>取得主題樣式設定物件。</db:para>
+<db:para><db:emphasis role="bold">&lt;Unknown command&gt;<db:code>return</db:code></db:emphasis>主題樣式設定物件。</db:para>
+</db:section>
+</db:section>
+</db:article>

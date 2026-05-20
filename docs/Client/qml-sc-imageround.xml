@@ -51,6 +51,10 @@
 <db:para>圖片填滿模式。</db:para>
 <db:para>預設 <db:link xlink:href="">Image.PreserveAspectFit</db:link> 。</db:para>
 </db:section>
+<db:section xml:id="horizontalAlignment-prop">
+<db:title>horizontalAlignment : enumeration</db:title>
+<db:para>圖片水平對齊位置。</db:para>
+</db:section>
 <db:section xml:id="source-prop">
 <db:title>source : url</db:title>
 <db:para>圖片來源 URL。</db:para>
@@ -63,6 +67,10 @@
 <db:section xml:id="status-prop">
 <db:title>status : enumeration</db:title>
 <db:para>目前圖片載入狀態。</db:para>
+</db:section>
+<db:section xml:id="verticalAlignment-prop">
+<db:title>verticalAlignment : enumeration</db:title>
+<db:para>圖片垂直對齊位置。</db:para>
 </db:section>
 </db:section>
 </db:article>
