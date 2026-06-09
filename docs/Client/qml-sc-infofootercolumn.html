@@ -34,14 +34,20 @@
 <h2 id="properties">Properties</h2>
 <ul>
 <li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#availableWidth-prop" translate="no">availableWidth</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#bottomPadding-prop" translate="no">bottomPadding</a></b> : real</li>
 <li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#buttonKeyRole-prop" translate="no">buttonKeyRole</a></b> : string</li>
 <li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#buttonModel-prop" translate="no">buttonModel</a></b> : var</li>
 <li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#buttonOpenUrlRole-prop" translate="no">buttonOpenUrlRole</a></b> : string</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#leftPadding-prop" translate="no">leftPadding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#padding-prop" translate="no">padding</a></b> : real</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#rightPadding-prop" translate="no">rightPadding</a></b> : real</li>
 <li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#showVersion-prop" translate="no">showVersion</a></b> : bool</li>
 <li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#sizeType-prop" translate="no">sizeType</a></b> : enumeration</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#spacing-prop" translate="no">spacing</a></b> : real</li>
 <li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#themeName-prop" translate="no">themeName</a></b> : string</li>
 <li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#themeStyle-prop" translate="no">themeStyle</a></b> : var</li>
 <li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#today-prop" translate="no">today</a></b> : date</li>
+<li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#topPadding-prop" translate="no">topPadding</a></b> : real</li>
 <li class="fn" translate="no"><b><a href="qml-sc-infofootercolumn.html#versionText-prop" translate="no">versionText</a></b> : string</li>
 </ul>
 <h2 id="methods">Methods</h2>
@@ -77,8 +83,18 @@
 <td class="tblQmlPropNode"><p>
 <span class="name">availableWidth</span> : <span class="type">real</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
 </table></div></div>
-<div class="qmldoc"><p>可用寬度（扣除 leftPadding 與 rightPadding）。</p>
+<div class="qmldoc"><p>可用寬度（扣除 <a href="qml-sc-infofootercolumn.html#leftPadding-prop" translate="no">leftPadding</a> 與 <a href="qml-sc-infofootercolumn.html#rightPadding-prop" translate="no">rightPadding</a>）。</p>
 </div></div><!-- @@@availableWidth -->
+<br/>
+<!-- $$$bottomPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="bottomPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">bottomPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>下方邊距。</p>
+</div></div><!-- @@@bottomPadding -->
 <br/>
 <!-- $$$buttonKeyRole -->
 <div class="qmlitem"><div class="qmlproto" translate="no">
@@ -112,6 +128,36 @@
 <p>若存在且為有效字串，點擊時會呼叫 Global.openUrlExternally()。</p>
 </div></div><!-- @@@buttonOpenUrlRole -->
 <br/>
+<!-- $$$leftPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="leftPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">leftPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>左方邊距。</p>
+</div></div><!-- @@@leftPadding -->
+<br/>
+<!-- $$$padding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="padding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">padding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>邊距。</p>
+</div></div><!-- @@@padding -->
+<br/>
+<!-- $$$rightPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="rightPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">rightPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>右方邊距。</p>
+</div></div><!-- @@@rightPadding -->
+<br/>
 <!-- $$$showVersion -->
 <div class="qmlitem"><div class="qmlproto" translate="no">
 <div class="table"><table class="qmlname">
@@ -142,6 +188,16 @@
 <tr valign="top" class="even"><td >Define.SizeType.Medium</td><td >中尺寸</td></tr>
 </table></div>
 </div></div><!-- @@@sizeType -->
+<br/>
+<!-- $$$spacing -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="spacing-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">spacing</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>間距。</p>
+</div></div><!-- @@@spacing -->
 <br/>
 <!-- $$$themeName -->
 <div class="qmlitem"><div class="qmlproto" translate="no">
@@ -174,6 +230,16 @@
 </table></div></div>
 <div class="qmldoc"><p>今日日期，用於顯示版權年份。</p>
 </div></div><!-- @@@today -->
+<br/>
+<!-- $$$topPadding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="topPadding-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">topPadding</span> : <span class="type">real</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>上方邊距。</p>
+</div></div><!-- @@@topPadding -->
 <br/>
 <!-- $$$versionText -->
 <div class="qmlitem"><div class="qmlproto" translate="no">

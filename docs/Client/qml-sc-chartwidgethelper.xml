@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
+<db:info>
+<db:title>ChartWidgetHelper QML Type</db:title>
+<db:productname>EdgeView</db:productname>
+<db:titleabbrev>EdgeView</db:titleabbrev>
+<db:abstract>
+<db:para>Provides helper utilities for chart data retrieval and format conversion.</db:para>
+</db:abstract>
+</db:info>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Import Statement</db:term>
+<db:listitem>
+<db:para>import SC</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Group</db:term>
+<db:listitem>
+<db:para>ChartWidgetHelper is part of <db:simplelist><db:member>chart</db:member></db:simplelist>
+</db:para>
+</db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section xml:id="details">
+<db:title>Detailed Description</db:title>
+<db:para><db:link xlink:href="qml-sc-chartwidgethelper.xml">ChartWidgetHelper</db:link> handles data log queries, interval calculations, and format conversions for various chart types including XY plots, state timelines, and trend charts.</db:para>
+</db:section>
+<db:section xml:id="property-documentation">
+<db:title>Property Documentation</db:title>
+<db:section xml:id="datalogFrom-prop">
+<db:title>datalogFrom : var</db:title>
+<db:para>This property holds the data log source configuration object.</db:para>
+<db:para>Configures whether data log queries target tags or records, including record name and column mapping information.</db:para>
+</db:section>
+<db:section xml:id="datalogMaxRecord-prop">
+<db:title>datalogMaxRecord : int</db:title>
+<db:para>This property holds the maximum number of data log records to retrieve.</db:para>
+</db:section>
+<db:section xml:id="datalogRawdataMaxRecord-prop">
+<db:title>datalogRawdataMaxRecord : int</db:title>
+<db:para>This property holds the maximum number of raw data log records to retrieve.</db:para>
+</db:section>
+<db:section xml:id="editor-prop">
+<db:title>editor : QtObject</db:title>
+<db:para>This property holds the editor context object used for project identification in data source queries.</db:para>
+</db:section>
+<db:section xml:id="isFromRecord-prop">
+<db:title>[read-only] isFromRecord : bool</db:title>
+<db:para>Returns <db:code>true</db:code> when <db:link xlink:href="qml-sc-chartwidgethelper.xml#datalogFrom-prop">datalogFrom</db:link> is configured to query from a record source, and <db:code>false</db:code> when querying from tags.</db:para>
+</db:section>
+<db:section xml:id="timeTitle-prop">
+<db:title>[read-only] timeTitle : string</db:title>
+<db:para>This property holds the column title used for the time axis in data log results.</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="method-documentation">
+<db:title>Method Documentation</db:title>
+<db:section xml:id="colorCompatibleRGBA-method">
+<db:title>colorCompatibleRGBA(<db:emphasis>fromColor</db:emphasis>, <db:emphasis>a</db:emphasis>)</db:title>
+<db:para>Converts <db:code role="parameter">fromColor</db:code> to an RGBA color string with optional alpha <db:code role="parameter">a</db:code>.</db:para>
+<db:para>Returns a CSS-compatible <db:code>rgba()</db:code> string, or <db:code>undefined</db:code> if the color cannot be converted.</db:para>
+</db:section>
+<db:section xml:id="getChartJsIntervalType-method">
+<db:title>getChartJsIntervalType(<db:emphasis>invTp</db:emphasis>)</db:title>
+<db:para>Converts the <db:code role="parameter">invTp</db:code> interval type from <db:link xlink:href="qml-sc-chartwidgethelper.xml#getDataLogIntervals-method">getDataLogIntervals</db:link> format to a Chart.js-compatible time unit string.</db:para>
+<db:para>Returns one of <db:code>&quot;year&quot;</db:code>, <db:code>&quot;month&quot;</db:code>, <db:code>&quot;day&quot;</db:code>, <db:code>&quot;hour&quot;</db:code>, <db:code>&quot;minute&quot;</db:code>, or <db:code>&quot;second&quot;</db:code>. Defaults to <db:code>&quot;minute&quot;</db:code> if <db:code role="parameter">invTp</db:code> is unrecognized.</db:para>
+</db:section>
+<db:section xml:id="getDataLog-method">
+<db:title>getDataLog(<db:emphasis>datalogTargets</db:emphasis>, <db:emphasis>st</db:emphasis>, <db:emphasis>en</db:emphasis>, <db:emphasis>cn</db:emphasis>, <db:emphasis>inv</db:emphasis>, <db:emphasis>invTp</db:emphasis>)</db:title>
+<db:para>Retrieves historical data log entries including raw data and aggregated logs.</db:para>
+<db:para><db:code role="parameter">datalogTargets</db:code> specifies the query targets as an array of objects with <db:code>Name</db:code>, <db:code>DataType</db:code>, and <db:code>_dataType</db:code> fields. <db:code role="parameter">st</db:code> and <db:code role="parameter">en</db:code> define the time range in milliseconds. <db:code role="parameter">cn</db:code> specifies the total record count; pass <db:code>0</db:code> for raw data queries. <db:code role="parameter">inv</db:code> specifies the sampling interval in milliseconds; pass <db:code>0</db:code> for raw data queries. <db:code role="parameter">invTp</db:code> specifies the interval type: <db:code>S</db:code> or <db:code>sec</db:code> for seconds, <db:code>M</db:code> or <db:code>min</db:code> for minutes, <db:code>H</db:code> or <db:code>hour</db:code> for hours, <db:code>D</db:code> or <db:code>day</db:code> for days, <db:code>month</db:code> for months, <db:code>year</db:code> for years.</db:para>
+<db:para>Returns a Promise that resolves to an object with <db:code>targets</db:code> and <db:code>values</db:code> arrays:</db:para>
+<db:programlisting language="cpp">{
+    &quot;targets&quot;: [{ &quot;Name&quot;: &quot;time&quot; }, { &quot;Name&quot;: &quot;Tag1&quot;, ... }],
+    &quot;values&quot;: [[timestamp, value1, value2, ...], ...]
+}
+</db:programlisting>
+<db:section>
+<db:title>See Also</db:title>
+<db:para><db:emphasis>See also </db:emphasis>
+<db:simplelist type="vert" role="see-also">
+<db:member><db:link xlink:href="">getRawDataLog()</db:link></db:member>
+<db:member><db:link xlink:href="qml-sc-chartwidgethelper.xml#getDataLogIntervals-method">getDataLogIntervals</db:link>()</db:member>
+</db:simplelist>
+</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="getDataLogIntervals-method">
+<db:title>getDataLogIntervals(<db:emphasis>startUnixMs</db:emphasis>, <db:emphasis>endUnixMs</db:emphasis>, <db:emphasis>interval</db:emphasis>)</db:title>
+<db:para>Calculates data log interval parameters including total count, interval size, and interval type for queries between <db:code role="parameter">startUnixMs</db:code> and <db:code role="parameter">endUnixMs</db:code> with the given <db:code role="parameter">interval</db:code> in milliseconds.</db:para>
+<db:para>Returns an object with <db:code>totalCount</db:code>, <db:code>inv</db:code>, and <db:code>invTp</db:code> properties.</db:para>
+</db:section>
+<db:section xml:id="getRawDataIntervalType-method">
+<db:title>getRawDataIntervalType(<db:emphasis>st</db:emphasis>, <db:emphasis>en</db:emphasis>, <db:emphasis>invTp</db:emphasis>)</db:title>
+<db:para>Returns the best-fit interval type for raw data queries between <db:code role="parameter">st</db:code> and <db:code role="parameter">en</db:code>, based on the configured raw data max record limit.</db:para>
+<db:para>If the computed interval exceeds the resolution of <db:code role="parameter">invTp</db:code>, returns the computed type; otherwise returns <db:code role="parameter">invTp</db:code>.</db:para>
+</db:section>
+<db:section xml:id="stTimelineFormatConvert-method">
+<db:title>stTimelineFormatConvert(<db:emphasis>startTimeMs</db:emphasis>, <db:emphasis>endTimeMs</db:emphasis>, <db:emphasis>res</db:emphasis>)</db:title>
+<db:para>Converts raw data log <db:code role="parameter">res</db:code> into state timeline format between <db:code role="parameter">startTimeMs</db:code> and <db:code role="parameter">endTimeMs</db:code>.</db:para>
+<db:para>Returns an array of objects, each with <db:code>target</db:code> and <db:code>datapoints</db:code> properties for timeline rendering.</db:para>
+</db:section>
+<db:section xml:id="syncHexDataColor-method">
+<db:title>syncHexDataColor(<db:emphasis>wgt</db:emphasis>)</db:title>
+<db:para>Converts color objects in the <db:code role="parameter">wgt</db:code> data list to hexadecimal string format.</db:para>
+<db:para>Iterates over the <db:code role="parameter">wgt</db:code> data list and replaces <db:code>backgroundColor</db:code> and <db:code>borderColor</db:code> objects with their string representations.</db:para>
+</db:section>
+<db:section xml:id="syncPropertyDataListNBinding-method">
+<db:title>syncPropertyDataListNBinding(<db:emphasis>wgt</db:emphasis>)</db:title>
+<db:para>Synchronizes property data list titles with binding targets.</db:para>
+<db:para>Iterates over the <db:code role="parameter">wgt</db:code> data list and updates titles from matching binding entries. Only updates titles when data items do not have a custom title set.</db:para>
+<db:section>
+<db:title>See Also</db:title>
+<db:para><db:emphasis>See also </db:emphasis>
+<db:simplelist type="vert" role="see-also">
+<db:member><db:link xlink:href="qml-sc-chartwidgethelper.xml#syncHexDataColor-method">syncHexDataColor</db:link>()</db:member>
+</db:simplelist>
+</db:para>
+</db:section>
+</db:section>
+<db:section xml:id="trendFormatConvert-method">
+<db:title>trendFormatConvert(<db:emphasis>startTimeMs</db:emphasis>, <db:emphasis>endTimeMs</db:emphasis>, <db:emphasis>res</db:emphasis>, <db:emphasis>chartData</db:emphasis>)</db:title>
+<db:para>Converts raw data log <db:code role="parameter">res</db:code> into trend chart format for <db:code role="parameter">chartData</db:code> between <db:code role="parameter">startTimeMs</db:code> and <db:code role="parameter">endTimeMs</db:code>.</db:para>
+<db:para>Values outside the span range are clamped. Boundary values at the start and end times are inserted if missing. Returns the updated <db:code role="parameter">chartData</db:code> array.</db:para>
+</db:section>
+<db:section xml:id="xyplotFormatConvert-method">
+<db:title>xyplotFormatConvert(<db:emphasis>startTimeMs</db:emphasis>, <db:emphasis>endTimeMs</db:emphasis>, <db:emphasis>res</db:emphasis>, <db:emphasis>chartData</db:emphasis>)</db:title>
+<db:para>Converts raw data log <db:code role="parameter">res</db:code> into XY plot format for <db:code role="parameter">chartData</db:code> between <db:code role="parameter">startTimeMs</db:code> and <db:code role="parameter">endTimeMs</db:code>.</db:para>
+<db:para>Values outside the span range (<db:code>spanHi</db:code> / <db:code>spanLo</db:code>) are clamped. Returns the updated <db:code role="parameter">chartData</db:code> array.</db:para>
+</db:section>
+</db:section>
+</db:article>

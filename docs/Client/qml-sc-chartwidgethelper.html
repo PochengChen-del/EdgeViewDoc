@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<!-- ChartWidgetHelper.qml -->
+  <meta name="description" content="Provides helper utilities for chart data retrieval and format conversion">
+  <title>ChartWidgetHelper QML Type | EdgeView 1.0</title>
+<link rel="stylesheet" type="text/css" href="style/offline.css"/>
+</head>
+<body>
+<li><a href="sc-qmlmodule.html" translate="no">SC</a></li>
+<li>ChartWidgetHelper</li>
+<div class="sidebar">
+<div class="toc">
+<h3 id="toc">Contents</h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title" translate="no">ChartWidgetHelper QML Type</h1>
+<!-- $$$ChartWidgetHelper-brief -->
+<p>Provides helper utilities for chart data retrieval and format conversion. <a href="#details">More...</a></p>
+<!-- @@@ChartWidgetHelper -->
+<div class="table"><table class="alignedsummary requisites" translate="no">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> <code translate="no">import SC</code></td></tr>
+</table></div>
+<ul>
+<li><a href="qml-sc-chartwidgethelper-members.html">List of all members, including inherited members</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#datalogFrom-prop" translate="no">datalogFrom</a></b> : var</li>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#datalogMaxRecord-prop" translate="no">datalogMaxRecord</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#datalogRawdataMaxRecord-prop" translate="no">datalogRawdataMaxRecord</a></b> : int</li>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#editor-prop" translate="no">editor</a></b> : QtObject</li>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#isFromRecord-prop" translate="no">isFromRecord</a></b> : bool</li>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#timeTitle-prop" translate="no">timeTitle</a></b> : string</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#colorCompatibleRGBA-method" translate="no">colorCompatibleRGBA</a></b>(<i>fromColor</i>, <i>a</i>)</li>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#getChartJsIntervalType-method" translate="no">getChartJsIntervalType</a></b>(<i>invTp</i>)</li>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#getDataLog-method" translate="no">getDataLog</a></b>(<i>datalogTargets</i>, <i>st</i>, <i>en</i>, <i>cn</i>, <i>inv</i>, <i>invTp</i>)</li>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#getDataLogIntervals-method" translate="no">getDataLogIntervals</a></b>(<i>startUnixMs</i>, <i>endUnixMs</i>, <i>interval</i>)</li>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#getRawDataIntervalType-method" translate="no">getRawDataIntervalType</a></b>(<i>st</i>, <i>en</i>, <i>invTp</i>)</li>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#stTimelineFormatConvert-method" translate="no">stTimelineFormatConvert</a></b>(<i>startTimeMs</i>, <i>endTimeMs</i>, <i>res</i>)</li>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#syncHexDataColor-method" translate="no">syncHexDataColor</a></b>(<i>wgt</i>)</li>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#syncPropertyDataListNBinding-method" translate="no">syncPropertyDataListNBinding</a></b>(<i>wgt</i>)</li>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#trendFormatConvert-method" translate="no">trendFormatConvert</a></b>(<i>startTimeMs</i>, <i>endTimeMs</i>, <i>res</i>, <i>chartData</i>)</li>
+<li class="fn" translate="no"><b><a href="qml-sc-chartwidgethelper.html#xyplotFormatConvert-method" translate="no">xyplotFormatConvert</a></b>(<i>startTimeMs</i>, <i>endTimeMs</i>, <i>res</i>, <i>chartData</i>)</li>
+</ul>
+<!-- $$$ChartWidgetHelper-description -->
+<h2 id="details">Detailed Description</h2>
+<p>ChartWidgetHelper handles data log queries, interval calculations, and format conversions for various chart types including XY plots, state timelines, and trend charts.</p>
+<!-- @@@ChartWidgetHelper -->
+<h2>Property Documentation</h2>
+<!-- $$$datalogFrom -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="datalogFrom-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">datalogFrom</span> : <span class="type">var</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>This property holds the data log source configuration object.</p>
+<p>Configures whether data log queries target tags or records, including record name and column mapping information.</p>
+</div></div><!-- @@@datalogFrom -->
+<br/>
+<!-- $$$datalogMaxRecord -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="datalogMaxRecord-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">datalogMaxRecord</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>This property holds the maximum number of data log records to retrieve.</p>
+</div></div><!-- @@@datalogMaxRecord -->
+<br/>
+<!-- $$$datalogRawdataMaxRecord -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="datalogRawdataMaxRecord-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">datalogRawdataMaxRecord</span> : <span class="type">int</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>This property holds the maximum number of raw data log records to retrieve.</p>
+</div></div><!-- @@@datalogRawdataMaxRecord -->
+<br/>
+<!-- $$$editor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="editor-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">editor</span> : <span class="type">QtObject</span></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>This property holds the editor context object used for project identification in data source queries.</p>
+</div></div><!-- @@@editor -->
+<br/>
+<!-- $$$isFromRecord -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="isFromRecord-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">isFromRecord</span> : <span class="type">bool</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Returns <code translate="no">true</code> when <a href="qml-sc-chartwidgethelper.html#datalogFrom-prop" translate="no">datalogFrom</a> is configured to query from a record source, and <code translate="no">false</code> when querying from tags.</p>
+</div></div><!-- @@@isFromRecord -->
+<br/>
+<!-- $$$timeTitle -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="timeTitle-prop">
+<td class="tblQmlPropNode"><p>
+<span class="name">timeTitle</span> : <span class="type">string</span> <code class="details extra" translate="no">[read-only]</code></p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>This property holds the column title used for the time axis in data log results.</p>
+</div></div><!-- @@@timeTitle -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$colorCompatibleRGBA[overload1]$$$colorCompatibleRGBA -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="colorCompatibleRGBA-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">colorCompatibleRGBA</span>(<i>fromColor</i>, <i>a</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Converts <i translate="no">fromColor</i> to an RGBA color string with optional alpha <i translate="no">a</i>.</p>
+<p>Returns a CSS-compatible <code translate="no">rgba()</code> string, or <code translate="no">undefined</code> if the color cannot be converted.</p>
+</div></div><!-- @@@colorCompatibleRGBA -->
+<br/>
+<!-- $$$getChartJsIntervalType[overload1]$$$getChartJsIntervalType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getChartJsIntervalType-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">getChartJsIntervalType</span>(<i>invTp</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Converts the <i translate="no">invTp</i> interval type from <a href="qml-sc-chartwidgethelper.html#getDataLogIntervals-method" translate="no">getDataLogIntervals</a> format to a Chart.js-compatible time unit string.</p>
+<p>Returns one of <code translate="no">&quot;year&quot;</code>, <code translate="no">&quot;month&quot;</code>, <code translate="no">&quot;day&quot;</code>, <code translate="no">&quot;hour&quot;</code>, <code translate="no">&quot;minute&quot;</code>, or <code translate="no">&quot;second&quot;</code>. Defaults to <code translate="no">&quot;minute&quot;</code> if <i translate="no">invTp</i> is unrecognized.</p>
+</div></div><!-- @@@getChartJsIntervalType -->
+<br/>
+<!-- $$$getDataLog[overload1]$$$getDataLog -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getDataLog-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">getDataLog</span>(<i>datalogTargets</i>, <i>st</i>, <i>en</i>, <i>cn</i>, <i>inv</i>, <i>invTp</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Retrieves historical data log entries including raw data and aggregated logs.</p>
+<p><i translate="no">datalogTargets</i> specifies the query targets as an array of objects with <code translate="no">Name</code>, <code translate="no">DataType</code>, and <code translate="no">_dataType</code> fields. <i translate="no">st</i> and <i translate="no">en</i> define the time range in milliseconds. <i translate="no">cn</i> specifies the total record count; pass <code translate="no">0</code> for raw data queries. <i translate="no">inv</i> specifies the sampling interval in milliseconds; pass <code translate="no">0</code> for raw data queries. <i translate="no">invTp</i> specifies the interval type: <code translate="no">S</code> or <code translate="no">sec</code> for seconds, <code translate="no">M</code> or <code translate="no">min</code> for minutes, <code translate="no">H</code> or <code translate="no">hour</code> for hours, <code translate="no">D</code> or <code translate="no">day</code> for days, <code translate="no">month</code> for months, <code translate="no">year</code> for years.</p>
+<p>Returns a Promise that resolves to an object with <code translate="no">targets</code> and <code translate="no">values</code> arrays:</p>
+<pre class="cpp" translate="no">{
+    <span class="string">&quot;targets&quot;</span>: <span class="operator">[</span>{ <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;time&quot;</span> }<span class="operator">,</span> { <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;Tag1&quot;</span><span class="operator">,</span> <span class="operator">.</span><span class="operator">.</span><span class="operator">.</span> }<span class="operator">]</span><span class="operator">,</span>
+    <span class="string">&quot;values&quot;</span>: <span class="operator">[</span><span class="operator">[</span>timestamp<span class="operator">,</span> value1<span class="operator">,</span> value2<span class="operator">,</span> <span class="operator">.</span><span class="operator">.</span><span class="operator">.</span><span class="operator">]</span><span class="operator">,</span> <span class="operator">.</span><span class="operator">.</span><span class="operator">.</span><span class="operator">]</span>
+}</pre>
+<p><b>See also </b>getRawDataLog() and <a href="qml-sc-chartwidgethelper.html#getDataLogIntervals-method" translate="no">getDataLogIntervals</a>().</p>
+</div></div><!-- @@@getDataLog -->
+<br/>
+<!-- $$$getDataLogIntervals[overload1]$$$getDataLogIntervals -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getDataLogIntervals-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">getDataLogIntervals</span>(<i>startUnixMs</i>, <i>endUnixMs</i>, <i>interval</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Calculates data log interval parameters including total count, interval size, and interval type for queries between <i translate="no">startUnixMs</i> and <i translate="no">endUnixMs</i> with the given <i translate="no">interval</i> in milliseconds.</p>
+<p>Returns an object with <code translate="no">totalCount</code>, <code translate="no">inv</code>, and <code translate="no">invTp</code> properties.</p>
+</div></div><!-- @@@getDataLogIntervals -->
+<br/>
+<!-- $$$getRawDataIntervalType[overload1]$$$getRawDataIntervalType -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="getRawDataIntervalType-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">getRawDataIntervalType</span>(<i>st</i>, <i>en</i>, <i>invTp</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Returns the best-fit interval type for raw data queries between <i translate="no">st</i> and <i translate="no">en</i>, based on the configured raw data max record limit.</p>
+<p>If the computed interval exceeds the resolution of <i translate="no">invTp</i>, returns the computed type; otherwise returns <i translate="no">invTp</i>.</p>
+</div></div><!-- @@@getRawDataIntervalType -->
+<br/>
+<!-- $$$stTimelineFormatConvert[overload1]$$$stTimelineFormatConvert -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="stTimelineFormatConvert-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">stTimelineFormatConvert</span>(<i>startTimeMs</i>, <i>endTimeMs</i>, <i>res</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Converts raw data log <i translate="no">res</i> into state timeline format between <i translate="no">startTimeMs</i> and <i translate="no">endTimeMs</i>.</p>
+<p>Returns an array of objects, each with <code translate="no">target</code> and <code translate="no">datapoints</code> properties for timeline rendering.</p>
+</div></div><!-- @@@stTimelineFormatConvert -->
+<br/>
+<!-- $$$syncHexDataColor[overload1]$$$syncHexDataColor -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="syncHexDataColor-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">syncHexDataColor</span>(<i>wgt</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Converts color objects in the <i translate="no">wgt</i> data list to hexadecimal string format.</p>
+<p>Iterates over the <i translate="no">wgt</i> data list and replaces <code translate="no">backgroundColor</code> and <code translate="no">borderColor</code> objects with their string representations.</p>
+</div></div><!-- @@@syncHexDataColor -->
+<br/>
+<!-- $$$syncPropertyDataListNBinding[overload1]$$$syncPropertyDataListNBinding -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="syncPropertyDataListNBinding-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">syncPropertyDataListNBinding</span>(<i>wgt</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Synchronizes property data list titles with binding targets.</p>
+<p>Iterates over the <i translate="no">wgt</i> data list and updates titles from matching binding entries. Only updates titles when data items do not have a custom title set.</p>
+<p><b>See also </b><a href="qml-sc-chartwidgethelper.html#syncHexDataColor-method" translate="no">syncHexDataColor</a>().</p>
+</div></div><!-- @@@syncPropertyDataListNBinding -->
+<br/>
+<!-- $$$trendFormatConvert[overload1]$$$trendFormatConvert -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="trendFormatConvert-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">trendFormatConvert</span>(<i>startTimeMs</i>, <i>endTimeMs</i>, <i>res</i>, <i>chartData</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Converts raw data log <i translate="no">res</i> into trend chart format for <i translate="no">chartData</i> between <i translate="no">startTimeMs</i> and <i translate="no">endTimeMs</i>.</p>
+<p>Values outside the span range are clamped. Boundary values at the start and end times are inserted if missing. Returns the updated <i translate="no">chartData</i> array.</p>
+</div></div><!-- @@@trendFormatConvert -->
+<br/>
+<!-- $$$xyplotFormatConvert[overload1]$$$xyplotFormatConvert -->
+<div class="qmlitem"><div class="qmlproto" translate="no">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="xyplotFormatConvert-method">
+<td class="tblQmlFuncNode"><p>
+<span class="name">xyplotFormatConvert</span>(<i>startTimeMs</i>, <i>endTimeMs</i>, <i>res</i>, <i>chartData</i>)</p></td></tr>
+</table></div></div>
+<div class="qmldoc"><p>Converts raw data log <i translate="no">res</i> into XY plot format for <i translate="no">chartData</i> between <i translate="no">startTimeMs</i> and <i translate="no">endTimeMs</i>.</p>
+<p>Values outside the span range (<code translate="no">spanHi</code> / <code translate="no">spanLo</code>) are clamped. Returns the updated <i translate="no">chartData</i> array.</p>
+</div></div><!-- @@@xyplotFormatConvert -->
+<br/>
+</body>
+</html>

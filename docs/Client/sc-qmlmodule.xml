@@ -95,6 +95,12 @@
 </db:listitem>
 </db:varlistentry>
 <db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-chartwidgethelper.xml" xlink:role="">ChartWidgetHelper</db:link></db:term>
+<db:listitem>
+<db:para>Provides helper utilities for chart data retrieval and format conversion</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
 <db:term><db:link xlink:href="qml-sc-colorindicator.xml" xlink:role="">ColorIndicator</db:link></db:term>
 <db:listitem>
 <db:para>顏色滑桿指示器元件。</db:para>
@@ -218,6 +224,18 @@
 <db:term><db:link xlink:href="qml-sc-formbackground.xml" xlink:role="">FormBackground</db:link></db:term>
 <db:listitem>
 <db:para>表單輸入元件背景。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-formbarsubtitle.xml" xlink:role="">FormBarSubtitle</db:link></db:term>
+<db:listitem>
+<db:para>表單副標題文字元件。</db:para>
+</db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term><db:link xlink:href="qml-sc-formbartitle.xml" xlink:role="">FormBarTitle</db:link></db:term>
+<db:listitem>
+<db:para>表單標題文字元件。</db:para>
 </db:listitem>
 </db:varlistentry>
 <db:varlistentry>
