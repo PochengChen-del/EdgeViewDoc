@@ -103,31 +103,34 @@
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | Critical |
-| 證據 | `meta-agent.go:94`、`wxproxy.go:53` 使用固定字串 |
+| 證據 | 原 `meta-agent.go:94`、`wxproxy.go:53` 使用固定字串；現由 `service/session_secret.go` 的 `LoadSessionKeys()` 取代 |
 | 影響 | 洩漏即可偽造 Session；跨環境相同 |
 | 機率 | 高（原始碼可見） |
-| 緩解 | 改用 Secret/環境變數、輪替、區分環境 |
-| 狀態 | Open |
+| 緩解 | 已完成：優先讀 `SESSION_SECRET`；否則以 `aes_secret` 機器金鑰經 HKDF-SHA256 派生；兩者皆無則啟動失敗；支援 `SESSION_SECRET_PREVIOUS` 輪替 |
+| 驗證 | 原始碼不再含固定 secret；啟動 log 僅輸出 fingerprint；Metadata/Runtime/xnginx/OPC UA Alarm Agent 共用同一解析規則 |
+| 狀態 | Fixed |
 
 ### R-002 全域停用 TLS 憑證驗證
 
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | High |
-| 證據 | `wxproxy.go:37` `InsecureSkipVerify: true` |
+| 證據 | 原 `wxproxy.go:37` 以 `http.DefaultTransport` 全域設定 `InsecureSkipVerify: true`；全域設定已移除 |
 | 影響 | 中間人攻擊、資料外洩 |
-| 緩解 | 移除、使用系統 CA 或指定 CA |
-| 狀態 | Open |
+| 緩解 | 全域設定已移除 |
+| 驗證 | `wxproxy.go` 不再有 `http.DefaultTransport` 全域覆寫 |
+| 狀態 | Fixed |
 
 ### R-003 `/record/queryrecord` 無認證
 
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | Critical |
-| 證據 | `controller/RecordController.go:20` `needAuth=false` |
+| 證據 | `controller/RecordController.go:20` 路由已註解；handler 不再標註 `@Router`；Swagger 目錄已移除 |
 | 影響 | 未授權查詢/濫用資料源 |
-| 緩解 | 改為 `true`、加授權與速率限制 |
-| 狀態 | Open |
+| 緩解 | 已完成：功能停用；其他 `/record/*` 端點維持 `needAuth=true`。未來若恢復需加認證、授權與速率限制 |
+| 驗證 | `/record/queryrecord` 未註冊，請求回 404；Swagger 不再列出 |
+| 狀態 | Fixed |
 
 ### R-004 密碼雜湊未加鹽
 
@@ -367,16 +370,18 @@
 flowchart LR
     P0[P0 立即] --> P1[P1 短期]
     P1 --> P2[P2 中期]
-    P0 --- A[認證/密鑰/TLS/queryrecord]
+    P0 --- A[認證/密鑰/TLS/queryrecord<br/>R-001/R-002/R-003 已修復]
     P1 --- B[密碼雜湊/速率限制/WS 認證/probes]
     P2 --- C[物件儲存/多副本/SSO/測試]
 ```
 
 | 階段 | 項目 |
 |------|------|
-| P0 | R-001、R-002、R-003、R-008、R-023 |
+| P0 | R-001、R-002、R-003 已修復；待處理 R-008、R-023、R-002-R |
 | P1 | R-004、R-005、R-006、R-015、R-016、R-018、R-022 |
 | P2 | R-009、R-010、R-011、R-017、R-021、TD-001~008 |
+
+> R-001/R-002/R-003 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
 
 ## 6. 決策記錄格式
 

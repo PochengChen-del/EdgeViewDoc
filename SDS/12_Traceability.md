@@ -120,7 +120,7 @@ flowchart LR
 | 需求群組 | 設計 | 驗證 |
 |----------|------|------|
 | NFR-PERF-001~012 | SDS-03 §10、SDS-05 §12、SDS-10 §7 | 效能測試、壓測、監控 |
-| NFR-SEC-001~014 | SDS-08 全章、SDS-11 §2 | 滲透測試、組態檢查 |
+| NFR-SEC-001~014 | SDS-08 全章、SDS-11 §2、SDS-13 | 滲透測試、組態檢查 |
 | NFR-REL-001~010 | SDS-05 §10、SDS-10 §8~11 | 故障注入、備份還原 |
 | NFR-SCL-001~005 | SDS-02 §4、SDS-10 §10 | 擴縮容測試 |
 | NFR-MNT-001~008 | SDS-10 全章 | 維運演練 |
@@ -159,6 +159,7 @@ flowchart LR
 | SDS-10 | NFR-MNT/PORT/REL |
 | SDS-11 | 風險與技術債 |
 | SDS-12 | 追溯 |
+| SDS-13 | R-001/R-002/R-003 修復設計與驗收 |
 
 ## 8. 反向追溯（程式碼 → 需求）
 
@@ -176,6 +177,8 @@ flowchart LR
 | `service/scProxyService.go`、`edgeHubService.go` | FR-RT-019~020 |
 | `service/firebaseService.go`、`AlarmNotifyService.go` | FR-RT-021~022 |
 | `pgstore/*`、`routes/routes.go` | FR-RT-017~018、023~024 |
+| `service/session_secret.go`（Metadata/Runtime/xnginx/Alarm） | R-001、NFR-SEC-008 |
+| `controller/RecordController.go`（queryrecord 停用） | R-003、NFR-SEC-001 |
 
 ## 9. 未對應/待確認
 
@@ -208,5 +211,6 @@ flowchart LR
 | 日期 | 版本 | 變更 | 作者 |
 |------|------|------|------|
 | 2026-11-13 | 1.0 | 初版 SRS/SDS | Junyu.Ke |
+| 2026-11-13 | 1.1 | 補 R-001/R-002/R-003 修復紀錄與介面現況 | 工程團隊 |
 
 > 需求變更時，需同步更新 SRS-03、SDS-12 與測試案例。

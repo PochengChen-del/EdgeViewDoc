@@ -89,8 +89,10 @@ sequenceDiagram
 | 有效期 | `sessiontimeout=604800`（7 天） |
 | 續期 | 請求時由 store 更新 |
 | 登出 | 清除 Cookie + Session |
-| 跨服務 | Metadata 與 Runtime 共用 store/secret |
-| 多副本 | 共用 DB，天然共享 Session |
+| 密鑰來源 | 優先 `SESSION_SECRET`；否則 `aes_secret` 經 HKDF-SHA256（`info="edgeview/session-cookie/v1"`）派生；皆無則啟動失敗 |
+| 輪替 | `SESSION_SECRET_PREVIOUS` 作為舊 key，保留至少一個 session timeout |
+| 跨服務 | Metadata、Runtime、xnginx、OPC UA Alarm Agent 共用同一解析規則與 key |
+| 多副本 | 共用 DB，天然共享 Session；key 來源需一致 |
 
 ### 3.4 Session 失效處理
 
@@ -172,7 +174,8 @@ sequenceDiagram
 | 授權檔 | AES + MAC/TID | `secret_*.go` |
 | Client 指令碼 | 壓縮/加密 | `security/aes` |
 
-- 機器金鑰不存在時回退舊金鑰（需監控）。
+- 資料加密：機器金鑰不存在時回退舊金鑰（需監控）。
+- Session key：不回退舊金鑰；`SESSION_SECRET` 與 `aes_secret` 皆無時啟動失敗（見 SDS-13）。
 - CBC 需確保 IV 管理與完整性（建議 GCM）。
 
 ### 6.3 稽核完整性
@@ -192,10 +195,10 @@ sequenceDiagram
 | Client ↔ Metadata | HTTP/HTTPS 可選 | 正式環境強制 HTTPS |
 | Client ↔ Runtime | HTTP/HTTPS/WS 可選 | 強制 WSS |
 | Ingress | TLS | 憑證管理/自動續期 |
-| Runtime → 外部 | `InsecureSkipVerify=true` | 改為驗證/指定 CA |
-| Metadata → 外部 | 部分驗證 | 全面驗證 |
+| Runtime → 外部 | 全域 `InsecureSkipVerify` 已移除；個別 client 仍停用 | 逐步改為系統 CA/指定 CA（R-002-R） |
+| Metadata → 外部 | 部分 client 停用驗證 | 全面驗證（R-002-R） |
 
-> **高風險**：`wxproxy.go:37` 全域停用憑證驗證，任何外連都可能被中間人攻擊。
+> **現況**：`wxproxy.go` 的全域 `http.DefaultTransport` 覆寫已移除。個別 WA/BI/X/HTTP client 仍有 `InsecureSkipVerify: true`，列為殘餘風險 R-002-R，正式環境應改為系統 CA 或指定 CA。
 
 ## 8. WebSocket 安全
 
@@ -246,7 +249,7 @@ sequenceDiagram
 | 檔案路徑 | 正規化，禁止 `..` |
 | JSON | 綁定結構，限制大小 |
 
-**風險**：`/record/queryrecord` 可執行任意查詢且無認證，屬高危。
+**風險（已處理）**：`/record/queryrecord` 原可執行任意查詢且無認證，屬高危；目前已停用路由，不再對外提供。其他 `/record/*` 端點維持 `needAuth=true`。
 
 ## 11. 稽核與監控
 
@@ -280,19 +283,19 @@ sequenceDiagram
 | Spoofing | 冒用 Session | Session + CSRF | Cookie 未 HttpOnly |
 | Tampering | 修改請求/稽核 | 時間戳、checksum | 非一次性時間戳 |
 | Repudiation | 否認操作 | 稽核日誌 | 日誌可被管理者刪除 |
-| Information Disclosure | 攔截 TLS | TLS（可選） | `InsecureSkipVerify` |
+| Information Disclosure | 攔截 TLS | 全域 `InsecureSkipVerify` 已移除 | 個別 client 仍停用驗證（R-002-R） |
 | Denial of Service | 大量查詢/WS | 連線池、佇列 | 無速率限制 |
-| Elevation of Privilege | 越權 API | 權限檢查 | 部分端點未驗證 |
+| Elevation of Privilege | 越權 API | 權限檢查；`/record/queryrecord` 已停用 | 部分公開端點未驗證 |
 
 ## 14. 加固清單
 
 ### 14.1 必做（P0）
 
 1. 強制 HTTPS/WSS。
-2. 移除 `InsecureSkipVerify`。
-3. `/record/queryrecord` 加認證/授權。
+2. 移除全域 `InsecureSkipVerify`（已完成）；個別 client 逐步改指定 CA（R-002-R）。
+3. `/record/queryrecord` 加認證/授權（已改為停用路由）。
 4. `systeminfo`/`default` 加登入檢查。
-5. Session secret 改環境變數/密鑰管理。
+5. Session secret 改環境變數/密鑰管理（已完成）。
 6. 密碼改 Argon2id/bcrypt（含遷移）。
 7. CSRF Cookie 設 `HttpOnly` + `SameSite`（前端改用 response body token）。
 

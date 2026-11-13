@@ -430,6 +430,8 @@ This operation does not require authentication
 
 ## post__record_queryrecord
 
+> **已停用（R-003）**：此端點未註冊，請求會回 404。以下內容僅保留為歷史文件。
+
 > Code samples
 
 ```http

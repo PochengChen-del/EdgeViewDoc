@@ -54,10 +54,9 @@ sequenceDiagram
     participant Srv as HTTP/HTTPS Server
 
     Main->>Cfg: 讀取 config / flags / env
-    Main->>Main: TLS InsecureSkipVerify（全域）
     Main->>DB: SharedDB(postgres, ConfigDB, 10)
     Main->>DB: SET search_path
-    Main->>Main: pgstore.NewStore + Sessions
+    Main->>Main: LoadSessionKeys() + pgstore.NewStore + Sessions
     Main->>Hub: NewSocketsHub() + go Run()
     Main->>App: NewApplication()
     Main->>Routes: CreateMapping
@@ -73,9 +72,9 @@ sequenceDiagram
 
 | 步驟 | 說明 |
 |------|------|
-| TLS | `http.DefaultTransport` 全域 `InsecureSkipVerify=true`（風險） |
+| TLS | 全域 `InsecureSkipVerify` 已移除；個別 client 仍停用驗證（R-002-R） |
 | DB | `repository.SharedDB` 連線池 10；`search_path` 依環境 |
-| Session | `graphicSession`；secret 硬編碼；`MaxAge=sessiontimeout` |
+| Session | `graphicSession`；key 由 `LoadSessionKeys()` 解析（env 或 `aes_secret` HKDF）；`MaxAge=sessiontimeout` |
 | WS 路徑 | WebAccess/OPC UA/X：`/so`；BI：`/`，並掛 `EdgeHubOptions` |
 | 認證逾時 | 連線後 `websocket_auth_timeout` 秒內需完成 login，否則關閉 |
 | 背景服務 | EdgeHub、SC Proxy、Firebase、AlarmNotify |
@@ -241,7 +240,7 @@ sequenceDiagram
 
 | Method | Path | 認證 | 用途 |
 |--------|------|------|------|
-| POST | `/record/queryrecord` | 否 | 直接查詢（風險，見 SDS-11） |
+| POST | `/record/queryrecord` | — | 已停用（路由未註冊，見 SDS-13 R-003） |
 | POST | `/record/schema` | 是 | 資料庫 schema |
 | POST | `/record/tableschema` | 是 | 資料表 schema |
 | POST | `/record/previewquery` | 是 | 預覽查詢 |
@@ -264,7 +263,7 @@ sequenceDiagram
   - Session 名稱 `graphicSession`。
   - 驗證失敗清 Cookie 並回 `-100`。
 - `verifyPacketTimestamp`：JSON 或表單 `packetTimestamp`，誤差 > `driftseconds` 回 `-102`。
-- `/record/queryrecord` 目前**不驗證**（設計缺陷）。
+- `/record/queryrecord` 已停用（路由未註冊）；其他 `/record/*` 端點皆需 Session + CSRF。
 
 ### 5.3 回應格式
 
@@ -416,7 +415,7 @@ sequenceDiagram
 | 時間戳 | REST `packetTimestamp` |
 | Basic Auth | WA/X 內部整合 |
 | WS 認證逾時 | 10 秒 |
-| TLS | 可設定；全域 `InsecureSkipVerify`（風險） |
+| TLS | 可設定；全域 `InsecureSkipVerify` 已移除；個別 client 待改指定 CA（R-002-R） |
 | CORS | 由 EdgeHubOptions/Ingress 控制 |
 
 ## 12. 效能設計
@@ -440,10 +439,10 @@ sequenceDiagram
 
 ## 14. 已知限制
 
-1. `/record/queryrecord` 未認證。
+1. `/record/queryrecord` 已停用（不再列出）。
 2. EH/X 告警間隔未初始化。
-3. TLS 全域不驗證憑證。
-4. Session secret 硬編碼。
+3. 全域 TLS 不驗證已移除；個別 client 仍停用（R-002-R）。
+4. Session secret 已改為 env/`aes_secret` HKDF，無硬編碼。
 5. `systeminfo`/`default` 未要求登入。
 6. Record 快取無 TTL，長期訂閱可能累積。
 7. 多副本需 Sticky Session（Hub 為記憶體狀態）。

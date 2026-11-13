@@ -108,7 +108,7 @@ flowchart TB
 
 | 群組 | 主要功能 |
 |------|----------|
-| Record 查詢 | queryrecord、preview、previewquery、previewhttp、schema、tableschema |
+| Record 查詢 | preview、previewquery、previewhttp、schema、tableschema（`queryrecord` 已停用） |
 | 分頁 | prevpage、nextpage、gotopage |
 | Datalog | querydatalog（時間範圍、間隔、時間欄位） |
 | 指令 | runrecordcmd（SQL/Influx/HTTP） |

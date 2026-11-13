@@ -30,11 +30,11 @@
 | NFR-SEC-001 | 認證 | Must | 所有非公開 API 需有效 Session 與 CSRF Token；公開端點需明確白名單。 |
 | NFR-SEC-002 | 授權 | Must | 依專案與角色檢查權限；無權限回傳 `-101`。 |
 | NFR-SEC-003 | 密碼儲存 | Must | 不得儲存明文密碼；現行使用 SHA-256，應逐步升級為加鹽雜湊（見 SDS-11）。 |
-| NFR-SEC-004 | 傳輸安全 | Must | 支援 HTTPS；憑證可設定。現行部分內部呼叫停用 TLS 驗證，應於正式環境關閉（見 SDS-11）。 |
+| NFR-SEC-004 | 傳輸安全 | Must | 支援 HTTPS；憑證可設定。全域停用 TLS 驗證已移除；個別外部呼叫仍停用者應逐步改為系統 CA/指定 CA（R-002-R）。 |
 | NFR-SEC-005 | CSRF | Must | 狀態變更請求需驗證 `csrfToken`。 |
 | NFR-SEC-006 | 防重放 | Must | 寫入操作需驗證 `packetTimestamp`（預設 300 秒）。 |
 | NFR-SEC-007 | 敏感設定加密 | Must | 資料來源密碼以 AES-256-CBC 加密儲存；金鑰不得寫入版本庫。 |
-| NFR-SEC-008 | Session 管理 | Must | Session 存於伺服器端；登出/逾時即失效；Cookie 需 HttpOnly/Secure（依部署）。 |
+| NFR-SEC-008 | Session 管理 | Must | Session 存於伺服器端；登出/逾時即失效；Session secret 不得硬編碼，需由 `SESSION_SECRET` 或 `aes_secret` 派生；Cookie 需 HttpOnly/Secure（依部署）。 |
 | NFR-SEC-009 | WebSocket 認證 | Must | 連線後需於 10 秒內完成登入，否則斷線。 |
 | NFR-SEC-010 | 上傳限制 | Must | 限制上傳大小與類型；避免路徑穿越。 |
 | NFR-SEC-011 | 日誌安全 | Should | 日誌不得記錄密碼、Token、完整憑證。 |

@@ -100,6 +100,7 @@ flowchart LR
 | SDS-10 | [SDS/10_Deployment_and_Operations.md](SDS/10_Deployment_and_Operations.md) | 組態、連接埠、部署、日誌、維運 |
 | SDS-11 | [SDS/11_Design_Decisions_and_Risks.md](SDS/11_Design_Decisions_and_Risks.md) | 設計取捨、已知限制與技術債 |
 | SDS-12 | [SDS/12_Traceability.md](SDS/12_Traceability.md) | SRS ↔ SDS ↔ 程式碼追溯 |
+| SDS-13 | [SDS/13_Security_Remediation.md](SDS/13_Security_Remediation.md) | R-001/R-002/R-003 修復設計、部署需求與驗收 |
 
 ## 4. 需求編號規則
 

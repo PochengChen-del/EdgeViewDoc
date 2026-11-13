@@ -468,7 +468,7 @@ sequenceDiagram
 
 | Method | Path | Auth | 用途 |
 |--------|------|------|------|
-| POST | `/record/queryrecord` | 否 | 直接查詢（**風險**） |
+| POST | `/record/queryrecord` | — | 已停用（路由未註冊，見 SDS-13 R-003） |
 | POST | `/record/schema` | 是 | 資料庫 schema |
 | POST | `/record/tableschema` | 是 | 資料表 schema |
 | POST | `/record/previewquery` | 是 | 預覽查詢 |

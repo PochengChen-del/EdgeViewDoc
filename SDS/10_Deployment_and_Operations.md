@@ -112,7 +112,7 @@ flowchart TB
 
 1. 增加 `livenessProbe`/`readinessProbe`（`/ping/*`、`/foo/serverTime`）。
 2. 設定 `PodDisruptionBudget`。
-3. 使用 Secret 管理 Session secret/DB 密碼。
+3. 使用 Secret 管理 Session secret/DB 密碼（Session secret 已完成程式端改造；部署需注入 `SESSION_SECRET`）。
 4. 設定 HPA（CPU/記憶體/連線數）。
 5. 設定 NetworkPolicy 限制外部存取。
 
@@ -137,13 +137,33 @@ flowchart TB
 
 | 變數 | 用途 |
 |------|------|
+| `SESSION_SECRET` | Session cookie 簽章金鑰；至少 32 bytes；Metadata/Runtime/xnginx/OPC UA Alarm Agent 需一致 |
+| `SESSION_SECRET_PREVIOUS` | 選用；輪替期間保留的舊 Session key |
 | `ENSAAS_SERVICES` / `VCAP_SERVICES` | DB 連線資訊 |
+| `PG_SCHEMA` | 指定 schema；建議明確設定，確保各服務讀到同一 `aes_secret` |
 | `LOG_ENV` | 日誌 DB |
 | `exdomain` | Edge365 網域 |
 | `DC_PORTAL_URL` / `API_DBMASTER_URL` / `API_ALARM_URL` | Edge365 服務 |
 | `APPS` | 路由對應 |
 | `ETCD_HOST` / `ETCD_PORT` / `iapp_ns` | IApp |
 | `license_type` / `license_*` | 授權 |
+
+### 5.4 Session key 來源與部署
+
+程式依下列順序取得 Session key，**不可回退到硬編碼值**：
+
+1. `SESSION_SECRET`（建議由 K8s Secret 或安裝程式注入）。
+2. `aes_secret`（KeyMigrator 建立的 32-byte 機器金鑰），以 HKDF-SHA256 派生：
+   `HKDF(machineKey, salt=nil, info="edgeview/session-cookie/v1")`。
+3. 兩者皆無：服務啟動失敗。
+
+部署注意：
+
+- Metadata、Runtime、xnginx 共用 `waxconfig` 與同一 schema；若使用 `aes_secret`，`PG_SCHEMA` 必須一致。
+- OPC UA Alarm Agent 使用 `waxalarm`；若不共用 cookie，可獨立設定；若需共用 `graphicSession`，必須使用相同 `SESSION_SECRET`。
+- 啟動 log 會輸出 `[session] key source=... fingerprint=...`；部署時比對各服務 fingerprint 是否一致，但不要記錄 key 本體。
+- 輪替：先同時部署 `SESSION_SECRET` + `SESSION_SECRET_PREVIOUS`，待舊 session 過期後移除 previous。
+- K8s 未執行 KeyMigrator 時，`aes_secret` 可能不存在，必須提供 `SESSION_SECRET`。
 
 ## 6. 連接埠與網路
 

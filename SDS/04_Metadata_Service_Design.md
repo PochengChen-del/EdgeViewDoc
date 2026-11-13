@@ -47,7 +47,7 @@ sequenceDiagram
     Main->>DB: InitDataBase(DefaultDBName)
     Main->>DB: sql.Open(postgres)、設定連線池
     Main->>DB: SET search_path
-    Main->>Sess: pgstore.NewStore(db, secret)
+    Main->>Sess: LoadSessionKeys() + pgstore.NewStore(db, keys...)
     Main->>Main: 設定 Session 選項（MaxAge=sessiontimeout）
     Main->>Routes: CreateMapping(engine, app)
     Main->>HTTP: ListenAndServe
@@ -73,7 +73,7 @@ sequenceDiagram
 | 一般 | `/` | — | `sessiontimeout`（604800） | 否 | 否 |
 | BI | `/` | `Meta365.CookieDomain()` | `sessiontimeout` | 是 | 否 |
 
-> 設計風險：secret 硬編碼於 `meta-agent.go`（見 SDS-11）。
+> Session key 由 `service/session_secret.go` 的 `LoadSessionKeys()` 解析：`SESSION_SECRET` 優先，否則使用 `aes_secret` 經 HKDF 派生，皆無則啟動失敗（見 SDS-13）。
 
 ## 3. 組態設計
 
@@ -337,8 +337,8 @@ flowchart TD
 
 ## 13. 已知限制
 
-1. Session secret 與 DB 預設密碼硬編碼。
-2. 部分內部 HTTPS 呼叫停用憑證驗證。
+1. DB 預設密碼仍為明文（Session secret 已改為 env/機器金鑰派生）。
+2. 部分內部 HTTPS 呼叫仍停用憑證驗證（R-002-R）。
 3. 密碼雜湊未加鹽。
 4. Schema 迁移分散於程式碼。
 5. BI 模式部分功能（本機 DB）停用。
