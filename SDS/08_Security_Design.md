@@ -289,7 +289,7 @@ sequenceDiagram
 | Tampering | 修改請求/稽核 | 時間戳、checksum | 非一次性時間戳 |
 | Repudiation | 否認操作 | 稽核日誌 | 日誌可被管理者刪除 |
 | Information Disclosure | 攔截 TLS | 全域 `InsecureSkipVerify` 已移除 | 個別 client 仍停用驗證（R-002-R） |
-| Denial of Service | 大量查詢/WS | 連線池、佇列 | 無速率限制 |
+| Denial of Service | 大量查詢/WS | nginx `limit_req`（每 app/來源 IP）、連線池、佇列 | 門檻偏高（預設 4090r/s、burst 256）；非 OPC UA 無帳號鎖定；WS 訊息未限流 |
 | Elevation of Privilege | 越權 API | 權限檢查；`/record/queryrecord` 已停用 | 部分公開端點未驗證 |
 
 ## 14. 加固清單
@@ -306,8 +306,8 @@ sequenceDiagram
 
 ### 14.2 建議（P1）
 
-1. 速率限制（登入、查詢、WS）。
-2. 帳號鎖定與 MFA（管理員）。
+1. 速率限制：nginx 已有每 app/來源 IP 的 `limit_req`；仍需針對登入、查詢與 WS 訊息設定更嚴格門檻。
+2. 帳號鎖定與 MFA（管理員）；目前只有 OPC UA `OPCUA_LoginLock`。
 3. WS Origin/大小/連線數限制。
 4. 上傳類型/病毒掃描。
 5. 稽核日誌 WORM/外部儲存。

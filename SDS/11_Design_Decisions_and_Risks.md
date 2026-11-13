@@ -178,10 +178,11 @@
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | High |
-| 證據 | `config.go` `EHAlmSummaryIntervalMs=-1`、`XAlmSummaryIntervalMs=-1`；`time.Sleep(-1ms)` 立即返回 |
+| 證據 | 原 `config.go` `EHAlmSummaryIntervalMs=-1`、`XAlmSummaryIntervalMs=-1`；`time.Sleep(-1ms)` 立即返回 |
 | 影響 | 忙迴圈、CPU 飆高、外部服務被打爆 |
-| 緩解 | 從設定綁定，預設 1000ms，並加下限 |
-| 狀態 | Open |
+| 緩解 | 已完成：新增 `eh_alarm_summary_interval_ms`、`x_alarm_summary_interval_ms` 預設 1000ms；讀取後一律經 `normalizeIntervalMs`，<=0 用預設、低於 100ms 夾到 100ms；WA/OPC UA/SystemInfo 一併套用 |
+| 驗證 | 啟動 log 顯示 EH/X 間隔為 1000（或設定值）；`time.Sleep` 不再收到負值 |
+| 狀態 | Fixed |
 
 ### R-009 Record 快取無 TTL
 
@@ -258,10 +259,10 @@
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | High |
-| 證據 | 僅 OPC UA 有 `OPCUA_LoginLock`；其他無明顯限制 |
-| 影響 | 暴力破解、資源耗盡 |
-| 緩解 | 登入/查詢/WS 速率限制、帳號鎖定 |
-| 狀態 | Open |
+| 證據 | `wax_nginx_ingress` 已有每 app `limit_req_zone` + `limit_req`（`xnginx.go`、`xnginx.yaml`），但預設 `4090r/s`、burst 256，對登入暴力破解實質保護有限；只有 OPC UA 有 `OPCUA_LoginLock`，其他來源無帳號鎖定；K8s ingress manifests 未見 rate limit annotation |
+| 影響 | 暴力破解、資源耗盡；nginx 限流可被高門檻或直連 backend 繞過；WS 握手後的訊息不受 `limit_req` 保護 |
+| 緩解 | 已有 nginx 全站/每 app 限流；待補：登入專用嚴格門檻、非 OPC UA 帳號鎖定、WS 訊息速率限制、K8s Ingress 限流、限制 backend 直連 |
+| 狀態 | Mitigating |
 
 ### R-017 稽核日誌可被管理者刪除
 
@@ -378,11 +379,11 @@ flowchart LR
 
 | 階段 | 項目 |
 |------|------|
-| P0 | R-001、R-002、R-003、R-006 已修復；待處理 R-008、R-023、R-002-R |
+| P0 | R-001、R-002、R-003、R-006、R-008 已修復；待處理 R-023、R-002-R |
 | P1 | R-004、R-005、R-015、R-016、R-018、R-022 |
 | P2 | R-009、R-010、R-011、R-017、R-021、TD-001~008 |
 
-> R-001/R-002/R-003/R-006 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
+> R-001/R-002/R-003/R-006/R-008 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
 
 ## 6. 決策記錄格式
 
@@ -404,7 +405,8 @@ flowchart LR
 | 風險 | 需求 |
 |------|------|
 | R-001~R-007 | NFR-SEC-001~010 |
-| R-008/R-009/R-016 | NFR-PERF-001~012 |
+| R-008/R-009 | NFR-PERF-001~012 |
+| R-016 | NFR-PERF-001~012、NFR-SEC-015 |
 | R-010/R-022 | NFR-REL-001~010 |
 | R-017/R-023 | NFR-AUD-001~005、NFR-PRV-001~004 |
 | R-011/R-019 | NFR-MNT-001~005 |

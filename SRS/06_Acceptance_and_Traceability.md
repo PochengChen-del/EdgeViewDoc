@@ -73,7 +73,7 @@
 
 | 編號 | 議題 | 影響需求 | 建議 |
 |------|------|----------|------|
-| OI-001 | EdgeHub/X 告警輪詢間隔未初始化（`-1`） | FR-RT-013、FR-RT-015、NFR-PERF-004 | 於啟動時設定預設 1000 ms 並加測試 |
+| OI-001 | EdgeHub/X 告警輪詢間隔未初始化（`-1`） | FR-RT-013、FR-RT-015、NFR-PERF-004 | 已修：預設 1000 ms，`<=0` 用預設、低於 100 ms 夾到 100 ms |
 | OI-002 | MQTT Client 停用但仍有設定/UI | FR-CLI-091 | 明確標示停用或移除 |
 | OI-003 | ODBC 未實作 | IF-SW-006 | 文件標示不支援，避免誤用 |
 | OI-004 | 密碼雜湊未加鹽 | NFR-SEC-003 | 規劃遷移至 Argon2/bcrypt |
@@ -81,3 +81,4 @@
 | OI-006 | WebSocket `systeminfo`/`default` 認證不足 | NFR-SEC-009 | 已修（R-006）：非 `login` topic 需登入；systeminfo 登入後才訂閱 |
 | OI-007 | Record 快取無明確閒置 TTL | NFR-PERF/REL | 依設計註解實作 10 分鐘回收或調整文件 |
 | OI-008 | DataSource source type 編號不一致 | IF-SW-002/004 | 統一常數並加轉換層 |
+| OI-009 | 非 OPC UA 登入鎖定與 K8s 限流未完整 | NFR-SEC-015 | nginx 已有 `limit_req`；補登入專用門檻、帳號鎖定、WS 訊息限流與 K8s ingress annotation |

@@ -120,7 +120,7 @@ flowchart LR
 | 需求群組 | 設計 | 驗證 |
 |----------|------|------|
 | NFR-PERF-001~012 | SDS-03 §10、SDS-05 §12、SDS-10 §7 | 效能測試、壓測、監控 |
-| NFR-SEC-001~014 | SDS-08 全章、SDS-11 §2、SDS-13 | 滲透測試、組態檢查 |
+| NFR-SEC-001~015 | SDS-08 全章、SDS-10 §4.2、SDS-11 §2、SDS-13 | 滲透測試、組態檢查 |
 | NFR-REL-001~010 | SDS-05 §10、SDS-10 §8~11 | 故障注入、備份還原 |
 | NFR-SCL-001~005 | SDS-02 §4、SDS-10 §10 | 擴縮容測試 |
 | NFR-MNT-001~008 | SDS-10 全章 | 維運演練 |
@@ -180,6 +180,8 @@ flowchart LR
 | `service/session_secret.go`（Metadata/Runtime/xnginx/Alarm） | R-001、NFR-SEC-008 |
 | `controller/RecordController.go`（queryrecord 停用） | R-003、NFR-SEC-001 |
 | `service/webSocket.go`、`controller/websocket/*`（WS 認證） | R-006、NFR-SEC-009 |
+| `config/config.go`、`EHAlarmPolling.go`、`XAlarmPolling.go` | R-008、NFR-PERF-004 |
+| `xnginx.go`、`xnginx.yaml`、`nginx.conf.templ`（rate limit） | R-016、NFR-SEC-015 |
 
 ## 9. 未對應/待確認
 
@@ -214,5 +216,7 @@ flowchart LR
 | 2026-11-13 | 1.0 | 初版 SRS/SDS | Junyu.Ke |
 | 2026-11-13 | 1.1 | 補 R-001/R-002/R-003 修復紀錄與介面現況 | 工程團隊 |
 | 2026-11-13 | 1.2 | 補 R-006 WebSocket 認證修復與驗收 | 工程團隊 |
+| 2026-11-13 | 1.3 | 補 R-008 EH/X 告警輪詢間隔修復與驗收 | 工程團隊 |
+| 2026-11-13 | 1.4 | 補 R-016 nginx 限流現況與殘餘風險 | 工程團隊 |
 
 > 需求變更時，需同步更新 SRS-03、SDS-12 與測試案例。

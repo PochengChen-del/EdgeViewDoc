@@ -10,6 +10,7 @@
 | R-002 | 全域停用 TLS 憑證驗證 | Fixed | 移除 `http.DefaultTransport` 全域 `InsecureSkipVerify` |
 | R-003 | `/record/queryrecord` 無認證 | Fixed | 路由停用，handler 不再標註 `@Router`，Swagger 目錄移除 |
 | R-006 | WebSocket 部分 topic 未認證 | Fixed | 非 `login` topic 統一要求 `AlreadyLogin`；systeminfo 登入後才註冊 |
+| R-008 | EH/X 告警輪詢間隔未初始化 | Fixed | 預設 1000ms；`<=0` 用預設、低於 100ms 夾到 100ms |
 
 ## 2. R-001 Session secret
 
@@ -105,7 +106,37 @@ sessionKey = HKDF-SHA256(
 4. WS login 成功後，systeminfo 才開始推送。
 5. `CheckAuthAndCloseAfter` 10 秒後仍會關閉未登入連線。
 
-## 6. 部署需求
+## 6. R-008 EH/X 告警輪詢間隔
+
+### 6.1 設計
+
+- `config.go` 新增預設：
+  - `eh_alarm_summary_interval_ms = 1000`
+  - `x_alarm_summary_interval_ms = 1000`
+- 讀取後統一經過 `normalizeIntervalMs`：
+  - `<= 0`：使用預設值。
+  - `1 ~ 99ms`：夾到最低 100ms。
+  - `>= 100ms`：使用設定值。
+- 同一規則套用於 WA、OPC UA、SystemInfo，避免其他輪詢因 `0`/負值變成忙迴圈。
+- 啟動 log 會輸出 `EHAlmSummaryIntervalMs`、`XAlmSummaryIntervalMs` 等實際值。
+
+### 6.2 程式位置
+
+| 功能 | 檔案 |
+|------|------|
+| 預設值與正規化 | `wax_rutime_proxy/config/config.go` |
+| EH 輪詢 | `wax_rutime_proxy/service/EHAlarmPolling.go` |
+| X 輪詢 | `wax_rutime_proxy/service/XAlarmPolling.go` |
+| 設定檔範例 | `wax_rutime_proxy/config.yaml` |
+
+### 6.3 驗收
+
+1. `config.yaml` 未設定 EH/X 時，啟動 log 顯示 1000ms。
+2. 設定 `-1` 或 `0` 時，仍使用 1000ms。
+3. 設定低於 100ms 時，實際使用 100ms。
+4. `time.Sleep` 不再收到 `-1ms` 或 `0ms`。
+
+## 7. 部署需求
 
 | 項目 | 需求 |
 |------|------|
@@ -117,7 +148,7 @@ sessionKey = HKDF-SHA256(
 
 K8s 環境若未注入 `SESSION_SECRET` 且資料庫沒有 `aes_secret`，服務會依設計啟動失敗，這是 R-001 的 fail-closed 行為。
 
-## 7. 驗收
+## 8. 驗收
 
 1. 原始碼搜尋不得再出現固定 session secret 字串。
 2. 各服務 `go build ./...` 成功。
@@ -127,8 +158,10 @@ K8s 環境若未注入 `SESSION_SECRET` 且資料庫沒有 `aes_secret`，服務
 6. 設定 `SESSION_SECRET_PREVIOUS` 時，舊 cookie 在期限內仍可解碼。
 7. 未登入 WS 送非 `login` topic 回 `-100`，且不觸發 `default` 廣播。
 8. 未登入不進入 systeminfo polling；登入後才收到 systeminfo。
+9. EH/X 未設定、`-1` 或 `0` 時，實際 interval 為 1000ms。
+10. EH/X 設定低於 100ms 時，實際 interval 為 100ms。
 
-## 8. 後續追蹤
+## 9. 後續追蹤
 
 | 編號 | 項目 | 說明 |
 |------|------|------|

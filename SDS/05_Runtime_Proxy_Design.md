@@ -93,6 +93,8 @@ sequenceDiagram
 | `log` | `filemaxmb`/`tofile` | 15/false | 日誌 |
 | `systeminfo_interval_ms` | int | 3000 | 系統資訊輪詢 |
 | `wa_alarm_summary_interval_ms` | int | 1000 | WA 告警摘要 |
+| `eh_alarm_summary_interval_ms` | int | 1000 | EH 告警摘要 |
+| `x_alarm_summary_interval_ms` | int | 1000 | X 告警摘要 |
 | `opcua_alarm_summary_interval_ms` | int | 1000 | OPC UA 告警摘要 |
 | `opcua.alarm` | `host`/`port`/`protocol`/`user`/`password` | `127.0.0.1:8090` | OPC UA 告警 |
 | `websocket_auth_timeout` | int | 10 | WS 認證秒數 |
@@ -343,10 +345,10 @@ sequenceDiagram
 | System Info | `SystemInfoPolling.go` | 3000 ms | SC Server TCP 連線狀態 |
 | WA 告警 | `WAAlarmPolling.go` | 1000 ms | `AlarmSummary(100000)` |
 | OPC UA 告警 | `OpcuaAlarmPolling.go` | 1000 ms | Agent `:8090`；連線資訊 TTL 60 秒 |
-| EH 告警 | `EHAlarmPolling.go` | `EHAlmSummaryIntervalMs`（預設 -1） | EdgeHub 告警 |
-| X 告警 | `XAlarmPolling.go` | `XAlmSummaryIntervalMs`（預設 -1） | X 平台；連線資訊 TTL 60 秒 |
+| EH 告警 | `EHAlarmPolling.go` | `EHAlmSummaryIntervalMs`（預設 1000ms） | EdgeHub 告警 |
+| X 告警 | `XAlarmPolling.go` | `XAlmSummaryIntervalMs`（預設 1000ms） | X 平台；連線資訊 TTL 60 秒 |
 
-> **風險**：EH/X 間隔未從 `config.yaml` 綁定，維持 `-1`，`time.Sleep` 可能立即返回造成高頻輪詢。
+> EH/X 間隔已從 `config.yaml` 綁定，預設 1000ms；所有輪詢間隔經 `normalizeIntervalMs`，<=0 使用預設、低於 100ms 夾到 100ms。
 
 > System Info 使用 TCP dial（2 秒 timeout）檢查 `ScServerAPIUrl` 的 host:port 是否接受連線；只代表連線可達，不代表 API 健康或授權正常。
 
@@ -443,7 +445,7 @@ sequenceDiagram
 ## 14. 已知限制
 
 1. `/record/queryrecord` 已停用（不再列出）。
-2. EH/X 告警間隔未初始化。
+2. EH/X 告警間隔已初始化（預設 1000ms），不再有 `-1` 忙迴圈。
 3. 全域 TLS 不驗證已移除；個別 client 仍停用（R-002-R）。
 4. Session secret 已改為 env/`aes_secret` HKDF，無硬編碼。
 5. `systeminfo`/`default` 已要求登入；`default` 仍會廣播已登入者訊息（非 R-006）。

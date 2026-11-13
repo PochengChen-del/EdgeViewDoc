@@ -11,7 +11,7 @@
 | NFR-PERF-001 | 畫面載入時間 | Must | 一般畫面（≤200 Widget）於區網內 3 秒內完成首次顯示；縮圖/資源採非同步載入。 |
 | NFR-PERF-002 | Viewer 即時更新 | Must | Record 輪詢週期 1 秒；Tag 批次更新間隔 33 ms；UI 不因資料更新阻塞。 |
 | NFR-PERF-003 | WebSocket 延遲 | Should | 資料變更至 Client 顯示的端到端延遲 ≤2 秒（正常網路）。 |
-| NFR-PERF-004 | 告警摘要更新 | Should | WA/OPC UA 告警摘要輪詢 1 秒；EH/X 依設定（預設應為 1 秒）。 |
+| NFR-PERF-004 | 告警摘要更新 | Should | WA/EH/X/OPC UA 告警摘要預設輪詢 1 秒；可由設定調整，低於 100 ms 會夾到 100 ms。 |
 | NFR-PERF-005 | 系統資訊 | Should | 每 3000 ms 更新一次。 |
 | NFR-PERF-006 | 查詢資料量 | Must | 單次 Record 查詢 `max_data_size` 限制 1–1000 筆。 |
 | NFR-PERF-007 | HTTP 併發 | Should | Client 最多 255 個並行 HTTP 連線、1024 佇列；Viewer 等待上限 10 秒。 |
@@ -41,6 +41,7 @@
 | NFR-SEC-012 | 依賴弱點 | Should | 定期掃描 Go/NPM/Qt 依賴與 SBOM（參考 `D:\Document\EdgeView SBom`）。 |
 | NFR-SEC-013 | 權限最小化 | Should | 服務以非 root 執行；資料庫帳號最小權限。 |
 | NFR-SEC-014 | 腳本沙箱 | Should | Client 腳本不得任意存取檔案系統；僅能透過受控 API。 |
+| NFR-SEC-015 | 速率限制與登入鎖定 | Should | 登入、查詢與 WebSocket 需有速率限制；非 OPC UA 帳號需有失敗鎖定或等效控制。nginx `limit_req` 可作為第一層，但門檻需能有效阻擋暴力破解。 |
 
 ---
 

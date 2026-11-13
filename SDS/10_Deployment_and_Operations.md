@@ -105,8 +105,11 @@ flowchart TB
 | timeout | 3600 秒（WS） |
 | CORS | 允許特定來源與憑證 |
 | TLS | 由 Ingress/憑證管理 |
+| Rate limit | on-prem xnginx：每個 app `limit_req_zone` + `limit_req`；預設 `4090r/s`、burst 256 |
 
 > 目前 `proxy_set_header Origin ""` 與寬鬆 CORS 需依安全政策收斂。
+>
+> Rate limit 目前在 on-prem xnginx 設定；K8s manifests 未見 `nginx.ingress.kubernetes.io/limit-rps` 等 annotation，需另外補上或依賴前端 Ingress。
 
 ### 4.3 建議補強
 
@@ -273,7 +276,7 @@ flowchart LR
 | WS 無法連線 | Ingress timeout/Origin | 檢查 3600s、CORS、憑證 |
 | 即時資料停止 | 資料源/輪詢錯誤 | 查 klog、資料源連線 |
 | 告警延遲 | 輪詢間隔/來源 | 檢查 interval、來源 API |
-| CPU 飆高 | EH/X 間隔 -1、慢查詢 | 設定間隔、優化查詢 |
+| CPU 飆高 | 自訂間隔過低、慢查詢 | 確認 EH/X 間隔（預設 1000ms、最低 100ms）、優化查詢 |
 | 記憶體成長 | WS 訂閱未釋放 | 檢查 unregister、重啟 |
 | 3D 載入失敗 | 資產缺失/版本 | 檢查 `scene3d_*`、快取 |
 | 匯入失敗 | 格式/版本/衝突 | 檢查 bun 日誌、備份 |
