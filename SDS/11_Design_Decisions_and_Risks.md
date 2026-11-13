@@ -189,10 +189,11 @@
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | Medium |
-| 證據 | `RecordDataPolling` 以訂閱生命週期管理，無閒置回收 |
-| 影響 | 長期連線/忘記 unregister 造成記憶體與連線累積 |
-| 緩解 | 加入閒置 TTL、最大訂閱數、監控 |
-| 狀態 | Open |
+| 證據 | 原 `RecordDataPolling` 以訂閱生命週期管理，無閒置回收、訂閱上限與統計 |
+| 影響 | 長期連線/忘記 unregister 造成記憶體與 DB manager 累積 |
+| 緩解 | 已完成：新增 `recorddata_idle_timeout_seconds`（預設 1800，0=停用）、`recorddata_max_registers`（256）、`recorddata_max_subscriptions_per_client`（256）、`recorddata_reap_interval_seconds`（60）；reaper 回收無訂閱/閒置/初始化逾時 record 並釋放 manager；新增 `Stats()` 與週期 klog 統計；補上初始化併發保護與斷線/取消回傳錯誤 |
+| 驗證 | 閒置超過 TTL 收到 expiry 通知且不再推送；超限 register 回錯誤；每分鐘 log 顯示 records/subscriptions/clients/goroutines；設定 `recorddata_idle_timeout_seconds: 0` 可停用 TTL |
+| 狀態 | Fixed |
 
 ### R-010 多副本 WebSocket 狀態
 
@@ -381,9 +382,9 @@ flowchart LR
 |------|------|
 | P0 | R-001、R-002、R-003、R-006、R-008 已修復；待處理 R-023、R-002-R |
 | P1 | R-004、R-005、R-015、R-016、R-018、R-022 |
-| P2 | R-009、R-010、R-011、R-017、R-021、TD-001~008 |
+| P2 | R-010、R-011、R-017、R-021、TD-001~008 |
 
-> R-001/R-002/R-003/R-006/R-008 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
+> R-001/R-002/R-003/R-006/R-008/R-009 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-009 原列 P2，已完成修復。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
 
 ## 6. 決策記錄格式
 

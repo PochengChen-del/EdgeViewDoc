@@ -159,7 +159,7 @@ flowchart LR
 | SDS-10 | NFR-MNT/PORT/REL |
 | SDS-11 | 風險與技術債 |
 | SDS-12 | 追溯 |
-| SDS-13 | R-001/R-002/R-003 修復設計與驗收 |
+| SDS-13 | R-001/R-002/R-003/R-006/R-008/R-009 修復設計與驗收 |
 
 ## 8. 反向追溯（程式碼 → 需求）
 
@@ -181,6 +181,7 @@ flowchart LR
 | `controller/RecordController.go`（queryrecord 停用） | R-003、NFR-SEC-001 |
 | `service/webSocket.go`、`controller/websocket/*`（WS 認證） | R-006、NFR-SEC-009 |
 | `config/config.go`、`EHAlarmPolling.go`、`XAlarmPolling.go` | R-008、NFR-PERF-004 |
+| `service/RecordDataPolling.go`（TTL/上限/回收） | R-009、NFR-PERF-004 |
 | `xnginx.go`、`xnginx.yaml`、`nginx.conf.templ`（rate limit） | R-016、NFR-SEC-015 |
 
 ## 9. 未對應/待確認
@@ -203,7 +204,7 @@ flowchart LR
 | Client | TC-CLI-001~095 | 對應 FR-CLI |
 | Metadata | TC-META-001~045 | 對應 FR-META |
 | Runtime | TC-RT-001~025 | 對應 FR-RT |
-| 效能 | TC-PERF-001~012 | 延遲/吞吐/資源 |
+| 效能 | TC-PERF-001~012 | 延遲/吞吐/資源/TTL |
 | 安全 | TC-SEC-001~014 | 認證/授權/加密/WS |
 | 可靠 | TC-REL-001~010 | 斷線/重啟/備份 |
 | 介面 | TC-IF-001~008 | REST/WS/檔案 |
@@ -218,5 +219,6 @@ flowchart LR
 | 2026-11-13 | 1.2 | 補 R-006 WebSocket 認證修復與驗收 | 工程團隊 |
 | 2026-11-13 | 1.3 | 補 R-008 EH/X 告警輪詢間隔修復與驗收 | 工程團隊 |
 | 2026-11-13 | 1.4 | 補 R-016 nginx 限流現況與殘餘風險 | 工程團隊 |
+| 2026-11-13 | 1.5 | 補 R-009 Record 訂閱 TTL、上限與 reaper 修復 | 工程團隊 |
 
 > 需求變更時，需同步更新 SRS-03、SDS-12 與測試案例。

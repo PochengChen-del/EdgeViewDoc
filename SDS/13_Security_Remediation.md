@@ -11,6 +11,7 @@
 | R-003 | `/record/queryrecord` 無認證 | Fixed | 路由停用，handler 不再標註 `@Router`，Swagger 目錄移除 |
 | R-006 | WebSocket 部分 topic 未認證 | Fixed | 非 `login` topic 統一要求 `AlreadyLogin`；systeminfo 登入後才註冊 |
 | R-008 | EH/X 告警輪詢間隔未初始化 | Fixed | 預設 1000ms；`<=0` 用預設、低於 100ms 夾到 100ms |
+| R-009 | Record 快取無 TTL | Fixed | 新增 idle TTL、全域/每 client 上限、reaper 與 `Stats()` |
 
 ## 2. R-001 Session secret
 
@@ -136,7 +137,50 @@ sessionKey = HKDF-SHA256(
 3. 設定低於 100ms 時，實際使用 100ms。
 4. `time.Sleep` 不再收到 `-1ms` 或 `0ms`。
 
-## 7. 部署需求
+## 7. R-009 Record 訂閱生命週期
+
+### 7.1 設計
+
+- `config.go` 新增設定（皆可由 `config.yaml` 覆寫）：
+  - `recorddata_idle_timeout_seconds`：預設 `1800` 秒，`0` 表示停用閒置 TTL。
+  - `recorddata_max_registers`：全域最大 record 數，預設 `256`，`0` 表示不限。
+  - `recorddata_max_subscriptions_per_client`：每 client 最大訂閱數，預設 `256`，`0` 表示不限。
+  - `recorddata_reap_interval_seconds`：回收與統計週期，預設 `60` 秒，最低 `10` 秒。
+- `RecordDataPolling.Register` 在持鎖狀態下檢查全域與每 client 上限；同 record 重新註冊不重複計數。
+- `LastActivity` 由 client 主動訊息更新：`register`、`prevpage`、`nextpage`、`gotopage`、`update`、`updatevalue`。伺服器每秒推送不刷新 TTL。
+- Reaper 每 `recorddata_reap_interval_seconds` 執行一次：
+  - 移除沒有訂閱者的 record。
+  - 移除超過閒置 TTL 的 record。
+  - 移除初始化超過 5 分鐘的 record。
+  - 清除已斷線 client，釋放 manager，並對仍在線的受影響 client 發送
+    `{topic:"recorddata", action:"query", error:-1, reason:"subscription expired ..."}`。
+- 新增 `Stats()` 與週期 klog，輸出 `records`、`subscriptions`、`clients`、`goroutines` 與目前上限。
+- 併發保護：
+  - `CreateInfo` 以 per-record mutex 序列化。
+  - 初始化計數使用 atomic CAS；初始化期間 reaper 不回收。
+  - 全域上限在插入新 record 的同一把鎖內檢查。
+  - 註冊被取消或 client 已斷線時回傳錯誤，controller 不會誤回成功。
+- `SoClient.chanClosed` 改為 `atomic.Bool`，新增 `IsClosed()` 供 polling 判斷。
+
+### 7.2 程式位置
+
+| 功能 | 檔案 |
+|------|------|
+| 設定與預設值 | `wax_rutime_proxy/config/config.go`、`config.yaml` |
+| TTL、上限、reaper、統計 | `wax_rutime_proxy/service/RecordDataPolling.go` |
+| Client 關閉狀態 | `wax_rutime_proxy/service/webSocket.go` |
+| WS register 錯誤回傳 | `wax_rutime_proxy/controller/websocket/RecordDataController.go` |
+
+### 7.3 驗收
+
+1. 同一 record 多 client 共用一個 `RecordRegister`；最後一個 client 取消或閒置逾時後移除。
+2. 超過 `recorddata_max_registers` 或 `recorddata_max_subscriptions_per_client` 時，register 回傳錯誤。
+3. 閒置超過 TTL 的 client 收到 expiry 訊息，之後不再收到該 record 的推送。
+4. client 斷線後不需要依賴前端 `unregister`，reaper 會清除殘留訂閱。
+5. 每分鐘 log 可看到 `[recorddata] stats ...`。
+6. `recorddata_idle_timeout_seconds: 0` 時不因閒置回收。
+
+## 8. 部署需求
 
 | 項目 | 需求 |
 |------|------|
@@ -145,10 +189,11 @@ sessionKey = HKDF-SHA256(
 | `PG_SCHEMA` | 使用 `aes_secret` 時，所有共用服務需一致 |
 | `aes_secret` | 由 KeyMigrator 建立；K8s 若未執行 KeyMigrator，必須提供 `SESSION_SECRET` |
 | KeyMigrator | on-prem 由 xnginx 在啟動服務前執行 |
+| RecordData TTL | 預設 1800 秒；被動看板需在期限內重送 `register` 當 refresh，或設 `recorddata_idle_timeout_seconds: 0` 停用 |
 
 K8s 環境若未注入 `SESSION_SECRET` 且資料庫沒有 `aes_secret`，服務會依設計啟動失敗，這是 R-001 的 fail-closed 行為。
 
-## 8. 驗收
+## 9. 驗收
 
 1. 原始碼搜尋不得再出現固定 session secret 字串。
 2. 各服務 `go build ./...` 成功。
@@ -160,11 +205,16 @@ K8s 環境若未注入 `SESSION_SECRET` 且資料庫沒有 `aes_secret`，服務
 8. 未登入不進入 systeminfo polling；登入後才收到 systeminfo。
 9. EH/X 未設定、`-1` 或 `0` 時，實際 interval 為 1000ms。
 10. EH/X 設定低於 100ms 時，實際 interval 為 100ms。
+11. Record 閒置超過 TTL 後不再推送，並收到 `error=-1` 的 expiry 訊息。
+12. 超過 record 或 per-client 上限時，register 回傳錯誤。
+13. 啟動後每分鐘可看到 `[recorddata] stats ...`。
+14. 將 `recorddata_idle_timeout_seconds` 設為 `0` 時，閒置 record 不會被 TTL 回收。
 
-## 9. 後續追蹤
+## 10. 後續追蹤
 
 | 編號 | 項目 | 說明 |
 |------|------|------|
 | R-002-R | 個別 client `InsecureSkipVerify` | 逐步改為系統 CA/指定 CA |
 | R-001-R | 機器金鑰輪替 | 需設計 `aes_secret` 輪替與資料重新加密流程 |
 | R-003-R | Record 查詢復用 | 若恢復功能，需補認證、授權與速率限制 |
+| R-009-R | SharedDB pool 縮減 | `SQLManager.Close()` 不關閉 process-wide pool；若需隨訂閱數縮減連線池，需另行設計 |

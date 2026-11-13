@@ -122,10 +122,12 @@ sequenceDiagram
     participant P as Runtime
     participant R as RecordDataPolling
     participant DB as 資料源
+    participant T as Reaper
 
     V->>P: {topic:recorddata, action:register, id, version, param}
     P->>R: Register(id, version, param, client)
-    R->>R: CheckRegisterNewest
+    R->>R: 檢查全域/每 client 上限
+    R->>R: CheckRegisterNewest / 標記 initializing
     R->>DB: 建立 manager + 首次查詢
     DB-->>R: rows
     R-->>V: 首次結果
@@ -136,6 +138,9 @@ sequenceDiagram
     end
     V->>P: {action:gotopage, page}
     R-->>V: 新頁資料
+    T->>R: reap()（預設每 60 秒）
+    R->>R: 無訂閱 / 閒置逾時 / 初始化逾時 → 釋放 manager
+    R-->>V: {action:query, error:-1, reason:expired}
     V->>P: {action:unregister}
     R->>R: 釋放 manager
 ```
@@ -144,7 +149,10 @@ sequenceDiagram
 
 - 同一 `recordID` 多 Client 共用一個 `RecordRegister`。
 - `version` 變更時重建。
-- 最後一個 Client 取消才釋放。
+- 最後一個 Client 取消或 TTL 到期後釋放。
+- `register` 會刷新 `LastActivity`；被動看板需在 TTL 內重送 `register` 當 refresh，或將 `recorddata_idle_timeout_seconds` 設為 `0`。
+- Reaper 會回收無訂閱、閒置逾時與初始化逾時的 record，並對在線 client 發送 `error=-1` expiry 訊息。
+- 超過 `recorddata_max_registers` 或 `recorddata_max_subscriptions_per_client` 時，register 回傳錯誤。
 - 寫入（`updatevalue`）需 Record 允許。
 
 ## 6. 歷史資料查詢

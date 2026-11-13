@@ -92,6 +92,10 @@ sequenceDiagram
 | `cert` | `crt`/`key` | — | TLS 憑證 |
 | `log` | `filemaxmb`/`tofile` | 15/false | 日誌 |
 | `systeminfo_interval_ms` | int | 3000 | 系統資訊輪詢 |
+| `recorddata_idle_timeout_seconds` | int | 1800 | Record 訂閱閒置 TTL；0=停用 |
+| `recorddata_max_registers` | int | 256 | 全域最大 Record 數；0=不限 |
+| `recorddata_max_subscriptions_per_client` | int | 256 | 每 client 最大訂閱數；0=不限 |
+| `recorddata_reap_interval_seconds` | int | 60 | Record 回收/統計週期；最低 10 秒 |
 | `wa_alarm_summary_interval_ms` | int | 1000 | WA 告警摘要 |
 | `eh_alarm_summary_interval_ms` | int | 1000 | EH 告警摘要 |
 | `x_alarm_summary_interval_ms` | int | 1000 | X 告警摘要 |
@@ -298,9 +302,11 @@ sequenceDiagram
     participant R as RecordRegister
     participant M as SQLManager/Influx
     participant DB as 資料源
+    participant T as Reaper
 
     C->>P: Register(recordID, version, param)
-    P->>P: CheckRegisterNewest
+    P->>P: 檢查全域/每 client 上限
+    P->>P: CheckRegisterNewest / 標記 initializing
     P->>R: CreateInfo（建立 manager、query）
     R->>M: NewSQLManager / NewInfluxDBManager
     R->>DB: 查詢
@@ -310,9 +316,15 @@ sequenceDiagram
         R->>DB: 查詢
         R-->>C: {topic:recorddata, action:query}
     end
+    T->>P: reap()（預設每 60 秒）
+    P->>R: 無訂閱 / 閒置逾時 / 初始化逾時
+    R->>R: 釋放 manager
+    R-->>C: {action:query, error:-1, reason:expired}
     C->>P: Unregister(recordID)
     R->>R: 釋放 manager
 ```
+
+> `register` 會刷新 `LastActivity`，可作為 TTL 心跳。TTL 只看 client 主動訊息，不看伺服器每秒推送。
 
 ### 6.3 輪詢與分頁
 
@@ -320,8 +332,11 @@ sequenceDiagram
 - 分頁：`prevpage`/`nextpage`/`gotopage`，頁碼存於 `Info["page"]`。
 - `max_data_size` 限制回傳筆數，超過截斷並可由 Client 分頁。
 - `updatevalue`：寫入資料源（依 Record 定義）。
-- 併發保護：`RecordRegister.Mu` 保護 `Info`；`CreateInfo` 與 `Unregister` 競爭以 map 比對避免錯誤註冊。
-- 快取：無明確 TTL；以訂閱生命週期為準（風險）。
+- 併發保護：`RecordRegister.Mu` 保護 `Info`；`CreateInfo` 以 per-record mutex 序列化；初始化期間以 atomic 計數標記，避免 reaper 提前回收。
+- 訂閱上限：`recorddata_max_registers`（預設 256）、`recorddata_max_subscriptions_per_client`（預設 256），超限回傳錯誤。
+- 生命週期：`recorddata_idle_timeout_seconds`（預設 1800 秒，0=停用）；reaper 每 `recorddata_reap_interval_seconds`（預設 60 秒）回收無訂閱、閒置與初始化逾時 record，並釋放 manager。
+- 監控：`Stats()` 與週期 klog 輸出 `records`/`subscriptions`/`clients`/`goroutines`。
+- 被動看板需在 TTL 內重送 `register` 當 refresh，或將 TTL 設為 0。
 
 ### 6.4 方言支援
 
@@ -341,7 +356,7 @@ sequenceDiagram
 
 | 服務 | 檔案 | 週期 | 說明 |
 |------|------|------|------|
-| Record 輪詢 | `RecordDataPolling.go`、`Polling.go` | 1 秒 | 查詢並推送 |
+| Record 輪詢 | `RecordDataPolling.go`、`Polling.go` | 1 秒 | 查詢並推送；具 idle TTL、訂閱上限與 reaper |
 | System Info | `SystemInfoPolling.go` | 3000 ms | SC Server TCP 連線狀態 |
 | WA 告警 | `WAAlarmPolling.go` | 1000 ms | `AlarmSummary(100000)` |
 | OPC UA 告警 | `OpcuaAlarmPolling.go` | 1000 ms | Agent `:8090`；連線資訊 TTL 60 秒 |
@@ -407,6 +422,7 @@ sequenceDiagram
 | Client 寫入佇列 | `send` channel + 專屬 goroutine，避免慢客戶端阻塞 |
 | 讀取逾時 | `pongWait`/`pingPeriod`（依實作） |
 | 訂閱鎖 | `RecordDataPolling.mu`、`RecordRegister.Mu` |
+| 初始化序列化 | `RecordRegister.initMu`；`initializing` atomic 計數避免 reaper 提前回收 |
 | Panic 回復 | REST 仲介層；WS 個別 handler |
 | 優雅關閉 | Hub、AlarmNotify、HTTP 依序關閉 |
 | 連線上限 | DB 10；WS 無硬上限（依資源） |
@@ -430,9 +446,9 @@ sequenceDiagram
 | 輪詢頻率 | Record 1 秒、告警 1 秒、系統 3 秒 |
 | 批次 | 每次查詢回傳多列，`max_data_size` 控制 |
 | 連線重用 | `SharedDB` 池、HTTP client 重用 |
-| 快取 | 告警連線資訊 60 秒、Session |
+| 快取 | Record 訂閱 idle TTL（預設 1800 秒）、告警連線資訊 60 秒、Session |
 | 背壓 | Client send channel；過慢可丟棄/關閉 |
-| 資源回收 | Unregister 釋放 manager；斷線自動清理 |
+| 資源回收 | Unregister 釋放 manager；斷線由 reaper 清除；閒置/初始化逾時自動回收 |
 
 ## 13. 擴充點
 
@@ -449,7 +465,7 @@ sequenceDiagram
 3. 全域 TLS 不驗證已移除；個別 client 仍停用（R-002-R）。
 4. Session secret 已改為 env/`aes_secret` HKDF，無硬編碼。
 5. `systeminfo`/`default` 已要求登入；`default` 仍會廣播已登入者訊息（非 R-006）。
-6. Record 快取無 TTL，長期訂閱可能累積。
+6. Record 訂閱具 idle TTL（預設 1800 秒）；被動看板需在期限內重送 `register`，或將 `recorddata_idle_timeout_seconds` 設為 `0`。
 7. 多副本需 Sticky Session（Hub 為記憶體狀態）。
 8. Oracle/MySQL/Influx 方言需依實際驅動驗證。
 
