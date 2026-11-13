@@ -179,6 +179,7 @@ flowchart LR
 | `pgstore/*`、`routes/routes.go` | FR-RT-017~018、023~024 |
 | `service/session_secret.go`（Metadata/Runtime/xnginx/Alarm） | R-001、NFR-SEC-008 |
 | `controller/RecordController.go`（queryrecord 停用） | R-003、NFR-SEC-001 |
+| `service/webSocket.go`、`controller/websocket/*`（WS 認證） | R-006、NFR-SEC-009 |
 
 ## 9. 未對應/待確認
 
@@ -212,5 +213,6 @@ flowchart LR
 |------|------|------|------|
 | 2026-11-13 | 1.0 | 初版 SRS/SDS | Junyu.Ke |
 | 2026-11-13 | 1.1 | 補 R-001/R-002/R-003 修復紀錄與介面現況 | 工程團隊 |
+| 2026-11-13 | 1.2 | 補 R-006 WebSocket 認證修復與驗收 | 工程團隊 |
 
 > 需求變更時，需同步更新 SRS-03、SDS-12 與測試案例。

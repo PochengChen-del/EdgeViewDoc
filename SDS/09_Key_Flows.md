@@ -309,16 +309,20 @@ sequenceDiagram
 sequenceDiagram
     participant V as Viewer
     participant P as Runtime
-    participant S as SC Server API
+    participant S as SC Server
     V->>P: WS connect
+    V->>P: login (csrfToken)
+    P->>P: SetAlreadyLogin + NotifyAuthenticated
     P->>P: systeminfo 訂閱
     loop 每 3 秒
-        P->>S: 查詢狀態
-        S-->>P: 狀態
+        P->>S: TCP connect (host:port, 2s timeout)
+        S-->>P: accept / refused
         P-->>V: 通訊/系統資訊
     end
 ```
 
+- 未登入不建立 systeminfo 訂閱。
+- TCP 連線成功只代表 port 可達，不代表 API 健康。
 - 用於 Viewer 通訊狀態與診斷對話框。
 
 ## 14. 錯誤與離線處理

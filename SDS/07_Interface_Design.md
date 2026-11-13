@@ -564,8 +564,8 @@ sequenceDiagram
 | `ehalarmsummary` | `register`/`unregister` | 登入 | 專案 | 摘要 |
 | `opcuaalarmsummary` | `register`/`unregister` | 登入 | 專案 | 摘要 |
 | `xalarmsummary` | `register`/`unregister` | 登入 | 專案 | 摘要 |
-| `systeminfo` | 連線即訂閱 | 否 | — | 系統狀態 |
-| `default` | ping/pong | 否 | — | 心跳 |
+| `systeminfo` | 登入後訂閱 | 是 | — | 系統狀態 |
+| `default` | ping/pong | 是 | — | 心跳 |
 
 ### 5.5 訊息時序
 

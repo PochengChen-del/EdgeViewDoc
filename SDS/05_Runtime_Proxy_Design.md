@@ -224,15 +224,16 @@ sequenceDiagram
 | `ehalarmsummary` | `register`、`unregister` | 是 | EdgeHub 告警摘要 |
 | `opcuaalarmsummary` | `register`、`unregister` | 是 | OPC UA 告警摘要 |
 | `xalarmsummary` | `register`、`unregister` | 是 | X 告警摘要 |
-| `systeminfo` | 無（連線即訂閱） | 否 | 系統/通訊狀態 |
-| `default` | ping/pong | 否 | 心跳與未知 topic 回應 |
+| `systeminfo` | 無（登入後訂閱） | 是 | 系統/通訊狀態 |
+| `default` | ping/pong | 是 | 心跳與未知 topic 回應 |
 
 ### 4.5 認證規則
 
-- `loginController.login`：以 `csrfToken` 反查 `http_sessions` 的 session data，成功後 `SetAlreadyLogin`。
-- 其他 `needAuth=true` 的 action：檢查 `client.AlreadyLogin()`，未登入回 `-100`。
+- `loginController.login`：以 `csrfToken` 反查 `http_sessions` 的 session data，成功後 `SetAlreadyLogin` 並 `NotifyAuthenticated`。
+- 分派前檢查：非 `login` topic 若未登入，直接回 `-100`，不進入 handler 或 `default`。
+- 其他 `needAuth=true` 的 action：再次檢查 `client.AlreadyLogin()`，未登入回 `-100`。
+- `systeminfo` 在 WS login 成功後才加入 polling 訂閱。
 - 連線後若逾時未登入，`CheckAuthAndCloseAfter` 主動關閉。
-- **風險**：`systeminfo` 與 `default` 未要求登入。
 
 ## 5. REST 設計
 
@@ -339,13 +340,15 @@ sequenceDiagram
 | 服務 | 檔案 | 週期 | 說明 |
 |------|------|------|------|
 | Record 輪詢 | `RecordDataPolling.go`、`Polling.go` | 1 秒 | 查詢並推送 |
-| System Info | `SystemInfoPolling.go` | 3000 ms | SC Server API 狀態 |
+| System Info | `SystemInfoPolling.go` | 3000 ms | SC Server TCP 連線狀態 |
 | WA 告警 | `WAAlarmPolling.go` | 1000 ms | `AlarmSummary(100000)` |
 | OPC UA 告警 | `OpcuaAlarmPolling.go` | 1000 ms | Agent `:8090`；連線資訊 TTL 60 秒 |
 | EH 告警 | `EHAlarmPolling.go` | `EHAlmSummaryIntervalMs`（預設 -1） | EdgeHub 告警 |
 | X 告警 | `XAlarmPolling.go` | `XAlmSummaryIntervalMs`（預設 -1） | X 平台；連線資訊 TTL 60 秒 |
 
 > **風險**：EH/X 間隔未從 `config.yaml` 綁定，維持 `-1`，`time.Sleep` 可能立即返回造成高頻輪詢。
+
+> System Info 使用 TCP dial（2 秒 timeout）檢查 `ScServerAPIUrl` 的 host:port 是否接受連線；只代表連線可達，不代表 API 健康或授權正常。
 
 ## 8. 外部整合
 
@@ -443,7 +446,7 @@ sequenceDiagram
 2. EH/X 告警間隔未初始化。
 3. 全域 TLS 不驗證已移除；個別 client 仍停用（R-002-R）。
 4. Session secret 已改為 env/`aes_secret` HKDF，無硬編碼。
-5. `systeminfo`/`default` 未要求登入。
+5. `systeminfo`/`default` 已要求登入；`default` 仍會廣播已登入者訊息（非 R-006）。
 6. Record 快取無 TTL，長期訂閱可能累積。
 7. 多副本需 Sticky Session（Hub 為記憶體狀態）。
 8. Oracle/MySQL/Influx 方言需依實際驅動驗證。

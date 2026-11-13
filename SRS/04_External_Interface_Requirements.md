@@ -196,8 +196,8 @@
 | `ehalarmsummary` | `register`/`unregister` | EdgeHub 告警摘要 |
 | `opcuaalarmsummary` | `register`/`unregister` | OPC UA 告警摘要 |
 | `xalarmsummary` | `register`/`unregister` | X 告警摘要 |
-| `systeminfo` | 連線即啟動 | 系統資訊推送 |
-| `default` | 無 | ping/pong 與廣播（開發用） |
+| `systeminfo` | 登入後啟動 | 系統資訊推送 |
+| `default` | 無 | 登入後 ping/pong 與廣播（開發用） |
 
 ### IF-COM-006 資料庫查詢介面
 

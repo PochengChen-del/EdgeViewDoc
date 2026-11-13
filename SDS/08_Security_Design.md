@@ -207,18 +207,23 @@ sequenceDiagram
 | 連線 | 同源/Ingress 控制 |
 | 登入 | `login` topic + `csrfToken` |
 | 逾時 | `websocket_auth_timeout=10` 秒 |
-| 授權 | `needAuth` action 檢查 `AlreadyLogin` |
-| 未登入 | `-100` |
+| 授權 | 分派前檢查：非 `login` topic 需 `AlreadyLogin`；action 再有 `needAuth` |
+| 未登入 | `-100`，不進入 handler |
 | Topic 白名單 | `handlers` map |
-| 未知 topic | 落 `default`（僅 ping） |
+| 未知 topic | 未登入不落 `default`；已登入才由 `default` 處理 |
+| systeminfo | WS login 成功後才註冊訂閱 |
 
-**風險**
+**已修**
 
-1. `systeminfo` 連線即訂閱，未檢查登入。
-2. `default` 未檢查登入。
-3. `verifyToken` 掃描所有 `http_sessions` 尋找相同 CSRF（效率與洩漏風險）。
-4. 缺少 Origin 檢查。
-5. 連線數/訊息大小無明顯上限。
+- `systeminfo` 未登入即訂閱：改由 `NotifyAuthenticated` 在登入成功後註冊。
+- `default` 未檢查登入：中央 gate 先阻擋，handler 再加一層檢查。
+
+**殘餘風險**
+
+1. `verifyToken` 掃描所有 `http_sessions` 尋找相同 CSRF（R-007）。
+2. 缺少 Origin 檢查。
+3. 連線數/訊息大小無明顯上限。
+4. `default` 仍會將已登入者的訊息廣播給所有 client；若不需要應移除廣播。
 
 ## 9. 檔案與上傳安全
 
@@ -294,7 +299,7 @@ sequenceDiagram
 1. 強制 HTTPS/WSS。
 2. 移除全域 `InsecureSkipVerify`（已完成）；個別 client 逐步改指定 CA（R-002-R）。
 3. `/record/queryrecord` 加認證/授權（已改為停用路由）。
-4. `systeminfo`/`default` 加登入檢查。
+4. `systeminfo`/`default` 加登入檢查（已完成，R-006）。
 5. Session secret 改環境變數/密鑰管理（已完成）。
 6. 密碼改 Argon2id/bcrypt（含遷移）。
 7. CSRF Cookie 設 `HttpOnly` + `SameSite`（前端改用 response body token）。

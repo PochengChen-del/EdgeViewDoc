@@ -9,6 +9,7 @@
 | R-001 | Session secret 硬編碼 | Fixed | 改由 `SESSION_SECRET` 或 `aes_secret` 經 HKDF 派生；無硬編碼、無 legacy fallback |
 | R-002 | 全域停用 TLS 憑證驗證 | Fixed | 移除 `http.DefaultTransport` 全域 `InsecureSkipVerify` |
 | R-003 | `/record/queryrecord` 無認證 | Fixed | 路由停用，handler 不再標註 `@Router`，Swagger 目錄移除 |
+| R-006 | WebSocket 部分 topic 未認證 | Fixed | 非 `login` topic 統一要求 `AlreadyLogin`；systeminfo 登入後才註冊 |
 
 ## 2. R-001 Session secret
 
@@ -71,7 +72,40 @@ sessionKey = HKDF-SHA256(
 - 其他 `/record/*` 端點維持 `needAuth=true`（Session + CSRF）。
 - 未來若要恢復，必須先加入認證、授權（專案/角色）與速率限制。
 
-## 5. 部署需求
+## 5. R-006 WebSocket 認證
+
+### 5.1 設計
+
+- `webSocket.go` 在 `handleRecvMessage` 分派前統一檢查：
+  - `topic == "login"` 允許未登入。
+  - 其他 topic 若 `AlreadyLogin() == false`，回 `-100` 並停止處理，不再落到 `default`。
+- `SystemInfoPolling.OnClientAdd` 增加 `AlreadyLogin()` 檢查。
+- `systemInfoController` 新增 `OnAuthenticated`：
+  - 連線時 `OnClientAdd` 不再註冊。
+  - WS login 成功後由 `SoClient.NotifyAuthenticated()` 呼叫，才加入 polling。
+- `PingPongController.OnMessage` 再檢查一次 `AlreadyLogin`，避免未來繞過中央 gate。
+- `loginController.login` 驗證 CSRF 成功後：
+  - `SetAlreadyLogin()`
+  - `NotifyAuthenticated()`
+
+### 5.2 程式位置
+
+| 功能 | 檔案 |
+|------|------|
+| 中央 topic 認證 | `wax_rutime_proxy/service/webSocket.go` |
+| 登入後通知 | `wax_rutime_proxy/service/webSocket.go`、`controller/websocket/loginController.go` |
+| systeminfo 註冊 | `controller/websocket/systemInfoController.go`、`service/SystemInfoPolling.go` |
+| default 防護 | `controller/websocket/baseController.go` |
+
+### 5.3 驗收
+
+1. 未登入送 `recorddata`、`systeminfo`、未知 topic 或 `default`，回 `-100`。
+2. 未登入訊息不會被 `default` 廣播。
+3. 未登入 client 不出現在 `SystemInfoPolling.clients`。
+4. WS login 成功後，systeminfo 才開始推送。
+5. `CheckAuthAndCloseAfter` 10 秒後仍會關閉未登入連線。
+
+## 6. 部署需求
 
 | 項目 | 需求 |
 |------|------|
@@ -83,7 +117,7 @@ sessionKey = HKDF-SHA256(
 
 K8s 環境若未注入 `SESSION_SECRET` 且資料庫沒有 `aes_secret`，服務會依設計啟動失敗，這是 R-001 的 fail-closed 行為。
 
-## 6. 驗收
+## 7. 驗收
 
 1. 原始碼搜尋不得再出現固定 session secret 字串。
 2. 各服務 `go build ./...` 成功。
@@ -91,8 +125,10 @@ K8s 環境若未注入 `SESSION_SECRET` 且資料庫沒有 `aes_secret`，服務
 4. 未設定 `SESSION_SECRET` 且無 `aes_secret` 時，服務啟動失敗並給出明確訊息。
 5. `POST /record/queryrecord` 回 404；Swagger 不再列出該路徑。
 6. 設定 `SESSION_SECRET_PREVIOUS` 時，舊 cookie 在期限內仍可解碼。
+7. 未登入 WS 送非 `login` topic 回 `-100`，且不觸發 `default` 廣播。
+8. 未登入不進入 systeminfo polling；登入後才收到 systeminfo。
 
-## 7. 後續追蹤
+## 8. 後續追蹤
 
 | 編號 | 項目 | 說明 |
 |------|------|------|

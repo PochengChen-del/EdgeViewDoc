@@ -78,6 +78,6 @@
 | OI-003 | ODBC 未實作 | IF-SW-006 | 文件標示不支援，避免誤用 |
 | OI-004 | 密碼雜湊未加鹽 | NFR-SEC-003 | 規劃遷移至 Argon2/bcrypt |
 | OI-005 | 部分內部 HTTPS 呼叫停用憑證驗證 | NFR-SEC-004 | 正式環境改為驗證或指定 CA |
-| OI-006 | WebSocket `systeminfo`/`default` 認證不足 | NFR-SEC-009 | 補上授權檢查 |
+| OI-006 | WebSocket `systeminfo`/`default` 認證不足 | NFR-SEC-009 | 已修（R-006）：非 `login` topic 需登入；systeminfo 登入後才訂閱 |
 | OI-007 | Record 快取無明確閒置 TTL | NFR-PERF/REL | 依設計註解實作 10 分鐘回收或調整文件 |
 | OI-008 | DataSource source type 編號不一致 | IF-SW-002/004 | 統一常數並加轉換層 |

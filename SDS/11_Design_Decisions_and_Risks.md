@@ -157,10 +157,11 @@
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | Medium |
-| 證據 | `systeminfo` 連線即訂閱；`default` 不檢查 |
-| 影響 | 未授權取得系統資訊 |
-| 緩解 | `OnClientAdd`/`OnMessage` 檢查 `AlreadyLogin` |
-| 狀態 | Open |
+| 證據 | 原 `default` PingPong 未檢查 `AlreadyLogin` 即將訊息廣播；`SystemInfoPolling.OnClientAdd` 未檢查即加入訂閱；`_run` 只過濾發送，未保護訂閱 |
+| 影響 | 未登入者可觸發 `default` 廣播；systeminfo 未登入即建立訂閱（資料已被 `_run` 過濾，主要為資源/狀態問題） |
+| 緩解 | 已完成：`webSocket.go` 在分派前統一檢查，非 `login` topic 未登入直接回 `-100`；`systeminfo` 改為登入成功後由 `NotifyAuthenticated` 註冊；`default` handler 再加一層檢查 |
+| 驗證 | 未登入送 `recorddata`/`default` 回 `-100` 且不廣播；未登入不進入 systeminfo polling map；登入後才收到 systeminfo |
+| 狀態 | Fixed |
 
 ### R-007 WS 登入掃描所有 Session
 
@@ -371,17 +372,17 @@ flowchart LR
     P0[P0 立即] --> P1[P1 短期]
     P1 --> P2[P2 中期]
     P0 --- A[認證/密鑰/TLS/queryrecord<br/>R-001/R-002/R-003 已修復]
-    P1 --- B[密碼雜湊/速率限制/WS 認證/probes]
+    P1 --- B[密碼雜湊/速率限制/probes]
     P2 --- C[物件儲存/多副本/SSO/測試]
 ```
 
 | 階段 | 項目 |
 |------|------|
-| P0 | R-001、R-002、R-003 已修復；待處理 R-008、R-023、R-002-R |
-| P1 | R-004、R-005、R-006、R-015、R-016、R-018、R-022 |
+| P0 | R-001、R-002、R-003、R-006 已修復；待處理 R-008、R-023、R-002-R |
+| P1 | R-004、R-005、R-015、R-016、R-018、R-022 |
 | P2 | R-009、R-010、R-011、R-017、R-021、TD-001~008 |
 
-> R-001/R-002/R-003 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
+> R-001/R-002/R-003/R-006 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
 
 ## 6. 決策記錄格式
 
