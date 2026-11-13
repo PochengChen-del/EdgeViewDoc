@@ -17,9 +17,9 @@
 
 | 子系統 | 角色 | 程式碼路徑 | 技術棧 |
 |--------|------|------------|--------|
-| 前端 Client（Designer + Viewer） | HMI 畫面設計與執行 | Git Repo: [EdgeView client](https://SWOrchestrationCenter@dev.azure.com/SWOrchestrationCenter/EdgeSync%20360/_git/wax_hmi-designer-client.git) | C++ / Qt 6 / QML、SCDraw2D/SCDraw3D、NanoCanvas |
+| 前端 Client（Designer + Viewer） | HMI 畫面設計與執行 | Git Repo: [EdgeView client](https://dev.azure.com/SWOrchestrationCenter/EdgeSync%20360/_git/wax_hmi-designer-client.git) | C++ / Qt 6 / QML、SCDraw2D/SCDraw3D、NanoCanvas |
 | 後端 Metadata Service | 設定、專案、使用者、授權、OPC UA 設定 | Git Repo: [EdgeView metadata server](https://dev.azure.com/SWOrchestrationCenter/EdgeSync%20360/_git/wax_metadata-service.git) | Go / Gin / PostgreSQL |
-| 後端 Runtime Proxy | 第三方資料查詢、即時資料代理、告警摘要 | [EdgeView datasource server](https://dev.azure.com/SWOrchestrationCenter/EdgeSync%20360/_git/wax_rutime_proxy) | Go / Gin / Gorilla WebSocket / PostgreSQL |
+| 後端 Runtime Proxy | 第三方資料查詢、即時資料代理、告警摘要 | Git Repo: [EdgeView datasource server](https://dev.azure.com/SWOrchestrationCenter/EdgeSync%20360/_git/wax_rutime_proxy) | Go / Gin / Gorilla WebSocket / PostgreSQL |
 
 ### 1.2 參考文件
 
