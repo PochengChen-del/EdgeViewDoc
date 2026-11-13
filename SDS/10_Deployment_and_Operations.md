@@ -160,7 +160,7 @@ flowchart TB
 部署注意：
 
 - Metadata、Runtime、xnginx 共用 `waxconfig` 與同一 schema；若使用 `aes_secret`，`PG_SCHEMA` 必須一致。
-- OPC UA Alarm Agent 使用 `waxalarm`；若不共用 cookie，可獨立設定；若需共用 `graphicSession`，必須使用相同 `SESSION_SECRET`。
+- OPC UA Alarm Agent 的 session store 使用 `metadata.dbname` / `metadata.dsn` / `metadata.schema`（預設 `waxconfig`）；若需共用 `graphicSession`，必須使用相同 `SESSION_SECRET`，且 metadata DB/schema 需一致。
 - 啟動 log 會輸出 `[session] key source=... fingerprint=...`；部署時比對各服務 fingerprint 是否一致，但不要記錄 key 本體。
 - 輪替：先同時部署 `SESSION_SECRET` + `SESSION_SECRET_PREVIOUS`，待舊 session 過期後移除 previous。
 - K8s 未執行 KeyMigrator 時，`aes_secret` 可能不存在，必須提供 `SESSION_SECRET`。

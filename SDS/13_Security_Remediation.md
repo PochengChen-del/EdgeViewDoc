@@ -41,9 +41,9 @@ sessionKey = HKDF-SHA256(
 | Metadata | `wax_metadata-service/service/session_secret.go` | `meta-agent.go` |
 | Runtime Proxy | `wax_rutime_proxy/service/session_secret.go` | `wxproxy.go` |
 | xnginx | `wax_nginx_ingress/service/session_secret.go` | `service/app.go` |
-| OPC UA Alarm Agent | `wax_opcua_alarm_agent/service/session_secret.go` | `cmd/alarmd/main.go` |
+| OPC UA Alarm Agent | `wax_opcua_alarm_agent/service/session_secret.go` | `opcua_alarm.go` |
 
-`LoadSessionKeys()` 回傳 `SessionKeys`，`KeyPairs()` 產生 pgstore 所需的 key pairs；`Previous` 只用於解碼舊 cookie。
+`LoadSessionKeys()` 回傳 `SessionKeys`，`KeyPairs()` 產生 pgstore 所需的 key pairs；`Previous` 只用於解碼舊 cookie。Alarm Agent 的 session store 使用 `MetadataConfigDB`/`MetadataSchema`，因此派生金鑰時也讀取同一組 metadata DB 設定。
 
 ### 2.3 輪替
 
@@ -56,7 +56,7 @@ sessionKey = HKDF-SHA256(
 ### 2.4 一致性
 
 - Metadata、Runtime、xnginx 共用 `waxconfig`；建議明確設定 `PG_SCHEMA`，確保讀到同一筆 `aes_secret`。
-- OPC UA Alarm Agent 使用 `waxalarm`；若需與其他服務共用 `graphicSession`，必須使用相同 `SESSION_SECRET`。
+- OPC UA Alarm Agent 的 session store 使用 `metadata.dbname` / `metadata.dsn` / `metadata.schema`（預設 `waxconfig`）；若需與其他服務共用 `graphicSession`，必須使用相同 `SESSION_SECRET`，且 metadata DB/schema 需一致。
 - 啟動 log 僅輸出 `[session] key source=... fingerprint=...`；部署時比對 fingerprint，不要記錄 key 本體。
 
 ## 3. R-002 TLS 憑證驗證
