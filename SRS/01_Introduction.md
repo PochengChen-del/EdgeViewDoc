@@ -89,6 +89,7 @@ EdgeView 是一套可跨平台執行的 HMI/SCADA 圖控平台，包含：
 5. `wax_rutime_proxy\docs\swagger.yaml`。
 6. `wax_rutime_proxy\websocket 開發文件.md`。
 7. `wax_hmi-designer-client\wa-hmi-designer\docs\qdoc\SC.qdoc` 與 QDoc 產生文件。
+8. [EdgeView 使用手冊（V4.2.x）](https://docs.google.com/document/d/1wa5-USVLF3dqyzATGt5GqrGQ8WzIPASZmo5GLartUq0/edit)。
 
 ## 6. 文件結構
 
@@ -101,6 +102,7 @@ EdgeView 是一套可跨平台執行的 HMI/SCADA 圖控平台，包含：
 | SRS-05 | 非功能需求：效能、安全、可靠度、可維護、可攜、i18n、稽核 |
 | SRS-06 | 驗收準則與需求追溯 |
 | SRS-07 | OPC UA 子系統需求：設定 UI、Data Agent、Alarm Agent、直連資料源 |
+| SRS-08 | 使用手冊補充需求：安裝/授權、連線、繪圖、控件、變數、腳本、事件、動畫、模型、配置、權限、插件、限制 |
 
 設計對應請參閱 `SDS/` 目錄；需求與設計的對照請參閱 `SDS/12_Traceability.md`，OPC UA 設計見 `SDS/14_OPCUA_Subsystem_Design.md`。
 

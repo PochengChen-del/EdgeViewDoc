@@ -136,6 +136,10 @@ flowchart LR
 | FR-OPC-039~040 | SDS-14 §5.7 | `storage/postgres.go`、`alarm/recovery.go`、`model/system_config.go` | TC-OPC-039 復原 |
 | FR-OPC-041~045 | SDS-14 §5.9、§5.8 | `routes/routes.go`、`service/basicAuth.go`、`alarm/reloader.go` | TC-OPC-041 認證/重載 |
 | 直連資料源 | SDS-14 §8 | `Common/Api/opcua.js`、`WADataSourceManager.qml`、`Opcua.qml` | TC-OPC-DIRECT |
+| FR-UM-001~014 | SDS-15 §10、SDS-10 §2.1 | 安裝/授權/服務管理 | TC-UM-001 安裝 |
+| FR-UM-015~030 | SDS-03 §3~5、SDS-15 §3~4 | `HttpConnect`、`Editor`、`Display*` | TC-UM-015 連線/繪圖 |
+| FR-UM-031~046 | SDS-03 §7~9、SDS-15 §5~7 | `widgets/*`、`waobjectProperties.js`、`WAJavaScriptManager` | TC-UM-031 控件/腳本 |
+| FR-UM-047~064 | SDS-15 §8~12 | `WACustom*`、DataModel、User、Plugin | TC-UM-047 模型/權限 |
 
 ## 5. 非功能需求追溯
 
@@ -147,6 +151,7 @@ flowchart LR
 | NFR-SCL-001~005 | SDS-02 §4、SDS-10 §10 | 擴縮容測試 |
 | NFR-MNT-001~008 | SDS-10 全章 | 維運演練 |
 | NFR-OPC-001~020 | SDS-14 §7、§11 | 壓測/故障/互通/安全 |
+| NFR-UM-001~008 | SDS-15 §13、SDS-10 | 更新率/相容/權限/備份 |
 | NFR-PORT-001~005 | SDS-03 §14、SDS-10 §13 | 各平台建置/煙霧 |
 | NFR-USE-001~006 | SDS-03 §5、SDS-07 | UAT |
 | NFR-I18N-001~006 | SDS-03 §4、§12 | 語系/時區測試 |
@@ -184,6 +189,7 @@ flowchart LR
 | SDS-11 | 風險與技術債 |
 | SDS-12 | 追溯 |
 | SDS-14 | FR-OPC-001~045、IF-OPC-001~010、NFR-OPC-001~020、直連資料源 |
+| SDS-15 | FR-UM-001~064、NFR-UM-001~008、IF-UM-001~006、手冊功能對照 |
 | SDS-13 | R-001/R-002/R-003/R-006/R-008/R-009 修復設計與驗收 |
 
 ## 8. 反向追溯（程式碼 → 需求）
@@ -237,6 +243,7 @@ flowchart LR
 | Metadata | TC-META-001~045 | 對應 FR-META |
 | Runtime | TC-RT-001~025 | 對應 FR-RT |
 | OPC UA | TC-OPC-001~045 | 對應 FR-OPC |
+| 使用手冊 | TC-UM-001~064 | 對應 FR-UM |
 | 效能 | TC-PERF-001~012 | 延遲/吞吐/資源/TTL |
 | 安全 | TC-SEC-001~014 | 認證/授權/加密/WS |
 | 可靠 | TC-REL-001~010 | 斷線/重啟/備份 |

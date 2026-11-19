@@ -164,27 +164,26 @@ flowchart TB
 
 | 平台 | 說明 |
 |------|------|
-| Windows 10/11 | 主要桌面環境，支援 Crashpad、Session 監控 |
-| macOS | 桌面環境 |
-| Linux | 桌面環境 |
+| Windows 10 1809+/11 | 主要桌面環境，支援 Crashpad、Session 監控 |
+| Linux Ubuntu 24.04 | 桌面環境 |
 | Android | 手機/平板，RWD 版面 |
 | iOS | 手機/平板，RWD 版面 |
-| WebAssembly/HTML5 | 瀏覽器執行，使用 `wasmsettings`、`wahttp_web`、Web AES 函式庫 |
+| WebAssembly/HTML5 | 瀏覽器執行（Chrome/Edge/Firefox，WebGL 2.0），使用 `wasmsettings`、`wahttp_web`、Web AES 函式庫 |
 
 需求：
 
 - Qt 6（含 Qt Quick、QuickControls2、Svg、WebSockets、Multimedia；選用 WebView、Firebase、ZXing）。
-- 圖形支援 OpenGL/OpenGL ES/Vulkan（依平台與 `WaSettings.getRender()`）。
+- 圖形支援 OpenGL 3.3+/OpenGL ES/Vulkan（依平台與 `WaSettings.getRender()`）；Windows 可支援 DirectX 11。
 - 網路可達 Metadata Service 與 Runtime Proxy；瀏覽器模式需允許 Cookie 與 WebSocket。
 
 ### 4.2 Server
 
 | 元件 | 需求 |
 |------|------|
-| OS | Linux（容器/K8s）或 Windows（服務/執行檔） |
+| OS | Windows 10 1607+/11、Ubuntu 22.04/24.04、麒麟 V10 SP1（或容器/K8s） |
 | 執行環境 | Go（Metadata Service）、Go 1.23（Runtime Proxy）、Go（Alarm Agent）、.NET（Data Agent）、Node/Vue build（UI） |
 | 資料庫 | PostgreSQL（必要），需 `ltree`、`uuid-ossp` 擴充；`waxalarm` 供 Alarm runtime |
-| 網路 | Metadata `127.0.0.1:28883`；Runtime `127.0.0.1:28884`；Data Agent `28886`/`28887`；Alarm Agent `28889`；可透過 Ingress 對外 |
+| 網路 | Metadata `127.0.0.1:28883`；Runtime `127.0.0.1:28884`；Data Agent `28886`/`28887`；Alarm Agent `28889`；EVS 對外 HTTP/HTTPS `8880`/`8881`；可透過 Ingress 對外 |
 | 憑證 | TLS 憑證與私鑰（`cert.crt`/`cert.key`） |
 | 資源 | 依使用者與輪詢連線數調整；建議獨立 PostgreSQL 與適當連線池 |
 
@@ -235,6 +234,7 @@ flowchart TB
 | 第三方資料庫 | Record/Datalog 查詢與配方 |
 | Firebase 服務帳號 | 行動推播 |
 | Edge365/etcd | 雲端代理與應用註冊 |
+| 授權檔（`graphix.lic`） | 服務啟動與功能（含 3D/App） |
 | 系統時間 | 封包時間戳、Session、Token、稽核 |
 
 ## 6. 設計與實作限制（Design Constraints）

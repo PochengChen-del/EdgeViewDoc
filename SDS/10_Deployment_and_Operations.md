@@ -10,6 +10,7 @@
 | OPC UA Data Agent | `wax_opcua_agent` / `.exe` | Linux amd64/arm64、Windows、macOS | .NET；Runtime/History 兩進程 |
 | OPC UA Alarm Agent | `wxalarmagent` / `.exe` | Linux、Windows | Go 靜態執行檔 |
 | OPC UA 設定 UI | `dist/`（Vue build） | 靜態（Nginx） | `/sc/opcua/` |
+| 安裝/授權工具 | `wxlic`、`activate.enc`、`graphix.lic` | 伺服器主機 | 手冊 §1.5.4 |
 | PostgreSQL | 外部/內建 | — | `waxconfig`、`waxalarm`、Session |
 | Ingress | Nginx | K8s | TLS、body 75M、長連線、WebSocket |
 
@@ -70,7 +71,20 @@ flowchart TB
     LD --> AD
 ```
 
-### 2.1 OPC UA 子系統部署
+### 2.1 手冊安裝/連線基準
+
+| 項目 | 值 |
+|------|----|
+| 伺服器安裝 | WebAccess 版／OPC UA 版；Linux `.inst` + systemd |
+| 服務管理 | `https://<host>:8881/system` |
+| WebAccess 設定 | `https://<host>:8881/SC/settings` |
+| OPC UA 設定 | `https://<host>:8881/sc/opcua` |
+| 瀏覽器 HTTP | `http://<host>:8880/sc/` |
+| 瀏覽器 HTTPS | `https://<host>:8881/sc/` |
+| 桌面安裝路徑 | `C:\Advantech\WebAccess\SCClient`、`/opt/advantech/webaccess/scclient` |
+| 授權 | `wxlic activate/deactivate`、`graphix.lic` |
+
+### 2.2 OPC UA 子系統部署
 
 | 元件 | 設定 | 埠 | 備註 |
 |------|------|----|------|

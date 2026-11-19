@@ -507,6 +507,8 @@ CMake 目標：`gc-designer`；連結 `RoniaKit`、`SCDraw2D`、`SCDraw3D`、`na
 6. 腳本 `eval` 需注意安全性與 CSP（WASM 模式）。
 7. OPC UA 即時/歷史值直連 Data Agent；若網路不可達，Widget 顯示 Bad Quality，不影響 Record/其他資料源。
 8. 根路徑部署時需設定 `DataSourceBody.dbport`/`alarmport`，否則歷史/警報直連可能失效。
+9. 手冊的圖紙/變數更新率（25/50/100 ms）與外部資料掃描（最低 500 ms）為不同層級，UI 需避免誤導。
+10. 模型（`WACustom`/`WACustomRectangle`）與 DataModel 密碼、匯入刪除保護需維持；詳見 SDS-15。
 
 ## 16. 需求對照
 
@@ -517,5 +519,6 @@ CMake 目標：`gc-designer`；連結 `RoniaKit`、`SCDraw2D`、`SCDraw3D`、`na
 | Widget/綁定/腳本 | FR-CLI-046~075 |
 | 設定/維運 | FR-CLI-076~095 |
 | OPC UA 直連資料源 | FR-OPC-015、FR-OPC-018、FR-OPC-035~037 |
+| 使用手冊功能（UI/控件/變數/腳本/模型） | FR-UM-021~050、SDS-15 |
 | 渲染/I/O/設定 | NFR-PERF-001~012、NFR-PORT-001~005、NFR-I18N-001~006 |
 | 安全 | NFR-SEC-001~014、NFR-OPC-007~008 |

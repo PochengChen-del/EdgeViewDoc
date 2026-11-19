@@ -151,7 +151,7 @@
 
 - 協定：HTTP/1.1 或 HTTPS。
 - 編碼：JSON（`application/json`）或 `multipart/form-data`（上傳）。
-- Metadata 預設埠：`28883`；Runtime 預設埠：`28884`。
+- Metadata 預設埠：`28883`；Runtime 預設埠：`28884`；EVS HTTP/HTTPS：`8880`/`8881`（`/sc/`、`/sc/opcua`、`/system`、`/SC/settings`）。
 - 共用回應格式：
 
 ```json
@@ -273,3 +273,4 @@
 | OPC UA 設定 UI | FR-OPC-001~012 | SDS-14 §3 |
 | OPC UA Data Agent | FR-OPC-013~027 | SDS-14 §4、§8 |
 | OPC UA Alarm Agent | FR-OPC-028~045 | SDS-14 §5、§6 |
+| 使用手冊介面（URL/安裝/授權/插件） | FR-UM-001~020、IF-UM-001~006 | SDS-10 §2.1、SDS-15 §10~12 |

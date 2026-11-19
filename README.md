@@ -7,8 +7,8 @@
 | 項目 | 內容 |
 |------|------|
 | 產品名稱 | EdgeView（HMI/SCADA 圖控設計與執行平台） |
-| 文件版本 | 1.1 |
-| 文件狀態 | 增修（加入 OPC UA 子系統與 Client 直連資料源） |
+| 文件版本 | 1.2 |
+| 文件狀態 | 增修（加入 OPC UA 子系統、Client 直連資料源、使用手冊需求） |
 | 文件語言 | 繁體中文（技術名詞保留英文原文） |
 | 整理日期 | 2026-11-19 |
 | 適用對象 | 產品經理、系統分析師、前後端工程師、測試工程師、DevOps、資安與稽核人員 |
@@ -34,6 +34,7 @@
 - `wax_opcua_alarm_agent\README.md`、`api.md`、`impl.md`：Alarm Engine 規格、API 與實作說明。
 - `wax_opcua_agent\wax_opcua_agent\appsettings.json`、`Controllers/`：Data Agent 設定與端點。
 - `wax_opcua_agent_ui\package.json`、`src/`：設定 UI 技術與頁面。
+- [EdgeView 使用手冊（V4.2.x）](https://docs.google.com/document/d/1wa5-USVLF3dqyzATGt5GqrGQ8WzIPASZmo5GLartUq0/edit)：安裝、連線、繪圖、控件、變數、腳本、事件、動畫、模型、工程配置、使用者、插件。
 
 ## 2. 系統定位摘要
 
@@ -103,6 +104,7 @@ flowchart LR
 | SRS-05 | [SRS/05_Nonfunctional_Requirements.md](SRS/05_Nonfunctional_Requirements.md) | 效能、安全、可靠度、可維護、可攜、i18n、稽核 |
 | SRS-06 | [SRS/06_Acceptance_and_Traceability.md](SRS/06_Acceptance_and_Traceability.md) | 驗收準則與需求追溯 |
 | SRS-07 | [SRS/07_OPCUA_Subsystem.md](SRS/07_OPCUA_Subsystem.md) | OPC UA 子系統需求（設定 UI、Data Agent、Alarm Agent） |
+| SRS-08 | [SRS/08_User_Manual_Requirements.md](SRS/08_User_Manual_Requirements.md) | 使用手冊補充需求（安裝/授權/繪圖/控件/變數/腳本/插件/限制） |
 
 ### 3.2 SDS（軟體設計規格書）
 
@@ -122,6 +124,7 @@ flowchart LR
 | SDS-12 | [SDS/12_Traceability.md](SDS/12_Traceability.md) | SRS ↔ SDS ↔ 程式碼追溯 |
 | SDS-13 | [SDS/13_Security_Remediation.md](SDS/13_Security_Remediation.md) | R-001/R-002/R-003 修復設計、部署需求與驗收 |
 | SDS-14 | [SDS/14_OPCUA_Subsystem_Design.md](SDS/14_OPCUA_Subsystem_Design.md) | OPC UA 子系統設計、API、資料模型、直連資料源 |
+| SDS-15 | [SDS/15_User_Manual_Mapping.md](SDS/15_User_Manual_Mapping.md) | 使用手冊功能對照、UI/控件/腳本/模型/權限/插件/限制 |
 
 ## 4. 需求編號規則
 
@@ -131,10 +134,13 @@ flowchart LR
 | `FR-META-nnn` | Metadata Service 功能需求 | `FR-META-020` |
 | `FR-RT-nnn` | Runtime Proxy 功能需求 | `FR-RT-020` |
 | `FR-OPC-nnn` | OPC UA 子系統功能需求 | `FR-OPC-015` |
+| `FR-UM-nnn` | 使用手冊補充功能需求 | `FR-UM-026` |
 | `NFR-xxx-nnn` | 非功能需求（PERF/SEC/REL/MNT/PORT/I18N/AUD） | `NFR-SEC-001` |
 | `NFR-OPC-nnn` | OPC UA 子系統非功能需求 | `NFR-OPC-001` |
+| `NFR-UM-nnn` | 使用手冊補充非功能需求 | `NFR-UM-001` |
 | `IF-xxx-nnn` | 外部介面需求 | `IF-COM-001` |
 | `IF-OPC-nnn` | OPC UA 子系統介面需求 | `IF-OPC-002` |
+| `IF-UM-nnn` | 使用手冊補充介面需求 | `IF-UM-001` |
 
 優先級定義：
 

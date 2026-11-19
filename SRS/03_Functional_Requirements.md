@@ -245,6 +245,10 @@ Viewer/Preview 的 OPC UA 即時與歷史 Tag 值由 Client **直接**呼叫 Dat
 
 > Runtime Proxy 仍負責 Record/第三方 DB 查詢與 `opcuaalarmsummary` WebSocket 摘要。
 
+### 3.7.2 使用手冊補充
+
+安裝/授權、系統需求、伺服器設定、瀏覽器/APP 連線、繪圖介面、控件目錄、變數、腳本、事件、動畫、模型、工程配置、使用者角色與插件等手冊功能，另見 [`SRS/08_User_Manual_Requirements.md`](08_User_Manual_Requirements.md)（`FR-UM-nnn`）。
+
 ## 3.8 需求優先級統計
 
 | 子系統 | Must | Should | Could | 合計 |
@@ -253,6 +257,7 @@ Viewer/Preview 的 OPC UA 即時與歷史 Tag 值由 Client **直接**呼叫 Dat
 | Metadata | 24 | 18 | 3 | 45 |
 | Runtime | 15 | 9 | 1 | 25 |
 | OPC UA 子系統 | 38 | 7 | 0 | 45 |
-| **總計** | **117** | **74** | **19** | **210** |
+| 使用手冊（SRS-08） | 44 | 16 | 4 | 64 |
+| **總計** | **161** | **90** | **23** | **274** |
 
-> 註：統計依本章與 SRS-07 表格粗略分類，實際排程以產品規劃為準。
+> 註：統計依本章、SRS-07、SRS-08 表格粗略分類，實際排程以產品規劃為準。

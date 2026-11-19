@@ -26,6 +26,7 @@
 | 設計取捨與風險 | 全系統 | SDS-11 |
 | 追溯 | 全系統 | SDS-12 |
 | OPC UA 子系統 | 三相關程式庫 | SDS-14 |
+| 使用手冊功能 | Client/Metadata/Runtime | SDS-15 |
 
 ## 3. 設計目標與原則
 
@@ -126,6 +127,7 @@
 | SDS-12 | 追溯 |
 | SDS-13 | 安全修復（R-001/R-002/R-003） |
 | SDS-14 | OPC UA 子系統設計（UI/Data Agent/Alarm Agent/直連資料源） |
+| SDS-15 | 使用手冊功能對照（UI/控件/腳本/模型/權限/插件/限制） |
 
 ## 7. 參考
 
@@ -137,6 +139,7 @@
 - `wax_opcua_agent\wax_opcua_agent\appsettings.json`、`Controllers/`。
 - `wax_opcua_alarm_agent\README.md`、`api.md`、`impl.md`。
 - `wax_opcua_agent_ui\src/`。
+- EdgeView 使用手冊（V4.2.x，Google Docs）。
 
 ## 8. 閱讀建議
 

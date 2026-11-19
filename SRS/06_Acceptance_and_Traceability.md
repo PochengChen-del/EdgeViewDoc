@@ -45,6 +45,10 @@
 | FR-OPC-013~027 Data Agent | Runtime/History 角色、即時/歷史/寫值/瀏覽/憑證、Alarm 欄位 | 整合/API/效能 |
 | FR-OPC-028~045 Alarm Agent | 規則、優先級、雙狀態、Ack/Process、清單/歷史、重啟復原 | 整合/系統 |
 | 直連資料源 | Client Viewer 直接取得即時/歷史值；Proxy 不承載 OPC UA Tag 值 | 端到端/延遲量測 |
+| FR-UM-001~020 安裝/授權/連線 | 依手冊完成安裝、試用/正式授權、桌面/瀏覽器/APP 連線 | 系統/UAT |
+| FR-UM-021~034 繪圖/控件/綁定 | 六大區塊、樣板、圖層、預覽、控件目錄、綁定語法、圖表限制 | 系統/UAT |
+| FR-UM-035~046 變數/腳本/事件/動畫 | 變數型別/限制、腳本函數、事件參數、動畫組合 | 系統/UAT |
+| FR-UM-047~064 模型/配置/權限/插件 | 模型/實例化、檔案、工程配置、角色、插件 | 系統/UAT |
 
 ## 5. 非功能驗收準則
 
@@ -60,12 +64,13 @@
 | NFR-OPC-001~004 | 效能測試 | 即時/批次/歷史/評估符合目標 |
 | NFR-OPC-005/006 | 故障注入 | 重啟 30 秒恢復；斷線回 Bad Quality |
 | NFR-OPC-007/008 | 安全測試 | 未認證被拒；TLS/OPC UA 加密可用 |
+| NFR-UM-001~008 | 效能/相容/UAT | 更新率、版本相容、i18n、權限、備份 |
 
 ## 6. 需求追溯原則
 
 - **正向追溯**：SRS 需求 → SDS 設計章節 → 程式碼位置 → 測試案例。
 - **反向追溯**：程式碼模組 → SDS → SRS（確認無孤立功能）。
-- 完整對照表見 `SDS/12_Traceability.md`；OPC UA 子系統見 `SRS/07` 與 `SDS/14`。
+- 完整對照表見 `SDS/12_Traceability.md`；OPC UA 子系統見 `SRS/07` 與 `SDS/14`；使用手冊功能見 `SRS/08` 與 `SDS/15`。
 - 需求 ID 一旦發佈不得重用；刪除需求需標記 `Deprecated` 並保留歷史。
 
 ## 7. 需求變更流程
@@ -93,5 +98,8 @@
 | OI-011 | Alarm 預設埠與 `config.yaml` 不一致（8090/28889） | FR-OPC-028、SDS-14 §11 | 統一預設與部署文件 |
 | OI-012 | Root path 部署缺少 `dbport`/`alarmport` | FR-OPC-015/018、SDS-14 §8.3 | 補 DataSourceBody 預設或改用路徑 |
 | OI-013 | OPC UA 設定 UI 與 Client 的 API 權限邊界 | FR-OPC-001、NFR-OPC-007 | 補權限測試與 CORS 驗證 |
+| OI-014 | 手冊 25 ms 更新率與外部資料掃描最低 500 ms 的差異 | FR-UM-025/026、NFR-UM-001 | 文件區分繪製/資料週期 |
+| OI-015 | 手冊插件/主題色/APP 查詢限制 | FR-UM-061/064 | 補來源與平台限制測試 |
+| OI-016 | 手冊模型密碼/匯入刪除保護 | FR-UM-047/048 | 補密碼與錯誤測試 |
 | OI-008 | DataSource source type 編號不一致 | IF-SW-002/004 | 統一常數並加轉換層 |
 | OI-009 | 非 OPC UA 登入鎖定與 K8s 限流未完整 | NFR-SEC-015 | nginx 已有 `limit_req`；補登入專用門檻、帳號鎖定、WS 訊息限流與 K8s ingress annotation |
