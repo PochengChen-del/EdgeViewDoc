@@ -41,6 +41,10 @@
 | FR-RT-001~009 查詢 | 各資料源可查詢；分頁/ schema/ datalog/ 指令正確；資料量限制生效 | 整合/API |
 | FR-RT-010~017 即時 | WS 登入、訂閱、推送、取消、updatevalue 正確；逾時斷線 | 整合/系統 |
 | FR-RT-018~025 代理/通知/關閉 | 代理轉發、FCM、統一錯誤、優雅關閉 | 整合/維運 |
+| FR-OPC-001~012 設定 UI | 登入/權限、專案、連線、Tag、節點瀏覽、警報、使用者、匯入匯出 | 系統/UAT |
+| FR-OPC-013~027 Data Agent | Runtime/History 角色、即時/歷史/寫值/瀏覽/憑證、Alarm 欄位 | 整合/API/效能 |
+| FR-OPC-028~045 Alarm Agent | 規則、優先級、雙狀態、Ack/Process、清單/歷史、重啟復原 | 整合/系統 |
+| 直連資料源 | Client Viewer 直接取得即時/歷史值；Proxy 不承載 OPC UA Tag 值 | 端到端/延遲量測 |
 
 ## 5. 非功能驗收準則
 
@@ -53,12 +57,15 @@
 | NFR-AUD-001~005 | 稽核測試 | 事件可追溯、checksum 可驗證、可匯出 |
 | NFR-I18N-001~006 | 語系/時區測試 | 切換與格式正確 |
 | NFR-PORT-001/002 | 建置/煙霧測試 | 各平台可啟動並完成登入 |
+| NFR-OPC-001~004 | 效能測試 | 即時/批次/歷史/評估符合目標 |
+| NFR-OPC-005/006 | 故障注入 | 重啟 30 秒恢復；斷線回 Bad Quality |
+| NFR-OPC-007/008 | 安全測試 | 未認證被拒；TLS/OPC UA 加密可用 |
 
 ## 6. 需求追溯原則
 
 - **正向追溯**：SRS 需求 → SDS 設計章節 → 程式碼位置 → 測試案例。
 - **反向追溯**：程式碼模組 → SDS → SRS（確認無孤立功能）。
-- 完整對照表見 `SDS/12_Traceability.md`。
+- 完整對照表見 `SDS/12_Traceability.md`；OPC UA 子系統見 `SRS/07` 與 `SDS/14`。
 - 需求 ID 一旦發佈不得重用；刪除需求需標記 `Deprecated` 並保留歷史。
 
 ## 7. 需求變更流程
@@ -80,5 +87,11 @@
 | OI-005 | 部分內部 HTTPS 呼叫停用憑證驗證 | NFR-SEC-004 | 正式環境改為驗證或指定 CA |
 | OI-006 | WebSocket `systeminfo`/`default` 認證不足 | NFR-SEC-009 | 已修（R-006）：非 `login` topic 需登入；systeminfo 登入後才訂閱 |
 | OI-007 | Record 快取無明確閒置 TTL | NFR-PERF/REL | 依設計註解實作 10 分鐘回收或調整文件 |
+| OI-008 | Data Agent `packetTimestamp` 未強制 | NFR-OPC-007、IF-OPC-002 | 修正中介層短路；補時間戳測試 |
+| OI-009 | Data Agent CORS 允許任意 Origin + Credentials | NFR-OPC-007 | 白名單化並限制憑證 |
+| OI-010 | OPC UA 憑證自動接受不受信任 | NFR-OPC-008 | 正式環境改為信任清單 |
+| OI-011 | Alarm 預設埠與 `config.yaml` 不一致（8090/28889） | FR-OPC-028、SDS-14 §11 | 統一預設與部署文件 |
+| OI-012 | Root path 部署缺少 `dbport`/`alarmport` | FR-OPC-015/018、SDS-14 §8.3 | 補 DataSourceBody 預設或改用路徑 |
+| OI-013 | OPC UA 設定 UI 與 Client 的 API 權限邊界 | FR-OPC-001、NFR-OPC-007 | 補權限測試與 CORS 驗證 |
 | OI-008 | DataSource source type 編號不一致 | IF-SW-002/004 | 統一常數並加轉換層 |
 | OI-009 | 非 OPC UA 登入鎖定與 K8s 限流未完整 | NFR-SEC-015 | nginx 已有 `limit_req`；補登入專用門檻、帳號鎖定、WS 訊息限流與 K8s ingress annotation |

@@ -225,6 +225,36 @@ sequenceDiagram
 3. 連線數/訊息大小無明顯上限。
 4. `default` 仍會將已登入者的訊息廣播給所有 client；若不需要應移除廣播。
 
+## 8.1 OPC UA 子系統安全
+
+| 機制 | Data Agent | Alarm Agent | 設定 UI |
+|------|------------|-------------|---------|
+| 認證 | Metadata Session + `csrfToken` 或 loopback Bearer | Session + CSRF、Basic、loopback Bearer | Metadata Session + `settings-csrfToken` |
+| 授權 | Metadata 專案/角色 | Metadata 專案/角色 | `role`/`permissions` |
+| 傳輸 | HTTP/HTTPS、PFX | HTTP/HTTPS | HTTPS（建議） |
+| OPC UA | SecurityMode/Policy、UserIdentity、PFX | 透過 Data Agent | — |
+| 內部呼叫 | Bearer（`aes_secret` 推導） | Bearer（輪詢 Data Agent） | — |
+| 稽核 | Serilog | 警報歷史/Ack | Metadata 稽核 |
+
+**風險**
+
+1. Data Agent `PacketTimestampMiddleware` 目前短路，時間戳未強制。
+2. CORS `SetIsOriginAllowed(_=>true).AllowCredentials()` 允許任意來源帶憑證。
+3. `AutoAcceptUntrustedCertificates=true`、`RejectSHA1SignedCertificates=false`。
+4. 預設 DB 帳密硬編碼（`Program.cs`、`service/app.go`）。
+5. Runtime/History 同映像，若 `isHistory` 設定錯誤會暴露錯誤端點（以 400 阻擋）。
+6. Root path 直連參數（`dbport`/`alarmport`）缺失時可能無法連線。
+7. Alarm 預設埠 8090 與部署 28889 不一致，易誤導。
+
+**建議**
+
+1. 修正時間戳中介層；加入 `packetTimestamp` 測試。
+2. CORS 白名單化；限制 Origin 與 Credentials。
+3. 正式環境關閉自動接受憑證，使用信任清單。
+4. DB 帳密改 Secret/環境變數。
+5. UI 與 Agent 全面 HTTPS；OPC UA 使用 SignAndEncrypt。
+6. 針對 `GetTagValue`/`GetDataLog` 加速率限制與審計。
+
 ## 9. 檔案與上傳安全
 
 | 控制 | 現況 |
@@ -332,3 +362,4 @@ sequenceDiagram
 | 稽核 | NFR-AUD-001~005 |
 | 輸入/上傳 | NFR-SEC-007~010 |
 | WS | NFR-SEC-009 |
+| OPC UA 子系統 | NFR-OPC-007~008、R-025~R-028 |

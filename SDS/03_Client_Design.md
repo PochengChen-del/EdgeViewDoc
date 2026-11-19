@@ -408,6 +408,11 @@ flowchart LR
 - 連線上限 255、佇列 1024、等待 120 秒（Viewer 10 秒）。
 - 常用路徑：`/api/about`、`/api/sysstatus`、`/api/alarm/*`、`/api/datalog/query`、`/api/datamodel/*`、`/api/biproxy`。
 - BI/EdgeHub 代理：`http://<host>:8882/apihub` 或 `https://wxproxy<suffix>/apihub`。
+- OPC UA 直連（不經 Proxy）：
+  - 即時：`{opcuaUrlPrefix}/GetTagValueText/{projid}`
+  - 歷史：`{opcuaUrlPrefix}db/GetDataLog/{projid}`、`/GetRawDataLog/{projid}`
+  - 警報：`{opcuaUrlPrefix}am/api/alarm/*`
+  - `opcuaUrlPrefix` 預設 `protocol//host/ua`；根路徑部署改用 `DataSourceBody` 的 `ip`/`port`/`dbport`/`alarmport`。
 
 ### 11.2 WebSocket
 
@@ -418,6 +423,35 @@ flowchart LR
 | 功能 | 自動重連、topic 訂閱 |
 | 主題 | `login`、`waalarmsummary`、`systeminfo`、`recorddata`、`ehalarmsummary`、`opcuaalarmsummary`、`xalarmsummary` |
 | Controller | `Common/Api/ws/<Topic>Controller.qml` 自動建立 |
+
+### 11.2.1 OPC UA 直連資料源
+
+```mermaid
+flowchart LR
+    WDS["WADataSourceManager<br/>dataValueCache"]
+    OQ["ui/component/datasource/Opcua.qml"]
+    API["Common/Api/opcua.js"]
+    RT["Data Agent :28886<br/>/ua"]
+    HIS["History Agent :28887<br/>/uadb"]
+    ALM["Alarm Agent :28889<br/>/uaam"]
+
+    WDS -->|getTagValue| OQ --> API -->|GetTagValueText| RT
+    WDS -->|getDynamic getrawdatalog| OQ --> API -->|GetRawDataLog| HIS
+    API -->|alarm list/log/ack| ALM
+```
+
+| 行為 | 實作 |
+|------|------|
+| 建立連線物件 | `WADataSourceManager.connect(dbID)` 讀 `/api/DataSource/querybodykey/2`，建立 `Opcua.qml` |
+| 即時值 | `Opcua.getTagValue` → `opcua.js tagvaluetext` → `/GetTagValueText/{projid}` |
+| 寫值 | `setTagValue`/`setTagValueText` → `/SetTagValue*` |
+| 歷史 | `getdatalog`/`getrawdatalog` → `{dburl}/GetDataLog`/`GetRawDataLog` |
+| 警報 | `alarmAck`/`getAlarmLog`/`alarmProcessHistory` → `{alarmurl}/api/alarm/*` |
+| 快取/批次 | `dataValueCache`、`_batchTagTimer` 33 ms |
+| 掃描週期 | `Global.treetimer`：伺服器 `client_data_update_interval`、本機 `dataUpdateInterval`，最低 500 ms、預設 1000 ms |
+| 認證 | 請求 header `csrfToken`；沿用 Metadata Session Cookie |
+
+> `Common/Api/ws/OpcuaalarmsummaryController.qml` 仍透過 Runtime Proxy WebSocket 取得摘要；即時/歷史 Tag 值與 alarm list/log/ack 則直連 Data/Alarm Agent。
 
 ### 11.3 MQTT
 
@@ -471,6 +505,8 @@ CMake 目標：`gc-designer`；連結 `RoniaKit`、`SCDraw2D`、`SCDraw3D`、`na
 4. 遠端 rcc 需處理版本與快取一致性。
 5. 3D 資產較大，需快取與載入策略。
 6. 腳本 `eval` 需注意安全性與 CSP（WASM 模式）。
+7. OPC UA 即時/歷史值直連 Data Agent；若網路不可達，Widget 顯示 Bad Quality，不影響 Record/其他資料源。
+8. 根路徑部署時需設定 `DataSourceBody.dbport`/`alarmport`，否則歷史/警報直連可能失效。
 
 ## 16. 需求對照
 
@@ -480,5 +516,6 @@ CMake 目標：`gc-designer`；連結 `RoniaKit`、`SCDraw2D`、`SCDraw3D`、`na
 | 專案/畫面/物件樹 | FR-CLI-021~045 |
 | Widget/綁定/腳本 | FR-CLI-046~075 |
 | 設定/維運 | FR-CLI-076~095 |
+| OPC UA 直連資料源 | FR-OPC-015、FR-OPC-018、FR-OPC-035~037 |
 | 渲染/I/O/設定 | NFR-PERF-001~012、NFR-PORT-001~005、NFR-I18N-001~006 |
-| 安全 | NFR-SEC-001~014 |
+| 安全 | NFR-SEC-001~014、NFR-OPC-007~008 |

@@ -17,7 +17,8 @@ EdgeView 是一套可跨平台執行的 HMI/SCADA 圖控平台，包含：
 - **EdgeView Designer**：以 Qt/QML 實作的視覺化畫面設計工具。
 - **EdgeView Viewer**：同一 Client 的執行期模式，載入設計結果並與後端即時互動。
 - **EdgeView Metadata Service**：設定、專案、使用者、權限、OPC UA 組態與稽核後端。
-- **EdgeView Runtime Proxy**：第三方資料查詢與即時資料代理後端。
+- **EdgeView Runtime Proxy**：Record/第三方資料查詢、告警摘要與代理後端。
+- **OPC UA 子系統**：設定 UI（Vue）、Data Agent（C#，Runtime/History）、Alarm Agent（Go）。
 
 ### 2.2 納入範圍（In Scope）
 
@@ -25,7 +26,9 @@ EdgeView 是一套可跨平台執行的 HMI/SCADA 圖控平台，包含：
 - Widget 庫、屬性系統、資料綁定（Tag/Variable/Record）、事件腳本、動畫與圖表。
 - 2D 向量繪圖（SCDraw2D）、3D 場景（SCDraw3D/threepp）、NanoCanvas 文字/向量渲染。
 - 使用者、群組、專案權限、登入來源（WebAccess、BI/EdgeHub、OPC UA、X）。
+- OPC UA 子系統：設定 UI、Data Agent（即時/歷史/寫值/瀏覽/憑證/測點）、Alarm Agent（規則/評估/狀態機/Ack/歷史）。
 - OPC UA 連線、Tag、專案、使用者與警報設定。
+- Client 直連 OPC UA Data Agent 取得即時/歷史 Tag 值。
 - 資料來源設定（WebAccess、OPC UA、X、EdgeHub/BI）。
 - Record 查詢定義、預覽、分頁、Datalog 歷史查詢。
 - WebSocket 即時資料（record data）、警報摘要（WA/EH/OPC UA/X）、系統資訊。
@@ -37,7 +40,7 @@ EdgeView 是一套可跨平台執行的 HMI/SCADA 圖控平台，包含：
 
 - 第三方 PLC/SCADA 控制器本身的韌體行為。
 - WebAccess、EdgeHub/Edge365、X 平台內部實作。
-- OPC UA Agent 的實作（本文件僅描述與其介接）。
+- OPC UA Server／裝置端的韌體與資訊模型實作（本文件描述 Agent/UI/Client 與其介接）。
 - 行動裝置商店上架流程與憑證生命週期細節。
 - 商業授權條款與計價。
 - 已停用或未實作功能（例如 MQTT Client、ODBC 資料源）不在需求保證範圍，僅於 SDS-11 記錄現況。
@@ -97,8 +100,9 @@ EdgeView 是一套可跨平台執行的 HMI/SCADA 圖控平台，包含：
 | SRS-04 | 外部介面需求：UI、硬體、軟體、通訊 |
 | SRS-05 | 非功能需求：效能、安全、可靠度、可維護、可攜、i18n、稽核 |
 | SRS-06 | 驗收準則與需求追溯 |
+| SRS-07 | OPC UA 子系統需求：設定 UI、Data Agent、Alarm Agent、直連資料源 |
 
-設計對應請參閱 `SDS/` 目錄；需求與設計的對照請參閱 `SDS/12_Traceability.md`。
+設計對應請參閱 `SDS/` 目錄；需求與設計的對照請參閱 `SDS/12_Traceability.md`，OPC UA 設計見 `SDS/14_OPCUA_Subsystem_Design.md`。
 
 ## 7. 需求表達慣例
 

@@ -115,6 +115,28 @@ flowchart LR
 | FR-RT-024 | SDS-05 §5.3 | `model/baseResponse.go` | TC-RT-024 錯誤格式 |
 | FR-RT-025 | SDS-05 §10 | `hub.Shutdown`、`app.Close`、`shutdownServer` | TC-RT-025 關閉 |
 
+## 4.1 OPC UA 子系統追溯
+
+| 需求 | 設計 | 主要程式碼 | 測試 |
+|------|------|------------|------|
+| FR-OPC-001~004 | SDS-14 §3.2~3.4 | `src/router/*`、`src/views/projects`、`src/api/projects.js` | TC-OPC-001 UI 登入/專案 |
+| FR-OPC-005~007 | SDS-14 §3.4、§6.1 | `src/views/orgTree/_components/connect*`、`tag*`、`src/api/orgTree.js` | TC-OPC-005 連線/Tag |
+| FR-OPC-008~010 | SDS-14 §3.4 | `src/views/orgTree/_components/{constant,calculation,system}Form.vue`、`alarmSetting` | TC-OPC-008 測點/警報 |
+| FR-OPC-011~012 | SDS-14 §3.4 | `src/views/user/*`、`src/views/import`、`src/views/oemSettings`、`logViewer` | TC-OPC-011 使用者/維運 |
+| FR-OPC-013~014 | SDS-14 §4.2~4.4 | `Program.cs`、`Authorization/*`、`Services/HttpSessionAuthService.cs` | TC-OPC-013 啟動/認證 |
+| FR-OPC-015~019 | SDS-14 §4.5~4.7 | `Controllers/TagValueController.cs`、`TagDetailController.cs`、`DataLogController.cs`、`BrowseController.cs` | TC-OPC-015 讀/寫/歷史 |
+| FR-OPC-020 | SDS-14 §4.8 | `OpcUaCacheService.cs`、`sync/OpcUaSync.cs` | TC-OPC-020 連線池 |
+| FR-OPC-021 | SDS-14 §4.5 | `CertificateController.cs`、`CertificateBuilder.cs` | TC-OPC-021 憑證 |
+| FR-OPC-022 | SDS-14 §4.9 | `Calc*`、`Acc*`、`SystemPoint*`、`ConstTag*` | TC-OPC-022 測點 |
+| FR-OPC-023 | SDS-14 §4.5、§6.5 | `AlarmAgentClient.cs`、`AlarmTagFields.cs` | TC-OPC-023 Alarm 欄位 |
+| FR-OPC-024~027 | SDS-14 §4.4、§4.10 | `Constraint/*`、`Exception/*`、`Program.cs` | TC-OPC-024 角色/安全 |
+| FR-OPC-028~030 | SDS-14 §5.2~5.4 | `opcua_alarm.go`、`alarm/engine.go`、`metadata/postgres.go`、`opcuaagent/poller.go` | TC-OPC-028 啟動/輪詢 |
+| FR-OPC-031~034 | SDS-14 §5.5~5.6 | `alarm/evaluator.go`、`precedence.go`、`workflow.go`、`state_machine.go` | TC-OPC-031 評估/流程 |
+| FR-OPC-035~038 | SDS-14 §5.8 | `controller/alarmController.go`、`alarm/fields.go` | TC-OPC-035 API |
+| FR-OPC-039~040 | SDS-14 §5.7 | `storage/postgres.go`、`alarm/recovery.go`、`model/system_config.go` | TC-OPC-039 復原 |
+| FR-OPC-041~045 | SDS-14 §5.9、§5.8 | `routes/routes.go`、`service/basicAuth.go`、`alarm/reloader.go` | TC-OPC-041 認證/重載 |
+| 直連資料源 | SDS-14 §8 | `Common/Api/opcua.js`、`WADataSourceManager.qml`、`Opcua.qml` | TC-OPC-DIRECT |
+
 ## 5. 非功能需求追溯
 
 | 需求群組 | 設計 | 驗證 |
@@ -124,6 +146,7 @@ flowchart LR
 | NFR-REL-001~010 | SDS-05 §10、SDS-10 §8~11 | 故障注入、備份還原 |
 | NFR-SCL-001~005 | SDS-02 §4、SDS-10 §10 | 擴縮容測試 |
 | NFR-MNT-001~008 | SDS-10 全章 | 維運演練 |
+| NFR-OPC-001~020 | SDS-14 §7、§11 | 壓測/故障/互通/安全 |
 | NFR-PORT-001~005 | SDS-03 §14、SDS-10 §13 | 各平台建置/煙霧 |
 | NFR-USE-001~006 | SDS-03 §5、SDS-07 | UAT |
 | NFR-I18N-001~006 | SDS-03 §4、§12 | 語系/時區測試 |
@@ -142,6 +165,7 @@ flowchart LR
 | IF-COM-005~006 | SDS-05 §4、SDS-07 §5 | WS 測試 |
 | IF-COM-007 | SDS-07 §2.5、§3.20 | 檔案測試 |
 | IF-COM-008 | SDS-05 §5.2、SDS-07 | 逾時測試 |
+| IF-OPC-001~010 | SDS-14 §6、SDS-07 §4.2~4.4 | 介面/整合測試 |
 
 ## 7. 設計章節覆蓋
 
@@ -159,6 +183,7 @@ flowchart LR
 | SDS-10 | NFR-MNT/PORT/REL |
 | SDS-11 | 風險與技術債 |
 | SDS-12 | 追溯 |
+| SDS-14 | FR-OPC-001~045、IF-OPC-001~010、NFR-OPC-001~020、直連資料源 |
 | SDS-13 | R-001/R-002/R-003/R-006/R-008/R-009 修復設計與驗收 |
 
 ## 8. 反向追溯（程式碼 → 需求）
@@ -183,6 +208,10 @@ flowchart LR
 | `config/config.go`、`EHAlarmPolling.go`、`XAlarmPolling.go` | R-008、NFR-PERF-004 |
 | `service/RecordDataPolling.go`（TTL/上限/回收） | R-009、NFR-PERF-004 |
 | `xnginx.go`、`xnginx.yaml`、`nginx.conf.templ`（rate limit） | R-016、NFR-SEC-015 |
+| `wax_opcua_agent_ui/src/*` | FR-OPC-001~012 |
+| `wax_opcua_agent/Controllers/*`、`Services/*` | FR-OPC-013~027 |
+| `wax_opcua_alarm_agent/alarm/*`、`metadata/*`、`storage/*` | FR-OPC-028~045 |
+| `wa-hmi-designer/Common/Api/opcua.js`、`WADataSourceManager.qml` | FR-OPC-015/018、直連資料源 |
 
 ## 9. 未對應/待確認
 
@@ -196,6 +225,9 @@ flowchart LR
 | `/api/settings/detail` | 公開讀取 | 確認是否需授權 |
 | Scene3D raw 檔 | 公開下載 | 加授權/簽章 |
 | `/api/oem`、`/api/langfont/settings` | 公開 | 確認資訊暴露範圍 |
+| OPC UA Data Agent `/swagger` | 公開 | 正式環境限制或關閉 |
+| OPC UA `GetTagValue`/`GetDataLog` | 直連端點 | 補速率限制與審計 |
+| Data Agent `packetTimestamp` | 目前未強制 | 修正中介層（R-025） |
 
 ## 10. 測試案例目錄（建議）
 
@@ -204,6 +236,7 @@ flowchart LR
 | Client | TC-CLI-001~095 | 對應 FR-CLI |
 | Metadata | TC-META-001~045 | 對應 FR-META |
 | Runtime | TC-RT-001~025 | 對應 FR-RT |
+| OPC UA | TC-OPC-001~045 | 對應 FR-OPC |
 | 效能 | TC-PERF-001~012 | 延遲/吞吐/資源/TTL |
 | 安全 | TC-SEC-001~014 | 認證/授權/加密/WS |
 | 可靠 | TC-REL-001~010 | 斷線/重啟/備份 |

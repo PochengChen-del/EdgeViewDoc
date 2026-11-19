@@ -1,16 +1,16 @@
 # EdgeView 軟體需求規格書（SRS）與軟體設計規格書（SDS）
 
-> 本目錄彙整 EdgeView 產品的軟體需求規格（Software Requirements Specification, SRS）與軟體設計規格（Software Design Specification, SDS）。內容依據下列三個程式碼庫的實際實作逆向整理，並輔以既有 EdgeView 文件與功能清單。
+> 本目錄彙整 EdgeView 產品的軟體需求規格（Software Requirements Specification, SRS）與軟體設計規格（Software Design Specification, SDS）。內容依據下列程式碼庫的實際實作逆向整理，並輔以既有 EdgeView 文件與功能清單。
 
 ## 1. 文件資訊
 
 | 項目 | 內容 |
 |------|------|
 | 產品名稱 | EdgeView（HMI/SCADA 圖控設計與執行平台） |
-| 文件版本 | 1.0 |
-| 文件狀態 | 初版（依現行程式碼現況整理） |
+| 文件版本 | 1.1 |
+| 文件狀態 | 增修（加入 OPC UA 子系統與 Client 直連資料源） |
 | 文件語言 | 繁體中文（技術名詞保留英文原文） |
-| 整理日期 | 2026-11-13 |
+| 整理日期 | 2026-11-19 |
 | 適用對象 | 產品經理、系統分析師、前後端工程師、測試工程師、DevOps、資安與稽核人員 |
 
 ### 1.1 程式碼基準（Code Baseline）
@@ -19,7 +19,10 @@
 |--------|------|------------|--------|
 | 前端 Client（Designer + Viewer） | HMI 畫面設計與執行 | Git Repo: [EdgeView client](https://dev.azure.com/SWOrchestrationCenter/EdgeSync%20360/_git/wax_hmi-designer-client.git) | C++ / Qt 6 / QML、SCDraw2D/SCDraw3D、NanoCanvas |
 | 後端 Metadata Service | 設定、專案、使用者、授權、OPC UA 設定 | Git Repo: [EdgeView metadata server](https://dev.azure.com/SWOrchestrationCenter/EdgeSync%20360/_git/wax_metadata-service.git) | Go / Gin / PostgreSQL |
-| 後端 Runtime Proxy | 第三方資料查詢、即時資料代理、告警摘要 | Git Repo: [EdgeView datasource server](https://dev.azure.com/SWOrchestrationCenter/EdgeSync%20360/_git/wax_rutime_proxy) | Go / Gin / Gorilla WebSocket / PostgreSQL |
+| 後端 Runtime Proxy | 第三方資料查詢、Record/告警摘要 | Git Repo: [EdgeView datasource server](https://dev.azure.com/SWOrchestrationCenter/EdgeSync%20360/_git/wax_rutime_proxy) | Go / Gin / Gorilla WebSocket / PostgreSQL |
+| OPC UA 設定 UI | OPC UA 專案/連線/Tag/警報/使用者設定 | `wax_opcua_agent_ui` | Vue 2.7 / Vue Router / Vuex / Axios |
+| OPC UA Data Agent | OPC UA 連線、即時值、寫值、歷史值、瀏覽、憑證 | `wax_opcua_agent`（`wax_opcua_agent/wax_opcua_agent`） | C# / ASP.NET Core / OPC UA .NET SDK |
+| OPC UA Alarm Agent | 警報規則編譯、條件評估、操作員流程、警報 API | `wax_opcua_alarm_agent` | Go / Gin / PostgreSQL |
 
 ### 1.2 參考文件
 
@@ -28,6 +31,9 @@
 - `D:\Document\EdgeViewDoc\docs\Server\record\*`：Runtime Proxy 既有 REST/WebSocket API 文件。
 - `wax_metadata-service\docs\swagger.yaml`、`wax_rutime_proxy\docs\swagger.yaml`：OpenAPI 定義。
 - `wax_rutime_proxy\websocket 開發文件.md`：WebSocket topic/action 設計說明。
+- `wax_opcua_alarm_agent\README.md`、`api.md`、`impl.md`：Alarm Engine 規格、API 與實作說明。
+- `wax_opcua_agent\wax_opcua_agent\appsettings.json`、`Controllers/`：Data Agent 設定與端點。
+- `wax_opcua_agent_ui\package.json`、`src/`：設定 UI 技術與頁面。
 
 ## 2. 系統定位摘要
 
@@ -37,39 +43,52 @@ EdgeView 為三層式 HMI/SCADA 平台：
 flowchart LR
     subgraph Client["Client（Qt/QML）"]
         D[Designer 設計模式]
-        V[Viewer 執行模式]
+        V[Viewer / Preview 執行模式]
     end
     subgraph Backend["EdgeView Server"]
         M[Metadata Service<br/>設定 / 授權 / 專案]
-        R[Runtime Proxy<br/>資料查詢 / 即時資料]
+        R[Runtime Proxy<br/>Record / 摘要 / 代理]
+        A[OPC UA Data Agent<br/>Runtime :28886<br/>History :28887]
+        L[OPC UA Alarm Agent<br/>:28889]
+    end
+    subgraph UI["設定層"]
+        U[OPC UA 設定 UI<br/>Vue /sc/opcua]
     end
     subgraph Data["資料與整合"]
-        PG[(PostgreSQL<br/>waxconfig)]
+        PG[(PostgreSQL<br/>waxconfig / waxalarm)]
         DB[(第三方資料庫<br/>SQLServer/MySQL/Oracle/PostgreSQL)]
         TS[(InfluxDB v1/v2)]
-        OPC[OPC UA Agent]
+        OPC[OPC UA Server]
         EH[Edge365 / EdgeHub]
         FCM[Firebase FCM]
     end
 
+    U -->|/sc/api| M
     D -->|HTTP REST / WS| M
     V -->|HTTP REST / WS| M
     D -->|HTTP REST / WS| R
     V -->|HTTP REST / WS| R
+    V -->|GetTagValueText / GetDataLog| A
+    V -->|alarm list/log/ack| L
     M --> PG
-    M --> OPC
     R --> PG
     R --> DB
     R --> TS
-    R --> OPC
     R --> EH
     R --> FCM
+    A --> PG
+    A --> OPC
+    L --> PG
+    L --> A
 ```
 
 - **Designer**：專案/畫面設計、Widget 屬性編輯、Tag/Variable/Record 綁定、事件腳本、動畫、3D 場景、匯入匯出、使用者與系統設定。
-- **Viewer**：載入已設計畫面，透過 WebSocket 接收即時資料、告警摘要，提供操作、巡邏、縮放、通訊狀態、資料來源狀態等執行期功能。
+- **Viewer**：載入已設計畫面，透過 WebSocket 接收 Record/告警摘要，並**直接**向 OPC UA Data Agent 取得即時與歷史 Tag 值（不經 Runtime Proxy），提供操作、巡邏、縮放、通訊狀態與資料來源狀態。直連使 OPC UA 值更新更即時。
 - **Metadata Service**：提供設定 API 與授權（登入、Session、CSRF、專案權限），管理專案物件樹、Display、Variable、DataModel、Record、Recipe、Alarm、User/Group、OPC UA 組態、系統設定、稽核與匯入匯出。
-- **Runtime Proxy**：提供 Record 查詢/預覽/分頁、Datalog 歷史查詢、WebSocket 即時資料與告警摘要、Edge365 反向代理、Firebase 推播。
+- **Runtime Proxy**：提供 Record 查詢/預覽/分頁、Datalog 歷史查詢、WebSocket Record 即時資料與告警摘要、Edge365 反向代理、Firebase 推播；**不承載 OPC UA 即時/歷史 Tag 值**。
+- **OPC UA 設定 UI**：OPC UA 專案、連線、Tag、常數/計算/系統測點、警報規則、使用者與權限設定。
+- **OPC UA Data Agent**：Runtime 與 History 兩種角色，提供即時值、寫值、歷史值、Tag 明細、瀏覽、憑證與測點計算。
+- **OPC UA Alarm Agent**：告警規則編譯、條件評估、雙狀態機、Ack/Process、警報清單/歷史。
 
 ## 3. 文件索引
 
@@ -79,10 +98,11 @@ flowchart LR
 |------|------|------|
 | SRS-01 | [SRS/01_Introduction.md](SRS/01_Introduction.md) | 目的、範圍、對象、定義、參考、文件結構 |
 | SRS-02 | [SRS/02_Overall_Description.md](SRS/02_Overall_Description.md) | 產品定位、系統脈絡、使用者角色、營運環境、限制與假設 |
-| SRS-03 | [SRS/03_Functional_Requirements.md](SRS/03_Functional_Requirements.md) | 功能需求（FR-CLI / FR-META / FR-RT），含優先級與驗收條件 |
+| SRS-03 | [SRS/03_Functional_Requirements.md](SRS/03_Functional_Requirements.md) | 功能需求（FR-CLI / FR-META / FR-RT），含 OPC UA 子系統索引 |
 | SRS-04 | [SRS/04_External_Interface_Requirements.md](SRS/04_External_Interface_Requirements.md) | 使用者、硬體、軟體、通訊介面需求 |
 | SRS-05 | [SRS/05_Nonfunctional_Requirements.md](SRS/05_Nonfunctional_Requirements.md) | 效能、安全、可靠度、可維護、可攜、i18n、稽核 |
 | SRS-06 | [SRS/06_Acceptance_and_Traceability.md](SRS/06_Acceptance_and_Traceability.md) | 驗收準則與需求追溯 |
+| SRS-07 | [SRS/07_OPCUA_Subsystem.md](SRS/07_OPCUA_Subsystem.md) | OPC UA 子系統需求（設定 UI、Data Agent、Alarm Agent） |
 
 ### 3.2 SDS（軟體設計規格書）
 
@@ -101,6 +121,7 @@ flowchart LR
 | SDS-11 | [SDS/11_Design_Decisions_and_Risks.md](SDS/11_Design_Decisions_and_Risks.md) | 設計取捨、已知限制與技術債 |
 | SDS-12 | [SDS/12_Traceability.md](SDS/12_Traceability.md) | SRS ↔ SDS ↔ 程式碼追溯 |
 | SDS-13 | [SDS/13_Security_Remediation.md](SDS/13_Security_Remediation.md) | R-001/R-002/R-003 修復設計、部署需求與驗收 |
+| SDS-14 | [SDS/14_OPCUA_Subsystem_Design.md](SDS/14_OPCUA_Subsystem_Design.md) | OPC UA 子系統設計、API、資料模型、直連資料源 |
 
 ## 4. 需求編號規則
 
@@ -109,8 +130,11 @@ flowchart LR
 | `FR-CLI-nnn` | Client（Designer/Viewer）功能需求 | `FR-CLI-010` |
 | `FR-META-nnn` | Metadata Service 功能需求 | `FR-META-020` |
 | `FR-RT-nnn` | Runtime Proxy 功能需求 | `FR-RT-020` |
+| `FR-OPC-nnn` | OPC UA 子系統功能需求 | `FR-OPC-015` |
 | `NFR-xxx-nnn` | 非功能需求（PERF/SEC/REL/MNT/PORT/I18N/AUD） | `NFR-SEC-001` |
+| `NFR-OPC-nnn` | OPC UA 子系統非功能需求 | `NFR-OPC-001` |
 | `IF-xxx-nnn` | 外部介面需求 | `IF-COM-001` |
+| `IF-OPC-nnn` | OPC UA 子系統介面需求 | `IF-OPC-002` |
 
 優先級定義：
 
@@ -141,6 +165,11 @@ flowchart LR
 | BI | Business Intelligence / EdgeHub 模式（`SourceTypeBI`） |
 | X | 另一資料來源平台（`SourceTypeX`） |
 | FCM | Firebase Cloud Messaging |
+| Data Agent | OPC UA 資料代理；Runtime（`:28886`）與 History（`:28887`）兩種角色 |
+| Alarm Agent | OPC UA 警報引擎（`:28889`），管理警報條件、狀態與歷史 |
+| 直連資料源 | Client 直接呼叫 Data Agent 取得即時/歷史 Tag 值，不經 Runtime Proxy |
+| ROC | Rate of Change，變化率警報 |
+| DEV_HI / DEV_LO | 偏差上限/下限警報 |
 
 ## 6. 文件維護原則
 

@@ -15,13 +15,17 @@
 | Client（Designer + Viewer） | `wax_hmi-designer-client\wa-hmi-designer` | SDS-03 |
 | Metadata Service | `wax_metadata-service` | SDS-04 |
 | Runtime Proxy | `wax_rutime_proxy` | SDS-05 |
-| 共用資料模型 | 兩後端 | SDS-06 |
-| 介面（REST/WS） | 兩後端 | SDS-07 |
+| OPC UA 設定 UI | `wax_opcua_agent_ui` | SDS-14 §3 |
+| OPC UA Data Agent | `wax_opcua_agent` | SDS-14 §4 |
+| OPC UA Alarm Agent | `wax_opcua_alarm_agent` | SDS-14 §5 |
+| 共用資料模型 | 後端 | SDS-06 |
+| 介面（REST/WS） | 後端 | SDS-07、SDS-14 §6 |
 | 安全 | 全系統 | SDS-08 |
 | 關鍵流程 | 全系統 | SDS-09 |
 | 部署維運 | 全系統 | SDS-10 |
 | 設計取捨與風險 | 全系統 | SDS-11 |
 | 追溯 | 全系統 | SDS-12 |
+| OPC UA 子系統 | 三相關程式庫 | SDS-14 |
 
 ## 3. 設計目標與原則
 
@@ -120,6 +124,8 @@
 | SDS-10 | 部署與維運 |
 | SDS-11 | 設計取捨與風險 |
 | SDS-12 | 追溯 |
+| SDS-13 | 安全修復（R-001/R-002/R-003） |
+| SDS-14 | OPC UA 子系統設計（UI/Data Agent/Alarm Agent/直連資料源） |
 
 ## 7. 參考
 
@@ -128,11 +134,14 @@
 - `wax_rutime_proxy\websocket 開發文件.md`。
 - `wax_hmi-designer-client\wa-hmi-designer\docs\qdoc\SC.qdoc`。
 - `D:\Document\EdgeViewDoc\docs`。
+- `wax_opcua_agent\wax_opcua_agent\appsettings.json`、`Controllers/`。
+- `wax_opcua_alarm_agent\README.md`、`api.md`、`impl.md`。
+- `wax_opcua_agent_ui\src/`。
 
 ## 8. 閱讀建議
 
-- 想了解「如何運作」：先讀 SDS-02，再依子系統讀 SDS-03/04/05。
-- 想查 API：直接看 SDS-07。
+- 想了解「如何運作」：先讀 SDS-02，再依子系統讀 SDS-03/04/05；OPC UA 讀 SDS-14。
+- 想查 API：直接看 SDS-07（含 OPC UA Agent/Alarm）。
 - 想查資料表：看 SDS-06。
 - 想了解安全：看 SDS-08。
 - 想了解流程：看 SDS-09。

@@ -6,8 +6,11 @@ EdgeView 以 **PostgreSQL** 作為設定資料庫，Metadata Service 與 Runtime
 
 | 服務 | 主要讀寫 | 說明 |
 |------|----------|------|
-| Metadata Service | 幾乎所有設定表 | 建立、遷移、維護 |
-| Runtime Proxy | `record`/`recordbody`、`datasource`/`datasourcebody`、`http_sessions`、`fcm_device*`、`testtable` | 只讀設定、寫入 Session/推播 |
+| Metadata Service | 幾乎所有設定表（含 `OPCUA_*`） | 建立、遷移、維護 |
+| Runtime Proxy | `record`/`recordbody`、`datasource`/`datasourcebody`、`http_sessions`、`fcm_device*` | 只讀設定、寫入 Session/推播 |
+| OPC UA Data Agent | 只讀 `OPCUA_*`、`http_sessions` | 連線/Tag/Const 設定、Session 驗證 |
+| OPC UA Alarm Agent | 只讀 `OPCUA_TagAlarm`/`Action`/`Level`；寫 `opcua_active_alarm`/`opcua_alarm_history` | 規則編譯、警報狀態/歷史 |
+| OPC UA 設定 UI | 無直接 DB | 全部經 Metadata API |
 
 資料庫名稱：
 
@@ -15,6 +18,7 @@ EdgeView 以 **PostgreSQL** 作為設定資料庫，Metadata Service 與 Runtime
 |------|---------|--------|
 | 設定 | `waxconfig` | `public`；私有雲 `wx` |
 | 動作日誌 | `waxlog`／`waxsclog` | `public` |
+| OPC UA 警報 runtime | `waxalarm` | `public` |
 | Session | 設定 DB | `public`（`http_sessions`） |
 
 ## 2. 命名與設計慣例
@@ -205,9 +209,9 @@ erDiagram
 | `Alarm` | `projid` | `singleaudioid`、`multiaudioid` | 告警音設定 |
 | `AlarmArea` | `projid`,`name` | `description`、`areaaudio`、`audioid` | 告警區域 |
 | `AlarmTag` | `projid`,`name`,`tagname` | `audioid` | Tag 告警音 |
-| `OPCUA_TagAlarm` | 依實作 | Tag/等級/動作 | OPC UA 告警 |
-| `OPCUA_AlarmAction` | 依實作 | 動作定義 | OPC UA 告警動作 |
-| `OPCUA_AlarmLevel` | 依實作 | 等級定義 | OPC UA 告警等級 |
+| `OPCUA_TagAlarm` | `projid`,`tagname`,`item` | `alarmtype`、`value` | OPC UA 告警規則（EAV） |
+| `OPCUA_AlarmAction` | `projid` | `report`、`alarmsummary`、`ack`、`alarmlog`、時間戳 | 專案告警門檻 |
+| `OPCUA_AlarmLevel` | `projid`,`level` | `levelname`、`colorcode`、時間戳 | 告警等級/顏色 |
 
 ### 4.6 使用者與安全
 
@@ -224,15 +228,37 @@ erDiagram
 | `OPCUA_UserProject` | `userid`,`projid` | `usertype` | 專案權限 |
 | `OPCUA_LoginLock` | 依實作 | 鎖定狀態 | 登入鎖定 |
 
-### 4.7 OPC UA
+### 4.7 OPC UA 設定（waxconfig）
 
-| 資料表 | 用途 |
-|--------|------|
-| `OPCUA_Project` | 專案（`projname` unique、時間戳） |
-| `OPCUA_Connect`／`OPCUA_ConnectBody` | 連線與參數 |
-| `OPCUA_Tag`／`OPCUA_TagConfig` | Tag 與設定（`datatype`、`displayint`、`displaydec`、`scalingtype`、`scalingfactor1/2`、`reverse`、`area`、`level`） |
-| `OPCUA_ConstTag`／`OPCUA_Consttagbody` | 常數 Tag |
-| `OPCUA_Alarm*` | 告警 |
+| 資料表 | 主鍵 | 主要欄位 | 用途 |
+|--------|------|----------|------|
+| `OPCUA_Project` | `projid` | `projname`（unique）、`description`、`createtimestamp`、`modifytimestamp` | OPC UA 專案 |
+| `OPCUA_Connect` | `projid`,`name` | `uri`、時間戳；FK→Project | 連線 |
+| `OPCUA_ConnectBody` | `projid`,`name`,`item` | `value`、`cert bytea`；FK→Connect | 連線參數/憑證 |
+| `OPCUA_Tag` | `projid`,`tagname` | `connectname`、`nodeid`、`description`、`spanhi/lo`、`datatype`、`displayint/dec`、`scalingtype`、`scalingfactor1/2`、`reverse`、`area`、`level` | OPC UA Tag |
+| `OPCUA_TagConfig` | `projid`,`type` | `spanhi/lo`、`displayint/dec` | Tag 預設 |
+| `OPCUA_ConstTag` | `projid`,`tagname` | `description`、`datatype`、`value`、`area`、`level`、`spanhi/lo`、`arylen`、時間戳 | 常數/計算/系統測點主表 |
+| `OPCUA_Consttagbody` | `projid`,`tagname`,`item` | `value` | 公式/設定（EAV） |
+| `OPCUA_TagAlarm` | `projid`,`tagname`,`item` | `alarmtype`、`value` | 告警規則（EAV） |
+| `OPCUA_AlarmAction` | `projid` | `report`、`alarmsummary`、`ack`、`alarmlog` | 專案門檻 |
+| `OPCUA_AlarmLevel` | `projid`,`level` | `levelname`、`colorcode` | 等級/顏色 |
+
+`OPCUA_ConnectBody.item` 常見鍵：`ApplicationUrl`、`Username`、`Password`、`PfxFile`、`PfxPassword`、`SecurityMode`、`SecurityPolicy`、`DomainNames`、`AuthMode`。
+
+`OPCUA_Consttagbody.item` 常見鍵：`formula`、`systype`、`source`、`divide`、`valuelimit`、`resetminutes`。
+
+`OPCUA_TagAlarm.item` 常見鍵：`HHALARM`、`HIALARM`、`LOALARM`、`LLALARM`、`ROCALARM`、`DEVHALARM`、`DEVLALARM`、`HHALARMLEVEL`、`HHENABLE`、`HHALARMMESSAGE`、`DELAYTIME`、`TONORMALDELAY`、`ASSOCTAGNAME`、`HLDEADBAND`、`DEVDEADBAND`、`HISTORIZING`。
+
+### 4.7.1 OPC UA Alarm Runtime（waxalarm）
+
+| 資料表 | 主鍵 | 主要欄位 | 用途 |
+|--------|------|----------|------|
+| `opcua_active_alarm` | `id`（bigserial） | `projid`、`tag`、`alarm_type`、`alarm_level`、`alarm_limit`、`discrete_state`、`alarm_message`、`condition_state`、`status`、`current_value`、`alarm_value`、`to_normal_time`、`close_time`、`handler`、`active_types jsonb`、`alarm_time` | 進行中/已關閉警報 |
+| `opcua_alarm_history` | — | `alarm_id`、`status`、`alarm_time`、`handler`、`commenter`、`record` | 警報事件歷程 |
+
+- `opcua_active_alarm` 部分唯一索引：`(projid, tag) WHERE status <> 0`，確保同 Tag 僅一個未關閉執行個體。
+- `opcua_alarm_history` 索引：`(alarm_id, alarm_time DESC)`。
+- 設定表（`opcua_tagalarm`/`opcua_alarmaction`/`opcua_alarmlevel`）仍由 Metadata Service 擁有；Alarm Agent 只讀。
 
 ### 4.8 配方與 3D
 

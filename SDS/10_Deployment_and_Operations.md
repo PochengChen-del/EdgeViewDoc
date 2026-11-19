@@ -7,8 +7,11 @@
 | Metadata Service | `WxMetaService` | Linux amd64/arm64、Windows、macOS | Go 靜態執行檔 |
 | Runtime Proxy | `WxProxy` | Linux amd64/arm64、Windows、macOS | Go 靜態執行檔 |
 | Client | `gc-designer` | Windows/macOS/Linux/Android/iOS/WASM | Qt 6 |
-| PostgreSQL | 外部/內建 | — | 設定與 Session |
-| Ingress | Nginx | K8s | TLS、body 75M、長連線 |
+| OPC UA Data Agent | `wax_opcua_agent` / `.exe` | Linux amd64/arm64、Windows、macOS | .NET；Runtime/History 兩進程 |
+| OPC UA Alarm Agent | `wxalarmagent` / `.exe` | Linux、Windows | Go 靜態執行檔 |
+| OPC UA 設定 UI | `dist/`（Vue build） | 靜態（Nginx） | `/sc/opcua/` |
+| PostgreSQL | 外部/內建 | — | `waxconfig`、`waxalarm`、Session |
+| Ingress | Nginx | K8s | TLS、body 75M、長連線、WebSocket |
 
 ## 2. 參考部署拓撲
 
@@ -25,15 +28,19 @@ flowchart TB
         PS[Service wxproxy:80]
         MD[Deployment wxmetadata<br/>:28883 ×1]
         PD[Deployment wxproxy<br/>:28884 ×1]
+        AD[Deployment opcua-agent<br/>Runtime :28886]
+        HD[Deployment opcua-history<br/>:28887]
+        LD[Deployment opcua-alarm<br/>:28889]
+        UD[Deployment opcua-ui<br/>static]
     end
     subgraph Data["資料層"]
-        PG[(PostgreSQL)]
+        PG[(PostgreSQL<br/>waxconfig/waxalarm)]
         EXT[(第三方 DB/Influx)]
     end
     subgraph Ext["外部"]
         WA[WebAccess]
         EH[Edge365]
-        OPC[OPC UA Agent]
+        OPC[OPC UA Server]
         X[X]
         FCM[Firebase]
     end
@@ -42,18 +49,40 @@ flowchart TB
     W --> ING
     ING --> MS --> MD
     ING --> PS --> PD
+    ING --> AD
+    ING --> HD
+    ING --> LD
+    ING --> UD
     MD --> PG
     PD --> PG
+    AD --> PG
+    HD --> PG
+    LD --> PG
     PD --> EXT
     MD --> WA
     MD --> EH
-    MD --> OPC
     PD --> WA
     PD --> EH
-    PD --> OPC
     PD --> X
     PD --> FCM
+    AD --> OPC
+    HD --> OPC
+    LD --> AD
 ```
+
+### 2.1 OPC UA 子系統部署
+
+| 元件 | 設定 | 埠 | 備註 |
+|------|------|----|------|
+| Data Agent Runtime | `isHistory=false` | 28886 | 即時/寫值/瀏覽/憑證 |
+| Data Agent History | `isHistory=true` | 28887 | 歷史查詢 |
+| Alarm Agent | `config.yaml` | 28889 | 需 `waxalarm` |
+| UI | `VUE_APP_PUBPATH=/sc/opcua/` | 80/443 | 靜態 SPA |
+| OPC UA Server | 現場 | 依設定 | 可加密 |
+
+- Runtime/History 使用同一映像，以不同 `appsettings.json`/`isHistory` 啟動。
+- Alarm Agent 與 Data Agent 需共用 `waxconfig` 與 `aes_secret`（Session/Bearer）。
+- Client 需能直連 `/ua`、`/uadb`、`/uaam` 或對應主機連接埠。
 
 ## 3. 容器映像
 
@@ -177,7 +206,11 @@ flowchart TB
 | Runtime HTTP | 28884 | Ingress → Pod |
 | Runtime WS | 28884 `/so`（BI `/`） | Client → Ingress |
 | PostgreSQL | 5436/5432 | Pod → DB |
-| OPC UA Agent | 5123/5124/8090 | Pod → Agent |
+| OPC UA Data Agent Runtime | 28886 | Client/Ingress → `/ua` |
+| OPC UA Data Agent History | 28887 | Client/Ingress → `/uadb` |
+| OPC UA Alarm Agent | 28889 | Client/Ingress → `/uaam` |
+| OPC UA Server | 依現場 | Pod → OPC UA |
+| OPC UA 設定 UI | 80/443 | `/sc/opcua/` |
 | Edge365 | 443/80 | Pod → 外部 |
 | Firebase | 443 | Pod → 外部 |
 
@@ -189,6 +222,8 @@ flowchart TB
 |------|------|------|
 | Metadata | klog + Gin | `log/`（`tofile`） |
 | Runtime | klog + Gin | `log/`（`tofile`） |
+| OPC UA Data Agent | Serilog | `logs/log-.txt` |
+| OPC UA Alarm Agent | klog + Gin | `log/`（`toFile`） |
 | Client | debuglogger（共享記憶體 ring） | 匯出檔 |
 | Ingress | Nginx access/error | 平台 |
 
@@ -204,6 +239,7 @@ flowchart TB
 | DB | 連線數、慢查詢、鎖 |
 | WS | 連線數、訊息率、斷線率 |
 | 業務 | 登入失敗、匯入/匯出、Record 失敗 |
+| OPC UA | Session 數、快取命中、Read/History 延遲、Bad Quality 比例、Alarm 評估延遲 |
 
 ### 7.3 健康檢查
 
@@ -212,6 +248,8 @@ flowchart TB
 | `POST /ping/:id` | Metadata 存活 |
 | `GET /foo/serverTime` | Runtime 存活 |
 | `POST /api/about` | 版本/能力 |
+| `GET /swagger` | Data Agent 存活 |
+| `POST /ping/:id` | Alarm Agent 存活 |
 
 ## 8. 備份與還原
 

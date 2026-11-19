@@ -223,13 +223,36 @@
 
 ---
 
-## 3.7 需求優先級統計
+## 3.7 OPC UA 子系統
+
+OPC UA 子系統（設定 UI、Data Agent、Alarm Agent）的需求另見 [`SRS/07_OPCUA_Subsystem.md`](07_OPCUA_Subsystem.md)，使用 `FR-OPC-nnn` 編號：
+
+| 群組 | 需求範圍 | 說明 |
+|------|----------|------|
+| 設定 UI | FR-OPC-001~012 | 專案、連線、Tag、警報、使用者、匯入匯出 |
+| Data Agent | FR-OPC-013~027 | 即時/歷史/寫值/瀏覽/憑證/測點 |
+| Alarm Agent | FR-OPC-028~045 | 規則、評估、狀態機、Ack/Process、清單/歷史 |
+
+### 3.7.1 Client 直連資料源（補充 FR-CLI）
+
+Viewer/Preview 的 OPC UA 即時與歷史 Tag 值由 Client **直接**呼叫 Data Agent，不經 Runtime Proxy。此行為補充 FR-CLI-051、FR-CLI-066、FR-RT-002/006 的資料路徑說明：
+
+| 資料 | 路徑 | 需求 |
+|------|------|------|
+| 即時 Tag | Client → Data Agent `GetTagValueText` | FR-OPC-015、FR-CLI-051 |
+| 歷史 Tag | Client → History Agent `GetDataLog`/`GetRawDataLog` | FR-OPC-018、FR-CLI-066 |
+| 警報清單/歷史/Ack | Client → Alarm Agent `/api/alarm/*` | FR-OPC-035~037 |
+
+> Runtime Proxy 仍負責 Record/第三方 DB 查詢與 `opcuaalarmsummary` WebSocket 摘要。
+
+## 3.8 需求優先級統計
 
 | 子系統 | Must | Should | Could | 合計 |
 |--------|------|--------|-------|------|
 | Client | 40 | 40 | 15 | 95 |
 | Metadata | 24 | 18 | 3 | 45 |
 | Runtime | 15 | 9 | 1 | 25 |
-| **總計** | **79** | **67** | **19** | **165** |
+| OPC UA 子系統 | 38 | 7 | 0 | 45 |
+| **總計** | **117** | **74** | **19** | **210** |
 
-> 註：統計依本章表格粗略分類，實際排程以產品規劃為準。
+> 註：統計依本章與 SRS-07 表格粗略分類，實際排程以產品規劃為準。

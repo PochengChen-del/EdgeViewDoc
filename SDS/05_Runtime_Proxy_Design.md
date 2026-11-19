@@ -6,13 +6,15 @@
 
 ## 1. 設計概述
 
-Runtime Proxy 是 EdgeView 的**執行期資料服務**，負責：
+Runtime Proxy 是 EdgeView 的**Record 執行期服務**，負責：
 
 1. 依 `Record` 定義查詢多種資料源（PostgreSQL、SQL Server、Oracle、MySQL、InfluxDB v1/v2、HTTP）。
-2. 以 WebSocket 提供即時資料、告警摘要、系統資訊。
-3. 代理 WebAccess、EdgeHub/BI、X、OPC UA 的資料與指令。
+2. 以 WebSocket 提供 Record 即時資料、告警摘要、系統資訊。
+3. 代理 WebAccess、EdgeHub/BI、X 的資料與指令，以及 OPC UA **告警摘要**。
 4. 發送 Firebase 推播。
 5. 提供 BI 模式（Edge365）相容的 `/` WebSocket 進入點。
+
+> **不負責** OPC UA 即時/歷史 Tag 值。該資料由 Client 直接呼叫 OPC UA Data Agent（`:28886`/`:28887`），見 SDS-14 §8。
 
 ```mermaid
 flowchart LR
@@ -36,7 +38,7 @@ flowchart LR
     DS --> HTTP[(HTTP API)]
     WA --> WAAPI[WAAPI]
     EH --> EHAPI[EdgeHubService]
-    OPC --> OPCAPI[OPC UA Agent]
+    OPC --> OPCAPI[OPC UA Alarm Agent]
     X --> XAPI[XAPI]
 ```
 
@@ -118,7 +120,7 @@ sequenceDiagram
 |----|------|------|
 | 1 | `SourceTypeWebAccess` | 使用本機 PostgreSQL `waxconfig`；WS `/so` |
 | 2 | `SourceTypeBI` | 使用 Edge365；WS `/`；關閉本機日誌檔 |
-| 3 | `SourceTypeOPCUA` | OPC UA Agent 資料源 |
+| 3 | `SourceTypeOPCUA` | OPC UA 模式（告警摘要；Tag 值由 Client 直連 Data Agent） |
 | 4 | `SourceTypeX` | X 平台 |
 
 ## 4. WebSocket Hub 設計
@@ -359,7 +361,7 @@ sequenceDiagram
 | Record 輪詢 | `RecordDataPolling.go`、`Polling.go` | 1 秒 | 查詢並推送；具 idle TTL、訂閱上限與 reaper |
 | System Info | `SystemInfoPolling.go` | 3000 ms | SC Server TCP 連線狀態 |
 | WA 告警 | `WAAlarmPolling.go` | 1000 ms | `AlarmSummary(100000)` |
-| OPC UA 告警 | `OpcuaAlarmPolling.go` | 1000 ms | Agent `:8090`；連線資訊 TTL 60 秒 |
+| OPC UA 告警 | `OpcuaAlarmPolling.go` | 1000 ms | Alarm Agent（`:8090` 預設／`:28889` 部署）；連線資訊 TTL 60 秒 |
 | EH 告警 | `EHAlarmPolling.go` | `EHAlmSummaryIntervalMs`（預設 1000ms） | EdgeHub 告警 |
 | X 告警 | `XAlarmPolling.go` | `XAlmSummaryIntervalMs`（預設 1000ms） | X 平台；連線資訊 TTL 60 秒 |
 
@@ -383,9 +385,10 @@ sequenceDiagram
 
 ### 8.3 OPC UA
 
-- 資料：Agent `:5123`（db `:5124`）。
-- 告警：`:8090`，`opcua.alarm` 設定。
-- 連線資訊快取 60 秒。
+- **告警摘要**：`OpcuaAlarmPolling` 呼叫 Alarm Agent（`opcua.alarm`，程式預設 `:8090`，部署常見 `:28889`）；連線資訊快取 60 秒。
+- **不自 Data Agent 讀取即時/歷史 Tag 值**：Client 直連 `/ua`、`/uadb`。
+- **Alarm 清單/歷史/Ack**：Client 直連 Alarm Agent `/uaam`；Proxy 僅提供 `opcuaalarmsummary` WebSocket。
+- 詳細子系統設計見 SDS-14。
 
 ### 8.4 X 平台
 

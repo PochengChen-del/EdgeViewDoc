@@ -2,7 +2,7 @@
 
 ## 1. 架構總覽
 
-EdgeView 採三層式架構：**Client（Qt/QML）**、**EdgeView Server（Metadata + Runtime）**、**資料與整合層**。Client 同時與兩個後端通訊；後端共用 PostgreSQL 設定資料庫，但職責分離。
+EdgeView 採三層式架構：**Client（Qt/QML）**、**EdgeView Server（Metadata + Runtime + OPC UA Agent/Alarm）**、**資料與整合層**。Client 與 Metadata/Runtime 通訊取得設定與 Record 資料，並**直接**與 OPC UA Data Agent 取得即時/歷史 Tag 值。後端共用 PostgreSQL 設定資料庫，但職責分離。
 
 ```mermaid
 flowchart TB
@@ -16,10 +16,17 @@ flowchart TB
         direction LR
         Meta["Metadata Service<br/>Go / Gin<br/>:28883"]
         Proxy["Runtime Proxy<br/>Go / Gin / WS Hub<br/>:28884"]
+        RT["OPC UA Data Agent<br/>Runtime :28886"]
+        HIS["OPC UA Data Agent<br/>History :28887"]
+        ALM["OPC UA Alarm Agent<br/>:28889"]
+    end
+
+    subgraph UI["Configuration UI"]
+        Vue["OPC UA 設定 UI<br/>Vue /sc/opcua"]
     end
 
     subgraph Domain["Domain / Data Layer"]
-        PGCfg[(PostgreSQL<br/>waxconfig)]
+        PGCfg[(PostgreSQL<br/>waxconfig / waxalarm)]
         ExtDB[(SQL Server / MySQL<br/>Oracle / PostgreSQL)]
         Influx[(InfluxDB v1/v2)]
     end
@@ -28,7 +35,7 @@ flowchart TB
         WA[WebAccess]
         EH[EdgeHub / Edge365]
         X[X Platform]
-        OPC[OPC UA Agent]
+        OPC[OPC UA Server]
         FCM[Firebase FCM]
     end
 
@@ -36,6 +43,10 @@ flowchart TB
     Viewer -->|REST + WS| Meta
     Designer -->|REST + WS| Proxy
     Viewer -->|REST + WS| Proxy
+    Viewer -->|即時/歷史 Tag| RT
+    Viewer -->|歷史 Tag| HIS
+    Viewer -->|警報清單/歷史/Ack| ALM
+    Vue -->|/sc/api| Meta
     Meta --> PGCfg
     Proxy --> PGCfg
     Proxy --> ExtDB
@@ -43,12 +54,16 @@ flowchart TB
     Meta --> WA
     Meta --> EH
     Meta --> X
-    Meta --> OPC
     Proxy --> WA
     Proxy --> EH
     Proxy --> X
-    Proxy --> OPC
     Proxy --> FCM
+    RT --> OPC
+    HIS --> OPC
+    RT --> PGCfg
+    HIS --> PGCfg
+    ALM --> PGCfg
+    ALM --> RT
 ```
 
 ## 2. 元件責任
@@ -68,6 +83,10 @@ flowchart TB
 | Runtime Service | 查詢、輪詢、告警、代理、通知 | UI |
 | Runtime Repository | 多資料源連線與方言 | 業務規則 |
 | WebSocket Hub | 連線、topic/action、訂閱、廣播 | 資料查詢 |
+| OPC UA 設定 UI | OPC UA 專案/連線/Tag/警報/使用者設定 | 直接存取 DB、OPC UA |
+| OPC UA Data Agent（Runtime） | 即時值、寫值、Tag 明細、瀏覽、憑證、測點計算 | 專案/畫面/Record |
+| OPC UA Data Agent（History） | 聚合/原始歷史查詢 | 即時寫值、專案設定 |
+| OPC UA Alarm Agent | 告警規則編譯、評估、狀態機、清單/歷史/Ack | 設定寫入、UI |
 
 ## 3. 分層設計
 
@@ -98,7 +117,7 @@ flowchart TB
     CTRL --> PLAT
 ```
 
-### 3.2 後端分層（兩個 Go 服務共用樣式）
+### 3.2 後端分層（Go 服務共用樣式；Data Agent 為 C# 分層）
 
 ```mermaid
 flowchart LR
@@ -121,8 +140,12 @@ flowchart LR
 | Runtime HTTP | `127.0.0.1:28884` | HTTP | `proxy.net.http` |
 | Runtime WebSocket | `/so` | WS | BI 模式為 `/` |
 | Runtime REST | `/record/*`、`/foo/*` | HTTP | 見 SDS-07 |
-| PostgreSQL | 依設定 | PostgreSQL | 設定資料庫 |
-| OPC UA Agent | `127.0.0.1:5123`（資料）、`8090`（告警） | HTTP | 依設定 |
+| OPC UA Data Agent（Runtime） | `127.0.0.1:28886` | HTTP/HTTPS | `/ua` |
+| OPC UA Data Agent（History） | `127.0.0.1:28887` | HTTP/HTTPS | `/uadb` |
+| OPC UA Alarm Agent | `127.0.0.1:28889` | HTTP/HTTPS | `/uaam` |
+| OPC UA 設定 UI | `/sc/opcua/` | HTTP | Vue 靜態 |
+| PostgreSQL | 依設定 | PostgreSQL | `waxconfig`/`waxalarm` |
+| OPC UA Server | 依現場 | OPC UA TCP | 可加密 |
 | Edge365 Ingress | 依環境 | HTTPS | `/apihub`、`/dbmaster`、`/alarm` |
 
 ### 4.1 部署圖
@@ -138,12 +161,15 @@ flowchart TB
         ING[Ingress / Nginx<br/>TLS、75M body]
         META[Meta Pod<br/>:28883]
         PROXY[Proxy Pod<br/>:28884]
+        AGENT[OPC UA Agent Pods<br/>Runtime :28886<br/>History :28887]
+        ALARM[Alarm Pod<br/>:28889]
+        UI[UI 靜態<br/>/sc/opcua]
         PG[(PostgreSQL)]
     end
     subgraph External["外部"]
         WA[WebAccess]
         EH[Edge365]
-        OPC[OPC UA Agent]
+        OPC[OPC UA Server]
         DB[(第三方 DB)]
         FCM[Firebase]
     end
@@ -153,16 +179,21 @@ flowchart TB
     C3 --> ING
     ING --> META
     ING --> PROXY
+    ING --> AGENT
+    ING --> ALARM
+    ING --> UI
     META --> PG
     PROXY --> PG
+    AGENT --> PG
+    ALARM --> PG
     META --> WA
     META --> EH
-    META --> OPC
     PROXY --> WA
     PROXY --> EH
     PROXY --> DB
-    PROXY --> OPC
     PROXY --> FCM
+    AGENT --> OPC
+    ALARM --> AGENT
 ```
 
 ## 5. 通訊與資料流
@@ -221,6 +252,26 @@ sequenceDiagram
     R->>F: 依 FCM 設定推送
 ```
 
+### 5.4 OPC UA 直連資料流（Viewer）
+
+```mermaid
+sequenceDiagram
+    participant V as Viewer
+    participant A as Data Agent
+    participant H as History Agent
+    participant U as OPC UA Server
+    V->>A: POST /GetTagValueText/{projid}
+    A->>U: Read Nodes
+    U-->>A: DataValue + Quality
+    A-->>V: {data:{Values,Result}}
+    V->>H: POST /GetDataLog/{projid}
+    H->>U: HistoryRead
+    U-->>H: DataValue[]
+    H-->>V: {data:{Result,DataLog}}
+```
+
+> OPC UA 即時/歷史 Tag 值**不經 Runtime Proxy**；Runtime Proxy 僅保留 Record 查詢、`opcuaalarmsummary` WebSocket 摘要、Edge365 代理與 FCM。
+
 ## 6. 技術架構決策摘要
 
 | 決策 | 選擇 | 理由 | 影響 |
@@ -241,6 +292,8 @@ sequenceDiagram
 3. Client 的 Designer/Viewer 共用執行檔，模式切換需清理設計期狀態。
 4. 外部平台中斷時，依功能降級（見 SRS-05 NFR-REL-010）。
 5. 瀏覽器模式不支援原生檔案系統、Crashpad、Session 監控。
+6. OPC UA Data Agent 分 Runtime/History 兩個進程；Client 需直接可達或經 Ingress `/ua`、`/uadb`。
+7. Alarm Agent 與 Data Agent 共用 Metadata Session key；多副本需共享 DB 與一致的 `aes_secret`。
 
 ## 8. 與需求對照
 
@@ -249,5 +302,6 @@ sequenceDiagram
 | Client 分層與模式 | FR-CLI-001~095 |
 | Metadata 分層與 API | FR-META-001~045 |
 | Runtime REST/WS | FR-RT-001~025 |
+| OPC UA 子系統 | FR-OPC-001~045、IF-OPC-001~010、NFR-OPC-001~020 |
 | 部署與連線 | IF-COM-001~008、NFR-PORT-001~005 |
 | 安全邊界 | NFR-SEC-001~014 |

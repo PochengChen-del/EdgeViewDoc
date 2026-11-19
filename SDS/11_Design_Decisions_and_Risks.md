@@ -93,6 +93,33 @@
 | 影響 | 套件大、shader/資產管理複雜 |
 | 狀態 | 已採用 |
 
+### ADR-011 OPC UA Data Agent 分 Runtime/History 角色
+
+| 項目 | 內容 |
+|------|------|
+| 決策 | 同一 C# 程式以 `isHistory` 區分 Runtime（28886）與 History（28887） |
+| 理由 | 隔離即時讀值與長歷史查詢，避免互相阻塞 |
+| 影響 | 需兩個進程與正確設定；端點以 400 阻擋錯用 |
+| 狀態 | 已採用 |
+
+### ADR-012 Client 直連 OPC UA Data Agent
+
+| 項目 | 內容 |
+|------|------|
+| 決策 | Viewer/Preview 直接呼叫 Data/Arm/Alarm Agent，不經 Runtime Proxy |
+| 理由 | 降低延遲、降低 Proxy 負載、歷史可獨立擴充 |
+| 影響 | Client 需可達多個位址；CORS/Cookie/認證需正確 |
+| 狀態 | 已採用 |
+
+### ADR-013 Alarm 設定與 runtime 分離
+
+| 項目 | 內容 |
+|------|------|
+| 決策 | 設定存 `waxconfig`；狀態/歷史存 `waxalarm`；Alarm 只讀設定 |
+| 理由 | 職責分離、可獨立備份/擴充 |
+| 影響 | 兩 DB 需一致；設定重載依 fingerprint |
+| 狀態 | 已採用 |
+
 ## 2. 風險登記
 
 > 嚴重度：Critical / High / Medium / Low  
@@ -345,6 +372,106 @@
 | 緩解 | 集中式授權 middleware + 測試 |
 | 狀態 | Open |
 
+### R-025 Data Agent 時間戳未強制
+
+| 項目 | 內容 |
+|------|------|
+| 嚴重度 | High |
+| 證據 | `PacketTimestampMiddleware.InvokeAsync` 開頭即 `await _next(); return;` |
+| 影響 | 重放攻擊窗口；與文件不符 |
+| 緩解 | 移除短路；補時間戳測試 |
+| 狀態 | Open |
+
+### R-026 Data Agent CORS 過寬
+
+| 項目 | 內容 |
+|------|------|
+| 嚴重度 | High |
+| 證據 | `SetIsOriginAllowed(_ => true).AllowCredentials()` |
+| 影響 | 任意網站可帶 Session 呼叫 |
+| 緩解 | 白名單 Origin；限制 Credentials |
+| 狀態 | Open |
+
+### R-027 OPC UA 憑證自動接受
+
+| 項目 | 內容 |
+|------|------|
+| 嚴重度 | High |
+| 證據 | `AutoAcceptUntrustedCertificates=true`、`RejectSHA1SignedCertificates=false` |
+| 影響 | 中間人/偽造 Server |
+| 緩解 | 信任清單、拒絕 SHA1 |
+| 狀態 | Open |
+
+### R-028 OPC UA 預設 DB 帳密
+
+| 項目 | 內容 |
+|------|------|
+| 嚴重度 | High |
+| 證據 | `Program.cs`、`service/app.go` 預設 `postgres/Postgre@sql1` |
+| 影響 | 未改設定即暴露 |
+| 緩解 | 強制 Secret/環境變數 |
+| 狀態 | Open |
+
+### R-029 Alarm 埠預設不一致
+
+| 項目 | 內容 |
+|------|------|
+| 嚴重度 | Medium |
+| 證據 | Go 預設 8090、`config.yaml` 28889、Runtime `opcua.alarm` 8090 |
+| 影響 | 部署連錯 |
+| 緩解 | 統一預設與文件 |
+| 狀態 | Open |
+
+### R-030 Root path 直連參數缺失
+
+| 項目 | 內容 |
+|------|------|
+| 嚴重度 | Medium |
+| 證據 | `DataSourceBody` 無 `dbport`/`alarmport`；`opcua.js` 根路徑使用 `info.dbport`/`alarmport` |
+| 影響 | 根路徑部署歷史/警報失效 |
+| 緩解 | 補預設或改用 `/uadb`、`/uaam` |
+| 狀態 | Open |
+
+### R-031 Alarm/Agent 多副本狀態
+
+| 項目 | 內容 |
+|------|------|
+| 嚴重度 | Medium |
+| 證據 | Alarm 以 DB 共享狀態；Data Agent 以程序內連線池/快取 |
+| 影響 | 多副本時快取/連線不一致 |
+| 緩解 | Sticky Session 或共享快取/訊息匯流排 |
+| 狀態 | Open |
+
+### R-032 OPC UA 大量輪詢
+
+| 項目 | 內容 |
+|------|------|
+| 嚴重度 | Medium |
+| 證據 | Alarm 預設 500–1000 ms 輪詢全部 watched tags |
+| 影響 | OPC UA Server 負載 |
+| 緩解 | 分組/訂閱/調整間隔 |
+| 狀態 | Open |
+
+### R-033 歷史查詢依賴 Server HDA
+
+| 項目 | 內容 |
+|------|------|
+| 嚴重度 | Medium |
+| 證據 | `GetDataLog` 使用 OPC UA HistoryRead |
+| 影響 | Server 不支援時無資料 |
+| 緩解 | 文件標示、改用其他歷史源 |
+| 狀態 | Accepted |
+
+### R-034 Alarm 設定重載與 runtime 落差
+
+| 項目 | 內容 |
+|------|------|
+| 嚴重度 | Medium |
+| 證據 | 每 30 秒 fingerprint 檢查；未變更不重載 |
+| 影響 | 設定變更非即時 |
+| 緩解 | 提供 `/api/alarm/reload`；調整週期 |
+| 狀態 | Accepted |
+
 ## 3. 技術債
 
 | 編號 | 項目 | 影響 | 建議 |
@@ -366,6 +493,9 @@
 4. 本機帳密使用 SHA-256（待遷移）。
 5. 公開資源端點依賴難猜 ID。
 6. WASM 功能受限（無原生檔案/當機回報）。
+7. OPC UA 歷史查詢依賴 Server Historical Access。
+8. OPC UA Alarm 設定重載為定期檢查（預設 30 秒），非即時。
+9. Data Agent Runtime/History 需兩個進程。
 
 ## 5. 改善路線
 
@@ -380,9 +510,9 @@ flowchart LR
 
 | 階段 | 項目 |
 |------|------|
-| P0 | R-001、R-002、R-003、R-006、R-008 已修復；待處理 R-023、R-002-R |
-| P1 | R-004、R-005、R-015、R-016、R-018、R-022 |
-| P2 | R-010、R-011、R-017、R-021、TD-001~008 |
+| P0 | R-001、R-002、R-003、R-006、R-008 已修復；待處理 R-023、R-002-R、R-025、R-026、R-027、R-028 |
+| P1 | R-004、R-005、R-015、R-016、R-018、R-022、R-029、R-030、R-031、R-032 |
+| P2 | R-010、R-011、R-017、R-021、R-033、R-034、TD-001~008 |
 
 > R-001/R-002/R-003/R-006/R-008/R-009 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-009 原列 P2，已完成修復。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
 
@@ -411,3 +541,6 @@ flowchart LR
 | R-010/R-022 | NFR-REL-001~010 |
 | R-017/R-023 | NFR-AUD-001~005、NFR-PRV-001~004 |
 | R-011/R-019 | NFR-MNT-001~005 |
+| R-025~R-028 | NFR-OPC-007~008、NFR-SEC-001~010 |
+| R-029~R-032 | NFR-OPC-001~012 |
+| R-033~R-034 | NFR-OPC-013~020 |

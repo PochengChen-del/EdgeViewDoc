@@ -280,9 +280,12 @@ flowchart TD
 
 ### 8.4 OPC UA
 
-- 連線 Agent：`opcua.agent`（5123/5124）。
-- 憑證：`opcuaCert.go` 產生自簽憑證（需 `pkcs12`）。
-- 內建 Agent：`opcuaAgent`（28886，poll 1000 ms）。
+- **設定擁有者**：`OPCUA_Project`/`Connect`/`Tag`/`ConstTag`/`TagAlarm`/`AlarmAction`/`AlarmLevel`/`User*` 由 Metadata 管理。
+- **設定 UI**：`wax_opcua_agent_ui` 透過 `/sc/api/opcua/*`、`/sc/api/setting/opcua/*` 操作，不直接連 DB。
+- **Data Agent**：`opcuaAgent`（28886/28887）讀取上述設定；Metadata 不代理即時/歷史值。
+- **Alarm Agent**：`alarm`（28889）讀取 `OPCUA_TagAlarm/Action/Level`；設定變更由 UI/Metadata 寫入。
+- 憑證：`opcuaCert.go` 產生自簽憑證（需 `pkcs12`）；Data Agent 亦可上傳 PFX。
+- 詳細設計見 SDS-14。
 
 ### 8.5 Firebase
 
@@ -352,5 +355,6 @@ flowchart TD
 | 啟動/認證/物件樹 | FR-META-001~012 |
 | 內容/裝置/OPC UA | FR-META-013~035 |
 | 設定/檔案/匯入匯出/稽核 | FR-META-036~045 |
+| OPC UA 設定（UI/Agent/Alarm） | FR-OPC-001~012、FR-OPC-028~045 |
 | REST/錯誤碼/Session | IF-COM-001~004、NFR-SEC-001~010 |
 | 部署/可維運 | NFR-PORT-001~005、NFR-MNT-001~005 |

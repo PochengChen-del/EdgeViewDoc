@@ -517,6 +517,118 @@ sequenceDiagram
 }
 ```
 
+## 4.2 OPC UA Data Agent REST 目錄
+
+> 程式庫：`wax_opcua_agent`；Runtime `:28886`、History `:28887`；認證為 Metadata Session + `csrfToken` 或 loopback Bearer。
+
+| Method | Path | 角色 | 用途 |
+|--------|------|------|------|
+| POST | `/Browse/one/{projid}` | Runtime | 瀏覽單一節點 |
+| POST | `/Browse/all/{projid}` | Runtime | 瀏覽全部節點 |
+| POST | `/TagDetail/{projid}` | Runtime | Tag 明細 |
+| POST | `/GetTagValue/{projid}` | Runtime | 原始值（含 Alarm 欄位轉發） |
+| POST | `/GetTagValueText/{projid}` | Runtime | 文字值（Client 主要使用） |
+| POST | `/GetTagList/{projid}` | Runtime | Tag 清單 |
+| POST | `/SetTagValue/{projid}` | Runtime | 寫入原始值 |
+| POST | `/SetTagValueText/{projid}` | Runtime | 寫入文字值 |
+| POST | `/GetDataLog/{projid}` | History | 聚合歷史 |
+| POST | `/GetRawDataLog/{projid}` | History | 原始歷史 |
+| POST | `/Certificate/create` | Runtime | 產生 PFX |
+| GET | `/swagger/*` | 兩者 | Swagger UI |
+
+### 4.2.1 即時值
+
+```json
+POST /GetTagValueText/12
+Headers: { "csrfToken": "<token>" }
+{
+  "Tags": [
+    { "Name": "Line1.Temp" },
+    { "Name": "Line1.Temp.spanhi" },
+    { "Name": "Line1.Temp.ALMST" }
+  ]
+}
+```
+
+```json
+{
+  "data": {
+    "Values": [
+      { "Name": "Line1.Temp", "Value": "72.5", "Quality": 0 },
+      { "Name": "Line1.Temp.spanhi", "Value": "100", "Quality": 0 },
+      { "Name": "Line1.Temp.ALMST", "Value": 1, "Quality": 0 }
+    ],
+    "Result": { "Ret": 0, "Total": 3 }
+  }
+}
+```
+
+### 4.2.2 歷史值
+
+```json
+POST /GetDataLog/12
+{
+  "StartTime": "2026-11-19 00:00:00",
+  "IntervalType": "M",
+  "Interval": 1,
+  "Records": 60,
+  "Tags": [{ "Name": "Line1.Temp", "DataType": 11 }],
+  "NumberOfValues": 1
+}
+```
+
+## 4.3 OPC UA Alarm Agent REST 目錄
+
+> 程式庫：`wax_opcua_alarm_agent`；預設 `:28889`；回應信封 `{data:{error,reason,result}}`。
+
+| Method | Path | 用途 |
+|--------|------|------|
+| POST | `/api/alarm/list` | 進行中警報（summary 過濾） |
+| POST | `/api/alarm/log` | 已關閉警報（等級/時間/排序/分頁/連線） |
+| POST | `/api/alarm/ack` | Ack/Process/Lock |
+| POST | `/api/alarm/processhistory` | 單一警報歷程 |
+| POST | `/api/alarm/definition/list` | 編譯後規則 |
+| POST | `/api/alarm/simulate` | 注入值測試 |
+| POST | `/api/alarm/reload` | 重載 metadata |
+| POST | `/GetTagValue/:projid` | Alarm 欄位（Data Agent 格式） |
+| POST | `/ping/:id` | 健康檢查 |
+
+### 4.3.1 警報清單
+
+```json
+POST /api/alarm/list
+{ "csrfToken": "<token>", "projid": 12 }
+```
+
+### 4.3.2 Ack
+
+```json
+POST /api/alarm/ack
+{
+  "csrfToken": "<token>",
+  "alarmid": [123],
+  "status": 2,
+  "handler": "op1",
+  "commenter": "op1",
+  "record": "checked"
+}
+```
+
+## 4.4 OPC UA 設定 UI → Metadata 對照
+
+| UI 頁面 | Metadata API |
+|---------|--------------|
+| 登入/登出 | `/api/login`、`/api/setting/logout` |
+| 專案 | `/api/opcua/projectlist`、`/api/opcua/proj/*` |
+| 連線 | `/api/setting/opcua/connectlist/:projid`、`/api/opcua/connect/*` |
+| 節點瀏覽 | `/api/opcua/roottag/:projid`、`/api/opcua/nodetag/:projid` |
+| Tag | `/api/setting/opcua/taglist/:projid`、`/api/opcua/tag/*` |
+| 常數/計算/系統 | `/api/setting/opcua/const/*` |
+| 警報 | `/api/setting/opcua/alarm/*`、`/api/setting/opcua/tagconfig/:projid` |
+| 使用者 | `/api/opcua/user*`、`/api/opcua/graphic/*` |
+| 資料源 | `/api/source`、`/api/setting/DataSource/*` |
+| 匯入/匯出 | `/api/setting/export`、`/api/setting/import` |
+
 ## 5. WebSocket 介面
 
 ### 5.1 連線
@@ -596,6 +708,8 @@ sequenceDiagram
 | 慢客戶端 | 傳送佇列滿載則關閉 |
 | 伺服器關閉 | 關閉所有連線 |
 
+> OPC UA 即時/歷史 Tag 值**不使用 WebSocket**，由 Client 以 HTTP 直連 Data Agent；`opcuaalarmsummary` 仍由 Runtime Proxy 提供。
+
 ## 6. 版本與相容
 
 | 項目 | 策略 |
@@ -616,3 +730,7 @@ sequenceDiagram
 | 逾時 | IF-COM-008 |
 | Metadata 目錄 | FR-META-001~045 |
 | Runtime 目錄 | FR-RT-001~025 |
+| OPC UA Data Agent | FR-OPC-013~027、IF-OPC-002/003 |
+| OPC UA Alarm Agent | FR-OPC-028~045、IF-OPC-004 |
+| OPC UA 設定 UI | FR-OPC-001~012、IF-OPC-001 |
+| OPC UA 直連 | IF-OPC-002~004、SDS-14 §8 |

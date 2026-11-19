@@ -65,7 +65,7 @@
 
 ### IF-SW-001 PostgreSQL（設定資料庫）
 
-- 用途：Metadata 與 Runtime 共用設定/工作階段/稽核資料。
+- 用途：Metadata/Runtime/OPC UA Data Agent/OPC UA Alarm Agent 共用設定、工作階段、稽核與警報 runtime 資料。
 - 必要擴充：`ltree`、`uuid-ossp`。
 - 連線參數：host、port、database、schema、user、password、SSL。
 - 需求：服務啟動時可建立必要資料表與索引；連線池上限依設定。
@@ -88,11 +88,14 @@
 - 介面：`/waxapi` REST，Basic Auth。
 - 需求：可設定主機、埠、協定、帳密。
 
-### IF-SW-005 OPC UA Agent
+### IF-SW-005 OPC UA Data Agent
 
-- 用途：OPC UA 專案/Tag、警報摘要、憑證。
-- 介面：HTTP（預設 `127.0.0.1:5123`／告警 `8090`）。
-- 需求：可設定主機、埠、帳密；憑證可下載。
+- 用途：OPC UA 連線、即時值、寫值、歷史值、Tag 明細、瀏覽、憑證、常數/計算/系統測點。
+- 介面：HTTP/HTTPS（Runtime `127.0.0.1:28886`、History `127.0.0.1:28887`）。
+- 認證：Metadata Session Cookie + `csrfToken`，或 loopback 內部 Bearer。
+- 需求：可設定 URI、安全模式/政策、帳密、PFX；Runtime/History 角色分離。
+- 端點：`/GetTagValue*`、`/SetTagValue*`、`/TagDetail/{projid}`、`/Browse/*`、`/GetDataLog/{projid}`、`/GetRawDataLog/{projid}`、`/Certificate/create`。
+- 詳細需求：`SRS/07` FR-OPC-013~027、IF-OPC-002/003。
 
 ### IF-SW-006 第三方資料庫
 
@@ -124,6 +127,21 @@
 | `bun-imex` | v2 匯入/匯出引用解析 | 執行檔存在且可執行 |
 | Balsam | 3D 模型轉換 | 平台對應執行檔存在 |
 | `waxcert` | Windows 憑證處理 | 路徑可設定 |
+
+### IF-SW-010 OPC UA Alarm Agent
+
+- 用途：警報規則、清單/歷史、Ack/Process、Alarm 欄位。
+- 介面：HTTP/HTTPS（預設 `127.0.0.1:28889`；程式預設 8090）。
+- 認證：Session + CSRF、本機 Basic Auth、loopback Bearer。
+- 端點：`/api/alarm/list`、`/api/alarm/log`、`/api/alarm/ack`、`/api/alarm/processhistory`、`/api/alarm/definition/list`、`/api/alarm/simulate`、`/api/alarm/reload`、`/GetTagValue/:projid`、`/ping/:id`。
+- 詳細需求：`SRS/07` FR-OPC-028~045、IF-OPC-004。
+
+### IF-SW-011 OPC UA 設定 UI
+
+- 用途：OPC UA 專案/連線/Tag/警報/使用者設定。
+- 介面：HTTP 靜態 SPA（`/sc/opcua/`），API 走 Metadata `/sc/api/*`。
+- 認證：Metadata Session Cookie + `settings-csrfToken`。
+- 需求：`graphic` 角色不得進入；依 `permissions` 顯示模組。
 
 ---
 
@@ -236,6 +254,9 @@
 | Record 輪詢 | 1 秒 |
 | 系統資訊 | 3 秒 |
 | 告警摘要 | WA/EH/X/OPC UA 預設 1 秒；可由設定調整（最低 100 ms） |
+| OPC UA 即時值 | Client 掃描預設 1 秒（最低 500 ms）；Data Agent 快取 500 ms |
+| OPC UA 歷史值 | 依查詢筆數/Server；History Agent 獨立 |
+| OPC UA Alarm 輪詢 | 預設 500 ms（`config.yaml` 1000 ms） |
 
 ---
 
@@ -249,3 +270,6 @@
 | WebSocket | FR-RT-010~017 | SDS-05、SDS-07 |
 | 資料庫 | FR-META-001、FR-RT-008 | SDS-06 |
 | 外部平台 | FR-META-045、FR-RT-019~022 | SDS-04、SDS-05 |
+| OPC UA 設定 UI | FR-OPC-001~012 | SDS-14 §3 |
+| OPC UA Data Agent | FR-OPC-013~027 | SDS-14 §4、§8 |
+| OPC UA Alarm Agent | FR-OPC-028~045 | SDS-14 §5、§6 |

@@ -151,7 +151,34 @@
 
 ---
 
-## 5.11 相容性與法規遵循
+## 5.11 OPC UA 子系統非功能需求
+
+| ID | 類別 | 需求 | 優先級 | 驗證 |
+|----|------|------|--------|------|
+| NFR-OPC-001 | 效能 | 100 Tags 即時讀取 ≤ 1 秒（區網）。 | Must | 壓測 |
+| NFR-OPC-002 | 效能 | 1000 Tags 批次讀取 ≤ 5 秒。 | Must | 壓測 |
+| NFR-OPC-003 | 效能 | 歷史查詢 60 點 × 10 Tags ≤ 3 秒（依 Server）。 | Should | 壓測 |
+| NFR-OPC-004 | 效能 | Alarm 評估延遲 ≤ 2 × 輪詢間隔。 | Must | 量測 |
+| NFR-OPC-005 | 可靠 | Agent/Alarm 重啟後 30 秒內恢復。 | Must | 故障演練 |
+| NFR-OPC-006 | 可靠 | OPC UA Server 斷線回 Bad Quality，恢復後重連。 | Must | 斷線測試 |
+| NFR-OPC-007 | 安全 | 外部請求需 Session/Bearer；Bearer 僅 loopback。 | Must | 滲透 |
+| NFR-OPC-008 | 安全 | 支援 HTTPS/PFX、OPC UA Sign/SignAndEncrypt。 | Should | 組態檢查 |
+| NFR-OPC-009 | 稽核 | 登入、設定變更、Ack/Process 可追溯。 | Must | 日誌 |
+| NFR-OPC-010 | i18n | UI 支援 en/tw/zh。 | Should | UAT |
+| NFR-OPC-011 | 擴充 | 多專案/連線/Tag；History 可水平擴充。 | Should | 容量 |
+| NFR-OPC-012 | 可觀測 | 結構化日誌、健康端點、錯誤碼。 | Should | 運維 |
+| NFR-OPC-013 | 相容 | OPC UA 1.04+、常見 DataType。 | Must | 互通 |
+| NFR-OPC-014 | 時間 | NTP；歷史時間戳標示 UTC/本地。 | Must | 時區 |
+| NFR-OPC-015 | 資源 | Runtime 256–512 MB；History 依快取調整。 | Should | 監控 |
+| NFR-OPC-016 | 備份 | 設定/警報 DB 可備份還原。 | Must | 還原 |
+| NFR-OPC-017 | 可維護 | 分層、可測試、設定外部化。 | Should | Review |
+| NFR-OPC-018 | 可測試 | 模擬值與 Swagger。 | Should | 測試 |
+| NFR-OPC-019 | 易用 | 表單驗證、錯誤提示、載入狀態。 | Should | UAT |
+| NFR-OPC-020 | 文件 | API/設定/部署/限制文件化。 | Must | 審查 |
+
+---
+
+## 5.12 相容性與法規遵循
 
 | ID | 需求 | 優先級 | 說明 |
 |----|------|--------|------|
@@ -162,7 +189,7 @@
 
 ---
 
-## 5.12 非功能需求驗證方式
+## 5.13 非功能需求驗證方式
 
 | 類別 | 驗證方式 |
 |------|----------|
@@ -173,3 +200,4 @@
 | 可攜性 | 各平台建置與煙霧測試 |
 | i18n | 語系切換、字型/時區/數字格式測試 |
 | 稽核 | 稽核軌跡完整性與 checksum 驗證 |
+| OPC UA | 互通測試（1.04+）、大量 Tag 壓測、歷史查詢、Alarm 狀態機、重啟復原 |

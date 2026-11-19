@@ -266,28 +266,83 @@ sequenceDiagram
 - 修改立即生效（新請求）。
 - 既有 Session 不自動失效（必要時可加版本欄位）。
 
-## 11. OPC UA 設定
+## 11. OPC UA 子系統
+
+### 11.1 設定 UI 設定專案/連線/Tag
 
 ```mermaid
 sequenceDiagram
-    participant A as 管理員
+    participant U as OPC UA UI
     participant M as Metadata
-    participant O as OPC UA Agent
-
-    A->>M: POST /api/opcua/proj/insert
-    A->>M: POST /api/opcua/connect/insert
-    A->>M: POST /api/opcua/tag/insert
-    A->>M: POST /api/opcua/conn/upserttest
-    M->>O: 測試連線/讀取
-    O-->>M: 結果
-    M-->>A: 成功/錯誤
-    A->>M: POST /api/setting/opcua/downloadcert/:projid
-    M-->>A: 憑證
+    participant DB as waxconfig
+    participant O as OPC UA Server
+    U->>M: POST /api/login (setting=true)
+    M-->>U: csrfToken/role
+    U->>M: POST /api/opcua/proj/insert
+    U->>M: POST /api/opcua/connect/insert (multipart PFX)
+    M->>DB: OPCUA_Connect/ConnectBody
+    U->>M: POST /api/opcua/roottag/:projid
+    M->>O: Browse（可選）
+    M-->>U: 節點
+    U->>M: POST /api/opcua/tag/insert
+    M->>DB: OPCUA_Tag
+    U->>M: POST /api/setting/opcua/alarm/upsert
+    M->>DB: OPCUA_AlarmAction/Level/TagAlarm
 ```
 
-- 憑證由 `opcuaCert.go` 產生。
-- Tag 匯入/分頁由 `TagPage`。
-- 權限由 `OPCUA_User*` 管理。
+- 憑證可由 UI 上傳或 `/Certificate/create` 產生。
+- Tag 匯入/分頁由 `TagPage`；權限由 `OPCUA_User*` 管理。
+
+### 11.2 Viewer 直連即時值
+
+```mermaid
+sequenceDiagram
+    participant V as Viewer
+    participant D as Data Agent
+    participant O as OPC UA Server
+    V->>V: WADataSourceManager.connect(2)
+    V->>D: GetTagValueText/{projid}
+    D->>D: 讀 opcua_tag/consttag、取連線池
+    D->>O: Read
+    O-->>D: DataValue
+    D-->>V: Values/Quality
+    V->>V: dataValueCache → Widget
+```
+
+### 11.3 Viewer 直連歷史值
+
+```mermaid
+sequenceDiagram
+    participant V as Viewer
+    participant H as History Agent
+    participant O as OPC UA Server
+    V->>H: GetRawDataLog/{projid}
+    H->>O: HistoryRead
+    O-->>H: DataValue[]
+    H-->>V: 時間序列
+```
+
+### 11.4 Alarm 生命週期
+
+```mermaid
+sequenceDiagram
+    participant D as Data Agent
+    participant A as Alarm Agent
+    participant DB as waxalarm
+    participant C as Client
+    A->>D: 輪詢 GetTagValue（Bearer）
+    D-->>A: Tag 值
+    A->>A: Evaluate/Precedence/Workflow
+    A->>DB: upsert opcua_active_alarm
+    A->>DB: insert opcua_alarm_history
+    C->>A: /api/alarm/list
+    A-->>C: 進行中警報
+    C->>A: /api/alarm/ack
+    A->>DB: 更新狀態/歷史
+```
+
+- 重啟時 `Engine.Recover()` 載入未關閉警報並在首次 poll 對帳。
+- `opcua_alarmaction` 決定 Ack/Process/Summary/Log 門檻。
 
 ## 12. 3D 場景與資產
 
@@ -373,6 +428,8 @@ sequenceDiagram
 | 即時/歷史 | FR-RT-001~017 |
 | 告警/推播 | FR-RT-010~017、FR-RT-018~020 |
 | 匯入/匯出 | FR-META-036~045 |
-| 使用者/OPC UA | FR-META-029~035 |
+| 使用者/OPC UA | FR-META-029~035、FR-OPC-001~012 |
+| OPC UA 直連 | FR-OPC-015、FR-OPC-018、IF-OPC-002/003 |
+| OPC UA Alarm | FR-OPC-028~045、IF-OPC-004 |
 | 3D | FR-CLI-056~060 |
 | 關閉/部署 | FR-RT-024~025、NFR-REL-003~004 |
