@@ -1,0 +1,89 @@
+,,,,,,
+,Select,Device Properties,Properties ID,Properties Description,Threat ID,Threat Description
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,TRUE,System Software,PID-22,Device includes a debugging capabilities,TID-224,Excessive Access via Software Diagnostic Features
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,TRUE,System Software,PID-272,Device includes cryptographic firmware/software integrity protection mechanisms,TID-214,Secrets Extracted from Device Root of Trust
+,TRUE,System Software,PID-272,Device includes cryptographic firmware/software integrity protection mechanisms,TID-330,Cryptographic Timing Side-Channel
+,,,,,,
+,TRUE,System Software,PID-2722,Device includes digitally signed firmware (with private key),TID-213,Faulty FW/SW Update Integrity Verification
+,,,,,,
+,TRUE,System Software,PID-274,Device includes user firmware/software version selection during updates,TID-216,Firmware Update Rollbacks Allowed
+,,,,,,
+,TRUE,Application Software,PID-31,Application-level software is present and running on the device,TID-301,Applications Binaries Modified
+,TRUE,Application Software,PID-311,Device includes the usage of a web/HTTP applications,TID-319,Cross Site Scripting (XSS)
+,TRUE,Application Software,PID-311,Device includes the usage of a web/HTTP applications,TID-320,SQL Injection
+,TRUE,Application Software,PID-311,Device includes the usage of a web/HTTP applications,TID-321,HTTP Application Session Hijacking
+,TRUE,Application Software,PID-311,Device includes the usage of a web/HTTP applications,TID-322,Cross Site Request Forgery (CSRF)
+,TRUE,Application Software,PID-311,Device includes the usage of a web/HTTP applications,TID-323,HTTP Path Traversal
+,TRUE,Application Software,PID-311,Device includes the usage of a web/HTTP applications,TID-324,HTTP Direct Object Reference
+,TRUE,Application Software,PID-311,Device includes the usage of a web/HTTP applications,TID-325,HTTP Injection/Response Splitting
+,TRUE,Application Software,PID-3121,"Device includes support for object oriented programming languages(e.g., Java, Python, PHP, C++)",TID-326,Insecure Deserialization
+,TRUE,Application Software,PID-3122,"Device includes support for manual memory management programming languages (e.g. C, C++)",TID-327,Out of Bounds Memory Access
+,TRUE,Application Software,PID-32,"Device includes the ability to deploy custom or external programs (e.g., ladder logic, compiled binaries)",TID-302,Install Untrusted Application
+,TRUE,Application Software,PID-321,Device includes ability to deploy custom programs from engineering software or IDE,TID-303,Excessive Trust in Offboard Management/IDE Software
+,TRUE,Application Software,PID-322,Device includes a program runtime environment for custom or external programs,TID-304,Manipulate Runtime Environment
+,,,,,,
+,TRUE,Application Software,PID-3232,Device includes ability to run custom/external programs/processes through an execution sandboxed environment,TID-306,Sandboxed Environments Escaped
+,,,,,,
+,,,,,,
+,,,,,,
+,TRUE,Application Software,PID-331,Device includes unauthenticated services,TID-310,Remotely Accessible Unauthenticated Services
+,TRUE,Application Software,PID-332,Device includes authenticated services,TID-311,Default Credentials
+,TRUE,Application Software,PID-332,Device includes authenticated services,TID-312,Credential Change Mechanism Can Be Abused
+,TRUE,Application Software,PID-332,Device includes authenticated services,TID-313,Unauthenticated Session Changes Credential
+,TRUE,Application Software,PID-332,Device includes authenticated services,TID-328,Hardcoded Credentials
+,TRUE,Application Software,PID-3321,Device includes passwords to authenticate the users,TID-314,Passwords Can Be Guessed Using Brute-Force Attempts
+,TRUE,Application Software,PID-3321,Device includes passwords to authenticate the users,TID-315,Password Retrieval Mechanism Abused
+,TRUE,Application Software,PID-3321,Device includes passwords to authenticate the users,TID-329,Improper Password Storage
+,TRUE,Application Software,PID-3322,Device includes cryptographic mechanism to authenticate users and sessions,TID-316,Incorrect Certificate Verification Allows Authentication Bypass
+,TRUE,Application Software,PID-3322,Device includes cryptographic mechanism to authenticate users and sessions,TID-317,Predictable Cryptographic Key
+,TRUE,Application Software,PID-3322,Device includes cryptographic mechanism to authenticate users and sessions,TID-318,Insecure Cryptographic Implementation
+,TRUE,Application Software,PID-3322,Device includes cryptographic mechanism to authenticate users and sessions,TID-330,Cryptographic Timing Side-Channel
+,TRUE,Application Software,PID-3322,Device includes cryptographic mechanism to authenticate users and sessions,TID-411,Weak/Insecure Cryptographic Protocol
+,TRUE,Networking,PID-41,Device exposes remote network services,TID-222,Critical System Service May Be Disabled
+,TRUE,Networking,PID-41,Device exposes remote network services,TID-310,Remotely Accessible Unauthenticated Services
+,TRUE,Networking,PID-41,Device exposes remote network services,TID-401,Undocumented Protocol Features
+,TRUE,Networking,PID-41,Device exposes remote network services,TID-404,Remotely Triggerable Deadlock/DoS
+,TRUE,Networking,PID-41,Device exposes remote network services,TID-405,Network Stack Resource Exhaustion
+,TRUE,Networking,PID-41,Device exposes remote network services,TID-407,Missing Message Replay Protection
+,TRUE,Networking,PID-4111,Device lacks protocol support for message authentication,TID-406,Unauthorized Messages or Connections
+,TRUE,Networking,PID-4112,Device lacks protocol support for message encryption,TID-408,Unencrypted Sensitive Data Communication
+,TRUE,Networking,PID-4113,"Device includes cryptographic functions for sensitive data, such as encryption or authentication",TID-221,Authentication Bypass By Message Replay
+,TRUE,Networking,PID-4113,"Device includes cryptographic functions for sensitive data, such as encryption or authentication",TID-316,Incorrect Certificate Verification Allows Authentication Bypass
+,TRUE,Networking,PID-4113,"Device includes cryptographic functions for sensitive data, such as encryption or authentication",TID-317,Predictable Cryptographic Key
+,TRUE,Networking,PID-4113,"Device includes cryptographic functions for sensitive data, such as encryption or authentication",TID-318,Insecure Cryptographic Implementation
+,TRUE,Networking,PID-4113,"Device includes cryptographic functions for sensitive data, such as encryption or authentication",TID-330,Cryptographic Timing Side-Channel
+,TRUE,Networking,PID-4113,"Device includes cryptographic functions for sensitive data, such as encryption or authentication",TID-410,Cryptographic Protocol Side Channel
+,TRUE,Networking,PID-4113,"Device includes cryptographic functions for sensitive data, such as encryption or authentication",TID-411,Weak/Insecure Cryptographic Protocol
+,,,,,,
