@@ -2,7 +2,8 @@
 
 > 評估範圍：EdgeView 完整系統，datasource = **OPC UA**。  
 > 包含：Qt Designer/Viewer、xnginx、Metadata Service、Runtime Proxy、OPC UA Data Agent（Runtime/History）、OPC UA Alarm Agent、OPC UA 設定 UI、PostgreSQL。  
-> 依據：`iec62443.csv`（IEC 62443-4-2 Requirements，148 列，其中 141 列為有效需求）。
+> 依據：`iec62443.csv`（IEC 62443-4-2 Requirements，148 列，其中 141 列為有效需求）。  
+> 證據索引：`62443/Evidence.md`（含 SBOM、手冊截圖、測試/流程缺口）。
 
 ## 1. 判定原則
 

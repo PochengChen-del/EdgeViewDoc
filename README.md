@@ -2,6 +2,18 @@
 
 > 本目錄彙整 EdgeView 產品的軟體需求規格（Software Requirements Specification, SRS）與軟體設計規格（Software Design Specification, SDS）。內容依據下列程式碼庫的實際實作逆向整理，並輔以既有 EdgeView 文件與功能清單。
 
+## 0. 文件入口
+
+| 類別 | 內容 | 位置 | 連結 | 證據用途 |
+|------|------|------|------|----------|
+| 需求文件 | Requirement Spec | Git Repo | [SRS](https://github.com/PochengChen-del/EdgeViewDoc/tree/main/SRS) | 需求、介面、NFR、驗收準則 |
+| 設計文件 | 系統架構、功能設計文件 | Git Repo | [SDS](https://github.com/PochengChen-del/EdgeViewDoc/tree/main/SDS) | 架構、模組、資料、流程、部署 |
+| 原始碼與服務說明 | 原始碼與 README | Git Repo | [README 說明](https://github.com/PochengChen-del/EdgeViewDoc/blob/main/README.md) | 程式碼基準、服務責任、整合 |
+| IEC 62443 | 62443-4-2 Requirements | Git Repo | [EdgeView_IEC62443-4-2_OPCUA](https://github.com/PochengChen-del/EdgeViewDoc/blob/main/62443/EdgeView_IEC62443-4-2_OPCUA.md) | 逐條符合性對照 |
+| IEC 62443 證據 | Evidence Index | Git Repo | [62443/Evidence.md](62443/Evidence.md) | 需求 ↔ 文件/程式碼/設定/SBOM/手冊截圖 |
+| 手冊截圖證據 | Manual Screenshots | Git Repo | [SRS-09](SRS/09_Manual_Screenshot_Evidence.md)、[SDS-16](SDS/16_Manual_Screenshot_Mapping.md) | 手冊截圖 ↔ 需求/設計/CR |
+| 軟體物料清單 | SBOM | Git Repo | [edgeview.cdx.json](https://github.com/PochengChen-del/EdgeViewDoc/blob/main/edgeview.cdx.json) | CycloneDX 1.7、元件/授權/版本 |
+
 ## 1. 文件資訊
 
 | 項目 | 內容 |
@@ -116,6 +128,7 @@ flowchart LR
 | SRS-06 | [SRS/06_Acceptance_and_Traceability.md](SRS/06_Acceptance_and_Traceability.md) | 驗收準則與需求追溯 |
 | SRS-07 | [SRS/07_OPCUA_Subsystem.md](SRS/07_OPCUA_Subsystem.md) | OPC UA 子系統需求（設定 UI、Data Agent、Alarm Agent） |
 | SRS-08 | [SRS/08_User_Manual_Requirements.md](SRS/08_User_Manual_Requirements.md) | 使用手冊補充需求（安裝/授權/繪圖/控件/變數/腳本/插件/限制） |
+| SRS-09 | [SRS/09_Manual_Screenshot_Evidence.md](SRS/09_Manual_Screenshot_Evidence.md) | 手冊截圖證據與需求對照 |
 
 ### 3.2 SDS（軟體設計規格書）
 
@@ -136,6 +149,7 @@ flowchart LR
 | SDS-13 | [SDS/13_Security_Remediation.md](SDS/13_Security_Remediation.md) | R-001/R-002/R-003 修復設計、部署需求與驗收 |
 | SDS-14 | [SDS/14_OPCUA_Subsystem_Design.md](SDS/14_OPCUA_Subsystem_Design.md) | OPC UA 子系統設計、API、資料模型、直連資料源 |
 | SDS-15 | [SDS/15_User_Manual_Mapping.md](SDS/15_User_Manual_Mapping.md) | 使用手冊功能對照、UI/控件/腳本/模型/權限/插件/限制 |
+| SDS-16 | [SDS/16_Manual_Screenshot_Mapping.md](SDS/16_Manual_Screenshot_Mapping.md) | 手冊截圖 ↔ 設計/程式碼/API/CR 對照 |
 
 ### 3.3 合規對照
 

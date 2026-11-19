@@ -194,4 +194,4 @@
 | 模型/檔案/配置 | 模型匯入匯出/實例化、資源、匯入匯出、尋找取代 |
 | 使用者/插件 | 角色權限、安全區/級別、插件 |
 
-設計對照見 `SDS/15_User_Manual_Mapping.md`；既有需求見 `SRS/03`、`SRS/07`。
+設計對照見 `SDS/15_User_Manual_Mapping.md`；截圖證據見 `SRS/09_Manual_Screenshot_Evidence.md`、`SDS/16_Manual_Screenshot_Mapping.md`；既有需求見 `SRS/03`、`SRS/07`。

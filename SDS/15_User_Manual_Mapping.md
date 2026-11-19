@@ -1,6 +1,7 @@
 # SDS-15 使用手冊功能對照（Manual Mapping）
 
 > 對應需求：`SRS/08_User_Manual_Requirements.md`  
+> 截圖證據：`SRS/09_Manual_Screenshot_Evidence.md`、`SDS/16_Manual_Screenshot_Mapping.md`  
 > 依據：EdgeView 使用手冊 V4.2.x
 
 ## 1. 目的

@@ -105,6 +105,7 @@ EdgeView 是一套可跨平台執行的 HMI/SCADA 圖控平台，包含：
 | SRS-06 | 驗收準則與需求追溯 |
 | SRS-07 | OPC UA 子系統需求：設定 UI、Data Agent、Alarm Agent、直連資料源 |
 | SRS-08 | 使用手冊補充需求：安裝/授權、連線、繪圖、控件、變數、腳本、事件、動畫、模型、配置、權限、插件、限制 |
+| SRS-09 | 使用手冊截圖證據：截圖 ↔ 需求對照 |
 
 設計對應請參閱 `SDS/` 目錄；需求與設計的對照請參閱 `SDS/12_Traceability.md`，OPC UA 設計見 `SDS/14_OPCUA_Subsystem_Design.md`。
 
