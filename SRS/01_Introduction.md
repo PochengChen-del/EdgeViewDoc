@@ -18,6 +18,7 @@ EdgeView 是一套可跨平台執行的 HMI/SCADA 圖控平台，包含：
 - **EdgeView Viewer**：同一 Client 的執行期模式，載入設計結果並與後端即時互動。
 - **EdgeView Metadata Service**：設定、專案、使用者、權限、OPC UA 組態與稽核後端。
 - **EdgeView Runtime Proxy**：Record/第三方資料查詢、告警摘要與代理後端。
+- **xnginx reverse proxy**：地端統一入口（`8880/8881`）；依 datasource 使用不同變體設定。
 - **OPC UA 子系統**：設定 UI（Vue）、Data Agent（C#，Runtime/History）、Alarm Agent（Go）。
 
 ### 2.2 納入範圍（In Scope）
@@ -28,7 +29,8 @@ EdgeView 是一套可跨平台執行的 HMI/SCADA 圖控平台，包含：
 - 使用者、群組、專案權限、登入來源（WebAccess、BI/EdgeHub、OPC UA、X）。
 - OPC UA 子系統：設定 UI、Data Agent（即時/歷史/寫值/瀏覽/憑證/測點）、Alarm Agent（規則/評估/狀態機/Ack/歷史）。
 - OPC UA 連線、Tag、專案、使用者與警報設定。
-- Client 直連 OPC UA Data Agent 取得即時/歷史 Tag 值。
+- Client 邏輯直連 OPC UA Data Agent，地端實體經 xnginx `/ua`、`/uadb`、`/uaam`。
+- 地端 Client ↔ Metadata/Runtime/Data Agent/Alarm 經 xnginx；EdgeHub/BI 經 K8s Ingress。
 - 資料來源設定（WebAccess、OPC UA、X、EdgeHub/BI）。
 - Record 查詢定義、預覽、分頁、Datalog 歷史查詢。
 - WebSocket 即時資料（record data）、警報摘要（WA/EH/OPC UA/X）、系統資訊。

@@ -15,6 +15,7 @@
 | Client（Designer + Viewer） | `wax_hmi-designer-client\wa-hmi-designer` | SDS-03 |
 | Metadata Service | `wax_metadata-service` | SDS-04 |
 | Runtime Proxy | `wax_rutime_proxy` | SDS-05 |
+| xnginx | `wax_nginx_ingress` | SDS-02 §3.3、SDS-10 §2.3 |
 | OPC UA 設定 UI | `wax_opcua_agent_ui` | SDS-14 §3 |
 | OPC UA Data Agent | `wax_opcua_agent` | SDS-14 §4 |
 | OPC UA Alarm Agent | `wax_opcua_alarm_agent` | SDS-14 §5 |

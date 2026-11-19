@@ -229,6 +229,7 @@
 
 | 功能 | 設計 |
 |------|------|
+| 入口 | xnginx `8880/8881`；`/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam`、`/system` |
 | 設定入口 | `https://<host>:8881/SC/settings`（WA）、`/sc/opcua`（OPC UA）、`/system` |
 | 資料來源 | `DataSource`/`DataSourceBody`、`/api/DataSource/*` |
 | 工程 DB 匯出/匯入 | `/api/setting/export`、`/api/setting/import`、`/api/setting/projlist` |

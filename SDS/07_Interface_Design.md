@@ -4,11 +4,15 @@
 
 | 介面 | 服務 | 預設 | 協定 | 用途 |
 |------|------|------|------|------|
+| xnginx（地端入口） | xnginx | `0.0.0.0:8880`／`8881` | HTTP/HTTPS | `/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam` |
 | Metadata REST | Metadata | `127.0.0.1:28883` | HTTP/HTTPS | 設定、認證、資源 |
 | Metadata 檔案 | Metadata | 同上 | HTTP | 縮圖、圖片、檔案、字型 |
 | Runtime REST | Runtime | `127.0.0.1:28884` | HTTP/HTTPS | Record 查詢/預覽 |
-| Runtime WS | Runtime | `ws://…/so`（BI：`/`） | WebSocket | 即時資料/告警/系統 |
-| Swagger | 兩者 | `/swagger/*any` | HTTP | API 文件 |
+| Runtime WS | Runtime | `/ws/so`（xnginx）／BI：K8s Ingress | WebSocket | 即時資料/告警/系統 |
+| OPC UA Data Agent | Data Agent | `/ua`、`/uadb` | HTTP | 即時/歷史 Tag |
+| OPC UA Alarm Agent | Alarm Agent | `/uaam` | HTTP | 警報清單/歷史/Ack |
+| K8s Ingress（BI） | Edge365 | `wxproxy<suffix>` | HTTPS | `/apihub`、`/dbmaster`、`/alarm` |
+| Swagger | 各服務 | `/swagger/*any` | HTTP | API 文件 |
 
 ## 2. REST 慣例
 
@@ -466,6 +470,8 @@ sequenceDiagram
 
 ## 4. Runtime REST 目錄
 
+> Metadata 對外為 `/sc/api/*`（xnginx `/sc`）；Runtime 對外為 `/wxproxy/record/*`（xnginx `/wxproxy`）。下表為 Runtime 服務內部路徑。
+
 | Method | Path | Auth | 用途 |
 |--------|------|------|------|
 | POST | `/record/queryrecord` | — | 已停用（路由未註冊，見 SDS-13 R-003） |
@@ -519,7 +525,7 @@ sequenceDiagram
 
 ## 4.2 OPC UA Data Agent REST 目錄
 
-> 程式庫：`wax_opcua_agent`；Runtime `:28886`、History `:28887`；認證為 Metadata Session + `csrfToken` 或 loopback Bearer。
+> 程式庫：`wax_opcua_agent`；對外經 xnginx `/ua`（Runtime `:28886`）與 `/uadb`（History `:28887`）；認證為 Metadata Session + `csrfToken` 或 loopback Bearer。
 
 | Method | Path | 角色 | 用途 |
 |--------|------|------|------|
@@ -539,7 +545,7 @@ sequenceDiagram
 ### 4.2.1 即時值
 
 ```json
-POST /GetTagValueText/12
+POST /ua/GetTagValueText/12
 Headers: { "csrfToken": "<token>" }
 {
   "Tags": [
@@ -566,7 +572,7 @@ Headers: { "csrfToken": "<token>" }
 ### 4.2.2 歷史值
 
 ```json
-POST /GetDataLog/12
+POST /uadb/GetDataLog/12
 {
   "StartTime": "2026-11-19 00:00:00",
   "IntervalType": "M",
@@ -579,7 +585,7 @@ POST /GetDataLog/12
 
 ## 4.3 OPC UA Alarm Agent REST 目錄
 
-> 程式庫：`wax_opcua_alarm_agent`；預設 `:28889`；回應信封 `{data:{error,reason,result}}`。
+> 程式庫：`wax_opcua_alarm_agent`；上游 `:28889`、對外經 xnginx `/uaam`；回應信封 `{data:{error,reason,result}}`。
 
 | Method | Path | 用途 |
 |--------|------|------|
@@ -635,8 +641,8 @@ POST /api/alarm/ack
 
 | 模式 | URL |
 |------|-----|
-| WebAccess/OPC UA/X | `ws(s)://<host>/so` |
-| BI/Edge365 | `ws(s)://<host>/` |
+| WebAccess/OPC UA/X（地端） | `ws(s)://<host>:8880|8881/ws/so` → xnginx → Runtime `/so` |
+| BI/Edge365（雲端） | `ws(s)://wxproxy<suffix>/` → K8s Ingress |
 
 ### 5.2 請求格式
 
@@ -708,7 +714,7 @@ sequenceDiagram
 | 慢客戶端 | 傳送佇列滿載則關閉 |
 | 伺服器關閉 | 關閉所有連線 |
 
-> OPC UA 即時/歷史 Tag 值**不使用 WebSocket**，由 Client 以 HTTP 直連 Data Agent；`opcuaalarmsummary` 仍由 Runtime Proxy 提供。
+> OPC UA 即時/歷史 Tag 值**不使用 WebSocket**，由 Client 以 HTTP 經 xnginx `/ua`、`/uadb` 直連 Data Agent；`opcuaalarmsummary` 仍由 Runtime Proxy 提供。
 
 ## 6. 版本與相容
 

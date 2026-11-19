@@ -165,12 +165,12 @@ flowchart LR
 |------|------|-----------|
 | IF-UI-001~006 | SDS-03 §3~§5 | UAT、跨平台 |
 | IF-HW-001~007 | SDS-03 §10、§14 | 硬體/GPU 測試 |
-| IF-SW-001~009 | SDS-04 §8、SDS-05 §8 | 整合測試 |
+| IF-SW-001~012 | SDS-04 §8、SDS-05 §8、SDS-10 §2.3 | 整合測試 |
 | IF-COM-001~004 | SDS-07 §2 | API 契約測試 |
 | IF-COM-005~006 | SDS-05 §4、SDS-07 §5 | WS 測試 |
 | IF-COM-007 | SDS-07 §2.5、§3.20 | 檔案測試 |
 | IF-COM-008 | SDS-05 §5.2、SDS-07 | 逾時測試 |
-| IF-OPC-001~010 | SDS-14 §6、SDS-07 §4.2~4.4 | 介面/整合測試 |
+| IF-OPC-001~011 | SDS-14 §6、SDS-07 §4.2~4.4、SDS-10 §2.3 | 介面/整合測試 |
 
 ## 7. 設計章節覆蓋
 
@@ -188,8 +188,8 @@ flowchart LR
 | SDS-10 | NFR-MNT/PORT/REL |
 | SDS-11 | 風險與技術債 |
 | SDS-12 | 追溯 |
-| SDS-14 | FR-OPC-001~045、IF-OPC-001~010、NFR-OPC-001~020、直連資料源 |
-| SDS-15 | FR-UM-001~064、NFR-UM-001~008、IF-UM-001~006、手冊功能對照 |
+| SDS-14 | FR-OPC-001~045、IF-OPC-001~011、NFR-OPC-001~020、直連資料源 |
+| SDS-15 | FR-UM-001~064、NFR-UM-001~008、IF-UM-001~007、手冊功能對照 |
 | SDS-13 | R-001/R-002/R-003/R-006/R-008/R-009 修復設計與驗收 |
 
 ## 8. 反向追溯（程式碼 → 需求）
@@ -218,6 +218,8 @@ flowchart LR
 | `wax_opcua_agent/Controllers/*`、`Services/*` | FR-OPC-013~027 |
 | `wax_opcua_alarm_agent/alarm/*`、`metadata/*`、`storage/*` | FR-OPC-028~045 |
 | `wa-hmi-designer/Common/Api/opcua.js`、`WADataSourceManager.qml` | FR-OPC-015/018、直連資料源 |
+| `wax_nginx_ingress/xnginx.yaml`、`xnginx.*.yaml` | IF-OPC-011、地端路由/TLS/限流 |
+| `wax_nginx_ingress/xnginx.go`、`appconfig.go` | xnginx upstream、location、服務監督 |
 
 ## 9. 未對應/待確認
 

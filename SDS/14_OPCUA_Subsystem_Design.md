@@ -9,8 +9,9 @@ OPC UA 子系統由三個程式庫組成，職責分離：
 | 元件 | 技術 | 角色 | 預設位址 |
 |------|------|------|----------|
 | `wax_opcua_agent_ui` | Vue 2.7 / Vue Router / Vuex / Axios | 設定 UI | `/sc/opcua/`（靜態） |
-| `wax_opcua_agent` | C# / ASP.NET Core / OPC UA .NET SDK | Data Agent（Runtime + History） | `127.0.0.1:28886`、`28887` |
-| `wax_opcua_alarm_agent` | Go / Gin / PostgreSQL | Alarm Engine | `127.0.0.1:28889` |
+| `wax_opcua_agent` | C# / ASP.NET Core / OPC UA .NET SDK | Data Agent（Runtime + History） | 上游 `127.0.0.1:28886`／`28887`；對外 `/ua`／`/uadb` |
+| `wax_opcua_alarm_agent` | Go / Gin / PostgreSQL | Alarm Engine | 上游 `127.0.0.1:28889`；對外 `/uaam` |
+| `xnginx` | Go + Nginx | 地端反向代理/服務監督 | `0.0.0.0:8880`／`8881` |
 
 ```mermaid
 flowchart TB
@@ -18,6 +19,7 @@ flowchart TB
         Vue["Vue SPA<br/>/sc/opcua/"]
     end
     subgraph Edge["EdgeView Server"]
+        NG["xnginx<br/>8880/8881"]
         Meta["Metadata Service<br/>:28883"]
         Proxy["Runtime Proxy<br/>:28884"]
         RT["Data Agent (Runtime)<br/>:28886"]
@@ -33,11 +35,13 @@ flowchart TB
     end
     UA[("OPC UA Server")]
 
-    Vue -->|"/sc/api/*"| Meta
+    Vue -->|"/sc/opcua、/sc/api/*"| NG
+    HMI -->|"/ua、/uadb、/uaam"| NG
+    NG --> Meta
+    NG --> RT
+    NG --> HIS
+    NG --> ALM
     Meta --> CFG
-    HMI -->|GetTagValueText / SetTagValue| RT
-    HMI -->|GetDataLog / GetRawDataLog| HIS
-    HMI -->|alarm list/log/ack| ALM
     Proxy -->|alarm summary| ALM
     ALM -->|GetTagValue| RT
     RT --> UA
@@ -53,7 +57,7 @@ flowchart TB
 | 決策 | 理由 | 影響 |
 |------|------|------|
 | Data Agent 分 Runtime/History 兩種角色 | 隔離即時查詢與歷史長查詢，避免互相阻塞 | 需兩個進程/連接埠 |
-| Client 直連 Data Agent | 降低即時值延遲，不經 Proxy | Client 需可達 28886/28887；需處理認證/CORS |
+| Client 邏輯直連 Data Agent | 降低即時值延遲，不經 Runtime Proxy | 實體經 xnginx `/ua`、`/uadb`；Client 不需直連 28886/28887 |
 | Alarm 與 Data Agent 分離 | 警報邏輯可獨立重啟/擴充 | 需共享 Session/metadata/內部 Token |
 | 設定 UI 走 Metadata API | 沿用既有權限、稽核、Session | UI 不直接連 DB |
 | Alarm 規則存 Metadata、狀態存 waxalarm | 設定與 runtime 分離 | 兩 DB 需一致 |
@@ -62,13 +66,14 @@ flowchart TB
 
 | 元件 | Port | 對外路徑（範例） | 說明 |
 |------|------|------------------|------|
-| Metadata | 28883 | `/sc/api` | UI 與 Client 設定 |
-| Runtime Proxy | 28884 | `/wxproxy`、`/ws/so` | 即時資料/告警摘要 |
-| Data Agent Runtime | 28886 | `/ua` | 即時值、寫值、Tag 明細、瀏覽、憑證 |
-| Data Agent History | 28887 | `/uadb` | 歷史值 |
-| Alarm Agent | 28889 | `/uaam` | 告警清單/歷史/Ack/設定欄位 |
+| xnginx HTTP/HTTPS | 8880/8881 | `/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam` | 地端統一入口 |
+| Metadata | 28883 | `/sc/api` | UI 與 Client 設定（上游 loopback） |
+| Runtime Proxy | 28884 | `/wxproxy`、`/ws/so` | 即時資料/告警摘要（上游 loopback） |
+| Data Agent Runtime | 28886 | `/ua` | 即時值、寫值、Tag 明細、瀏覽、憑證（上游 loopback） |
+| Data Agent History | 28887 | `/uadb` | 歷史值（上游 loopback） |
+| Alarm Agent | 28889 | `/uaam` | 告警清單/歷史/Ack/設定欄位（上游 loopback） |
 | OPC UA Server | 依現場 | — | OPC UA TCP（可加密） |
-| UI | 80/443 | `/sc/opcua/` | Vue 靜態資源 |
+| UI | 8880/8881 | `/sc/opcua/` | xnginx 靜態/路由 |
 
 > Client 的 URL 規則：`Global.serverInfo.opcuaPathname` 預設 `/ua`；非根路徑時 `dburl = opcuaUrlPrefix + "db"`、`alarmurl = opcuaUrlPrefix + "am"`，即 `/uadb`、`/uaam`。
 
@@ -461,6 +466,8 @@ flowchart TB
 
 ### 5.8 REST API
 
+> 對外路徑加 xnginx 前綴：`/uaam/api/alarm/*`、`/uaam/GetTagValue/:projid`、`/uaam/ping/:id`。
+
 | Method | Path | 認證 | 用途 |
 |--------|------|------|------|
 | POST | `/api/alarm/list` | 是 | 進行中警報（summary 過濾） |
@@ -484,7 +491,7 @@ flowchart TB
 
 ## 6. 介面設計
 
-### 6.1 UI → Metadata
+### 6.1 UI → xnginx → Metadata
 
 | UI 功能 | API |
 |---------|-----|
@@ -499,10 +506,12 @@ flowchart TB
 | 資料源 | `/api/source`、`/api/setting/DataSource/*` |
 | 匯入/匯出 | `/api/setting/export`、`/api/setting/import` |
 
-### 6.2 Client → Data Agent（直連）
+> 對外實際路徑為 `/sc` + 上表（例如 `/sc/api/opcua/projectlist`），由 xnginx 去前綴後轉 Metadata。
+
+### 6.2 Client → xnginx → Data Agent
 
 ```json
-POST /GetTagValueText/12
+POST /ua/GetTagValueText/12
 Headers: { "csrfToken": "<token>" }
 {
   "Tags": [{ "Name": "Line1.Temp" }]
@@ -518,10 +527,10 @@ Headers: { "csrfToken": "<token>" }
 }
 ```
 
-### 6.3 Client → History Agent
+### 6.3 Client → xnginx → History Agent
 
 ```json
-POST /GetDataLog/12
+POST /uadb/GetDataLog/12
 {
   "StartTime": "2026-11-19 00:00:00",
   "IntervalType": "M",
@@ -532,15 +541,15 @@ POST /GetDataLog/12
 }
 ```
 
-### 6.4 Client → Alarm Agent
+### 6.4 Client → xnginx → Alarm Agent
 
 ```json
-POST /api/alarm/list
+POST /uaam/api/alarm/list
 { "csrfToken": "<token>", "projid": 12 }
 ```
 
 ```json
-POST /api/alarm/ack
+POST /uaam/api/alarm/ack
 {
   "csrfToken": "<token>",
   "alarmid": [123],
@@ -642,15 +651,16 @@ Authorization: Bearer <internal-service-token>
 | NFR-OPC-013~014 | OPC UA 1.04 SDK、時間格式/UTC |
 | NFR-OPC-015~020 | 資源限制、備份、分層、模擬、表單驗證、文件 |
 
-## 8. Client 直連資料源設計（重要）
+## 8. Client 直連資料源設計（邏輯直連／xnginx）
 
 ### 8.1 為什麼直連
 
-Viewer/Preview 的即時 Tag 值與歷史 Tag 值由 Client **直接**呼叫 Data Agent，不經 Runtime Proxy。優點：
+Viewer/Preview 的即時 Tag 值與歷史 Tag 值由 Client **直接**呼叫 Data Agent（不經 Runtime Proxy）。**實體路徑**為 Client → xnginx `/ua`、`/uadb`、`/uaam` → Data/Alarm Agent；這是「邏輯直連」，避免多一層 Proxy，同時保留 xnginx 的 TLS/路由/限流。優點：
 
-1. 少一層轉發，值更新更即時。
+1. 不經 Runtime Proxy，值更新更即時。
 2. Proxy 不需承擔高頻 Tag 查詢。
 3. 歷史查詢可獨立擴充 History Agent。
+4. 對外僅開 xnginx `8880/8881`，Agent 維持 loopback。
 
 ### 8.2 Client 端實作
 
@@ -660,21 +670,22 @@ Viewer/Preview 的即時 Tag 值與歷史 Tag 值由 Client **直接**呼叫 Dat
 | `ui/component/datasource/Opcua.qml` | `getTagValue` → `tagvaluetext`；`getNodeList`/`getTagList`/`getTagAry` |
 | `Common/WADataSourceManager.qml` | `connect(dbID)` 讀 `DataSourceBody`；`dataValueCache`；33 ms 批次；`Global.treetimer` 週期掃描 |
 | `ui/component/chart/ChartWidgetHelper.qml` | `getRawDataLog`/`getDataLog` → History Agent |
-| `Common/Api/ws/OpcuaalarmsummaryController.qml` | 警報摘要仍走 Runtime Proxy WebSocket |
+| `Common/Api/ws/OpcuaalarmsummaryController.qml` | 警報摘要仍走 Runtime Proxy WebSocket（xnginx `/ws`） |
 
 ### 8.3 URL 規則
 
 ```mermaid
 flowchart TB
     A["DataSourceBody<br/>ip/port/dbport/alarmport/protocol"] --> B{"serverInfo.pathname == '/' ?"}
-    B -->|是| C["http://ip:port<br/>http://ip:dbport<br/>http://ip:alarmport"]
-    B -->|否| D["opcuaUrlPrefix = protocol//host/ua<br/>dburl = /ua + db<br/>alarmurl = /ua + am"]
+    B -->|是（無 xnginx，legacy）| C["http://ip:port<br/>http://ip:dbport<br/>http://ip:alarmport"]
+    B -->|否（標準：xnginx）| D["opcuaUrlPrefix = protocol//host/ua<br/>dburl = /ua + db<br/>alarmurl = /ua + am"]
 ```
 
-- 即時：`POST {url}/GetTagValueText/{projid}`
-- 歷史：`POST {dburl}/GetDataLog/{projid}` 或 `/GetRawDataLog/{projid}`
-- 警報：`{alarmurl}/api/alarm/*`
+- 即時：`POST {url}/GetTagValueText/{projid}` → xnginx `/ua/`
+- 歷史：`POST {dburl}/GetDataLog/{projid}` 或 `/GetRawDataLog/{projid}` → xnginx `/uadb/`
+- 警報：`{alarmurl}/api/alarm/*` → xnginx `/uaam/`
 - 認證：`csrfToken` header；同 Metadata Session Cookie。
+- 僅在**無 xnginx 的根路徑部署**才直接使用 `DataSourceBody.ip/port/dbport/alarmport`。
 
 ### 8.4 更新週期
 
@@ -694,12 +705,12 @@ flowchart TB
 
 | 資料 | 路徑 | 備註 |
 |------|------|------|
-| OPC UA 即時 Tag | Client → Data Agent `:28886` | 直連 |
-| OPC UA 歷史 Tag | Client → History Agent `:28887` | 直連 |
-| OPC UA 警報清單/歷史/Ack | Client → Alarm Agent `:28889` | 直連 |
-| OPC UA 警報摘要（WS） | Client → Runtime Proxy → Alarm Agent | `opcuaalarmsummary` |
-| Record/第三方 DB 查詢 | Client → Runtime Proxy | 不變 |
-| 設定/專案/Tag 定義 | Client → Metadata | 不變 |
+| OPC UA 即時 Tag | Client → xnginx `/ua` → Data Agent `:28886` | 邏輯直連 |
+| OPC UA 歷史 Tag | Client → xnginx `/uadb` → History Agent `:28887` | 邏輯直連 |
+| OPC UA 警報清單/歷史/Ack | Client → xnginx `/uaam` → Alarm Agent `:28889` | 邏輯直連 |
+| OPC UA 警報摘要（WS） | Client → xnginx `/ws` → Runtime Proxy → Alarm Agent | `opcuaalarmsummary` |
+| Record/第三方 DB 查詢 | Client → xnginx `/wxproxy` → Runtime Proxy | 不變 |
+| 設定/專案/Tag 定義 | Client → xnginx `/sc` → Metadata | 不變 |
 
 > Runtime Proxy 仍保留 `opcuaalarmsummary`，用於既有 Widget 的摘要訂閱；**不承載即時/歷史 Tag 值**。
 
@@ -732,7 +743,7 @@ sequenceDiagram
     M->>DB: OPCUA_Tag
 ```
 
-### 10.2 Viewer 即時值（直連）
+### 10.2 Viewer 即時值（經 xnginx）
 
 ```mermaid
 sequenceDiagram
@@ -745,7 +756,7 @@ sequenceDiagram
     D-->>C: Values/Quality
 ```
 
-### 10.3 歷史趨勢（直連）
+### 10.3 歷史趨勢（經 xnginx）
 
 ```mermaid
 sequenceDiagram
@@ -782,9 +793,9 @@ stateDiagram-v2
 | Data Agent Runtime | `isHistory=false` | 28886 |
 | Data Agent History | `isHistory=true` | 28887 |
 | Alarm Agent | `config.yaml` | 28889 |
-| UI | Nginx 靜態 | 80/443 |
+| UI | xnginx 靜態/路由 | 8880/8881 |
 
-### 11.2 Nginx/Ingress 路由
+### 11.2 xnginx（地端）/ K8s Ingress（BI）路由
 
 | 路徑 | 目標 |
 |------|------|
@@ -794,6 +805,9 @@ stateDiagram-v2
 | `/uadb/*` | History Agent `:28887` |
 | `/uaam/*` | Alarm Agent `:28889` |
 | `/wxproxy/*`、`/ws/so` | Runtime Proxy `:28884` |
+| `/system/*` | system `:28888` |
+
+> 地端路徑 `http(s)://<EVS>:8880|8881` 由 xnginx 提供。EdgeHub/BI 例外：Client 走 K8s Ingress `wxproxy<suffix>`，不由地端 xnginx 代理。
 
 - WebSocket 需 `proxy_http_version 1.1`、`Upgrade`/`Connection`。
 - Body 大小依歷史/憑證需求調整。
@@ -838,7 +852,7 @@ stateDiagram-v2
 | FR-OPC-001~012 | §3 |
 | FR-OPC-013~027 | §4 |
 | FR-OPC-028~045 | §5 |
-| IF-OPC-001~010 | §6 |
+| IF-OPC-001~011 | §6 |
 | NFR-OPC-001~020 | §7、§11 |
 | Client 直連 | §8 |
 | 安全 | §9 |

@@ -29,7 +29,7 @@ Metadata Service 是 EdgeView 的**設定與管理中樞**，提供專案、畫�
 | 稽核/日誌 | `/api/auditlog/*`、`/api/logmaint/*` | `AuditLogController`、`MaintenanceController` |
 | 授權/版本/系統 | `/api/about`、`/api/license`、`/api/sysstatus` | 系統服務 |
 
-完整路由目錄見 SDS-07。
+完整路由目錄見 SDS-07。地端對外路徑為 `/sc/api/*`（xnginx `/sc` → Metadata `28883`）；BI 模式經 K8s Ingress。
 
 ## 2. 啟動流程
 

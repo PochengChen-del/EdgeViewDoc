@@ -11,8 +11,9 @@
 | OPC UA Alarm Agent | `wxalarmagent` / `.exe` | Linux、Windows | Go 靜態執行檔 |
 | OPC UA 設定 UI | `dist/`（Vue build） | 靜態（Nginx） | `/sc/opcua/` |
 | 安裝/授權工具 | `wxlic`、`activate.enc`、`graphix.lic` | 伺服器主機 | 手冊 §1.5.4 |
+| xnginx | `xnginx` + `_nginx` | 主機（Windows/Linux） | 地端 `8880/8881`、TLS、路由、限流、服務監督 |
+| K8s Ingress | Nginx Ingress | K8s | 僅 EdgeHub/BI、TLS、body 75M、WebSocket |
 | PostgreSQL | 外部/內建 | — | `waxconfig`、`waxalarm`、Session |
-| Ingress | Nginx | K8s | TLS、body 75M、長連線、WebSocket |
 
 ## 2. 參考部署拓撲
 
@@ -23,16 +24,18 @@ flowchart TB
         M[Mobile]
         W[Browser WASM]
     end
-    subgraph K8s["Kubernetes"]
-        ING[Ingress<br/>TLS / 75M / 3600s]
-        MS[Service wxmetadata:80]
-        PS[Service wxproxy:80]
-        MD[Deployment wxmetadata<br/>:28883 ×1]
-        PD[Deployment wxproxy<br/>:28884 ×1]
-        AD[Deployment opcua-agent<br/>Runtime :28886]
-        HD[Deployment opcua-history<br/>:28887]
-        LD[Deployment opcua-alarm<br/>:28889]
-        UD[Deployment opcua-ui<br/>static]
+    subgraph Local["地端主機"]
+        NG[xnginx<br/>8880/8881]
+        MD[Metadata<br/>:28883]
+        PD[Runtime Proxy<br/>:28884]
+        AD[OPC UA Agent<br/>:28886]
+        HD[OPC UA History<br/>:28887]
+        LD[OPC UA Alarm<br/>:28889]
+        SYS[system<br/>:28888]
+    end
+    subgraph K8s["Kubernetes / 雲端"]
+        ING[K8s Ingress<br/>TLS / 75M / 3600s]
+        EH[wxproxy / Edge365]
     end
     subgraph Data["資料層"]
         PG[(PostgreSQL<br/>waxconfig/waxalarm)]
@@ -40,20 +43,23 @@ flowchart TB
     end
     subgraph Ext["外部"]
         WA[WebAccess]
-        EH[Edge365]
         OPC[OPC UA Server]
         X[X]
         FCM[Firebase]
     end
-    D --> ING
-    M --> ING
-    W --> ING
-    ING --> MS --> MD
-    ING --> PS --> PD
-    ING --> AD
-    ING --> HD
-    ING --> LD
-    ING --> UD
+    D -->|地端| NG
+    M -->|地端| NG
+    W -->|地端| NG
+    D -->|BI| ING
+    M -->|BI| ING
+    W -->|BI| ING
+    ING --> EH
+    NG --> MD
+    NG --> PD
+    NG --> AD
+    NG --> HD
+    NG --> LD
+    NG --> SYS
     MD --> PG
     PD --> PG
     AD --> PG
@@ -61,9 +67,7 @@ flowchart TB
     LD --> PG
     PD --> EXT
     MD --> WA
-    MD --> EH
     PD --> WA
-    PD --> EH
     PD --> X
     PD --> FCM
     AD --> OPC
@@ -88,15 +92,30 @@ flowchart TB
 
 | 元件 | 設定 | 埠 | 備註 |
 |------|------|----|------|
+| xnginx | `xnginx.opcua.yaml` | 8880/8881 | `/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam` |
 | Data Agent Runtime | `isHistory=false` | 28886 | 即時/寫值/瀏覽/憑證 |
 | Data Agent History | `isHistory=true` | 28887 | 歷史查詢 |
 | Alarm Agent | `config.yaml` | 28889 | 需 `waxalarm` |
-| UI | `VUE_APP_PUBPATH=/sc/opcua/` | 80/443 | 靜態 SPA |
+| UI | `VUE_APP_PUBPATH=/sc/opcua/` | 8880/8881 | xnginx 靜態/路由 |
 | OPC UA Server | 現場 | 依設定 | 可加密 |
 
 - Runtime/History 使用同一映像，以不同 `appsettings.json`/`isHistory` 啟動。
 - Alarm Agent 與 Data Agent 需共用 `waxconfig` 與 `aes_secret`（Session/Bearer）。
-- Client 需能直連 `/ua`、`/uadb`、`/uaam` 或對應主機連接埠。
+- Client 只連 xnginx `/ua`、`/uadb`、`/uaam`，不直連 28886/28887/28889。
+
+### 2.3 xnginx 設定變體
+
+| 檔案 | datasource | apps（反向代理） | 備註 |
+|------|------------|-------------------|------|
+| `xnginx.yaml` | 1 WebAccess | `sc`、`wxproxy`、`system`（`wxlog` no proxy） | 基礎/預設 |
+| `xnginx.webaccess.yaml` | 1 WebAccess | `sc`、`wxproxy`、`system` | WebAccess 專用 |
+| `xnginx.opcua.yaml` | 3 OPC UA | `sc`、`ua`、`uadb`、`uaam`、`wxproxy`、`system` | OPC UA 全套 |
+| `xnginx.x.yaml` | 4 X | `waxconfig`、`waxapi`、`waxnotify`、`sc`、`wxproxy` | 僅 HTTPS `8881`；無 system |
+
+- `xnginx` 會依 `apps[].app_name` 產生 `/sc/`、`/wxproxy/`、`/ua/`、`/uadb/`、`/uaam/`、`/ws/`、`/system/` location 與 upstream。
+- `nginx.net.http.port=8880`、`https.port=8881`；`websocket: true` 的 app 產生 `/ws/` Upgrade 設定。
+- `ratelimit` 產生 `limit_req_zone`；`no_reverse_proxy: true`（`wxlog`）不建立 upstream。
+- `xnginx` 同時負責啟動/監督 `WxMetaService`、`wxproxy`、`wax_opcua_agent`、`wxalarmagent`。
 
 ## 3. 容器映像
 
@@ -138,17 +157,17 @@ flowchart TB
 | resources.limits | 256Mi / 60m / 256Mi | 同左 |
 | env | `ENSAAS_SERVICES`、`exdomain`、`DC_PORTAL_URL`、`API_DBMASTER_URL`、授權、ETCD、iapp | `ENSAAS_SERVICES`、`exdomain`、`DC_PORTAL_URL`、`API_DBMASTER_URL`、`API_ALARM_URL`、`APPS` |
 
-### 4.2 Service / Ingress
+### 4.2 Service / Ingress（BI）與 xnginx（地端）
 
-| 項目 | 設定 |
-|------|------|
-| Service | ClusterIP，port 80 → targetPort |
-| Ingress path | Prefix `/.*` |
-| body | 75 MB |
-| timeout | 3600 秒（WS） |
-| CORS | 允許特定來源與憑證 |
-| TLS | 由 Ingress/憑證管理 |
-| Rate limit | on-prem xnginx：每個 app `limit_req_zone` + `limit_req`；預設 `4090r/s`、burst 256 |
+| 項目 | K8s Ingress（BI） | xnginx（地端） |
+|------|-------------------|----------------|
+| 入口 | ClusterIP + Ingress | `8880`/`8881` |
+| 路徑 | `/.*` 或 `wxproxy` 前綴 | `/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam`、`/system` |
+| body | 75 MB | 無限制（`client_max_body_size 0`） |
+| timeout | 3600 秒（WS） | connect 300s、read/send 300s、keepalive 6000s |
+| TLS | Ingress/憑證管理 | `_cert` PEM/PFX |
+| Rate limit | 需補 annotation | 每個 app `limit_req_zone`；`4090r/s`、burst 256 |
+| WebSocket | Ingress annotation | `/ws/` Upgrade/Connection |
 
 > 目前 `proxy_set_header Origin ""` 與寬鬆 CORS 需依安全政策收斂。
 >
@@ -170,6 +189,7 @@ flowchart TB
 |------|------|------|
 | Metadata | `config.yaml` | 網路、DB、整合、授權 |
 | Runtime | `config.yaml` | 網路、資料源、告警、FCM |
+| xnginx | `xnginx*.yaml` | `nginx.net`、`apps`、`envs`、`datasource` |
 | 兩者 | 環境變數 | 覆寫敏感/環境值 |
 | 兩者 | 命令列旗標 | 臨時覆寫 |
 
@@ -215,17 +235,19 @@ flowchart TB
 
 | 服務 | Port | 方向 |
 |------|------|------|
-| Metadata HTTP | 28883 | Ingress → Pod |
-| Metadata HTTPS | 可設定（預設 -1） | — |
-| Runtime HTTP | 28884 | Ingress → Pod |
-| Runtime WS | 28884 `/so`（BI `/`） | Client → Ingress |
-| PostgreSQL | 5436/5432 | Pod → DB |
-| OPC UA Data Agent Runtime | 28886 | Client/Ingress → `/ua` |
-| OPC UA Data Agent History | 28887 | Client/Ingress → `/uadb` |
-| OPC UA Alarm Agent | 28889 | Client/Ingress → `/uaam` |
-| OPC UA Server | 依現場 | Pod → OPC UA |
-| OPC UA 設定 UI | 80/443 | `/sc/opcua/` |
-| Edge365 | 443/80 | Pod → 外部 |
+| xnginx HTTP/HTTPS | 8880/8881 | Client → xnginx（地端） |
+| Metadata HTTP | 28883 | xnginx → Metadata |
+| Runtime HTTP | 28884 | xnginx → Runtime |
+| Runtime WS | 28884 `/so` | xnginx `/ws` → Runtime |
+| PostgreSQL | 5436/5432 | 服務 → DB |
+| OPC UA Data Agent Runtime | 28886 | xnginx `/ua` → Agent |
+| OPC UA Data Agent History | 28887 | xnginx `/uadb` → History |
+| OPC UA Alarm Agent | 28889 | xnginx `/uaam` → Alarm |
+| 服務管理 system | 28888 | xnginx `/system` |
+| OPC UA Server | 依現場 | Agent → OPC UA |
+| OPC UA 設定 UI | 8880/8881 | `/sc/opcua/` |
+| K8s Ingress（BI） | 443 | Client → Ingress → `wxproxy`/Edge365 |
+| Edge365 | 443/80 | 服務 → 外部 |
 | Firebase | 443 | Pod → 外部 |
 
 ## 7. 日誌與監控

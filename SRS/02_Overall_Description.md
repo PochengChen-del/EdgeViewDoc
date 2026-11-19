@@ -2,7 +2,13 @@
 
 ## 1. 產品定位（Product Perspective）
 
-EdgeView 是 WebAccess/SCADA X 生態系中的圖控前端與執行平台。Client 以 Qt 6/QML 建構，可在桌面、行動裝置與瀏覽器（WebAssembly）執行；後端由 Metadata Service、Runtime Proxy 兩個 Go 服務，以及 OPC UA Data Agent（C#）、OPC UA Alarm Agent（Go）與 OPC UA 設定 UI（Vue）組成。設定資料存於 PostgreSQL，Client 透過 HTTP REST/WebSocket 取得設定與 Record 資料，並**直接**向 OPC UA Data Agent 取得即時/歷史 Tag 值。
+EdgeView 是 WebAccess/SCADA X 生態系中的圖控前端與執行平台。Client 以 Qt 6/QML 建構，可在桌面、行動裝置與瀏覽器（WebAssembly）執行；後端由 **xnginx reverse proxy**、Metadata Service、Runtime Proxy、OPC UA Data Agent（C#）、OPC UA Alarm Agent（Go）與 OPC UA 設定 UI（Vue）組成。
+
+連線路徑：
+
+- **EdgeHub/BI（雲端）**：Client 透過 **K8s Ingress** 連線 `wxproxy<suffix>`／Edge365。
+- **WebAccess/OPC UA/X（地端）**：Client 透過 **xnginx**（`8880`/`8881`）路由到 Metadata `/sc`、Runtime `/wxproxy`、Data Agent `/ua`、`/uadb`、Alarm `/uaam`。
+- Client 對 OPC UA Agent 是**邏輯直連**（不經 Runtime Proxy），實體經 xnginx。
 
 ```mermaid
 flowchart TB
@@ -15,22 +21,31 @@ flowchart TB
 
     subgraph EdgeView["EdgeView"]
         Client[Client<br/>Designer / Viewer]
+        NG[xnginx<br/>8880 / 8881]
         Meta[Metadata Service<br/>:28883]
         Proxy[Runtime Proxy<br/>:28884]
         Agent[OPC UA Data Agent<br/>Runtime :28886 / History :28887]
         Alarm[OPC UA Alarm Agent<br/>:28889]
         UI[OPC UA 設定 UI<br/>/sc/opcua]
         DB[(PostgreSQL<br/>waxconfig / waxalarm)]
-        Client --> Meta
-        Client --> Proxy
-        Client -->|即時/歷史 Tag| Agent
-        Client -->|警報清單/歷史/Ack| Alarm
-        UI --> Meta
+        Client -->|地端| NG
+        UI --> NG
+        NG --> Meta
+        NG --> Proxy
+        NG -->|/ua、/uadb| Agent
+        NG -->|/uaam| Alarm
         Meta --> DB
         Proxy --> DB
         Agent --> DB
         Alarm --> DB
     end
+
+    subgraph Cloud["EdgeHub / BI（雲端）"]
+        ING[K8s Ingress]
+        CloudSvc[wxproxy / Edge365]
+        ING --> CloudSvc
+    end
+    Client -->|BI| ING
 
     subgraph External["外部系統"]
         WA[WebAccess]
@@ -65,11 +80,13 @@ flowchart TB
 
 | 介面 | 方向 | 協定 | 說明 |
 |------|------|------|------|
-| Client ↔ Metadata Service | 雙向 | HTTP/HTTPS REST、Cookie Session | 設定、專案、使用者、授權、OPC UA、匯入匯出 |
-| Client ↔ Runtime Proxy | 雙向 | HTTP/HTTPS REST、WebSocket | Record 查詢、Record 即時資料、告警摘要、系統資訊 |
-| Client ↔ OPC UA Data Agent | 雙向 | HTTP/HTTPS REST | 即時 Tag 值、歷史 Tag 值、寫值、Tag 明細、瀏覽 |
-| Client ↔ OPC UA Alarm Agent | 雙向 | HTTP/HTTPS REST | 警報清單、歷史、Ack/Process、歷程 |
-| OPC UA 設定 UI ↔ Metadata | 雙向 | HTTP/HTTPS REST | OPC UA 專案/連線/Tag/警報/使用者設定 |
+| Client ↔ xnginx | 雙向 | HTTP/HTTPS | 地端統一入口；`/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam` |
+| Client ↔ K8s Ingress | 雙向 | HTTPS | EdgeHub/BI 雲端；`/apihub`、`/dbmaster`、`/alarm` |
+| xnginx ↔ Metadata | 雙向 | HTTP | `/sc` → `28883` |
+| xnginx ↔ Runtime Proxy | 雙向 | HTTP/WS | `/wxproxy`、`/ws` → `28884` |
+| xnginx ↔ OPC UA Data Agent | 雙向 | HTTP | `/ua`、`/uadb` → `28886`/`28887` |
+| xnginx ↔ OPC UA Alarm Agent | 雙向 | HTTP | `/uaam` → `28889` |
+| OPC UA 設定 UI ↔ xnginx ↔ Metadata | 雙向 | HTTP/HTTPS REST | `/sc/opcua`、`/sc/api` |
 | Metadata ↔ PostgreSQL | 雙向 | PostgreSQL wire protocol | 設定資料、Session、稽核 |
 | Runtime ↔ PostgreSQL | 雙向 | PostgreSQL wire protocol | Record 定義、資料來源設定、Session、FCM |
 | Runtime ↔ 第三方 DB | 唯讀/讀寫 | 各 DB 原生協定 | Record 查詢、Datalog、配方資料 |
@@ -131,6 +148,16 @@ flowchart TB
 | 代理 | Edge365 apihub/dbmaster/alarm 反向代理、`/fw` HTTP 代理 |
 | 通知 | 警報通知輪詢、Firebase 推播 |
 
+### 2.3.1 xnginx 地端入口
+
+| 群組 | 主要功能 |
+|------|----------|
+| 路由 | `/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam`、`/system` |
+| 安全 | TLS `8881`、HTTP `8880`、限流、CORS/Cache 標頭 |
+| 服務監督 | 啟動/重啟 Metadata、Runtime、Data Agent、Alarm、wxlog |
+| 設定變體 | `xnginx.yaml`、`xnginx.webaccess.yaml`、`xnginx.opcua.yaml`、`xnginx.x.yaml` |
+| BI 例外 | EdgeHub/BI 走 K8s Ingress，不使用地端 xnginx |
+
 ### 2.4 OPC UA 子系統
 
 | 群組 | 主要功能 |
@@ -139,7 +166,7 @@ flowchart TB
 | Data Agent（Runtime） | 即時值、寫值、Tag 明細、瀏覽、憑證、Alarm 欄位轉發、常數/計算/累計/系統測點 |
 | Data Agent（History） | 聚合歷史（GetDataLog）、原始歷史（GetRawDataLog） |
 | Alarm Agent | 規則編譯、條件評估、優先級、雙狀態機、Ack/Process/Lock、警報清單/歷史/歷程、模擬、重載 |
-| 直連資料源 | Client Viewer/Preview 直接呼叫 Data Agent 取得即時/歷史 Tag 值，不經 Runtime Proxy |
+| 直連資料源 | Client Viewer/Preview 邏輯直連 Data Agent 取得即時/歷史 Tag 值（不經 Runtime Proxy），地端經 xnginx `/ua`、`/uadb` |
 
 > OPC UA 子系統的完整需求見 `SRS/07_OPCUA_Subsystem.md`。
 
@@ -203,13 +230,13 @@ flowchart TB
 ### 5.1 限制
 
 1. 伺服器端設定資料庫以 PostgreSQL 為唯一支援的設定儲存。
-2. Metadata Service 與 Runtime Proxy 為獨立進程，預設僅綁定 loopback，需透過 Ingress/反向代理對外。
+2. Metadata Service、Runtime Proxy、OPC UA Data/Alarm Agent 預設僅綁定 loopback；地端透過 xnginx `8880/8881` 對外，EdgeHub/BI 透過 K8s Ingress。
 3. Client 的 Designer 與 Viewer 為同一執行檔（`gc-designer`），以 `openMode` 區分。
 4. 資料來源若為 WebAccess/EdgeHub/X/OPC UA，需對應平台可用且網路可達。
-5. OPC UA 即時/歷史 Tag 值由 Client 直連 Data Agent（`:28886`/`:28887`）；Client 需能直接連線該位址或經 Ingress `/ua`、`/uadb`。
+5. OPC UA 即時/歷史 Tag 值由 Client 邏輯直連 Data Agent；實體經 xnginx `/ua`、`/uadb`，Client 不需直連 `28886`/`28887`。
 6. OPC UA 歷史查詢需 OPC UA Server 支援 Historical Access。
 7. OPC UA 設定 UI 需能連線 Metadata Service（`/sc/api`），且 `graphic` 角色不得進入設定頁。
-8. 瀏覽器（WASM）模式部分原生能力（檔案系統、Session 監控、Crashpad）不可用；直連 Data Agent 需正確 CORS/Cookie。
+8. 瀏覽器（WASM）模式部分原生能力（檔案系統、Session 監控、Crashpad）不可用；經 xnginx 直連 Data Agent 需正確 CORS/Cookie。
 9. 既有程式碼中 MQTT Client 功能停用；ODBC 資料源未實作。
 10. 所有 REST/WS 請求需符合封包時間戳防重放（`packetTimestamp`，預設 300 秒容差）；Data Agent 目前未實際強制，見 SDS-14。
 
@@ -227,6 +254,8 @@ flowchart TB
 
 | 相依項目 | 影響 |
 |----------|------|
+| xnginx | 地端 Client 入口、TLS、路由、限流、服務監督 |
+| K8s Ingress | EdgeHub/BI 雲端入口 |
 | PostgreSQL | 設定、Session、稽核、Record 定義；不可用時後端無法啟動 |
 | OPC UA Data Agent | OPC UA 即時/歷史值、寫值、Tag 明細、瀏覽 |
 | OPC UA Alarm Agent | OPC UA 警報清單/歷史/Ack |
@@ -242,7 +271,7 @@ flowchart TB
 - Client 以 QML 為主要 UI 技術，C++ 提供控制器、渲染與 I/O。
 - 後端以 Go + Gin 實作（Metadata/Runtime/Alarm），採 controller/service/model/repository 分層；Data Agent 以 C# ASP.NET Core 實作。
 - 設定資料以 PostgreSQL 關聯表 + JSONB 混合儲存；OPC UA 警報 runtime 使用獨立 `waxalarm` 資料庫。
-- OPC UA 即時/歷史值由 Client 直連 Data Agent；Runtime Proxy 僅處理 Record、摘要與代理。
+- OPC UA 即時/歷史值由 Client 邏輯直連 Data Agent（地端經 xnginx）；Runtime Proxy 僅處理 Record、摘要與代理。
 - 密碼與敏感資料處理需符合既有機制（詳見 SDS-08）。
 - 國際化以 Qt `.ts/.qm` 與伺服器字型/i18n 設定為基礎。
 

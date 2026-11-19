@@ -7,8 +7,8 @@
 | 項目 | 內容 |
 |------|------|
 | 產品名稱 | EdgeView（HMI/SCADA 圖控設計與執行平台） |
-| 文件版本 | 1.2 |
-| 文件狀態 | 增修（加入 OPC UA 子系統、Client 直連資料源、使用手冊需求） |
+| 文件版本 | 1.3 |
+| 文件狀態 | 增修（OPC UA、使用手冊、xnginx 地端入口與 K8s Ingress 分流） |
 | 文件語言 | 繁體中文（技術名詞保留英文原文） |
 | 整理日期 | 2026-11-19 |
 | 適用對象 | 產品經理、系統分析師、前後端工程師、測試工程師、DevOps、資安與稽核人員 |
@@ -23,6 +23,7 @@
 | OPC UA 設定 UI | OPC UA 專案/連線/Tag/警報/使用者設定 | `wax_opcua_agent_ui` | Vue 2.7 / Vue Router / Vuex / Axios |
 | OPC UA Data Agent | OPC UA 連線、即時值、寫值、歷史值、瀏覽、憑證 | `wax_opcua_agent`（`wax_opcua_agent/wax_opcua_agent`） | C# / ASP.NET Core / OPC UA .NET SDK |
 | OPC UA Alarm Agent | 警報規則編譯、條件評估、操作員流程、警報 API | `wax_opcua_alarm_agent` | Go / Gin / PostgreSQL |
+| xnginx 反向代理 | 地端入口、TLS、路由、限流、服務監督 | `wax_nginx_ingress` | Go + Nginx |
 
 ### 1.2 參考文件
 
@@ -35,6 +36,7 @@
 - `wax_opcua_agent\wax_opcua_agent\appsettings.json`、`Controllers/`：Data Agent 設定與端點。
 - `wax_opcua_agent_ui\package.json`、`src/`：設定 UI 技術與頁面。
 - [EdgeView 使用手冊（V4.2.x）](https://docs.google.com/document/d/1wa5-USVLF3dqyzATGt5GqrGQ8WzIPASZmo5GLartUq0/edit)：安裝、連線、繪圖、控件、變數、腳本、事件、動畫、模型、工程配置、使用者、插件。
+- `wax_nginx_ingress\xnginx.yaml`：主設定；`xnginx.webaccess.yaml`、`xnginx.opcua.yaml`、`xnginx.x.yaml`：依 datasource 的變體。
 
 ## 2. 系統定位摘要
 
@@ -47,10 +49,15 @@ flowchart LR
         V[Viewer / Preview 執行模式]
     end
     subgraph Backend["EdgeView Server"]
+        NG[xnginx<br/>8880 / 8881]
         M[Metadata Service<br/>設定 / 授權 / 專案]
         R[Runtime Proxy<br/>Record / 摘要 / 代理]
         A[OPC UA Data Agent<br/>Runtime :28886<br/>History :28887]
         L[OPC UA Alarm Agent<br/>:28889]
+    end
+    subgraph Cloud["EdgeHub / BI 雲端"]
+        ING[K8s Ingress]
+        EH[wxproxy / Edge365]
     end
     subgraph UI["設定層"]
         U[OPC UA 設定 UI<br/>Vue /sc/opcua]
@@ -60,17 +67,19 @@ flowchart LR
         DB[(第三方資料庫<br/>SQLServer/MySQL/Oracle/PostgreSQL)]
         TS[(InfluxDB v1/v2)]
         OPC[OPC UA Server]
-        EH[Edge365 / EdgeHub]
         FCM[Firebase FCM]
     end
 
-    U -->|/sc/api| M
-    D -->|HTTP REST / WS| M
-    V -->|HTTP REST / WS| M
-    D -->|HTTP REST / WS| R
-    V -->|HTTP REST / WS| R
-    V -->|GetTagValueText / GetDataLog| A
-    V -->|alarm list/log/ack| L
+    U -->|/sc/opcua、/sc/api| NG
+    D -->|地端：/sc、/wxproxy| NG
+    V -->|地端：/sc、/wxproxy、/ws、/ua、/uadb、/uaam| NG
+    D -->|BI：K8s Ingress| ING
+    V -->|BI：K8s Ingress| ING
+    ING --> EH
+    NG --> M
+    NG --> R
+    NG --> A
+    NG --> L
     M --> PG
     R --> PG
     R --> DB
@@ -84,12 +93,14 @@ flowchart LR
 ```
 
 - **Designer**：專案/畫面設計、Widget 屬性編輯、Tag/Variable/Record 綁定、事件腳本、動畫、3D 場景、匯入匯出、使用者與系統設定。
-- **Viewer**：載入已設計畫面，透過 WebSocket 接收 Record/告警摘要，並**直接**向 OPC UA Data Agent 取得即時與歷史 Tag 值（不經 Runtime Proxy），提供操作、巡邏、縮放、通訊狀態與資料來源狀態。直連使 OPC UA 值更新更即時。
+- **Viewer**：載入已設計畫面，透過 WebSocket 接收 Record/告警摘要，並**邏輯直連** OPC UA Data Agent 取得即時與歷史 Tag 值（不經 Runtime Proxy）；地端實體路徑為 Client → xnginx `/ua`、`/uadb`、`/uaam` → Agent。直連使 OPC UA 值更新更即時。
 - **Metadata Service**：提供設定 API 與授權（登入、Session、CSRF、專案權限），管理專案物件樹、Display、Variable、DataModel、Record、Recipe、Alarm、User/Group、OPC UA 組態、系統設定、稽核與匯入匯出。
 - **Runtime Proxy**：提供 Record 查詢/預覽/分頁、Datalog 歷史查詢、WebSocket Record 即時資料與告警摘要、Edge365 反向代理、Firebase 推播；**不承載 OPC UA 即時/歷史 Tag 值**。
 - **OPC UA 設定 UI**：OPC UA 專案、連線、Tag、常數/計算/系統測點、警報規則、使用者與權限設定。
 - **OPC UA Data Agent**：Runtime 與 History 兩種角色，提供即時值、寫值、歷史值、Tag 明細、瀏覽、憑證與測點計算。
 - **OPC UA Alarm Agent**：告警規則編譯、條件評估、雙狀態機、Ack/Process、警報清單/歷史。
+- **xnginx**：地端反向代理/服務監督；`8880/8881`，路由 `/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam`、`/system`，依 datasource 使用 `xnginx.yaml`、`xnginx.webaccess.yaml`、`xnginx.opcua.yaml`、`xnginx.x.yaml`。
+- **K8s Ingress**：僅 EdgeHub/BI 雲端入口；Client 透過 `wxproxy<suffix>` 連 Edge365。
 
 ## 3. 文件索引
 
@@ -111,7 +122,7 @@ flowchart LR
 | 編號 | 檔案 | 內容 |
 |------|------|------|
 | SDS-01 | [SDS/01_Introduction.md](SDS/01_Introduction.md) | 設計目標、範圍、原則、參考 |
-| SDS-02 | [SDS/02_System_Architecture.md](SDS/02_System_Architecture.md) | 系統架構、元件、部署、技術棧 |
+| SDS-02 | [SDS/02_System_Architecture.md](SDS/02_System_Architecture.md) | 系統架構（xnginx/Ingress 分流）、元件、部署、技術棧 |
 | SDS-03 | [SDS/03_Client_Design.md](SDS/03_Client_Design.md) | Qt/QML Client 詳細設計 |
 | SDS-04 | [SDS/04_Metadata_Service_Design.md](SDS/04_Metadata_Service_Design.md) | Metadata Service 詳細設計 |
 | SDS-05 | [SDS/05_Runtime_Proxy_Design.md](SDS/05_Runtime_Proxy_Design.md) | Runtime Proxy 詳細設計 |
@@ -119,7 +130,7 @@ flowchart LR
 | SDS-07 | [SDS/07_Interface_Design.md](SDS/07_Interface_Design.md) | 完整 REST / WebSocket 介面目錄與錯誤碼 |
 | SDS-08 | [SDS/08_Security_Design.md](SDS/08_Security_Design.md) | 認證、授權、加密、Session、風險 |
 | SDS-09 | [SDS/09_Key_Flows.md](SDS/09_Key_Flows.md) | 關鍵作業循序圖 |
-| SDS-10 | [SDS/10_Deployment_and_Operations.md](SDS/10_Deployment_and_Operations.md) | 組態、連接埠、部署、日誌、維運 |
+| SDS-10 | [SDS/10_Deployment_and_Operations.md](SDS/10_Deployment_and_Operations.md) | xnginx/K8s、組態、連接埠、部署、日誌、維運 |
 | SDS-11 | [SDS/11_Design_Decisions_and_Risks.md](SDS/11_Design_Decisions_and_Risks.md) | 設計取捨、已知限制與技術債 |
 | SDS-12 | [SDS/12_Traceability.md](SDS/12_Traceability.md) | SRS ↔ SDS ↔ 程式碼追溯 |
 | SDS-13 | [SDS/13_Security_Remediation.md](SDS/13_Security_Remediation.md) | R-001/R-002/R-003 修復設計、部署需求與驗收 |
@@ -173,7 +184,8 @@ flowchart LR
 | FCM | Firebase Cloud Messaging |
 | Data Agent | OPC UA 資料代理；Runtime（`:28886`）與 History（`:28887`）兩種角色 |
 | Alarm Agent | OPC UA 警報引擎（`:28889`），管理警報條件、狀態與歷史 |
-| 直連資料源 | Client 直接呼叫 Data Agent 取得即時/歷史 Tag 值，不經 Runtime Proxy |
+| 直連資料源 | Client 邏輯直連 Data Agent（不經 Runtime Proxy）；地端實體經 xnginx `/ua`、`/uadb`、`/uaam` |
+| xnginx | 地端反向代理/服務監督；HTTP 8880／HTTPS 8881；依 datasource 使用不同 yaml |
 | ROC | Rate of Change，變化率警報 |
 | DEV_HI / DEV_LO | 偏差上限/下限警報 |
 

@@ -12,8 +12,8 @@
 
 本子系統與 EdgeView 的關係：
 
-- 設定 UI 不直接連線 OPC UA Server，而是透過 **Metadata Service** 的 OPC UA API 讀寫設定。
-- Client（`wa-hmi-designer`）在 Viewer/Preview 時**直接**呼叫 Data Agent 取得即時值與歷史值，不經 Runtime Proxy。
+- 設定 UI 不直接連線 OPC UA Server，而是經 **xnginx** 呼叫 **Metadata Service** 的 OPC UA API 讀寫設定。
+- Client（`wa-hmi-designer`）在 Viewer/Preview 時**邏輯直連** Data Agent 取得即時值與歷史值（不經 Runtime Proxy）；地端實體經 xnginx `/ua`、`/uadb`、`/uaam`。
 - Alarm Agent 由 Data Agent 輪詢或直接 OPC UA Subscription 取得 Tag 值，並直接提供 Client 警報清單、歷史、Ack/Process API；Runtime Proxy 只讀取警報摘要。
 
 ## 2. 系統定位
@@ -24,6 +24,7 @@ flowchart LR
         Vue[OPC UA 設定 UI<br/>Vue 2]
     end
     subgraph EdgeView["EdgeView Server"]
+        NG[xnginx<br/>8880/8881]
         Meta[Metadata Service<br/>:28883]
         Proxy[Runtime Proxy<br/>:28884]
         Agent[OPC UA Data Agent<br/> Runtime :28886<br/>History :28887]
@@ -37,11 +38,13 @@ flowchart LR
         UA[OPC UA Server]
     end
 
-    Vue -->|/sc/api| Meta
+    Vue -->|/sc/opcua、/sc/api| NG
+    Client -->|/ua、/uadb、/uaam| NG
+    NG --> Meta
+    NG --> Proxy
+    NG --> Agent
+    NG --> Alarm
     Meta --> DB
-    Client -->|GetTagValueText| Agent
-    Client -->|GetDataLog| Agent
-    Client -->|alarm list/log/ack| Alarm
     Proxy -->|alarm summary| Alarm
     Alarm -->|/GetTagValue| Agent
     Agent --> UA
@@ -53,9 +56,9 @@ flowchart LR
 
 | 邊界 | 說明 |
 |------|------|
-| UI ↔ Metadata | UI 只使用 Metadata OPC UA API；不直接寫 DB |
-| Client ↔ Data Agent | 即時/歷史 Tag 值直連，降低 Proxy 延遲 |
-| Client ↔ Alarm Agent | 警報清單、歷史、Ack/Process 直連 |
+| UI ↔ xnginx ↔ Metadata | UI 只使用 Metadata OPC UA API；不直接寫 DB |
+| Client ↔ Data Agent | 邏輯直連（不經 Proxy），實體經 xnginx `/ua`、`/uadb` |
+| Client ↔ Alarm Agent | 邏輯直連，實體經 xnginx `/uaam` |
 | Runtime Proxy ↔ Alarm Agent | 既有 `opcuaalarmsummary` WebSocket 摘要 |
 | Data Agent ↔ Alarm Agent | Alarm 輪詢 Data Agent 取得評估值 |
 | Data Agent ↔ OPC UA Server | OPC UA binary/TCP（可加密） |
@@ -138,21 +141,22 @@ UI 權限沿用 Metadata Service 的 `role`、`permissions`、`account` Cookie�
 
 | ID | 介面 | 協定 | 說明 |
 |----|------|------|------|
-| IF-OPC-001 | UI ↔ Metadata | HTTPS REST | `/sc/api/opcua/*`、`/sc/api/setting/opcua/*`、`/sc/api/source`、`/sc/api/setting/DataSource/*` |
-| IF-OPC-002 | Client ↔ Data Agent | HTTP/HTTPS | `/GetTagValue*`、`/SetTagValue*`、`/TagDetail`、`/Browse/*` |
-| IF-OPC-003 | Client ↔ History Agent | HTTP/HTTPS | `/GetDataLog`、`/GetRawDataLog` |
-| IF-OPC-004 | Client/Runtime ↔ Alarm Agent | HTTP/HTTPS | `/api/alarm/*`、`/GetTagValue/:projid` |
+| IF-OPC-001 | UI ↔ xnginx ↔ Metadata | HTTPS REST | `/sc/api/opcua/*`、`/sc/api/setting/opcua/*`、`/sc/api/source`、`/sc/api/setting/DataSource/*` |
+| IF-OPC-002 | Client ↔ xnginx ↔ Data Agent | HTTP/HTTPS | `/ua/GetTagValue*`、`/ua/SetTagValue*`、`/ua/TagDetail`、`/ua/Browse/*` |
+| IF-OPC-003 | Client ↔ xnginx ↔ History Agent | HTTP/HTTPS | `/uadb/GetDataLog`、`/uadb/GetRawDataLog` |
+| IF-OPC-004 | Client/Runtime ↔ xnginx ↔ Alarm Agent | HTTP/HTTPS | `/uaam/api/alarm/*`、`/uaam/GetTagValue/:projid` |
 | IF-OPC-005 | Data Agent ↔ OPC UA Server | OPC UA TCP | SecurityMode/Policy、UserIdentity、Certificate |
 | IF-OPC-006 | Data Agent ↔ PostgreSQL | PostgreSQL | `opcua_*` 設定、Session |
 | IF-OPC-007 | Alarm Agent ↔ PostgreSQL | PostgreSQL | `waxalarm` runtime、`waxconfig` 設定/Session |
 | IF-OPC-008 | Alarm Agent ↔ Data Agent | HTTP | 輪詢 `/GetTagValue/{projid}`（Bearer） |
 | IF-OPC-009 | Agent/Alarm ↔ Metadata Session | PostgreSQL/HTTP | 驗證 `graphicSession`/`settingSession` 與 CSRF |
-| IF-OPC-010 | UI 靜態資源 | HTTP | Nginx `/sc/opcua/`；`VUE_APP_PUBPATH`/`VUE_APP_APIROOT` |
+| IF-OPC-010 | UI 靜態資源 | HTTP | xnginx `/sc/opcua/`；`VUE_APP_PUBPATH`/`VUE_APP_APIROOT` |
+| IF-OPC-011 | xnginx | HTTP/HTTPS | `8880/8881`；`/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam` |
 
 ### 5.1 即時值請求範例
 
 ```json
-POST /GetTagValueText/12
+POST /ua/GetTagValueText/12
 Headers: csrfToken: <token>
 {
   "Tags": [
@@ -181,7 +185,7 @@ Headers: csrfToken: <token>
 ### 5.2 歷史值請求範例
 
 ```json
-POST /GetDataLog/12
+POST /uadb/GetDataLog/12
 {
   "StartTime": "2026-11-19 00:00:00",
   "IntervalType": "M",
@@ -230,8 +234,8 @@ POST /GetDataLog/12
 
 ## 8. 限制與假設
 
-1. 設定 UI 依賴 Metadata Service 的 OPC UA API；Metadata 不可用時無法設定。
-2. Client 直連 Data Agent 需網路可達 28886/28887；瀏覽器模式需 CORS/Cookie。
+1. 設定 UI 依賴 xnginx + Metadata Service 的 OPC UA API；Metadata 不可用時無法設定。
+2. Client 邏輯直連 Data Agent，實體經 xnginx `/ua`、`/uadb`、`/uaam`；瀏覽器模式需 CORS/Cookie。
 3. OPC UA Server 需支援 Historical Access 才能查歷史。
 4. 憑證信任需人工於 OPC UA Server 端設定。
 5. Alarm Agent 不提供設定寫入；設定由 Metadata/UI 管理。
@@ -245,5 +249,5 @@ POST /GetDataLog/12
 | FR-OPC-001~012 | SDS-14 §3 |
 | FR-OPC-013~027 | SDS-14 §4 |
 | FR-OPC-028~045 | SDS-14 §5 |
-| IF-OPC-001~010 | SDS-14 §6、SDS-07 |
+| IF-OPC-001~011 | SDS-14 §6、SDS-07 |
 | NFR-OPC-001~020 | SDS-14 §7.4、§11 |

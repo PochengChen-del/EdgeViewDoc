@@ -106,9 +106,9 @@
 
 | 項目 | 內容 |
 |------|------|
-| 決策 | Viewer/Preview 直接呼叫 Data/Arm/Alarm Agent，不經 Runtime Proxy |
+| 決策 | Viewer/Preview 邏輯直連 Data/Alarm Agent，不經 Runtime Proxy；地端實體經 xnginx `/ua`、`/uadb`、`/uaam` |
 | 理由 | 降低延遲、降低 Proxy 負載、歷史可獨立擴充 |
-| 影響 | Client 需可達多個位址；CORS/Cookie/認證需正確 |
+| 影響 | 需維護 xnginx 路由；CORS/Cookie/認證需正確 |
 | 狀態 | 已採用 |
 
 ### ADR-013 Alarm 設定與 runtime 分離
@@ -472,6 +472,16 @@
 | 緩解 | 提供 `/api/alarm/reload`；調整週期 |
 | 狀態 | Accepted |
 
+### R-035 xnginx 設定變體漂移
+
+| 項目 | 內容 |
+|------|------|
+| 嚴重度 | Medium |
+| 證據 | `xnginx.yaml`、`xnginx.webaccess.yaml`、`xnginx.opcua.yaml`、`xnginx.x.yaml` 各自維護 apps/routes |
+| 影響 | 路徑/埠/服務清單不一致，導致 404/500 |
+| 緩解 | 以 `xnginx.yaml` 為基準、設定比對/啟動煙霧測試、文件同步 |
+| 狀態 | Open |
+
 ## 3. 技術債
 
 | 編號 | 項目 | 影響 | 建議 |
@@ -511,7 +521,7 @@ flowchart LR
 | 階段 | 項目 |
 |------|------|
 | P0 | R-001、R-002、R-003、R-006、R-008 已修復；待處理 R-023、R-002-R、R-025、R-026、R-027、R-028 |
-| P1 | R-004、R-005、R-015、R-016、R-018、R-022、R-029、R-030、R-031、R-032 |
+| P1 | R-004、R-005、R-015、R-016、R-018、R-022、R-029、R-030、R-031、R-032、R-035 |
 | P2 | R-010、R-011、R-017、R-021、R-033、R-034、TD-001~008 |
 
 > R-001/R-002/R-003/R-006/R-008/R-009 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-009 原列 P2，已完成修復。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
@@ -544,3 +554,4 @@ flowchart LR
 | R-025~R-028 | NFR-OPC-007~008、NFR-SEC-001~010 |
 | R-029~R-032 | NFR-OPC-001~012 |
 | R-033~R-034 | NFR-OPC-013~020 |
+| R-035 | IF-SW-012、IF-OPC-011、NFR-MNT-001~008 |

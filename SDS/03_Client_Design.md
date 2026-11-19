@@ -406,13 +406,20 @@ flowchart LR
 | `io/http/persistentCookieJar.*` | Cookie 保存 |
 
 - 連線上限 255、佇列 1024、等待 120 秒（Viewer 10 秒）。
-- 常用路徑：`/api/about`、`/api/sysstatus`、`/api/alarm/*`、`/api/datalog/query`、`/api/datamodel/*`、`/api/biproxy`。
-- BI/EdgeHub 代理：`http://<host>:8882/apihub` 或 `https://wxproxy<suffix>/apihub`。
-- OPC UA 直連（不經 Proxy）：
-  - 即時：`{opcuaUrlPrefix}/GetTagValueText/{projid}`
-  - 歷史：`{opcuaUrlPrefix}db/GetDataLog/{projid}`、`/GetRawDataLog/{projid}`
-  - 警報：`{opcuaUrlPrefix}am/api/alarm/*`
-  - `opcuaUrlPrefix` 預設 `protocol//host/ua`；根路徑部署改用 `DataSourceBody` 的 `ip`/`port`/`dbport`/`alarmport`。
+- 地端 URL 以 `http(s)://<EVS>:8880|8881/sc` 為基底；xnginx 再依路徑轉發：
+  - `/sc/*` → Metadata `28883`
+  - `/wxproxy/*` → Runtime Proxy `28884`
+  - `/ws/*` → Runtime Proxy WebSocket
+  - `/ua/*` → OPC UA Data Agent `28886`
+  - `/uadb/*` → OPC UA History `28887`
+  - `/uaam/*` → OPC UA Alarm Agent `28889`
+- 常用 Metadata 路徑：`/api/about`、`/api/sysstatus`、`/api/alarm/*`、`/api/datalog/query`、`/api/datamodel/*`。
+- BI/EdgeHub（雲端）：`http(s)://wxproxy<suffix>/apihub`、`/dbmaster`、`/alarm`，經 K8s Ingress，不使用地端 xnginx。
+- OPC UA 邏輯直連（實體經 xnginx）：
+  - 即時：`{opcuaUrlPrefix}/GetTagValueText/{projid}`（`/ua`）
+  - 歷史：`{opcuaUrlPrefix}db/GetDataLog/{projid}`、`/GetRawDataLog/{projid}`（`/uadb`）
+  - 警報：`{opcuaUrlPrefix}am/api/alarm/*`（`/uaam`）
+  - `opcuaUrlPrefix` 預設 `protocol//host/ua`；根路徑（無 xnginx）才用 `DataSourceBody` 的 `ip`/`port`/`dbport`/`alarmport`。
 
 ### 11.2 WebSocket
 
@@ -431,27 +438,31 @@ flowchart LR
     WDS["WADataSourceManager<br/>dataValueCache"]
     OQ["ui/component/datasource/Opcua.qml"]
     API["Common/Api/opcua.js"]
-    RT["Data Agent :28886<br/>/ua"]
-    HIS["History Agent :28887<br/>/uadb"]
-    ALM["Alarm Agent :28889<br/>/uaam"]
+    NG["xnginx<br/>8880/8881"]
+    RT["Data Agent :28886"]
+    HIS["History Agent :28887"]
+    ALM["Alarm Agent :28889"]
 
-    WDS -->|getTagValue| OQ --> API -->|GetTagValueText| RT
-    WDS -->|getDynamic getrawdatalog| OQ --> API -->|GetRawDataLog| HIS
-    API -->|alarm list/log/ack| ALM
+    WDS -->|getTagValue| OQ --> API -->|/ua/GetTagValueText| NG
+    WDS -->|getDynamic getrawdatalog| OQ --> API -->|/uadb/GetRawDataLog| NG
+    API -->|/uaam/api/alarm/*| NG
+    NG --> RT
+    NG --> HIS
+    NG --> ALM
 ```
 
 | 行為 | 實作 |
 |------|------|
-| 建立連線物件 | `WADataSourceManager.connect(dbID)` 讀 `/api/DataSource/querybodykey/2`，建立 `Opcua.qml` |
-| 即時值 | `Opcua.getTagValue` → `opcua.js tagvaluetext` → `/GetTagValueText/{projid}` |
-| 寫值 | `setTagValue`/`setTagValueText` → `/SetTagValue*` |
-| 歷史 | `getdatalog`/`getrawdatalog` → `{dburl}/GetDataLog`/`GetRawDataLog` |
-| 警報 | `alarmAck`/`getAlarmLog`/`alarmProcessHistory` → `{alarmurl}/api/alarm/*` |
+| 建立連線物件 | `WADataSourceManager.connect(dbID)` 讀 `/sc/api/DataSource/querybodykey/{dbID}`，建立 `Opcua.qml` |
+| 即時值 | `Opcua.getTagValue` → `opcua.js tagvaluetext` → `/ua/GetTagValueText/{projid}` |
+| 寫值 | `setTagValue`/`setTagValueText` → `/ua/SetTagValue*` |
+| 歷史 | `getdatalog`/`getrawdatalog` → `/uadb/GetDataLog`、`/uadb/GetRawDataLog` |
+| 警報 | `alarmAck`/`getAlarmLog`/`alarmProcessHistory` → `/uaam/api/alarm/*` |
 | 快取/批次 | `dataValueCache`、`_batchTagTimer` 33 ms |
 | 掃描週期 | `Global.treetimer`：伺服器 `client_data_update_interval`、本機 `dataUpdateInterval`，最低 500 ms、預設 1000 ms |
 | 認證 | 請求 header `csrfToken`；沿用 Metadata Session Cookie |
 
-> `Common/Api/ws/OpcuaalarmsummaryController.qml` 仍透過 Runtime Proxy WebSocket 取得摘要；即時/歷史 Tag 值與 alarm list/log/ack 則直連 Data/Alarm Agent。
+> 上述「直連」為邏輯直連：Client 只看到 xnginx `/ua`、`/uadb`、`/uaam`，不直接連 28886/28887/28889。`Common/Api/ws/OpcuaalarmsummaryController.qml` 仍透過 Runtime Proxy WebSocket（`/ws`）取得摘要。
 
 ### 11.3 MQTT
 
@@ -505,7 +516,7 @@ CMake 目標：`gc-designer`；連結 `RoniaKit`、`SCDraw2D`、`SCDraw3D`、`na
 4. 遠端 rcc 需處理版本與快取一致性。
 5. 3D 資產較大，需快取與載入策略。
 6. 腳本 `eval` 需注意安全性與 CSP（WASM 模式）。
-7. OPC UA 即時/歷史值直連 Data Agent；若網路不可達，Widget 顯示 Bad Quality，不影響 Record/其他資料源。
+7. OPC UA 即時/歷史值經 xnginx 直連 Data Agent；若 xnginx/Agent 不可達，Widget 顯示 Bad Quality，不影響 Record/其他資料源。
 8. 根路徑部署時需設定 `DataSourceBody.dbport`/`alarmport`，否則歷史/警報直連可能失效。
 9. 手冊的圖紙/變數更新率（25/50/100 ms）與外部資料掃描（最低 500 ms）為不同層級，UI 需避免誤導。
 10. 模型（`WACustom`/`WACustomRectangle`）與 DataModel 密碼、匯入刪除保護需維持；詳見 SDS-15。

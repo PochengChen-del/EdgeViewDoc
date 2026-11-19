@@ -235,13 +235,13 @@ OPC UA 子系統（設定 UI、Data Agent、Alarm Agent）的需求另見 [`SRS/
 
 ### 3.7.1 Client 直連資料源（補充 FR-CLI）
 
-Viewer/Preview 的 OPC UA 即時與歷史 Tag 值由 Client **直接**呼叫 Data Agent，不經 Runtime Proxy。此行為補充 FR-CLI-051、FR-CLI-066、FR-RT-002/006 的資料路徑說明：
+Viewer/Preview 的 OPC UA 即時與歷史 Tag 值由 Client **邏輯直連** Data Agent（不經 Runtime Proxy）；地端實體路徑為 Client → xnginx `/ua`、`/uadb`、`/uaam` → Agent。此行為補充 FR-CLI-051、FR-CLI-066、FR-RT-002/006 的資料路徑說明：
 
 | 資料 | 路徑 | 需求 |
 |------|------|------|
-| 即時 Tag | Client → Data Agent `GetTagValueText` | FR-OPC-015、FR-CLI-051 |
-| 歷史 Tag | Client → History Agent `GetDataLog`/`GetRawDataLog` | FR-OPC-018、FR-CLI-066 |
-| 警報清單/歷史/Ack | Client → Alarm Agent `/api/alarm/*` | FR-OPC-035~037 |
+| 即時 Tag | Client → xnginx `/ua` → Data Agent `GetTagValueText` | FR-OPC-015、FR-CLI-051 |
+| 歷史 Tag | Client → xnginx `/uadb` → History Agent `GetDataLog`/`GetRawDataLog` | FR-OPC-018、FR-CLI-066 |
+| 警報清單/歷史/Ack | Client → xnginx `/uaam` → Alarm Agent `/api/alarm/*` | FR-OPC-035~037 |
 
 > Runtime Proxy 仍負責 Record/第三方 DB 查詢與 `opcuaalarmsummary` WebSocket 摘要。
 

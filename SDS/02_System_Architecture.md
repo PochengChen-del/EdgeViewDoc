@@ -2,67 +2,67 @@
 
 ## 1. 架構總覽
 
-EdgeView 採三層式架構：**Client（Qt/QML）**、**EdgeView Server（Metadata + Runtime + OPC UA Agent/Alarm）**、**資料與整合層**。Client 與 Metadata/Runtime 通訊取得設定與 Record 資料，並**直接**與 OPC UA Data Agent 取得即時/歷史 Tag 值。後端共用 PostgreSQL 設定資料庫，但職責分離。
+EdgeView 採三層式架構：**Client（Qt/QML）**、**EdgeView Server（Nginx + Metadata + Runtime + OPC UA Agent/Alarm）**、**資料與整合層**。
+
+通訊路徑依資料源區分：
+
+1. **EdgeHub/BI（雲端）**：Client 透過 **K8s Ingress** 連線 `wxproxy<suffix>` 與 Edge365 雲端服務。
+2. **WebAccess / OPC UA / X（地端）**：Client 透過 **xnginx reverse proxy**（HTTP `8880`／HTTPS `8881`）統一路由到 Metadata、Runtime Proxy、OPC UA Data Agent、OPC UA Alarm Agent。
+3. **OPC UA 設定 UI**：同樣經 xnginx `/sc/opcua` 與 `/sc/api`。
+
+Client 對 OPC UA Agent 的呼叫在**邏輯上是直連**（不經 Runtime Proxy），但**實體上仍經 xnginx**（`/ua`、`/uadb`、`/uaam`）。
 
 ```mermaid
 flowchart TB
     subgraph Presentation["Presentation Layer"]
-        direction LR
-        Designer["Designer<br/>openMode=config/edit/preview"]
-        Viewer["Viewer<br/>openMode=view"]
+        Designer["Designer"]
+        Viewer["Viewer"]
+        Vue["OPC UA 設定 UI<br/>Vue"]
     end
 
-    subgraph Application["Application Layer"]
-        direction LR
-        Meta["Metadata Service<br/>Go / Gin<br/>:28883"]
-        Proxy["Runtime Proxy<br/>Go / Gin / WS Hub<br/>:28884"]
+    subgraph Edge["EdgeView Server / 地端"]
+        NG["xnginx<br/>HTTP :8880 / HTTPS :8881<br/>rate limit / TLS / WS"]
+        Meta["Metadata Service<br/>:28883"]
+        Proxy["Runtime Proxy<br/>:28884"]
         RT["OPC UA Data Agent<br/>Runtime :28886"]
         HIS["OPC UA Data Agent<br/>History :28887"]
         ALM["OPC UA Alarm Agent<br/>:28889"]
     end
 
-    subgraph UI["Configuration UI"]
-        Vue["OPC UA 設定 UI<br/>Vue /sc/opcua"]
+    subgraph BI["EdgeHub / BI（雲端）"]
+        ING["K8s Ingress"]
+        Cloud["wxproxy / Edge365"]
     end
 
-    subgraph Domain["Domain / Data Layer"]
-        PGCfg[(PostgreSQL<br/>waxconfig / waxalarm)]
+    subgraph Data["Data Layer"]
+        PG[(PostgreSQL<br/>waxconfig / waxalarm)]
         ExtDB[(SQL Server / MySQL<br/>Oracle / PostgreSQL)]
-        Influx[(InfluxDB v1/v2)]
-    end
-
-    subgraph Integration["Integration Layer"]
-        WA[WebAccess]
-        EH[EdgeHub / Edge365]
-        X[X Platform]
+        Influx[(InfluxDB)]
         OPC[OPC UA Server]
-        FCM[Firebase FCM]
     end
 
-    Designer -->|REST + WS| Meta
-    Viewer -->|REST + WS| Meta
-    Designer -->|REST + WS| Proxy
-    Viewer -->|REST + WS| Proxy
-    Viewer -->|即時/歷史 Tag| RT
-    Viewer -->|歷史 Tag| HIS
-    Viewer -->|警報清單/歷史/Ack| ALM
-    Vue -->|/sc/api| Meta
-    Meta --> PGCfg
-    Proxy --> PGCfg
+    Designer -->|地端：/sc、/wxproxy、/ua、/uadb、/uaam| NG
+    Viewer -->|地端：/sc、/wxproxy、/ws、/ua、/uadb、/uaam| NG
+    Vue -->|/sc/opcua、/sc/api| NG
+    Designer -->|BI：K8s Ingress| ING
+    Viewer -->|BI：K8s Ingress| ING
+    ING --> Cloud
+
+    NG -->|/sc| Meta
+    NG -->|/wxproxy、/ws| Proxy
+    NG -->|/ua| RT
+    NG -->|/uadb| HIS
+    NG -->|/uaam| ALM
+
+    Meta --> PG
+    Proxy --> PG
+    RT --> PG
+    HIS --> PG
+    ALM --> PG
     Proxy --> ExtDB
     Proxy --> Influx
-    Meta --> WA
-    Meta --> EH
-    Meta --> X
-    Proxy --> WA
-    Proxy --> EH
-    Proxy --> X
-    Proxy --> FCM
     RT --> OPC
     HIS --> OPC
-    RT --> PGCfg
-    HIS --> PGCfg
-    ALM --> PGCfg
     ALM --> RT
 ```
 
@@ -87,6 +87,8 @@ flowchart TB
 | OPC UA Data Agent（Runtime） | 即時值、寫值、Tag 明細、瀏覽、憑證、測點計算 | 專案/畫面/Record |
 | OPC UA Data Agent（History） | 聚合/原始歷史查詢 | 即時寫值、專案設定 |
 | OPC UA Alarm Agent | 告警規則編譯、評估、狀態機、清單/歷史/Ack | 設定寫入、UI |
+| xnginx | 地端反向代理、TLS、靜態 UI、WebSocket、限流、服務監督 | 業務邏輯、雲端 EdgeHub/BI |
+| K8s Ingress | EdgeHub/BI 雲端入口、TLS、路由 | 地端 OPC UA Agent/Alarm |
 
 ## 3. 分層設計
 
@@ -129,71 +131,98 @@ flowchart LR
     REPO --> DB[(PostgreSQL / 外部 DB)]
 ```
 
+### 3.3 地端反向代理（xnginx）
+
+`wax_nginx_ingress` 以 Go 產生/監督 Nginx 與後端程序，是**地端 Client 的唯一入口**（EdgeHub/BI 例外走 K8s Ingress）。
+
+| 項目 | 設計 |
+|------|------|
+| 入口 | HTTP `8880`、HTTPS `8881` |
+| 路由 | 依 `apps[].app_name` 產生 `/{app_name}/` location 與 upstream |
+| WebSocket | `websocket: true` 的 app 產生 `/ws/` Upgrade/Connection |
+| 限流 | 每個 app `limit_req_zone`（預設 `4090r/s`、burst 256、`429`） |
+| TLS | `nginx.ssl.cert/key`（PEM）、`pfx` |
+| 服務監督 | 啟動/重啟 `WxMetaService`、`wxproxy`、`wax_opcua_agent`、`wxalarmagent`、`nginx` |
+| 設定變體 | `xnginx.yaml`（主/WebAccess）、`xnginx.webaccess.yaml`、`xnginx.opcua.yaml`、`xnginx.x.yaml` |
+
+| 對外路徑 | upstream | 服務 |
+|----------|----------|------|
+| `/sc/` | `sc:28883` | Metadata |
+| `/wxproxy/` | `wxproxy:28884` | Runtime REST |
+| `/ws/` | `wxproxy:28884` | Runtime WebSocket |
+| `/ua/` | `ua:28886` | OPC UA Data Agent |
+| `/uadb/` | `uadb:28887` | OPC UA History |
+| `/uaam/` | `uaam:28889` | OPC UA Alarm |
+| `/system/` | `system:28888` | 服務管理 |
+
+> `xnginx.x.yaml` 只開 HTTPS `8881`，apps 為 `waxconfig`/`waxapi`/`waxnotify`/`sc`/`wxproxy`，無 `system`。
+>
+> Nginx `proxy_pass .../` 會去掉前綴，因此 Client `/ua/GetTagValueText` → Agent `/GetTagValueText`；`/sc/api` → Metadata `/api`；`/wxproxy/record` → Runtime `/record`。
+
 ## 4. 執行期拓撲與連接埠
 
 | 元件 | 預設位址 | 協定 | 備註 |
 |------|----------|------|------|
+| 元件 | 預設位址 | 協定 | 備註 |
+|------|----------|------|------|
 | Client | 動態 | — | 桌面/行動/瀏覽器 |
-| Metadata HTTP | `127.0.0.1:28883` | HTTP | `net.http` |
-| Metadata HTTPS | 停用（`port: -1`） | HTTPS | 可設定 |
-| Metadata Proxy 目標 | `127.0.0.1:28884` | HTTP | `proxy.net.http` |
-| Runtime HTTP | `127.0.0.1:28884` | HTTP | `proxy.net.http` |
-| Runtime WebSocket | `/so` | WS | BI 模式為 `/` |
-| Runtime REST | `/record/*`、`/foo/*` | HTTP | 見 SDS-07 |
-| OPC UA Data Agent（Runtime） | `127.0.0.1:28886` | HTTP/HTTPS | `/ua` |
-| OPC UA Data Agent（History） | `127.0.0.1:28887` | HTTP/HTTPS | `/uadb` |
-| OPC UA Alarm Agent | `127.0.0.1:28889` | HTTP/HTTPS | `/uaam` |
-| OPC UA 設定 UI | `/sc/opcua/` | HTTP | Vue 靜態 |
+| **xnginx HTTP/HTTPS** | `0.0.0.0:8880`／`8881` | HTTP/HTTPS | **地端統一入口** |
+| Metadata HTTP | `127.0.0.1:28883` | HTTP | xnginx `/sc/` upstream |
+| Runtime HTTP/WS | `127.0.0.1:28884` | HTTP/WS | xnginx `/wxproxy/`、`/ws/` upstream |
+| OPC UA Data Agent（Runtime） | `127.0.0.1:28886` | HTTP | xnginx `/ua/` upstream |
+| OPC UA Data Agent（History） | `127.0.0.1:28887` | HTTP | xnginx `/uadb/` upstream |
+| OPC UA Alarm Agent | `127.0.0.1:28889` | HTTP | xnginx `/uaam/` upstream |
+| 服務管理 system | `127.0.0.1:28888` | HTTP | xnginx `/system/` |
+| OPC UA 設定 UI | `/sc/opcua/` | HTTP | xnginx 靜態/路由 |
 | PostgreSQL | 依設定 | PostgreSQL | `waxconfig`/`waxalarm` |
 | OPC UA Server | 依現場 | OPC UA TCP | 可加密 |
-| Edge365 Ingress | 依環境 | HTTPS | `/apihub`、`/dbmaster`、`/alarm` |
+| K8s Ingress | 依環境 | HTTPS | **僅 EdgeHub/BI** `/apihub`、`/dbmaster`、`/alarm`、`wxproxy` |
 
 ### 4.1 部署圖
 
 ```mermaid
 flowchart TB
-    subgraph Browser["使用者裝置"]
+    subgraph Devices["使用者裝置"]
         C1[Desktop Client]
         C2[Mobile Client]
         C3[Browser WASM]
     end
-    subgraph K8s["Kubernetes / 主機"]
-        ING[Ingress / Nginx<br/>TLS、75M body]
-        META[Meta Pod<br/>:28883]
-        PROXY[Proxy Pod<br/>:28884]
-        AGENT[OPC UA Agent Pods<br/>Runtime :28886<br/>History :28887]
-        ALARM[Alarm Pod<br/>:28889]
-        UI[UI 靜態<br/>/sc/opcua]
+
+    subgraph Local["地端 EdgeView Server"]
+        NG[xnginx<br/>HTTP :8880 / HTTPS :8881]
+        META[Metadata :28883]
+        PROXY[Runtime Proxy :28884]
+        AGENT[OPC UA Agent :28886]
+        HIST[OPC UA History :28887]
+        ALARM[OPC UA Alarm :28889]
+        SYS[system :28888]
         PG[(PostgreSQL)]
     end
-    subgraph External["外部"]
-        WA[WebAccess]
-        EH[Edge365]
-        OPC[OPC UA Server]
-        DB[(第三方 DB)]
-        FCM[Firebase]
+
+    subgraph Cloud["雲端 EdgeHub/BI"]
+        ING[K8s Ingress]
+        EH[wxproxy / Edge365]
     end
 
-    C1 --> ING
-    C2 --> ING
-    C3 --> ING
-    ING --> META
-    ING --> PROXY
-    ING --> AGENT
-    ING --> ALARM
-    ING --> UI
+    C1 -->|地端| NG
+    C2 -->|地端| NG
+    C3 -->|地端| NG
+    C1 -->|BI| ING
+    C2 -->|BI| ING
+    C3 -->|BI| ING
+    ING --> EH
+
+    NG --> META
+    NG --> PROXY
+    NG --> AGENT
+    NG --> HIST
+    NG --> ALARM
+    NG --> SYS
     META --> PG
     PROXY --> PG
     AGENT --> PG
+    HIST --> PG
     ALARM --> PG
-    META --> WA
-    META --> EH
-    PROXY --> WA
-    PROXY --> EH
-    PROXY --> DB
-    PROXY --> FCM
-    AGENT --> OPC
-    ALARM --> AGENT
 ```
 
 ## 5. 通訊與資料流
@@ -203,14 +232,19 @@ flowchart TB
 ```mermaid
 sequenceDiagram
     participant D as Designer
+    participant N as xnginx
     participant M as Metadata Service
     participant P as PostgreSQL
-    D->>M: POST /api/getdisplaylist/:projid (Session + CSRF)
+    D->>N: POST /sc/api/getdisplaylist/:projid (Session + CSRF)
+    N->>M: /api/getdisplaylist/:projid
     M->>P: SELECT Display / ObjectPath
     P-->>M: rows
-    M-->>D: {data:{error,result}}
-    D->>M: POST /api/getdisplaydetail/:displayid
-    M-->>D: 畫面 JSON（含 Widget/綁定/腳本）
+    M-->>N: {data:{error,result}}
+    N-->>D: {data:{error,result}}
+    D->>N: POST /sc/api/getdisplaydetail/:displayid
+    N->>M: /api/getdisplaydetail/:displayid
+    M-->>N: 畫面 JSON
+    N-->>D: 畫面 JSON（含 Widget/綁定/腳本）
     D->>D: 解析並建立 Widget
 ```
 
@@ -219,20 +253,23 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant V as Viewer
+    participant N as xnginx
     participant R as Runtime Proxy
     participant WS as WS Hub
     participant DB as 外部資料源
-    V->>R: WS connect /so
-    V->>R: {topic:login, action:login, csrfToken}
+    V->>N: WS connect /ws/so
+    N->>R: Upgrade /so
+    V->>N: {topic:login, action:login, csrfToken}
+    N->>R: 轉發
     R-->>V: {error:0}
-    V->>R: {topic:recorddata, action:register, request}
+    V->>N: {topic:recorddata, action:register, request}
     R->>WS: 建立訂閱與輪詢
     loop 每 1 秒
         WS->>DB: 查詢
         DB-->>WS: rows
         WS-->>V: {topic:recorddata, action:query, result}
     end
-    V->>R: {topic:recorddata, action:unregister}
+    V->>N: {topic:recorddata, action:unregister}
 ```
 
 ### 5.3 告警資料流
@@ -257,20 +294,25 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant V as Viewer
+    participant N as xnginx
     participant A as Data Agent
     participant H as History Agent
     participant U as OPC UA Server
-    V->>A: POST /GetTagValueText/{projid}
+    V->>N: POST /ua/GetTagValueText/{projid}
+    N->>A: /GetTagValueText/{projid}
     A->>U: Read Nodes
     U-->>A: DataValue + Quality
-    A-->>V: {data:{Values,Result}}
-    V->>H: POST /GetDataLog/{projid}
+    A-->>N: {data:{Values,Result}}
+    N-->>V: {data:{Values,Result}}
+    V->>N: POST /uadb/GetDataLog/{projid}
+    N->>H: /GetDataLog/{projid}
     H->>U: HistoryRead
     U-->>H: DataValue[]
-    H-->>V: {data:{Result,DataLog}}
+    H-->>N: {data:{Result,DataLog}}
+    N-->>V: {data:{Result,DataLog}}
 ```
 
-> OPC UA 即時/歷史 Tag 值**不經 Runtime Proxy**；Runtime Proxy 僅保留 Record 查詢、`opcuaalarmsummary` WebSocket 摘要、Edge365 代理與 FCM。
+> OPC UA 即時/歷史 Tag 值的**邏輯路徑**是 Client → Data Agent（不經 Runtime Proxy），**實體路徑**為 Client → xnginx → Data Agent（`/ua`、`/uadb`）。Runtime Proxy 僅保留 Record 查詢、`opcuaalarmsummary` WebSocket 摘要、Edge365 代理與 FCM。
 
 ## 6. 技術架構決策摘要
 
@@ -283,7 +325,9 @@ sequenceDiagram
 | 即時通訊 | WebSocket | 雙向、低延遲 | 需處理重連與認證 |
 | 設定儲存 | PostgreSQL + JSONB | 關聯 + 彈性 | 需管理 schema 與遷移 |
 | 多資料源 | 每來源獨立 manager | 方言差異大 | 維護成本 |
-| 部署 | Docker/K8s | 標準化、可擴充 | 需 Ingress/Session 設計 |
+| 地端入口 | xnginx reverse proxy | 統一 TLS/路由/限流/服務監督 | 需維護 datasource 變體設定 |
+| 雲端入口 | K8s Ingress | EdgeHub/BI 雲端服務 | 僅 BI 模式使用 |
+| 部署 | Docker/K8s 或主機 | 標準化、可擴充 | 需 Ingress/xnginx/Session 設計 |
 
 ## 7. 架構限制與邊界
 
@@ -292,8 +336,10 @@ sequenceDiagram
 3. Client 的 Designer/Viewer 共用執行檔，模式切換需清理設計期狀態。
 4. 外部平台中斷時，依功能降級（見 SRS-05 NFR-REL-010）。
 5. 瀏覽器模式不支援原生檔案系統、Crashpad、Session 監控。
-6. OPC UA Data Agent 分 Runtime/History 兩個進程；Client 需直接可達或經 Ingress `/ua`、`/uadb`。
+6. OPC UA Data Agent 分 Runtime/History 兩個進程；Client 經 xnginx `/ua`、`/uadb` 存取，不直接連 28886/28887。
 7. Alarm Agent 與 Data Agent 共用 Metadata Session key；多副本需共享 DB 與一致的 `aes_secret`。
+8. 地端所有服務（Metadata/Runtime/Data Agent/Alarm）只綁 loopback，對外僅 xnginx `8880/8881`。
+9. EdgeHub/BI 走 K8s Ingress，不使用地端 xnginx；兩者路徑與認證需分別測試。
 
 ## 8. 與需求對照
 
@@ -302,6 +348,7 @@ sequenceDiagram
 | Client 分層與模式 | FR-CLI-001~095 |
 | Metadata 分層與 API | FR-META-001~045 |
 | Runtime REST/WS | FR-RT-001~025 |
-| OPC UA 子系統 | FR-OPC-001~045、IF-OPC-001~010、NFR-OPC-001~020 |
+| OPC UA 子系統 | FR-OPC-001~045、IF-OPC-001~011、NFR-OPC-001~020 |
+| xnginx 地端入口 | IF-OPC-011、IF-SW-012、IF-UM-007 |
 | 部署與連線 | IF-COM-001~008、NFR-PORT-001~005 |
 | 安全邊界 | NFR-SEC-001~014 |

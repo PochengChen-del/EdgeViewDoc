@@ -44,7 +44,8 @@
 | FR-OPC-001~012 設定 UI | 登入/權限、專案、連線、Tag、節點瀏覽、警報、使用者、匯入匯出 | 系統/UAT |
 | FR-OPC-013~027 Data Agent | Runtime/History 角色、即時/歷史/寫值/瀏覽/憑證、Alarm 欄位 | 整合/API/效能 |
 | FR-OPC-028~045 Alarm Agent | 規則、優先級、雙狀態、Ack/Process、清單/歷史、重啟復原 | 整合/系統 |
-| 直連資料源 | Client Viewer 直接取得即時/歷史值；Proxy 不承載 OPC UA Tag 值 | 端到端/延遲量測 |
+| 直連資料源 | Client 經 xnginx `/ua`、`/uadb`、`/uaam` 取得即時/歷史/警報；Proxy 不承載 OPC UA Tag 值 | 端到端/延遲量測 |
+| xnginx 入口 | `8880/8881` 路由、TLS、WS、限流、四種 datasource 變體 | 整合/維運 |
 | FR-UM-001~020 安裝/授權/連線 | 依手冊完成安裝、試用/正式授權、桌面/瀏覽器/APP 連線 | 系統/UAT |
 | FR-UM-021~034 繪圖/控件/綁定 | 六大區塊、樣板、圖層、預覽、控件目錄、綁定語法、圖表限制 | 系統/UAT |
 | FR-UM-035~046 變數/腳本/事件/動畫 | 變數型別/限制、腳本函數、事件參數、動畫組合 | 系統/UAT |
@@ -65,6 +66,7 @@
 | NFR-OPC-005/006 | 故障注入 | 重啟 30 秒恢復；斷線回 Bad Quality |
 | NFR-OPC-007/008 | 安全測試 | 未認證被拒；TLS/OPC UA 加密可用 |
 | NFR-UM-001~008 | 效能/相容/UAT | 更新率、版本相容、i18n、權限、備份 |
+| NFR-SEC-004/015 | xnginx/TLS/限流 | 憑證、429、WS Upgrade |
 
 ## 6. 需求追溯原則
 
@@ -101,5 +103,7 @@
 | OI-014 | 手冊 25 ms 更新率與外部資料掃描最低 500 ms 的差異 | FR-UM-025/026、NFR-UM-001 | 文件區分繪製/資料週期 |
 | OI-015 | 手冊插件/主題色/APP 查詢限制 | FR-UM-061/064 | 補來源與平台限制測試 |
 | OI-016 | 手冊模型密碼/匯入刪除保護 | FR-UM-047/048 | 補密碼與錯誤測試 |
+| OI-017 | xnginx 四個 datasource 變體設定漂移 | IF-SW-012、IF-OPC-011 | 以 `xnginx.yaml` 為基準，建立設定比對/測試 |
+| OI-018 | 地端 xnginx 與 BI K8s Ingress 路徑/認證差異 | IF-COM、NFR-OPC-007 | 分流測試（WebAccess/OPC UA/X vs BI） |
 | OI-008 | DataSource source type 編號不一致 | IF-SW-002/004 | 統一常數並加轉換層 |
 | OI-009 | 非 OPC UA 登入鎖定與 K8s 限流未完整 | NFR-SEC-015 | nginx 已有 `limit_req`；補登入專用門檻、帳號鎖定、WS 訊息限流與 K8s ingress annotation |

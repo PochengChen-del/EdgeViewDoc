@@ -180,6 +180,7 @@
 | IF-UM-004 | 授權 | `wxlic`、`activate.enc`、`deactivate.enc`、`graphix.lic` |
 | IF-UM-005 | 插件 | `SCServer\_public\plugin` |
 | IF-UM-006 | APP 推播 | Firebase/FCM；QR Code/IP 連線 |
+| IF-UM-007 | xnginx 地端入口 | `8880/8881`；`/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam`、`/system` |
 
 ## 16. 驗收與追溯
 

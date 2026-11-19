@@ -20,9 +20,11 @@ flowchart TB
         LAN[區網使用者]
     end
     subgraph Edge["EdgeView Server"]
-        Ingress[Ingress / TLS]
+        NG[xnginx / TLS<br/>8880 / 8881]
+        Ingress[K8s Ingress<br/>BI only]
         Meta[Metadata]
         Proxy[Runtime]
+        Agent[OPC UA Agent/Alarm]
         DB[(PostgreSQL)]
     end
     subgraph External["外部服務"]
@@ -31,22 +33,28 @@ flowchart TB
         X[X]
         OPC[OPC UA]
     end
-    Browser -->|HTTPS| Ingress
-    LAN -->|HTTP/HTTPS| Ingress
-    Ingress --> Meta
-    Ingress --> Proxy
+    Browser -->|地端 HTTP/HTTPS| NG
+    LAN -->|地端 HTTP/HTTPS| NG
+    Browser -->|BI HTTPS| Ingress
+    LAN -->|BI HTTPS| Ingress
+    NG --> Meta
+    NG --> Proxy
+    NG --> Agent
+    Ingress -->|BI| Proxy
     Meta --> DB
     Proxy --> DB
+    Agent --> DB
     Meta --> External
     Proxy --> External
 ```
 
 **邊界規則**
 
-1. 所有使用者請求經 Ingress（TLS 終結）。
+1. 地端請求經 xnginx（TLS `8881`、限流）；EdgeHub/BI 經 K8s Ingress。
 2. 後端之間與外部服務使用獨立的認證（Basic/Token/憑證）。
 3. DB 僅限內網，使用最小權限帳號。
 4. 瀏覽器不直接連 DB/外部服務。
+5. 後端（Metadata/Runtime/Agent/Alarm）僅綁 loopback，對外只暴露 xnginx。
 
 ## 3. 認證設計
 
@@ -194,7 +202,8 @@ sequenceDiagram
 |------|------|------|
 | Client ↔ Metadata | HTTP/HTTPS 可選 | 正式環境強制 HTTPS |
 | Client ↔ Runtime | HTTP/HTTPS/WS 可選 | 強制 WSS |
-| Ingress | TLS | 憑證管理/自動續期 |
+| xnginx（地端） | TLS 8881、HTTP 8880 | 憑證管理、限流、WS Upgrade |
+| K8s Ingress（BI） | TLS | 憑證管理/自動續期 |
 | Runtime → 外部 | 全域 `InsecureSkipVerify` 已移除；個別 client 仍停用 | 逐步改為系統 CA/指定 CA（R-002-R） |
 | Metadata → 外部 | 部分 client 停用驗證 | 全面驗證（R-002-R） |
 

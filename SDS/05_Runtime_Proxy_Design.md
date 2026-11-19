@@ -6,7 +6,7 @@
 
 ## 1. 設計概述
 
-Runtime Proxy 是 EdgeView 的**Record 執行期服務**，負責：
+Runtime Proxy 是 EdgeView 的**Record 執行期服務**；地端 Client 經 xnginx `/wxproxy`、`/ws` 存取，EdgeHub/BI 經 K8s Ingress。負責：
 
 1. 依 `Record` 定義查詢多種資料源（PostgreSQL、SQL Server、Oracle、MySQL、InfluxDB v1/v2、HTTP）。
 2. 以 WebSocket 提供 Record 即時資料、告警摘要、系統資訊。
@@ -14,12 +14,14 @@ Runtime Proxy 是 EdgeView 的**Record 執行期服務**，負責：
 4. 發送 Firebase 推播。
 5. 提供 BI 模式（Edge365）相容的 `/` WebSocket 進入點。
 
-> **不負責** OPC UA 即時/歷史 Tag 值。該資料由 Client 直接呼叫 OPC UA Data Agent（`:28886`/`:28887`），見 SDS-14 §8。
+> **不負責** OPC UA 即時/歷史 Tag 值。該資料由 Client 邏輯直連 OPC UA Data Agent，實體經 xnginx `/ua`、`/uadb`，見 SDS-14 §8。
 
 ```mermaid
 flowchart LR
-    Client -->|REST /record/*| RC[RecordController]
-    Client -->|WS /so| Hub[SoHub]
+    Client -->|REST /wxproxy/record/*| NG[xnginx]
+    Client -->|WS /ws/so| NG
+    NG -->|/wxproxy| RC[RecordController]
+    NG -->|/ws| Hub[SoHub]
     Hub --> Login[login]
     Hub --> Rec[recorddata]
     Hub --> WA[waalarmsummary]
@@ -77,7 +79,7 @@ sequenceDiagram
 | TLS | 全域 `InsecureSkipVerify` 已移除；個別 client 仍停用驗證（R-002-R） |
 | DB | `repository.SharedDB` 連線池 10；`search_path` 依環境 |
 | Session | `graphicSession`；key 由 `LoadSessionKeys()` 解析（env 或 `aes_secret` HKDF）；`MaxAge=sessiontimeout` |
-| WS 路徑 | WebAccess/OPC UA/X：`/so`；BI：`/`，並掛 `EdgeHubOptions` |
+| WS 路徑 | WebAccess/OPC UA/X：Client 連 xnginx `/ws/so`，xnginx 轉 `/so`；BI：K8s Ingress `/`，並掛 `EdgeHubOptions` |
 | 認證逾時 | 連線後 `websocket_auth_timeout` 秒內需完成 login，否則關閉 |
 | 背景服務 | EdgeHub、SC Proxy、Firebase、AlarmNotify |
 | 關閉 | 先停 Hub 與通知，再關 HTTP |
@@ -120,7 +122,7 @@ sequenceDiagram
 |----|------|------|
 | 1 | `SourceTypeWebAccess` | 使用本機 PostgreSQL `waxconfig`；WS `/so` |
 | 2 | `SourceTypeBI` | 使用 Edge365；WS `/`；關閉本機日誌檔 |
-| 3 | `SourceTypeOPCUA` | OPC UA 模式（告警摘要；Tag 值由 Client 直連 Data Agent） |
+| 3 | `SourceTypeOPCUA` | OPC UA 模式（告警摘要；Tag 值由 Client 經 xnginx 直連 Data Agent） |
 | 4 | `SourceTypeX` | X 平台 |
 
 ## 4. WebSocket Hub 設計
@@ -246,6 +248,8 @@ sequenceDiagram
 ## 5. REST 設計
 
 ### 5.1 路由
+
+> 地端 Client 對外為 `http(s)://<EVS>:8880|8881/wxproxy/record/*`，xnginx 去掉 `/wxproxy` 後轉發至 Runtime `/record/*`。
 
 | Method | Path | 認證 | 用途 |
 |--------|------|------|------|
@@ -387,7 +391,7 @@ sequenceDiagram
 
 - **告警摘要**：`OpcuaAlarmPolling` 呼叫 Alarm Agent（`opcua.alarm`，程式預設 `:8090`，部署常見 `:28889`）；連線資訊快取 60 秒。
 - **不自 Data Agent 讀取即時/歷史 Tag 值**：Client 直連 `/ua`、`/uadb`。
-- **Alarm 清單/歷史/Ack**：Client 直連 Alarm Agent `/uaam`；Proxy 僅提供 `opcuaalarmsummary` WebSocket。
+- **Alarm 清單/歷史/Ack**：Client 經 xnginx `/uaam` 直連 Alarm Agent；Proxy 僅提供 `opcuaalarmsummary` WebSocket（`/ws`）。
 - 詳細子系統設計見 SDS-14。
 
 ### 8.4 X 平台

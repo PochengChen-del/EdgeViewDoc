@@ -91,10 +91,10 @@
 ### IF-SW-005 OPC UA Data Agent
 
 - 用途：OPC UA 連線、即時值、寫值、歷史值、Tag 明細、瀏覽、憑證、常數/計算/系統測點。
-- 介面：HTTP/HTTPS（Runtime `127.0.0.1:28886`、History `127.0.0.1:28887`）。
+- 介面：HTTP/HTTPS；對外 xnginx `/ua`（Runtime `28886`）、`/uadb`（History `28887`）。
 - 認證：Metadata Session Cookie + `csrfToken`，或 loopback 內部 Bearer。
 - 需求：可設定 URI、安全模式/政策、帳密、PFX；Runtime/History 角色分離。
-- 端點：`/GetTagValue*`、`/SetTagValue*`、`/TagDetail/{projid}`、`/Browse/*`、`/GetDataLog/{projid}`、`/GetRawDataLog/{projid}`、`/Certificate/create`。
+- 端點：`/ua/GetTagValue*`、`/ua/SetTagValue*`、`/ua/TagDetail/{projid}`、`/ua/Browse/*`、`/uadb/GetDataLog/{projid}`、`/uadb/GetRawDataLog/{projid}`、`/ua/Certificate/create`。
 - 詳細需求：`SRS/07` FR-OPC-013~027、IF-OPC-002/003。
 
 ### IF-SW-006 第三方資料庫
@@ -131,17 +131,25 @@
 ### IF-SW-010 OPC UA Alarm Agent
 
 - 用途：警報規則、清單/歷史、Ack/Process、Alarm 欄位。
-- 介面：HTTP/HTTPS（預設 `127.0.0.1:28889`；程式預設 8090）。
+- 介面：HTTP/HTTPS；對外 xnginx `/uaam`（上游 `28889`；程式預設 8090）。
 - 認證：Session + CSRF、本機 Basic Auth、loopback Bearer。
-- 端點：`/api/alarm/list`、`/api/alarm/log`、`/api/alarm/ack`、`/api/alarm/processhistory`、`/api/alarm/definition/list`、`/api/alarm/simulate`、`/api/alarm/reload`、`/GetTagValue/:projid`、`/ping/:id`。
+- 端點：`/uaam/api/alarm/list`、`/uaam/api/alarm/log`、`/uaam/api/alarm/ack`、`/uaam/api/alarm/processhistory`、`/uaam/api/alarm/definition/list`、`/uaam/api/alarm/simulate`、`/uaam/api/alarm/reload`、`/uaam/GetTagValue/:projid`、`/uaam/ping/:id`。
 - 詳細需求：`SRS/07` FR-OPC-028~045、IF-OPC-004。
 
 ### IF-SW-011 OPC UA 設定 UI
 
 - 用途：OPC UA 專案/連線/Tag/警報/使用者設定。
-- 介面：HTTP 靜態 SPA（`/sc/opcua/`），API 走 Metadata `/sc/api/*`。
+- 介面：HTTP 靜態 SPA（`/sc/opcua/`），API 走 Metadata `/sc/api/*`，經 xnginx。
 - 認證：Metadata Session Cookie + `settings-csrfToken`。
 - 需求：`graphic` 角色不得進入；依 `permissions` 顯示模組。
+
+### IF-SW-012 xnginx Reverse Proxy
+
+- 用途：地端 Client 統一入口；TLS、路由、限流、WebSocket、服務監督。
+- 介面：HTTP `8880`／HTTPS `8881`。
+- 路由：`/sc`→Metadata、`/wxproxy`、`/ws`→Runtime、`/ua`→Data Agent、`/uadb`→History、`/uaam`→Alarm、`/system`→system。
+- 設定：`xnginx.yaml`（主）、`xnginx.webaccess.yaml`、`xnginx.opcua.yaml`、`xnginx.x.yaml`。
+- EdgeHub/BI 例外：使用 K8s Ingress，不使用地端 xnginx。
 
 ---
 
@@ -151,7 +159,7 @@
 
 - 協定：HTTP/1.1 或 HTTPS。
 - 編碼：JSON（`application/json`）或 `multipart/form-data`（上傳）。
-- Metadata 預設埠：`28883`；Runtime 預設埠：`28884`；EVS HTTP/HTTPS：`8880`/`8881`（`/sc/`、`/sc/opcua`、`/system`、`/SC/settings`）。
+- Metadata 預設埠：`28883`；Runtime 預設埠：`28884`；地端 xnginx HTTP/HTTPS：`8880`/`8881`（`/sc/`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam`、`/system`）。
 - 共用回應格式：
 
 ```json
@@ -244,6 +252,7 @@
 
 | 介面 | 逾時/限制 |
 |------|-----------|
+| xnginx | connect 300 秒、read/send 300 秒、keepalive 6000 秒、body 無限制 |
 | Metadata HTTP server | read/write 5 分鐘、header 30 秒、idle 120 秒 |
 | Runtime HTTP server | request 2 分鐘 |
 | WebAccess/X HTTP client | 30 秒 |
@@ -273,4 +282,4 @@
 | OPC UA 設定 UI | FR-OPC-001~012 | SDS-14 §3 |
 | OPC UA Data Agent | FR-OPC-013~027 | SDS-14 §4、§8 |
 | OPC UA Alarm Agent | FR-OPC-028~045 | SDS-14 §5、§6 |
-| 使用手冊介面（URL/安裝/授權/插件） | FR-UM-001~020、IF-UM-001~006 | SDS-10 §2.1、SDS-15 §10~12 |
+| 使用手冊介面（URL/安裝/授權/插件/xnginx） | FR-UM-001~020、IF-UM-001~007 | SDS-10 §2.1、SDS-15 §10~12 |
