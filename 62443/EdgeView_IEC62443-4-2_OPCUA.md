@@ -31,12 +31,12 @@
 
 | ID | Name | SL | 狀態 | HTTPS | EdgeView（OPC UA 版）實作 |
 |----|------|----|------|-------|---------------------------|
-| CR 1.01 | Human user identification and authentication | SL1 | 符合（HTTPS） | 是 | 本機/WebAccess/OPC UA/X 登入；Session + CSRF；建議全程 HTTPS。 |
-| CR 1.01 RE(1) | Unique identification and authentication | SL2 | 符合 | — | `UserInfo`/`OPCUA_User` 使用者名稱唯一；每請求綁定 Session。 |
+| CR 1.01 | Human user identification and authentication | SL1 | 符合（HTTPS） | 是 | OPC UA 使用者（admin/OPCUA_User）登入；Session + CSRF；建議全程 HTTPS。 |
+| CR 1.01 RE(1) | Unique identification and authentication | SL2 | 符合 | — | `OPCUA_User` 使用者名稱唯一；每請求綁定 Session。 |
 | CR 1.01 RE(2) | Multifactor authentication for all interfaces | SL3 | 不符合 | — | 未內建 MFA；需外部 IdP/反向代理補充。 |
 | CR 1.02 | Software process and device identification and authentication | SL2 | 部分符合 | 是 | 服務間以內部 Bearer/Session、OPC UA 憑證；未對每個軟體程序/裝置發獨立身分。 |
 | CR 1.02 RE(1) | Unique identification and authentication | SL3 | 部分符合 | 是 | OPC UA 連線使用獨立應用憑證/PFX；未涵蓋所有服務程序。 |
-| CR 1.03 | Account management | SL1 | 符合 | — | `UserAdmin`/`UserInfo`/`OPCUA_User` 新增/修改/刪除/停用；角色與專案授權。 |
+| CR 1.03 | Account management | SL1 | 符合 | — | `UserAdmin`/`OPCUA_User` 新增/修改/刪除/停用；OPC UA 設定 UI 管理角色與專案授權。 |
 | CR 1.04 | Identifier management | SL1 | 符合 | — | 使用者名稱唯一鍵；專案/角色/安全區識別。 |
 | CR 1.05 | Authenticator management | SL1 | 部分符合 | 是 | 支援改密/重設；無完整密碼到期、歷史、複雜度政策。 |
 | CR 1.05 RE(1) | Hardware security for authenticators | SL3 | 不適用（Web Server） | — | 無硬體 Token/TPM 綁定。 |
@@ -50,9 +50,9 @@
 | CR 1.09 | Strength of public key-based authentication | SL2 | 符合（HTTPS） | 是 | TLS 1.2/1.3、OPC UA SecurityPolicy；憑證金鑰強度依設定。 |
 | CR 1.09 RE(1) | Hardware security for public key-based authentication | SL3 | 不適用（Web Server） | — | 私鑰可由 OS 檔案/憑證存放區保護；無 HSM。 |
 | CR 1.10 | Authenticator feedback | SL1 | 部分符合（HTTPS） | 是 | 登入失敗回一般錯誤，不顯示密碼；HTTPS 防止竊聽。 |
-| CR 1.11 | Unsuccessful login attempts | SL1 | 部分符合 | — | OPC UA 有 `OPCUA_LoginLock`；本機/WA 尚無統一鎖定。 |
-| CR 1.12 | System use notification | SL1 | 不符合 | — | 無登入前使用聲明/橫幅。 |
-| CR 1.13 | Access via untrusted networks | N/A | 符合（HTTPS） | 是 | 地端 xnginx `8881`、BI K8s Ingress TLS；後端僅 loopback。 |
+| CR 1.11 | Unsuccessful login attempts | SL1 | 符合（HTTPS） | 是 | OPC UA 以 `OPCUA_LoginLock` 管理失敗次數/鎖定；登入經 HTTPS。 |
+| CR 1.12 | System use notification | SL1 | 符合（HTTPS） | 是 | 登入/連線頁 footer（`InfoFooterRow`/`InfoFooterColumn`）提供 Privacy Policy、Contact、Support 連結；以 `Global.openUrlExternally` 開啟 HTTPS 頁面。若 CB 要求登入前強制同意，需再加確認視窗。 |
+| CR 1.13 | Access via untrusted networks | N/A | 符合（HTTPS） | 是 | 地端 xnginx `8881` TLS；後端僅 loopback。 |
 | NDR 1.13 | Access via untrusted networks | SL1 | 不適用（網路設備） | — | 非網路設備。 |
 | NDR 1.13 RE(1) | Explicit access request approval | SL3 | 不適用（網路設備） | — | 非網路設備。 |
 | CR 1.14 | Strength of symmetric key-based authentication | SL2 | 符合（HTTPS） | 是 | Session HMAC、CSRF、HTTPS；AES 保護設定。 |
@@ -155,7 +155,7 @@
 
 | ID | Name | SL | 狀態 | HTTPS | EdgeView（OPC UA 版）實作 |
 |----|------|----|------|-------|---------------------------|
-| CR 4.01 | Information confidentiality | SL1 | 符合（HTTPS） | 是 | xnginx HTTPS、K8s Ingress TLS、OPC UA SignAndEncrypt；敏感設定 AES。 |
+| CR 4.01 | Information confidentiality | SL1 | 符合（HTTPS） | 是 | xnginx HTTPS、OPC UA SignAndEncrypt；敏感設定 AES。 |
 | CR 4.02 | Information persistence | SL2 | 部分符合 | — | Session/資料保留可設定；缺少統一清除驗證。 |
 | CR 4.02 RE(1) | Erase of shared memory resources | SL3 | 部分符合 | — | 程序結束釋放；無保證抹除 shared memory。 |
 | CR 4.02 RE(2) | Erase verification | SL3 | 不符合 | — | 無抹除驗證。 |
@@ -165,7 +165,7 @@
 
 | ID | Name | SL | 狀態 | HTTPS | EdgeView（OPC UA 版）實作 |
 |----|------|----|------|-------|---------------------------|
-| CR 5.01 | Network segmentation | SL1 | 符合 | 是 | xnginx 地端入口、後端 loopback、K8s Ingress/NetworkPolicy（建議）。 |
+| CR 5.01 | Network segmentation | SL1 | 符合 | 是 | xnginx 地端入口、後端 loopback；網路分段由防火牆/主機網路配合。 |
 | CR 5.02 | Zone boundary protection | N/A | 不適用（Web Server） | — | 由網路設備/防火牆負責。 |
 | NDR 5.02 | Zone boundary protection | SL1 | 不適用（網路設備） | — | 非網路設備。 |
 | NDR 5.02 RE(1) | Deny all, permit by exception | SL2 | 不適用（網路設備） | — | 非網路設備。 |
@@ -205,8 +205,8 @@
 |------|----------|------|
 | 無 MFA | CR 1.01 RE(2) | 整合外部 IdP/反向代理 MFA。 |
 | 密碼政策/生命週期不足、SHA-256 未加鹽 | CR 1.05、1.07 | Argon2id/bcrypt + 複雜度/到期/歷史。 |
-| 無統一登入鎖定（本機/WA） | CR 1.11 | 集中失敗計數與鎖定。 |
-| 無使用聲明 | CR 1.12 | 登入頁加入安全告示。 |
+
+
 | 無 Concurrent Session 限制 | CR 2.07 | Session 上限/管理。 |
 | 稽核無 WORM/容量告警 | CR 2.09、3.09 | 外部 WORM/SIEM、容量告警。 |
 | 無程式/更新簽章 | CR 3.04、3.10 | 簽章驗證與供應鏈安全。 |
@@ -220,11 +220,11 @@
 
 | 類別 | 數量 |
 |------|------|
-| 符合 | 19 |
+| 符合 | 20 |
 | 符合（HTTPS） | 11 |
-| 部分符合 | 33 |
-| 部分符合（HTTPS） | 6 |
-| 不符合 | 9 |
+| 部分符合 | 35 |
+| 部分符合（HTTPS） | 4 |
+| 不符合 | 8 |
 | 不適用 | 3 |
 | 不適用（Web Server） | 21 |
 | 不適用（OS/硬體） | 17 |
