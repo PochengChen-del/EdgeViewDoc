@@ -137,6 +137,13 @@ flowchart LR
 | SDS-14 | [SDS/14_OPCUA_Subsystem_Design.md](SDS/14_OPCUA_Subsystem_Design.md) | OPC UA 子系統設計、API、資料模型、直連資料源 |
 | SDS-15 | [SDS/15_User_Manual_Mapping.md](SDS/15_User_Manual_Mapping.md) | 使用手冊功能對照、UI/控件/腳本/模型/權限/插件/限制 |
 
+### 3.3 合規對照
+
+| 文件 | 內容 |
+|------|------|
+| [62443/README.md](62443/README.md) | IEC 62443-4-2 對照方法、HTTPS/不適用原則、統計與缺口 |
+| [62443/EdgeView_IEC62443-4-2_OPCUA.md](62443/EdgeView_IEC62443-4-2_OPCUA.md) | 141 項需求逐條對照（OPC UA 版） |
+
 ## 4. 需求編號規則
 
 | 前綴 | 意義 | 範例 |
