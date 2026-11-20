@@ -1,13 +1,13 @@
-## 附錄 A：部分符合項目明細（39 項）
+## 附錄 A：部分符合項目明細（38 項）
 
-> 本附錄逐項說明「部分符合」與「部分符合（HTTPS）」項目的現況、缺口與建議。關聯需求與設計章節以連結標示；風險編號對應 `SDS/11_Design_Decisions_and_Risks.md`。
+> 本附錄逐項說明「部分符合」項目的現況、缺口與建議。關聯需求與設計章節以連結標示；風險編號對應 `SDS/11_Design_Decisions_and_Risks.md`。
 
 | 群組 | 項目 | 數量 |
 |------|------|------|
 | Common Component | CCSC 1、CCSC 2、CCSC 4 | 3 |
 | FR1 識別與認證 | CR 1.02、1.02 RE(1)、1.05、1.07、1.10 | 5 |
 | FR2 使用控制 | CR 2.01 RE(1)、2.01 RE(3)、2.03、2.04、SAR 2.04、SAR 2.04 RE(1)、2.05、2.09、2.09 RE(1)、2.10、2.11 RE(1)、2.12、2.12 RE(1) | 13 |
-| FR3 系統完整性 | CR 3.02、SAR 3.02、3.03、3.04、3.04 RE(1)、3.04 RE(2)、3.09、3.10 | 8 |
+| FR3 系統完整性 | CR 3.02、SAR 3.02、3.03、3.04、3.04 RE(2)、3.09、3.10 | 7 |
 | FR4 資料機密性 | CR 4.02、4.02 RE(1)、4.03 | 3 |
 | FR6 事件回應 | CR 6.02 | 1 |
 | FR7 資源可用性 | CR 7.01、7.01 RE(1)、7.02、7.03 RE(1)、7.06 RE(1)、7.08 | 6 |
@@ -20,7 +20,7 @@
 - **建議**：建立必要功能清單與 RTO/RPO，對應 `SDS-02`、`SDS-10`；以 zone/conduit 模型標示資料流與相依；由產品/資安共同核可，並納入變更管理。
 - **對應**：[NFR-REL-001、NFR-OPC-005](../SRS/05_Nonfunctional_Requirements.md)、[SDS-02](../SDS/02_System_Architecture.md)、[SDS-10](../SDS/10_Deployment_and_Operations.md)
 
-#### A.1.2 CCSC 2 Compensating countermeasures（部分符合，HTTPS）
+#### A.1.2 CCSC 2 Compensating countermeasures（部分符合）
 - **現況**：以 xnginx TLS、限流、後端 loopback、Session/CSRF、稽核等作為補償控制。
 - **部分符合原因**：補償措施散見於設計與程式，未形成正式「補償控制清單」，缺少每項控制對應的原始需求、威脅、殘餘風險與有效期限。
 - **建議**：建立補償控制登記表（控制、對應 CR、替代原因、驗證方式、殘餘風險、到期日）；與 `SDS-08`、`SDS-11` 連動；定期由資安覆核。
@@ -34,31 +34,31 @@
 
 ### A.2 Identification and Authentication Control（FR1）
 
-#### A.2.1 CR 1.02 Software process and device identification and authentication（部分符合，HTTPS）
+#### A.2.1 CR 1.02 Software process and device identification and authentication（部分符合）
 - **現況**：服務間使用內部 Bearer/Session，OPC UA 連線使用應用憑證/PFX。
 - **部分符合原因**：未對每個服務程序或裝置核發獨立且可輪替的身分；部分內部呼叫仍共用 Session/Bearer，缺乏服務身分盤點與生命週期管理。
 - **建議**：建立服務/裝置身分清冊；內部呼叫改用獨立服務帳號或 mTLS；憑證/Secret 由密鑰管理派發並定期輪替；撤銷流程納入維運。
 - **對應**：[NFR-SEC-001、NFR-OPC-007](../SRS/05_Nonfunctional_Requirements.md)、[IF-SW-005](../SRS/04_External_Interface_Requirements.md)、[SDS-08 §2、§8.1](../SDS/08_Security_Design.md)
 
-#### A.2.2 CR 1.02 RE(1) Unique identification and authentication（部分符合，HTTPS）
+#### A.2.2 CR 1.02 RE(1) Unique identification and authentication（部分符合）
 - **現況**：OPC UA 每個連線可設定獨立應用憑證/PFX，Certificate/create 可產生憑證。
 - **部分符合原因**：憑證機制未涵蓋所有服務程序；憑證輪替、撤銷、到期監控與信任清單管理仍依人工。
 - **建議**：為 Metadata/Runtime/Alarm 等服務建立專屬憑證或金鑰；自動化到期提醒與輪替；建立憑證撤銷與信任清單程序；記錄憑證指紋於啟動日誌。
 - **對應**：[FR-OPC-005、FR-OPC-021、FR-OPC-027](../SRS/07_OPCUA_Subsystem.md)、[NFR-OPC-008](../SRS/05_Nonfunctional_Requirements.md)、[SDS-14 §4.5](../SDS/14_OPCUA_Subsystem_Design.md)
 
-#### A.2.3 CR 1.05 Authenticator management（部分符合，HTTPS）
+#### A.2.3 CR 1.05 Authenticator management（部分符合）
 - **現況**：支援使用者改密、管理員重設；OPC UA 首次登入可強制改密。
 - **部分符合原因**：缺少密碼到期、歷史、複雜度與重用限制；重設流程與臨時密碼生命週期未標準化；未強制所有帳號定期更新。
 - **建議**：導入可設定的密碼政策（長度、複雜度、歷史次數、到期、首次改密）；重設採一次性臨時密碼並強制變更；所有變更寫入稽核；遷移至高強度雜湊。
 - **對應**：[FR-CLI-007](../SRS/03_Functional_Requirements.md)、[FR-META-029](../SRS/03_Functional_Requirements.md)、[NFR-SEC-003](../SRS/05_Nonfunctional_Requirements.md)、[SDS-08 §6.1](../SDS/08_Security_Design.md)、[SDS-11 R-004](../SDS/11_Design_Decisions_and_Risks.md)
 
-#### A.2.4 CR 1.07 Strength of password-based authentication（部分符合，HTTPS）
+#### A.2.4 CR 1.07 Strength of password-based authentication（部分符合）
 - **現況**：密碼以 SHA-256 儲存，無加鹽；登入經 HTTPS 保護。
 - **部分符合原因**：SHA-256 不具工作因子，無法抵抗離線暴力破解；無最小長度/複雜度/常見密碼阻擋；未加鹽導致相同密碼雜湊相同。
 - **建議**：改用 Argon2id 或 bcrypt（含成本參數與每帳號鹽）；登入端加入速率限制與鎖定；提供舊雜湊登入時自動升級（rehash）；政策與教育文件化。
 - **對應**：[NFR-SEC-003、NFR-SEC-004](../SRS/05_Nonfunctional_Requirements.md)、[SDS-08 §6.1](../SDS/08_Security_Design.md)、[SDS-11 R-004](../SDS/11_Design_Decisions_and_Risks.md)
 
-#### A.2.5 CR 1.10 Authenticator feedback（部分符合，HTTPS）
+#### A.2.5 CR 1.10 Authenticator feedback（部分符合）
 - **現況**：登入失敗回傳一般錯誤，不顯示密碼；HTTPS 防止竊聽。
 - **部分符合原因**：未明確保證回應時間與訊息一致（避免帳號列舉與時間側通道）；失敗原因與來源 IP 的稽核欄位未標準化；無逐步延遲或鎖定提示策略。
 - **建議**：統一失敗訊息與回應時間；對未知帳號與錯誤密碼採相同處理；記錄來源 IP、User-Agent、失敗原因碼；必要時加入指數退避；提供管理員可查詢的鎖定狀態。
@@ -78,7 +78,7 @@
 - **建議**：新增監督者/破窗（break-glass）角色，採臨時提權與自動到期；要求填寫理由與工單編號；雙人核准高風險操作；全程稽核與事後審查。
 - **對應**：[FR-CLI-076](../SRS/03_Functional_Requirements.md)、[NFR-AUD-001](../SRS/05_Nonfunctional_Requirements.md)、[SDS-08 §4.3](../SDS/08_Security_Design.md)、[SDS-11 R-024](../SDS/11_Design_Decisions_and_Risks.md)
 
-#### A.3.3 CR 2.03 Use control for portable and mobile devices（部分符合，HTTPS）
+#### A.3.3 CR 2.03 Use control for portable and mobile devices（部分符合）
 - **現況**：APP 可連線並接收推播；裝置以 FCM Token 註冊。
 - **部分符合原因**：未限制可存取裝置類型、版本或合規狀態；無裝置核准、遠端撤銷、遺失處理與 Session 綁定的完整流程。
 - **建議**：建立裝置註冊/核准清單；支援遠端撤銷 Token 與 Session；要求最低 OS/App 版本；可選用 MDM 或條件式存取；記錄裝置與推播稽核。
@@ -96,7 +96,7 @@
 - **建議**：外掛上架前執行靜態/動態掃描與簽章；以雜湊清單封鎖未核准版本；部署端限制外掛來源；建立安全開發與外掛審核紀錄。
 - **對應**：[FR-CLI-050、FR-CLI-093](../SRS/03_Functional_Requirements.md)、[NFR-SEC-010、NFR-SEC-014](../SRS/05_Nonfunctional_Requirements.md)、[SDS-08 §9](../SDS/08_Security_Design.md)
 
-#### A.3.6 SAR 2.04 RE(1) Mobile code authenticity check（部分符合，HTTPS）
+#### A.3.6 SAR 2.04 RE(1) Mobile code authenticity check（部分符合）
 - **現況**：Plugin 可經 HTTPS 下載，降低傳輸竄改風險。
 - **部分符合原因**：未驗證程式簽章或發行者；僅依 HTTPS 與伺服器信任，無法防止來源端被替換或內部檔案竄改。
 - **建議**：外掛採分離式簽章（如 Ed25519/GPG）並驗證憑證鏈；安裝/更新時比對雜湊；建立發行者信任清單與撤銷；拒絕未簽章或簽章失效的套件。
@@ -164,31 +164,25 @@
 - **建議**：新增啟動自我檢查與定期檢查（憑證到期、Session key 指紋一致、DB 權限、TLS 組態）；將結果輸出健康端點與稽核；異常時告警；提供可關閉的設定以因應相容性。
 - **對應**：[NFR-MNT-008](../SRS/05_Nonfunctional_Requirements.md)、[NFR-OPC-012](../SRS/05_Nonfunctional_Requirements.md)、[NFR-REL-002](../SRS/05_Nonfunctional_Requirements.md)、[SDS-10 §7](../SDS/10_Deployment_and_Operations.md)、[SDS-13](../SDS/13_Security_Remediation.md)
 
-#### A.4.4 CR 3.04 Software and information integrity（部分符合，HTTPS）
-- **現況**：具備版本欄位、checksum 與備份；更新檔可經 HTTPS 傳輸。
-- **部分符合原因**：更新/安裝檔未強制簽章驗證；無 anti-rollback 與更新來源固定；完整性檢查未涵蓋設定與外掛。
-- **建議**：建立簽署與驗證流程（安裝檔/容器/外掛）；版本清單與雜湊基準；更新前驗簽、更新後驗證；支援回復；將 SBOM 與雜湊納入發佈。
+#### A.4.4 CR 3.04 Software and information integrity（部分符合）
+- **現況**：具備版本欄位、checksum 與備份；出貨軟體經 Windows Authenticode/Linux GPG 簽章；更新檔可經 HTTPS 傳輸。
+- **部分符合原因**：更新來源固定與 anti-rollback 未強制；完整性檢查未涵蓋設定與外掛。
+- **建議**：安裝/更新前後驗簽並比對雜湊；版本清單與雜湊基準；更新來源固定與 anti-rollback；支援回復；將 SBOM 與雜湊納入發佈。
 - **對應**：[NFR-SEC-012](../SRS/05_Nonfunctional_Requirements.md)、[NFR-MNT-007](../SRS/05_Nonfunctional_Requirements.md)、[NFR-OPC-020](../SRS/05_Nonfunctional_Requirements.md)、[SDS-10 §9](../SDS/10_Deployment_and_Operations.md)、[SDS-11](../SDS/11_Design_Decisions_and_Risks.md)
 
-#### A.4.5 CR 3.04 RE(1) Authenticity of software and information（部分符合，HTTPS）
-- **現況**：軟體與資源可經 HTTPS 下載，傳輸具機密性與完整性。
-- **部分符合原因**：未驗證程式碼簽章與發行者；HTTPS 僅保證通道，若來源或伺服器被入侵仍可能取得惡意更新。
-- **建議**：採用程式碼簽章（Windows Authenticode、Linux GPG/cosign）並驗證憑證鏈；容器映像簽章與 provenance；下載頁提供雜湊；拒絕未簽章更新。
-- **對應**：[NFR-SEC-004、NFR-SEC-012](../SRS/05_Nonfunctional_Requirements.md)、[SDS-08 §7](../SDS/08_Security_Design.md)、[SDS-10 §9](../SDS/10_Deployment_and_Operations.md)
-
-#### A.4.6 CR 3.04 RE(2) Automated notification of integrity violations（部分符合）
+#### A.4.5 CR 3.04 RE(2) Automated notification of integrity violations（部分符合）
 - **現況**：稽核/日誌可記錄異常，維運可查詢。
 - **部分符合原因**：無自動化完整性監控（FIM）與告警；設定/程式/資料庫變更未建立基準與即時比對。
 - **建議**：部署 FIM 或定期基準比對（設定、二進位、DB schema）；異常時告警至 SIEM/維運；納入變更管理與例外清單；定期演練。
 - **對應**：[NFR-SEC-012](../SRS/05_Nonfunctional_Requirements.md)、[NFR-MNT-002](../SRS/05_Nonfunctional_Requirements.md)、[NFR-AUD-001](../SRS/05_Nonfunctional_Requirements.md)、[SDS-08 §11](../SDS/08_Security_Design.md)、[SDS-10 §7](../SDS/10_Deployment_and_Operations.md)
 
-#### A.4.7 CR 3.09 Protection of audit information（部分符合）
+#### A.4.6 CR 3.09 Protection of audit information（部分符合）
 - **現況**：稽核記錄含 SHA3-256 checksum，DB 具權限控管。
 - **部分符合原因**：未使用 WORM/一次性媒體；具 DB 管理權限者可刪除或重算；備份未強制不可變。
 - **建議**：稽核表改為 append-only 角色；串流至外部 SIEM/WORM；備份採物件鎖定/不可變儲存；定期驗證 checksum 與簽章；分離管理權限。
 - **對應**：[FR-META-042](../SRS/03_Functional_Requirements.md)、[NFR-AUD-003](../SRS/05_Nonfunctional_Requirements.md)、[SDS-08 §6.3](../SDS/08_Security_Design.md)、[SDS-11 R-017](../SDS/11_Design_Decisions_and_Risks.md)
 
-#### A.4.8 CR 3.10 Support for updates（部分符合，HTTPS）
+#### A.4.7 CR 3.10 Support for updates（部分符合）
 - **現況**：具備安裝/升版流程與回復說明；更新檔可經 HTTPS 傳輸。
 - **部分符合原因**：更新真實性、完整性與 anti-rollback 未強制；維護窗口、備份與回滾演練未標準化。
 - **建議**：更新包簽章與驗證、版本 pinning、更新前備份與檢查清單、失敗自動回復；維護窗口與通知流程；更新事件稽核。
@@ -208,7 +202,7 @@
 - **建議**：敏感緩衝使用後顯式清零；停用或保護 core dump/swap；使用記憶體鎖定（可行時）；建立清除測試與殘留掃描。
 - **對應**：[NFR-PRV-003](../SRS/05_Nonfunctional_Requirements.md)、[NFR-SEC-008](../SRS/05_Nonfunctional_Requirements.md)、[SDS-08 §12](../SDS/08_Security_Design.md)、[SDS-11 R-022](../SDS/11_Design_Decisions_and_Risks.md)
 
-#### A.5.3 CR 4.03 Use of cryptography（部分符合，HTTPS）
+#### A.5.3 CR 4.03 Use of cryptography（部分符合）
 - **現況**：TLS、AES-256-CBC、SHA-256 與 OPC UA 加密；敏感設定加密儲存。
 - **部分符合原因**：密碼雜湊未加鹽且無工作因子；AES-CBC 缺少完整性保護（建議 GCM）；金鑰輪替與演算法盤點未完整。
 - **建議**：密碼改 Argon2id/bcrypt；新資料採 AES-GCM 或 Encrypt-then-MAC；建立加密演算法/金鑰清冊與輪替政策；淘汰弱協定/演算法；可選 FIPS 模式。
@@ -216,7 +210,7 @@
 
 ### A.6 Timely Response to Events（FR6）
 
-#### A.6.1 CR 6.02 Continuous monitoring（部分符合，HTTPS）
+#### A.6.1 CR 6.02 Continuous monitoring（部分符合）
 - **現況**：具備 `systeminfo`、健康端點、日誌與系統狀態頁。
 - **部分符合原因**：未整合 SIEM/IDS/IPS；告警規則、關聯分析與值班流程不完整；監控資料保留與可視化有限。
 - **建議**：將日誌/指標匯出至 SIEM；建立登入失敗、權限變更、稽核異常、資源耗盡的告警規則；搭配 IDS/IPS 與網路流量監控；定義值班與升級流程。
@@ -224,7 +218,7 @@
 
 ### A.7 Resource Availability（FR7）
 
-#### A.7.1 CR 7.01 Denial of service protection（部分符合，HTTPS）
+#### A.7.1 CR 7.01 Denial of service protection（部分符合）
 - **現況**：xnginx `limit_req`、連線池/佇列、逾時與服務監督。
 - **部分符合原因**：限流門檻偏高且非依端點細分；無全面 DDoS 防護、來源信譽或上游清洗；WS 訊息與連線數限制不足。
 - **建議**：依端點（登入、查詢、WS）設定更嚴格限流；連線數/訊息大小上限；來源 IP 信譽與封鎖；上游 DDoS 清洗；定期壓測與調校。
@@ -248,7 +242,7 @@
 - **建議**：備份後自動計算雜湊並記錄；定期自動測試還原至隔離環境；驗證 schema/關鍵資料；失敗告警；保存與銷毀政策。
 - **對應**：[NFR-REL-009](../SRS/05_Nonfunctional_Requirements.md)、[NFR-OPC-016](../SRS/05_Nonfunctional_Requirements.md)、[SDS-10 §8](../SDS/10_Deployment_and_Operations.md)、[SDS-06](../SDS/06_Data_Model.md)
 
-#### A.7.5 CR 7.06 RE(1) Machine-readable reporting of current security settings（部分符合，HTTPS）
+#### A.7.5 CR 7.06 RE(1) Machine-readable reporting of current security settings（部分符合）
 - **現況**：設定檔與部分 API 可讀取；管理介面可查詢。
 - **部分符合原因**：無完整、版本化且可機器讀取的安全設定報表；缺少有效值（含預設/覆寫）與基準差異。
 - **建議**：提供 JSON 匯出 API（TLS、Session、CSRF、限流、密碼政策、憑證、稽核）；標示來源與有效值；支援基準比對與簽章；定期產出報表。

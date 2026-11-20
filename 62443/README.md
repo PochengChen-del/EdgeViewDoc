@@ -2,9 +2,11 @@
 
 本目錄依 `iec62443.csv`（IEC 62443-4-2 Requirements）逐項說明 EdgeView 的實作對照。
 
+> **通訊協定**：EdgeView 系統預設使用 HTTPS（xnginx `protocol: https`，TLS 入口 `8881`，後端僅綁 loopback）。HTTP `8880` 僅保留為相容性選項；使用者若自行改為 `protocol: http` 或 `both` 並以 HTTP 連線，其傳輸風險由使用者自行承擔，不納入本對照表的符合性判定。
+
 | 文件 | 內容 |
 |------|------|
-| [EdgeView_IEC62443-4-2_OPCUA.md](EdgeView_IEC62443-4-2_OPCUA.md) | 141 項需求逐條對照（狀態、HTTPS、實作說明）；附錄 A 部分符合項目明細（39 項）、附錄 B 不符合項目明細（8 項，含原因與建議） |
+| [EdgeView_IEC62443-4-2_OPCUA.md](EdgeView_IEC62443-4-2_OPCUA.md) | 141 項需求逐條對照（狀態、實作說明）；附錄 A 部分符合項目明細（38 項）、附錄 B 不符合項目明細（8 項，含原因與建議） |
 | [Evidence.md](Evidence.md) | 證據索引、SBOM、手冊截圖、測試/流程缺口 |
 | [evidence/](evidence/) | 15 張 OPC UA 手冊截圖（SS-01~SS-15） |
 
@@ -14,7 +16,7 @@
 - **資料源版本**：**OPC UA**（`DataSource=3`）
 - **元件**：
   - Qt Designer / Viewer（桌面、瀏覽器、APP）
-  - xnginx（地端 `8880/8881`、TLS、路由、限流、服務監督）
+  - xnginx（預設 HTTPS `8881`；`8880` 為相容性選項、TLS、路由、限流、服務監督）
   - Metadata Service
   - Runtime Proxy
   - OPC UA Data Agent（Runtime `28886`／History `28887`）
@@ -29,7 +31,6 @@
 | 狀態 | 說明 |
 |------|------|
 | 符合 | EdgeView 內建機制可滿足。 |
-| 符合（HTTPS） | 以 HTTPS/TLS 連線即可滿足（機密性、完整性、來源驗證等）。 |
 | 部分符合 | 有部分機制，仍需 OS/網路/流程或功能補強。 |
 | 不符合 | 目前無對應機制。 |
 | 不適用 | 該需求不適用 OPC UA 版 EdgeView。 |
@@ -37,9 +38,9 @@
 | 不適用（OS/硬體） | 由 OS、虛擬化、TPM、UPS 或硬體負責。 |
 | 不適用（網路設備） | EDR/NDR 等網路設備專屬需求，EdgeView 非網路設備。 |
 
-## 3. HTTPS 可解決項目
+## 3. 通訊協定（預設 HTTPS）
 
-以下類型以 **HTTPS/TLS** 為主要或必要控制，於對照表 `HTTPS` 欄標示 `是`；其中主要靠 HTTPS 者標示 `符合（HTTPS）` 或 `部分符合（HTTPS）`：
+系統預設以 **HTTPS/TLS** 通訊，以下需求之通訊保護由預設 HTTPS 提供：
 
 - 使用者/服務的遠端登入與 Session（CR 1.01、1.07、1.10、1.12、1.13、1.14）
 - 憑證/公鑰認證（CR 1.08、1.09）
@@ -49,7 +50,7 @@
 - 稽核程式化存取（CR 6.01 RE(1)）
 - DoS 限流與安全設定管理（CR 7.01、7.06）
 
-> 實務上建議關閉 HTTP `8880` 或將其 301 導向 HTTPS `8881`；憑證由 xnginx/Ingress 管理，後端僅綁 loopback。
+> 使用者若自行將 `protocol` 改為 `http` 或 `both` 並以 HTTP 連線，傳輸風險由使用者自行承擔，不納入本對照表的符合性判定。憑證由 xnginx/Ingress 管理，後端僅綁 loopback。
 
 ## 4. Web Server 不適用項目
 
@@ -67,10 +68,8 @@
 
 | 類別 | 數量 |
 |------|------|
-| 符合 | 20 |
-| 符合（HTTPS） | 11 |
-| 部分符合 | 35 |
-| 部分符合（HTTPS） | 4 |
+| 符合 | 32 |
+| 部分符合 | 38 |
 | 不符合 | 8 |
 | 不適用（含 Web Server/OS/硬體/網路設備） | 63 |
 | **合計** | **141** |
@@ -83,10 +82,9 @@
 | 密碼使用 SHA-256（未加鹽），無完整強度/到期/歷史政策 | CR 1.05、1.07 | SL1、SL3、SL4 | Argon2id/bcrypt + 複雜度/到期/歷史。 |
 | 無同時 Session 上限 | CR 2.07 | SL3 | Session 上限與管理。 |
 | 稽核無 WORM/容量門檻告警 | CR 2.09、3.09 | SL1、SL2、SL3、SL4 | 外部 WORM/SIEM、容量告警。 |
-| 更新/程式無強制簽章驗證 | CR 3.04、3.10 | SL1、SL2 | 簽章驗證與供應鏈安全。 |
+| 更新流程缺 anti-rollback/版本固定 | CR 3.04、3.10 | SL1、SL2 | 更新包驗簽、版本 pinning、失敗回復。 |
 | 無執行期安全功能自我測試/完整性監控 | CR 3.03 | SL1、SL4 | 啟動/執行期 self-test。 |
 | 無共享記憶體抹除驗證 | CR 4.02 | SL2、SL3 | 共享記憶體/暫存清除與驗證。 |
-| 部分服務管理仍可用 HTTP `8880` | CR 1.01、1.13、3.01、4.01、5.01、7.06 | SL1 | 關閉 HTTP `8880` 或僅導向 HTTPS `8881`。 |
 
 ## 7. 使用建議
 
