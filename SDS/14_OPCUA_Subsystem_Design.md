@@ -11,7 +11,7 @@ OPC UA 子系統由三個程式庫組成，職責分離：
 | `wax_opcua_agent_ui` | Vue 2.7 / Vue Router / Vuex / Axios | 設定 UI | `/sc/opcua/`（靜態） |
 | `wax_opcua_agent` | C# / ASP.NET Core / OPC UA .NET SDK | Data Agent（Runtime + History） | 上游 `127.0.0.1:28886`／`28887`；對外 `/ua`／`/uadb` |
 | `wax_opcua_alarm_agent` | Go / Gin / PostgreSQL | Alarm Engine | 上游 `127.0.0.1:28889`；對外 `/uaam` |
-| `xnginx` | Go + Nginx | 地端反向代理/服務監督 | `0.0.0.0:8880`／`8881` |
+| `xnginx` | Go + Nginx | 地端反向代理/服務監督 | `0.0.0.0:8881`（HTTPS，預設） |
 
 ```mermaid
 flowchart TB
@@ -19,7 +19,7 @@ flowchart TB
         Vue["Vue SPA<br/>/sc/opcua/"]
     end
     subgraph Edge["EdgeView Server"]
-        NG["xnginx<br/>8880/8881"]
+        NG["xnginx<br/>8881 HTTPS（預設）/ WSS"]
         Meta["Metadata Service<br/>:28883"]
         Proxy["Runtime Proxy<br/>:28884"]
         RT["Data Agent (Runtime)<br/>:28886"]
@@ -64,16 +64,18 @@ flowchart TB
 
 ## 2. 部署與連接埠
 
+> 對外協定預設為 **HTTPS**（WebSocket 為 **WSS**）：xnginx `protocol: https`、連接埠 `8881`；`http`／`both`（`8880`）僅相容舊版。以下「上游 loopback」皆為內部 HTTP，不對外。
+
 | 元件 | Port | 對外路徑（範例） | 說明 |
 |------|------|------------------|------|
-| xnginx HTTP/HTTPS | 8880/8881 | `/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam` | 地端統一入口 |
+| xnginx HTTPS/WSS | 8881（預設） | `/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam` | 地端統一入口 |
 | Metadata | 28883 | `/sc/api` | UI 與 Client 設定（上游 loopback） |
-| Runtime Proxy | 28884 | `/wxproxy`、`/ws/so` | 即時資料/告警摘要（上游 loopback） |
-| Data Agent Runtime | 28886 | `/ua` | 即時值、寫值、Tag 明細、瀏覽、憑證（上游 loopback） |
-| Data Agent History | 28887 | `/uadb` | 歷史值（上游 loopback） |
-| Alarm Agent | 28889 | `/uaam` | 告警清單/歷史/Ack/設定欄位（上游 loopback） |
+| Runtime Proxy | 28884 | `/wxproxy`、`/ws/so` | 即時資料/告警摘要（上游 loopback；對外 WSS） |
+| Data Agent Runtime | 28886 | `/ua` | 即時值、寫值、Tag 明細、瀏覽、憑證（上游 loopback；對外 HTTPS） |
+| Data Agent History | 28887 | `/uadb` | 歷史值（上游 loopback；對外 HTTPS） |
+| Alarm Agent | 28889 | `/uaam` | 告警清單/歷史/Ack/設定欄位（上游 loopback；對外 HTTPS） |
 | OPC UA Server | 依現場 | — | OPC UA TCP（可加密） |
-| UI | 8880/8881 | `/sc/opcua/` | xnginx 靜態/路由 |
+| UI | 8881（預設） | `/sc/opcua/` | xnginx 靜態/路由 |
 
 > Client 的 URL 規則：`Global.serverInfo.opcuaPathname` 預設 `/ua`；非根路徑時 `dburl = opcuaUrlPrefix + "db"`、`alarmurl = opcuaUrlPrefix + "am"`，即 `/uadb`、`/uaam`。
 
@@ -199,16 +201,17 @@ sequenceDiagram
 | `MyService:DriftSeconds` | `300` | 時間戳容差 |
 | `MyService:isHistory` | `false` | `true` 只允許歷史端點 |
 | `MyService:isUpdate` | `false` | 寫回設定後結束 |
-| `MyService:Kestrel:Protocol` | `http` | `http`/`https` |
+| `MyService:Kestrel:Protocol` | `https` | `http`/`https`；部署時 xnginx 以 `$protocol` 帶入（預設 `https`），appsettings 內建值為 `http` |
 | `MyService:Kestrel:Port` | `28886` | Runtime 或 History 實例的埠 |
 | `MyService:Kestrel:DbPort` | `28887` | 歷史埠參考值；實際仍由該進程的 `Port` 綁定（部署時以另一個 `appsettings` 設 `Port=28887`、`isHistory=true`） |
 | `MyService:Kestrel:Pfx`/`PfxPassword` | 空 | HTTPS 憑證 |
 | `MyService:LogUaServer` | `false` | OPC UA SDK 日誌 |
-| `MyService:MetadataBaseUrl` | `http://127.0.0.1:28883` | Metadata |
+| `MyService:MetadataBaseUrl` | `http://127.0.0.1:28883` | Metadata（loopback） |
 | `MyService:AlarmAgentEnabled` | `true` | 是否轉發 Alarm 欄位 |
-| `MyService:AlarmAgentBaseUrl` | `http://127.0.0.1:28889` | Alarm Agent |
+| `MyService:AlarmAgentBaseUrl` | `http://127.0.0.1:28889` | Alarm Agent（loopback） |
 
 - PostgreSQL 連線可由 `ENSAAS_SERVICES` 的 `postgresql[0].credentials` 覆寫。
+- 部署時由 xnginx 的 `protocol: https` 帶入 `Kestrel:Protocol=https`，對外即 HTTPS；僅在憑證缺失時才回退 HTTP（應視為異常）。
 - HTTPS 若 PFX 不存在，會嘗試使用 Proxy 的 `_cert` PEM；再失敗則回 HTTP。
 - `isUpdate=true` 時只把命令列參數寫回 `appsettings.json` 後結束。
 
@@ -369,8 +372,8 @@ sequenceDiagram
 
 | 鍵 | 預設 | 說明 |
 |----|------|------|
-| `alarm.net.http` | `0.0.0.0:8090`（預設值）；`config.yaml` 為 `:28889` | HTTP |
-| `alarm.net.https` | `-1` | HTTPS |
+| `alarm.net.http` | `0.0.0.0:8090`（預設值）；`config.yaml` 為 `:28889` | HTTP（loopback upstream） |
+| `alarm.net.https` | `-1` | HTTPS（對外 HTTPS 由 xnginx `protocol: https` 提供） |
 | `alarm.metadataReloadMs` | `30000` | 定期檢查 metadata |
 | `sessiontimeout` | `604800` | Session |
 | `opcuaAgent.enabled` | `true` | 輪詢 Data Agent |
@@ -660,13 +663,13 @@ Viewer/Preview 的即時 Tag 值與歷史 Tag 值由 Client **直接**呼叫 Dat
 1. 不經 Runtime Proxy，值更新更即時。
 2. Proxy 不需承擔高頻 Tag 查詢。
 3. 歷史查詢可獨立擴充 History Agent。
-4. 對外僅開 xnginx `8880/8881`，Agent 維持 loopback。
+4. 對外僅開 xnginx HTTPS `8881`（預設，WebSocket 為 WSS），Agent 維持 loopback；`8880` 僅相容舊版。
 
 ### 8.2 Client 端實作
 
 | 模組 | 行為 |
 |------|------|
-| `Common/Api/opcua.js` | `Opcua` 類別；建立 `http`（即時）、`httpdb`（歷史）、`httpalarm`（警報） |
+| `Common/Api/opcua.js` | `Opcua` 類別；建立 `http`（即時）、`httpdb`（歷史）、`httpalarm`（警報）通道；實際 scheme 依 `serverInfo.protocol`（預設 `https:`） |
 | `ui/component/datasource/Opcua.qml` | `getTagValue` → `tagvaluetext`；`getNodeList`/`getTagList`/`getTagAry` |
 | `Common/WADataSourceManager.qml` | `connect(dbID)` 讀 `DataSourceBody`；`dataValueCache`；33 ms 批次；`Global.treetimer` 週期掃描 |
 | `ui/component/chart/ChartWidgetHelper.qml` | `getRawDataLog`/`getDataLog` → History Agent |
@@ -677,15 +680,16 @@ Viewer/Preview 的即時 Tag 值與歷史 Tag 值由 Client **直接**呼叫 Dat
 ```mermaid
 flowchart TB
     A["DataSourceBody<br/>ip/port/dbport/alarmport/protocol"] --> B{"serverInfo.pathname == '/' ?"}
-    B -->|是（無 xnginx，legacy）| C["http://ip:port<br/>http://ip:dbport<br/>http://ip:alarmport"]
-    B -->|否（標準：xnginx）| D["opcuaUrlPrefix = protocol//host/ua<br/>dburl = /ua + db<br/>alarmurl = /ua + am"]
+    B -->|是（無 xnginx，legacy）| C["http://ip:port<br/>http://ip:dbport<br/>http://ip:alarmport<br/>（僅直連相容）"]
+    B -->|否（標準：xnginx）| D["opcuaUrlPrefix = protocol//host/ua<br/>protocol 預設 https<br/>dburl = /uadb、alarmurl = /uaam"]
 ```
 
 - 即時：`POST {url}/GetTagValueText/{projid}` → xnginx `/ua/`
 - 歷史：`POST {dburl}/GetDataLog/{projid}` 或 `/GetRawDataLog/{projid}` → xnginx `/uadb/`
 - 警報：`{alarmurl}/api/alarm/*` → xnginx `/uaam/`
 - 認證：`csrfToken` header；同 Metadata Session Cookie。
-- 僅在**無 xnginx 的根路徑部署**才直接使用 `DataSourceBody.ip/port/dbport/alarmport`。
+- 標準部署一律經 xnginx，`protocol` 預設 `https`（即 `https://<host>/ua`）；`opcuaUrlPrefix` 不再組出 `http://`。
+- 僅在**無 xnginx 的根路徑部署**才直接使用 `DataSourceBody.ip/port/dbport/alarmport`（legacy，非預設）。
 
 ### 8.4 更新週期
 
@@ -793,7 +797,7 @@ stateDiagram-v2
 | Data Agent Runtime | `isHistory=false` | 28886 |
 | Data Agent History | `isHistory=true` | 28887 |
 | Alarm Agent | `config.yaml` | 28889 |
-| UI | xnginx 靜態/路由 | 8880/8881 |
+| UI | xnginx 靜態/路由 | 8881（HTTPS，預設） |
 
 ### 11.2 xnginx（地端）/ K8s Ingress（BI）路由
 
@@ -807,7 +811,7 @@ stateDiagram-v2
 | `/wxproxy/*`、`/ws/so` | Runtime Proxy `:28884` |
 | `/system/*` | system `:28888` |
 
-> 地端路徑 `http(s)://<EVS>:8880|8881` 由 xnginx 提供。EdgeHub/BI 例外：Client 走 K8s Ingress `wxproxy<suffix>`，不由地端 xnginx 代理。
+> 地端路徑預設 `https://<EVS>:8881`（WebSocket `wss://<EVS>:8881`）由 xnginx 提供；`http://<EVS>:8880` 僅 `protocol: http|both` 時可用。EdgeHub/BI 例外：Client 走 K8s Ingress `wxproxy<suffix>`，不由地端 xnginx 代理。
 
 - WebSocket 需 `proxy_http_version 1.1`、`Upgrade`/`Connection`。
 - Body 大小依歷史/憑證需求調整。

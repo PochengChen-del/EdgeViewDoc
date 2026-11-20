@@ -406,27 +406,28 @@ flowchart LR
 | `io/http/persistentCookieJar.*` | Cookie 保存 |
 
 - 連線上限 255、佇列 1024、等待 120 秒（Viewer 10 秒）。
-- 地端 URL 以 `http(s)://<EVS>:8880|8881/sc` 為基底；xnginx 再依路徑轉發：
+- 地端 URL 預設以 `https://<EVS>:8881/sc` 為基底（`serverInfo.protocol` 預設 `https:`）；xnginx 再依路徑轉發：
   - `/sc/*` → Metadata `28883`
   - `/wxproxy/*` → Runtime Proxy `28884`
-  - `/ws/*` → Runtime Proxy WebSocket
+  - `/ws/*` → Runtime Proxy WebSocket（WSS）
   - `/ua/*` → OPC UA Data Agent `28886`
   - `/uadb/*` → OPC UA History `28887`
   - `/uaam/*` → OPC UA Alarm Agent `28889`
 - 常用 Metadata 路徑：`/api/about`、`/api/sysstatus`、`/api/alarm/*`、`/api/datalog/query`、`/api/datamodel/*`。
-- BI/EdgeHub（雲端）：`http(s)://wxproxy<suffix>/apihub`、`/dbmaster`、`/alarm`，經 K8s Ingress，不使用地端 xnginx。
+- BI/EdgeHub（雲端）：`https://wxproxy<suffix>/apihub`、`/dbmaster`、`/alarm`，經 K8s Ingress，不使用地端 xnginx。
 - OPC UA 邏輯直連（實體經 xnginx）：
   - 即時：`{opcuaUrlPrefix}/GetTagValueText/{projid}`（`/ua`）
   - 歷史：`{opcuaUrlPrefix}db/GetDataLog/{projid}`、`/GetRawDataLog/{projid}`（`/uadb`）
   - 警報：`{opcuaUrlPrefix}am/api/alarm/*`（`/uaam`）
-  - `opcuaUrlPrefix` 預設 `protocol//host/ua`；根路徑（無 xnginx）才用 `DataSourceBody` 的 `ip`/`port`/`dbport`/`alarmport`。
+  - `opcuaUrlPrefix` 預設 `protocol//host/ua`（`protocol` 預設 `https:`，即 `https://<host>/ua`）；根路徑（無 xnginx）才用 `DataSourceBody` 的 `ip`/`port`/`dbport`/`alarmport`。
+- 相容舊版：僅當伺服器 `protocol: http|both` 時才使用 `http://<EVS>:8880/sc`。
 
 ### 11.2 WebSocket
 
 | 元件 | 說明 |
 |------|------|
 | `Global.websocket` | `WaWebSocket` |
-| URL | `${wsprotocol}//${serverInfo.host}/ws/so` |
+| URL | `${wsprotocol}//${serverInfo.host}/ws/so`；`wsprotocol` 由 `serverInfo.protocol` 推導，預設 `https:` → **`wss:`** |
 | 功能 | 自動重連、topic 訂閱 |
 | 主題 | `login`、`waalarmsummary`、`systeminfo`、`recorddata`、`ehalarmsummary`、`opcuaalarmsummary`、`xalarmsummary` |
 | Controller | `Common/Api/ws/<Topic>Controller.qml` 自動建立 |
@@ -438,7 +439,7 @@ flowchart LR
     WDS["WADataSourceManager<br/>dataValueCache"]
     OQ["ui/component/datasource/Opcua.qml"]
     API["Common/Api/opcua.js"]
-    NG["xnginx<br/>8880/8881"]
+    NG["xnginx<br/>8881（HTTPS，預設）"]
     RT["Data Agent :28886"]
     HIS["History Agent :28887"]
     ALM["Alarm Agent :28889"]

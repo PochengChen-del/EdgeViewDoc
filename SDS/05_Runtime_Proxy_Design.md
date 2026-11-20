@@ -91,8 +91,8 @@ sequenceDiagram
 | `datasource` | int | 1 | 1=WebAccess、2=BI、3=OPC UA、4=X |
 | `driftseconds` | int | 300 | 時間戳容許漂移 |
 | `sessiontimeout` | int | 604800 | Session 秒數 |
-| `proxy.net.http` | `host`/`port` | `127.0.0.1:28884` | 服務位址 |
-| `proxy.net.https` | `host`/`port` | `localhost:-1` | HTTPS（停用） |
+| `proxy.net.http` | `host`/`port` | `127.0.0.1:28884` | 服務位址（loopback） |
+| `proxy.net.https` | `host`/`port` | `localhost:-1` | HTTPS（對外 HTTPS／WSS 由 xnginx `protocol: https` 提供） |
 | `cert` | `crt`/`key` | — | TLS 憑證 |
 | `log` | `filemaxmb`/`tofile` | 15/false | 日誌 |
 | `systeminfo_interval_ms` | int | 3000 | 系統資訊輪詢 |
@@ -249,7 +249,7 @@ sequenceDiagram
 
 ### 5.1 路由
 
-> 地端 Client 對外為 `http(s)://<EVS>:8880|8881/wxproxy/record/*`，xnginx 去掉 `/wxproxy` 後轉發至 Runtime `/record/*`。
+> 地端 Client 對外預設為 `https://<EVS>:8881/wxproxy/record/*`（WebSocket 為 `wss://`），xnginx 去掉 `/wxproxy` 後轉發至 Runtime `/record/*`；`http://<EVS>:8880` 僅在 `protocol: http|both` 時提供。
 
 | Method | Path | 認證 | 用途 |
 |--------|------|------|------|

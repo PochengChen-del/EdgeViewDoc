@@ -20,7 +20,7 @@ flowchart TB
         LAN[區網使用者]
     end
     subgraph Edge["EdgeView Server"]
-        NG[xnginx / TLS<br/>8880 / 8881]
+        NG[xnginx / TLS<br/>8881（預設）/ WSS]
         Ingress[K8s Ingress<br/>BI only]
         Meta[Metadata]
         Proxy[Runtime]
@@ -33,8 +33,8 @@ flowchart TB
         X[X]
         OPC[OPC UA]
     end
-    Browser -->|地端 HTTP/HTTPS| NG
-    LAN -->|地端 HTTP/HTTPS| NG
+    Browser -->|地端 HTTPS/WSS| NG
+    LAN -->|地端 HTTPS/WSS| NG
     Browser -->|BI HTTPS| Ingress
     LAN -->|BI HTTPS| Ingress
     NG --> Meta
@@ -198,11 +198,13 @@ sequenceDiagram
 
 ## 7. 傳輸安全
 
+> **預設原則**：對外協定預設一律為 **HTTPS**，WebSocket 一律為 **WSS**。xnginx `protocol: https` 為預設值，對外連接埠 `8881`；`http`／`both`（`8880`）僅為相容舊版選項，正式環境不應啟用。
+
 | 介面 | 現況 | 建議 |
 |------|------|------|
-| Client ↔ Metadata | HTTP/HTTPS 可選 | 正式環境強制 HTTPS |
-| Client ↔ Runtime | HTTP/HTTPS/WS 可選 | 強制 WSS |
-| xnginx（地端） | TLS 8881、HTTP 8880 | 憑證管理、限流、WS Upgrade |
+| Client ↔ Metadata | 預設 HTTPS（xnginx 8881） | 維持強制 HTTPS |
+| Client ↔ Runtime | 預設 HTTPS／WSS（xnginx 8881） | 維持強制 WSS |
+| xnginx（地端） | 預設 TLS 8881；HTTP 8880 僅 `protocol: http 或 both` | 憑證管理、限流、WS Upgrade |
 | K8s Ingress（BI） | TLS | 憑證管理/自動續期 |
 | Runtime → 外部 | 全域 `InsecureSkipVerify` 已移除；個別 client 仍停用 | 逐步改為系統 CA/指定 CA（R-002-R） |
 | Metadata → 外部 | 部分 client 停用驗證 | 全面驗證（R-002-R） |
@@ -240,7 +242,7 @@ sequenceDiagram
 |------|------------|-------------|---------|
 | 認證 | Metadata Session + `csrfToken` 或 loopback Bearer | Session + CSRF、Basic、loopback Bearer | Metadata Session + `settings-csrfToken` |
 | 授權 | Metadata 專案/角色 | Metadata 專案/角色 | `role`/`permissions` |
-| 傳輸 | HTTP/HTTPS、PFX | HTTP/HTTPS | HTTPS（建議） |
+| 傳輸 | 對外 HTTPS（xnginx 預設）、PFX；loopback HTTP | 對外 HTTPS（xnginx 預設）；loopback HTTP | HTTPS（預設） |
 | OPC UA | SecurityMode/Policy、UserIdentity、PFX | 透過 Data Agent | — |
 | 內部呼叫 | Bearer（`aes_secret` 推導） | Bearer（輪詢 Data Agent） | — |
 | 稽核 | Serilog | 警報歷史/Ack | Metadata 稽核 |

@@ -11,7 +11,7 @@
 | OPC UA Alarm Agent | `wxalarmagent` / `.exe` | Linux、Windows | Go 靜態執行檔 |
 | OPC UA 設定 UI | `dist/`（Vue build） | 靜態（Nginx） | `/sc/opcua/` |
 | 安裝/授權工具 | `wxlic`、`activate.enc`、`graphix.lic` | 伺服器主機 | 手冊 §1.5.4 |
-| xnginx | `xnginx` + `_nginx` | 主機（Windows/Linux） | 地端 `8880/8881`、TLS、路由、限流、服務監督 |
+| xnginx | `xnginx` + `_nginx` | 主機（Windows/Linux） | 地端 HTTPS/WSS `8881`（預設）、TLS、路由、限流、服務監督 |
 | K8s Ingress | Nginx Ingress | K8s | 僅 EdgeHub/BI、TLS、body 75M、WebSocket |
 | PostgreSQL | 外部/內建 | — | `waxconfig`、`waxalarm`、Session |
 
@@ -25,7 +25,7 @@ flowchart TB
         W[Browser WASM]
     end
     subgraph Local["地端主機"]
-        NG[xnginx<br/>8880/8881]
+        NG[xnginx<br/>8881 HTTPS（預設）/ WSS]
         MD[Metadata<br/>:28883]
         PD[Runtime Proxy<br/>:28884]
         AD[OPC UA Agent<br/>:28886]
@@ -77,14 +77,16 @@ flowchart TB
 
 ### 2.1 手冊安裝/連線基準
 
+> 對外協定預設為 **HTTPS**（xnginx `protocol: https`，連接埠 `8881`），WebSocket 預設為 **WSS**；`http://<host>:8880` 僅在 `protocol: http|both` 時提供，屬相容舊版選項。
+
 | 項目 | 值 |
 |------|----|
 | 伺服器安裝 | WebAccess 版／OPC UA 版；Linux `.inst` + systemd |
 | 服務管理 | `https://<host>:8881/system` |
 | WebAccess 設定 | `https://<host>:8881/SC/settings` |
 | OPC UA 設定 | `https://<host>:8881/sc/opcua` |
-| 瀏覽器 HTTP | `http://<host>:8880/sc/` |
-| 瀏覽器 HTTPS | `https://<host>:8881/sc/` |
+| 瀏覽器（預設） | `https://<host>:8881/sc/` |
+| 瀏覽器（相容舊版，`protocol: http 或 both`） | `http://<host>:8880/sc/` |
 | 桌面安裝路徑 | `C:\Advantech\WebAccess\SCClient`、`/opt/advantech/webaccess/scclient` |
 | 授權 | `wxlic activate/deactivate`、`graphix.lic` |
 
@@ -92,11 +94,11 @@ flowchart TB
 
 | 元件 | 設定 | 埠 | 備註 |
 |------|------|----|------|
-| xnginx | `xnginx.opcua.yaml` | 8880/8881 | `/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam` |
+| xnginx | `xnginx.opcua.yaml` | 8881（HTTPS，預設） | `/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam` |
 | Data Agent Runtime | `isHistory=false` | 28886 | 即時/寫值/瀏覽/憑證 |
 | Data Agent History | `isHistory=true` | 28887 | 歷史查詢 |
 | Alarm Agent | `config.yaml` | 28889 | 需 `waxalarm` |
-| UI | `VUE_APP_PUBPATH=/sc/opcua/` | 8880/8881 | xnginx 靜態/路由 |
+| UI | `VUE_APP_PUBPATH=/sc/opcua/` | 8881（HTTPS，預設） | xnginx 靜態/路由 |
 | OPC UA Server | 現場 | 依設定 | 可加密 |
 
 - Runtime/History 使用同一映像，以不同 `appsettings.json`/`isHistory` 啟動。
@@ -113,6 +115,7 @@ flowchart TB
 | `xnginx.x.yaml` | 4 X | `waxconfig`、`waxapi`、`waxnotify`、`sc`、`wxproxy` | 僅 HTTPS `8881`；無 system |
 
 - `xnginx` 會依 `apps[].app_name` 產生 `/sc/`、`/wxproxy/`、`/ua/`、`/uadb/`、`/uaam/`、`/ws/`、`/system/` location 與 upstream。
+- `protocol: https` 為預設對外協定（WebSocket 即 `wss`）；`nginx.net.https.port=8881` 為預設入口，`http.port=8880` 僅在 `protocol: http|both` 時提供。
 - `nginx.net.http.port=8880`、`https.port=8881`；`websocket: true` 的 app 產生 `/ws/` Upgrade 設定。
 - `ratelimit` 產生 `limit_req_zone`；`no_reverse_proxy: true`（`wxlog`）不建立 upstream。
 - `xnginx` 同時負責啟動/監督 `WxMetaService`、`wxproxy`、`wax_opcua_agent`、`wxalarmagent`。
@@ -161,7 +164,7 @@ flowchart TB
 
 | 項目 | K8s Ingress（BI） | xnginx（地端） |
 |------|-------------------|----------------|
-| 入口 | ClusterIP + Ingress | `8880`/`8881` |
+| 入口 | ClusterIP + Ingress | `8881`（HTTPS，預設） |
 | 路徑 | `/.*` 或 `wxproxy` 前綴 | `/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam`、`/system` |
 | body | 75 MB | 無限制（`client_max_body_size 0`） |
 | timeout | 3600 秒（WS） | connect 300s、read/send 300s、keepalive 6000s |
@@ -235,7 +238,7 @@ flowchart TB
 
 | 服務 | Port | 方向 |
 |------|------|------|
-| xnginx HTTP/HTTPS | 8880/8881 | Client → xnginx（地端） |
+| xnginx HTTPS/WSS | 8881（預設） | Client → xnginx（地端） |
 | Metadata HTTP | 28883 | xnginx → Metadata |
 | Runtime HTTP | 28884 | xnginx → Runtime |
 | Runtime WS | 28884 `/so` | xnginx `/ws` → Runtime |
@@ -245,7 +248,7 @@ flowchart TB
 | OPC UA Alarm Agent | 28889 | xnginx `/uaam` → Alarm |
 | 服務管理 system | 28888 | xnginx `/system` |
 | OPC UA Server | 依現場 | Agent → OPC UA |
-| OPC UA 設定 UI | 8880/8881 | `/sc/opcua/` |
+| OPC UA 設定 UI | 8881（預設） | `/sc/opcua/` |
 | K8s Ingress（BI） | 443 | Client → Ingress → `wxproxy`/Edge365 |
 | Edge365 | 443/80 | 服務 → 外部 |
 | Firebase | 443 | Pod → 外部 |

@@ -2,17 +2,19 @@
 
 ## 1. 通訊總覽
 
-| 介面 | 服務 | 預設 | 協定 | 用途 |
+> **協定預設值**：所有對外（Client 可見）介面預設為 **HTTPS**，WebSocket 預設為 **WSS**。地端由 xnginx 的 `protocol: https`（`wax_nginx_ingress/xnginx*.yaml`）提供，對外連接埠預設 `8881`；`http`／`both`（`8880`）僅保留給相容舊版。內部服務以 loopback（`127.0.0.1`）HTTP 提供，不對外暴露。
+
+| 介面 | 服務 | 預設 | 協定（預設） | 用途 |
 |------|------|------|------|------|
-| xnginx（地端入口） | xnginx | `0.0.0.0:8880`／`8881` | HTTP/HTTPS | `/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam` |
-| Metadata REST | Metadata | `127.0.0.1:28883` | HTTP/HTTPS | 設定、認證、資源 |
-| Metadata 檔案 | Metadata | 同上 | HTTP | 縮圖、圖片、檔案、字型 |
-| Runtime REST | Runtime | `127.0.0.1:28884` | HTTP/HTTPS | Record 查詢/預覽 |
-| Runtime WS | Runtime | `/ws/so`（xnginx）／BI：K8s Ingress | WebSocket | 即時資料/告警/系統 |
-| OPC UA Data Agent | Data Agent | `/ua`、`/uadb` | HTTP | 即時/歷史 Tag |
-| OPC UA Alarm Agent | Alarm Agent | `/uaam` | HTTP | 警報清單/歷史/Ack |
+| xnginx（地端入口） | xnginx | `0.0.0.0:8881`（HTTPS） | HTTPS／WSS | `/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam` |
+| Metadata REST | Metadata | `127.0.0.1:28883` | HTTP（loopback）；對外 HTTPS | 設定、認證、資源 |
+| Metadata 檔案 | Metadata | 同上 | 對外 HTTPS | 縮圖、圖片、檔案、字型 |
+| Runtime REST | Runtime | `127.0.0.1:28884` | HTTP（loopback）；對外 HTTPS | Record 查詢/預覽 |
+| Runtime WS | Runtime | `/ws/so`（xnginx）／BI：K8s Ingress | **WSS** | 即時資料/告警/系統 |
+| OPC UA Data Agent | Data Agent | `/ua`、`/uadb` | HTTP（loopback）；對外 HTTPS | 即時/歷史 Tag |
+| OPC UA Alarm Agent | Alarm Agent | `/uaam` | HTTP（loopback）；對外 HTTPS | 警報清單/歷史/Ack |
 | K8s Ingress（BI） | Edge365 | `wxproxy<suffix>` | HTTPS | `/apihub`、`/dbmaster`、`/alarm` |
-| Swagger | 各服務 | `/swagger/*any` | HTTP | API 文件 |
+| Swagger | 各服務 | `/swagger/*any` | 對外 HTTPS | API 文件 |
 
 ## 2. REST 慣例
 
@@ -641,8 +643,9 @@ POST /api/alarm/ack
 
 | 模式 | URL |
 |------|-----|
-| WebAccess/OPC UA/X（地端） | `ws(s)://<host>:8880|8881/ws/so` → xnginx → Runtime `/so` |
-| BI/Edge365（雲端） | `ws(s)://wxproxy<suffix>/` → K8s Ingress |
+| WebAccess/OPC UA/X（地端，預設） | `wss://<host>:8881/ws/so` → xnginx → Runtime `/so` |
+| WebAccess/OPC UA/X（相容舊版 `protocol: http`） | `ws://<host>:8880/ws/so` → xnginx → Runtime `/so` |
+| BI/Edge365（雲端） | `wss://wxproxy<suffix>/` → K8s Ingress |
 
 ### 5.2 請求格式
 

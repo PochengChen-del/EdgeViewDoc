@@ -7,7 +7,7 @@ EdgeView 採三層式架構：**Client（Qt/QML）**、**EdgeView Server（Nginx
 通訊路徑依資料源區分：
 
 1. **EdgeHub/BI（雲端）**：Client 透過 **K8s Ingress** 連線 `wxproxy<suffix>` 與 Edge365 雲端服務。
-2. **WebAccess / OPC UA / X（地端）**：Client 透過 **xnginx reverse proxy**（HTTP `8880`／HTTPS `8881`）統一路由到 Metadata、Runtime Proxy、OPC UA Data Agent、OPC UA Alarm Agent。
+2. **WebAccess / OPC UA / X（地端）**：Client 透過 **xnginx reverse proxy**（預設 HTTPS `8881`，`protocol: https`；WebSocket 即 WSS）統一路由到 Metadata、Runtime Proxy、OPC UA Data Agent、OPC UA Alarm Agent。
 3. **OPC UA 設定 UI**：同樣經 xnginx `/sc/opcua` 與 `/sc/api`。
 
 Client 對 OPC UA Agent 的呼叫在**邏輯上是直連**（不經 Runtime Proxy），但**實體上仍經 xnginx**（`/ua`、`/uadb`、`/uaam`）。
@@ -21,7 +21,7 @@ flowchart TB
     end
 
     subgraph Edge["EdgeView Server / 地端"]
-        NG["xnginx<br/>HTTP :8880 / HTTPS :8881<br/>rate limit / TLS / WS"]
+        NG["xnginx<br/>HTTPS :8881（預設）/ WSS<br/>rate limit / TLS / WS"]
         Meta["Metadata Service<br/>:28883"]
         Proxy["Runtime Proxy<br/>:28884"]
         RT["OPC UA Data Agent<br/>Runtime :28886"]
@@ -123,7 +123,7 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    REQ[HTTP/WS Request] --> ROUTES[routes<br/>註冊、驗證、時間戳]
+    REQ[HTTPS/WSS Request] --> ROUTES[routes<br/>註冊、驗證、時間戳]
     ROUTES --> CTRL[controller<br/>解析、回應]
     CTRL --> SVC[service<br/>Application、整合、輪詢]
     SVC --> MODEL[model<br/>資料結構、SQL]
@@ -137,7 +137,8 @@ flowchart LR
 
 | 項目 | 設計 |
 |------|------|
-| 入口 | HTTP `8880`、HTTPS `8881` |
+| 入口 | HTTPS `8881`（預設，`protocol: https`）；HTTP `8880` 僅相容舊版 |
+| 協定 | 對外預設 HTTPS／WSS；內部 loopback 為 HTTP |
 | 路由 | 依 `apps[].app_name` 產生 `/{app_name}/` location 與 upstream |
 | WebSocket | `websocket: true` 的 app 產生 `/ws/` Upgrade/Connection |
 | 限流 | 每個 app `limit_req_zone`（預設 `4090r/s`、burst 256、`429`） |
@@ -155,6 +156,8 @@ flowchart LR
 | `/uaam/` | `uaam:28889` | OPC UA Alarm |
 | `/system/` | `system:28888` | 服務管理 |
 
+> 所有 `xnginx*.yaml` 的 `protocol` 預設為 `https`（WebSocket 即 `wss`）；`http`／`both`（`8880`）僅為相容舊版。
+>
 > `xnginx.x.yaml` 只開 HTTPS `8881`，apps 為 `waxconfig`/`waxapi`/`waxnotify`/`sc`/`wxproxy`，無 `system`。
 >
 > Nginx `proxy_pass .../` 會去掉前綴，因此 Client `/ua/GetTagValueText` → Agent `/GetTagValueText`；`/sc/api` → Metadata `/api`；`/wxproxy/record` → Runtime `/record`。
@@ -163,17 +166,15 @@ flowchart LR
 
 | 元件 | 預設位址 | 協定 | 備註 |
 |------|----------|------|------|
-| 元件 | 預設位址 | 協定 | 備註 |
-|------|----------|------|------|
 | Client | 動態 | — | 桌面/行動/瀏覽器 |
-| **xnginx HTTP/HTTPS** | `0.0.0.0:8880`／`8881` | HTTP/HTTPS | **地端統一入口** |
-| Metadata HTTP | `127.0.0.1:28883` | HTTP | xnginx `/sc/` upstream |
-| Runtime HTTP/WS | `127.0.0.1:28884` | HTTP/WS | xnginx `/wxproxy/`、`/ws/` upstream |
-| OPC UA Data Agent（Runtime） | `127.0.0.1:28886` | HTTP | xnginx `/ua/` upstream |
-| OPC UA Data Agent（History） | `127.0.0.1:28887` | HTTP | xnginx `/uadb/` upstream |
-| OPC UA Alarm Agent | `127.0.0.1:28889` | HTTP | xnginx `/uaam/` upstream |
-| 服務管理 system | `127.0.0.1:28888` | HTTP | xnginx `/system/` |
-| OPC UA 設定 UI | `/sc/opcua/` | HTTP | xnginx 靜態/路由 |
+| **xnginx HTTPS/WSS** | `0.0.0.0:8881` | HTTPS／WSS | **地端統一入口（預設）**；`http://:8880` 僅 `protocol: http 或 both` |
+| Metadata HTTP | `127.0.0.1:28883` | HTTP（loopback） | xnginx `/sc/` upstream；對外 HTTPS |
+| Runtime HTTP/WS | `127.0.0.1:28884` | HTTP／WS（loopback） | xnginx `/wxproxy/`、`/ws/` upstream；對外 HTTPS／WSS |
+| OPC UA Data Agent（Runtime） | `127.0.0.1:28886` | HTTP（loopback） | xnginx `/ua/` upstream；對外 HTTPS |
+| OPC UA Data Agent（History） | `127.0.0.1:28887` | HTTP（loopback） | xnginx `/uadb/` upstream；對外 HTTPS |
+| OPC UA Alarm Agent | `127.0.0.1:28889` | HTTP（loopback） | xnginx `/uaam/` upstream；對外 HTTPS |
+| 服務管理 system | `127.0.0.1:28888` | HTTP（loopback） | xnginx `/system/`；對外 HTTPS |
+| OPC UA 設定 UI | `/sc/opcua/` | 對外 HTTPS | xnginx 靜態/路由 |
 | PostgreSQL | 依設定 | PostgreSQL | `waxconfig`/`waxalarm` |
 | OPC UA Server | 依現場 | OPC UA TCP | 可加密 |
 | K8s Ingress | 依環境 | HTTPS | **僅 EdgeHub/BI** `/apihub`、`/dbmaster`、`/alarm`、`wxproxy` |
@@ -189,7 +190,7 @@ flowchart TB
     end
 
     subgraph Local["地端 EdgeView Server"]
-        NG[xnginx<br/>HTTP :8880 / HTTPS :8881]
+        NG[xnginx<br/>HTTPS :8881（預設）/ WSS]
         META[Metadata :28883]
         PROXY[Runtime Proxy :28884]
         AGENT[OPC UA Agent :28886]
@@ -338,7 +339,7 @@ sequenceDiagram
 5. 瀏覽器模式不支援原生檔案系統、Crashpad、Session 監控。
 6. OPC UA Data Agent 分 Runtime/History 兩個進程；Client 經 xnginx `/ua`、`/uadb` 存取，不直接連 28886/28887。
 7. Alarm Agent 與 Data Agent 共用 Metadata Session key；多副本需共享 DB 與一致的 `aes_secret`。
-8. 地端所有服務（Metadata/Runtime/Data Agent/Alarm）只綁 loopback，對外僅 xnginx `8880/8881`。
+8. 地端所有服務（Metadata/Runtime/Data Agent/Alarm）只綁 loopback，對外僅 xnginx HTTPS `8881`（預設，WebSocket 為 WSS）；HTTP `8880` 僅相容舊版。
 9. EdgeHub/BI 走 K8s Ingress，不使用地端 xnginx；兩者路徑與認證需分別測試。
 
 ## 8. 與需求對照

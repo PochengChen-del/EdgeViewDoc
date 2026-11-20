@@ -230,7 +230,7 @@
 
 | 功能 | 設計 |
 |------|------|
-| 入口 | xnginx `8880/8881`；`/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam`、`/system` |
+| 入口 | xnginx HTTPS `8881`（預設，WebSocket 為 WSS）；`/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam`、`/system`；`8880` 僅相容舊版 |
 | 設定入口 | `https://<host>:8881/SC/settings`（WA）、`/sc/opcua`（OPC UA）、`/system` |
 | 資料來源 | `DataSource`/`DataSourceBody`、`/api/DataSource/*` |
 | 工程 DB 匯出/匯入 | `/api/setting/export`、`/api/setting/import`、`/api/setting/projlist` |

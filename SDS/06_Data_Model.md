@@ -184,11 +184,11 @@ erDiagram
 |----|------|
 | `ip` / `host` | 主機 |
 | `port` | 埠 |
-| `protocol` | `http`/`https`/`tcp` |
+| `protocol` | `http`/`https`/`tcp`；HTTP 類型資料源預設 `https` |
 | `username` | 帳號 |
 | `password` | 密碼（可能加密） |
 | `database` / `dbname` | 資料庫名 |
-| `url` | HTTP/Influx 端點 |
+| `url` | HTTPS/Influx 端點 |
 | `token` / `org` / `bucket` | Influx v2 |
 
 `Recordbody.item` 常見鍵：
