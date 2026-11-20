@@ -9,6 +9,7 @@
 | 需求文件 | Requirement Spec | Git Repo | [SRS](https://github.com/PochengChen-del/EdgeViewDoc/tree/main/SRS) | 需求、介面、NFR、驗收準則 |
 | 設計文件 | 系統架構、功能設計文件 | Git Repo | [SDS](https://github.com/PochengChen-del/EdgeViewDoc/tree/main/SDS) | 架構、模組、資料、流程、部署 |
 | 原始碼與服務說明 | 原始碼與 README | Git Repo | [README 說明](https://github.com/PochengChen-del/EdgeViewDoc/blob/main/README.md) | 程式碼基準、服務責任、整合 |
+| IEC 62443 | 62443-4-1 Requirements | Git Repo| [EdgeView_IEC62443-4-1_OPCUA](https://github.com/PochengChen-del/EdgeViewDoc/blob/main/62443/EdgeView_IEC62443-4-1_OPCUA.md) |
 | IEC 62443 | 62443-4-2 Requirements | Git Repo | [EdgeView_IEC62443-4-2_OPCUA](https://github.com/PochengChen-del/EdgeViewDoc/blob/main/62443/EdgeView_IEC62443-4-2_OPCUA.md) | 逐條符合性對照 |
 | IEC 62443 證據 | Evidence Index | Git Repo | [62443/Evidence.md](62443/Evidence.md) | 需求 ↔ 文件/程式碼/設定/SBOM/手冊截圖 |
 | 手冊截圖證據 | Manual Screenshots | Git Repo | [SRS-09](SRS/09_Manual_Screenshot_Evidence.md)、[SDS-16](SDS/16_Manual_Screenshot_Mapping.md) | 手冊截圖 ↔ 需求/設計/CR |
