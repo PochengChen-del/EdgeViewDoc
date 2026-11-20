@@ -4,7 +4,7 @@
 
 | 文件 | 內容 |
 |------|------|
-| [EdgeView_IEC62443-4-2_OPCUA.md](EdgeView_IEC62443-4-2_OPCUA.md) | 141 項需求逐條對照（狀態、HTTPS、實作說明） |
+| [EdgeView_IEC62443-4-2_OPCUA.md](EdgeView_IEC62443-4-2_OPCUA.md) | 141 項需求逐條對照（狀態、HTTPS、實作說明）；附錄 A 部分符合項目明細（39 項）、附錄 B 不符合項目明細（8 項，含原因與建議） |
 | [Evidence.md](Evidence.md) | 證據索引、SBOM、手冊截圖、測試/流程缺口 |
 | [evidence/](evidence/) | 15 張 OPC UA 手冊截圖（SS-01~SS-15） |
 
