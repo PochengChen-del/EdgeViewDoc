@@ -799,7 +799,7 @@ stateDiagram-v2
 | Alarm Agent | `config.yaml` | 28889 |
 | UI | xnginx 靜態/路由 | 8881（HTTPS，預設） |
 
-### 11.2 xnginx（地端）/ K8s Ingress（BI）路由
+### 11.2 xnginx（地端）/ K8s Ingress（EdgeHub）路由
 
 | 路徑 | 目標 |
 |------|------|
@@ -811,7 +811,7 @@ stateDiagram-v2
 | `/wxproxy/*`、`/ws/so` | Runtime Proxy `:28884` |
 | `/system/*` | system `:28888` |
 
-> 地端路徑預設 `https://<EVS>:8881`（WebSocket `wss://<EVS>:8881`）由 xnginx 提供；`http://<EVS>:8880` 僅 `protocol: http|both` 時可用。EdgeHub/BI 例外：Client 走 K8s Ingress `wxproxy<suffix>`，不由地端 xnginx 代理。
+> 地端路徑預設 `https://<EVS>:8881`（WebSocket `wss://<EVS>:8881`）由 xnginx 提供；`http://<EVS>:8880` 僅 `protocol: http|both` 時可用。EdgeHub 例外：Client 走 K8s Ingress `wxproxy<suffix>`，不由地端 xnginx 代理。
 
 - WebSocket 需 `proxy_http_version 1.1`、`Upgrade`/`Connection`。
 - Body 大小依歷史/憑證需求調整。

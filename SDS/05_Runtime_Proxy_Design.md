@@ -6,13 +6,13 @@
 
 ## 1. 設計概述
 
-Runtime Proxy 是 EdgeView 的**Record 執行期服務**；地端 Client 經 xnginx `/wxproxy`、`/ws` 存取，EdgeHub/BI 經 K8s Ingress。負責：
+Runtime Proxy 是 EdgeView 的**Record 執行期服務**；地端 Client 經 xnginx `/wxproxy`、`/ws` 存取，EdgeHub 經 K8s Ingress。負責：
 
 1. 依 `Record` 定義查詢多種資料源（PostgreSQL、SQL Server、Oracle、MySQL、InfluxDB v1/v2、HTTP）。
 2. 以 WebSocket 提供 Record 即時資料、告警摘要、系統資訊。
-3. 代理 WebAccess、EdgeHub/BI、X 的資料與指令，以及 OPC UA **告警摘要**。
+3. 代理 WebAccess、EdgeHub、X 的資料與指令，以及 OPC UA **告警摘要**。
 4. 發送 Firebase 推播。
-5. 提供 BI 模式（Edge365）相容的 `/` WebSocket 進入點。
+5. 提供 EdgeHub 模式（Edge365）相容的 `/` WebSocket 進入點。
 
 > **不負責** OPC UA 即時/歷史 Tag 值。該資料由 Client 邏輯直連 OPC UA Data Agent，實體經 xnginx `/ua`、`/uadb`，見 SDS-14 §8。
 
@@ -79,7 +79,7 @@ sequenceDiagram
 | TLS | 全域 `InsecureSkipVerify` 已移除；個別 client 仍停用驗證（R-002-R） |
 | DB | `repository.SharedDB` 連線池 10；`search_path` 依環境 |
 | Session | `graphicSession`；key 由 `LoadSessionKeys()` 解析（env 或 `aes_secret` HKDF）；`MaxAge=sessiontimeout` |
-| WS 路徑 | WebAccess/OPC UA/X：Client 連 xnginx `/ws/so`，xnginx 轉 `/so`；BI：K8s Ingress `/`，並掛 `EdgeHubOptions` |
+| WS 路徑 | WebAccess/OPC UA/X：Client 連 xnginx `/ws/so`，xnginx 轉 `/so`；EdgeHub：K8s Ingress `/`，並掛 `EdgeHubOptions` |
 | 認證逾時 | 連線後 `websocket_auth_timeout` 秒內需完成 login，否則關閉 |
 | 背景服務 | EdgeHub、SC Proxy、Firebase、AlarmNotify |
 | 關閉 | 先停 Hub 與通知，再關 HTTP |
@@ -88,7 +88,7 @@ sequenceDiagram
 
 | 區塊 | 欄位 | 預設 | 說明 |
 |------|------|------|------|
-| `datasource` | int | 1 | 1=WebAccess、2=BI、3=OPC UA、4=X |
+| `datasource` | int | 1 | 1=WebAccess、2=EdgeHub、3=OPC UA、4=X |
 | `driftseconds` | int | 300 | 時間戳容許漂移 |
 | `sessiontimeout` | int | 604800 | Session 秒數 |
 | `proxy.net.http` | `host`/`port` | `127.0.0.1:28884` | 服務位址（loopback） |
@@ -385,7 +385,7 @@ sequenceDiagram
 
 - `edgeHubService.go`：`/apihub`、`/dbmaster`、`/alarm`。
 - `DataSourceEdgeHubService.go`：EdgeHub 資料源。
-- BI 模式：WS 掛在 `/`，並使用 `EdgeHubOptions`。
+- EdgeHub 模式：WS 掛在 `/`，並使用 `EdgeHubOptions`。
 
 ### 8.3 OPC UA
 

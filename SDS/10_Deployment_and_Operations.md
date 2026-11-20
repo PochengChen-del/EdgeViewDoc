@@ -12,7 +12,7 @@
 | OPC UA 設定 UI | `dist/`（Vue build） | 靜態（Nginx） | `/sc/opcua/` |
 | 安裝/授權工具 | `wxlic`、`activate.enc`、`graphix.lic` | 伺服器主機 | 手冊 §1.5.4 |
 | xnginx | `xnginx` + `_nginx` | 主機（Windows/Linux） | 地端 HTTPS/WSS `8881`（預設）、TLS、路由、限流、服務監督 |
-| K8s Ingress | Nginx Ingress | K8s | 僅 EdgeHub/BI、TLS、body 75M、WebSocket |
+| K8s Ingress | Nginx Ingress | K8s | 僅 EdgeHub、TLS、body 75M、WebSocket |
 | PostgreSQL | 外部/內建 | — | `waxconfig`、`waxalarm`、Session |
 
 ## 2. 參考部署拓撲
@@ -50,9 +50,9 @@ flowchart TB
     D -->|地端| NG
     M -->|地端| NG
     W -->|地端| NG
-    D -->|BI| ING
-    M -->|BI| ING
-    W -->|BI| ING
+    D -->|EdgeHub| ING
+    M -->|EdgeHub| ING
+    W -->|EdgeHub| ING
     ING --> EH
     NG --> MD
     NG --> PD
@@ -160,9 +160,9 @@ flowchart TB
 | resources.limits | 256Mi / 60m / 256Mi | 同左 |
 | env | `ENSAAS_SERVICES`、`exdomain`、`DC_PORTAL_URL`、`API_DBMASTER_URL`、授權、ETCD、iapp | `ENSAAS_SERVICES`、`exdomain`、`DC_PORTAL_URL`、`API_DBMASTER_URL`、`API_ALARM_URL`、`APPS` |
 
-### 4.2 Service / Ingress（BI）與 xnginx（地端）
+### 4.2 Service / Ingress（EdgeHub）與 xnginx（地端）
 
-| 項目 | K8s Ingress（BI） | xnginx（地端） |
+| 項目 | K8s Ingress（EdgeHub） | xnginx（地端） |
 |------|-------------------|----------------|
 | 入口 | ClusterIP + Ingress | `8881`（HTTPS，預設） |
 | 路徑 | `/.*` 或 `wxproxy` 前綴 | `/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam`、`/system` |
@@ -249,7 +249,7 @@ flowchart TB
 | 服務管理 system | 28888 | xnginx `/system` |
 | OPC UA Server | 依現場 | Agent → OPC UA |
 | OPC UA 設定 UI | 8881（預設） | `/sc/opcua/` |
-| K8s Ingress（BI） | 443 | Client → Ingress → `wxproxy`/Edge365 |
+| K8s Ingress（EdgeHub） | 443 | Client → Ingress → `wxproxy`/Edge365 |
 | Edge365 | 443/80 | 服務 → 外部 |
 | Firebase | 443 | Pod → 外部 |
 

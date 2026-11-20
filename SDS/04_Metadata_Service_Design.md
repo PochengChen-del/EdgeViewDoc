@@ -6,7 +6,7 @@
 
 ## 1. 設計概述
 
-Metadata Service 是 EdgeView 的**設定與管理中樞**，提供專案、畫面、Widget 內容、變數、資料模型、Record、告警、使用者/群組、OPC UA、配方、3D 場景、檔案資源、匯入匯出、稽核與系統設定等 API。服務以 Session + CSRF + 時間戳驗證保護，並可切換資料源模式（WebAccess、BI/Edge365、X、OPC UA）。
+Metadata Service 是 EdgeView 的**設定與管理中樞**，提供專案、畫面、Widget 內容、變數、資料模型、Record、告警、使用者/群組、OPC UA、配方、3D 場景、檔案資源、匯入匯出、稽核與系統設定等 API。服務以 Session + CSRF + 時間戳驗證保護，並可切換資料源模式（WebAccess、EdgeHub/Edge365、X、OPC UA）。
 
 ### 1.1 主要能力
 
@@ -29,7 +29,7 @@ Metadata Service 是 EdgeView 的**設定與管理中樞**，提供專案、畫�
 | 稽核/日誌 | `/api/auditlog/*`、`/api/logmaint/*` | `AuditLogController`、`MaintenanceController` |
 | 授權/版本/系統 | `/api/about`、`/api/license`、`/api/sysstatus` | 系統服務 |
 
-完整路由目錄見 SDS-07。地端對外路徑為 `/sc/api/*`（xnginx `/sc` → Metadata `28883`）；BI 模式經 K8s Ingress。
+完整路由目錄見 SDS-07。地端對外路徑為 `/sc/api/*`（xnginx `/sc` → Metadata `28883`）；EdgeHub 模式經 K8s Ingress。
 
 ## 2. 啟動流程
 
@@ -58,7 +58,7 @@ sequenceDiagram
 | 階段 | 行為 |
 |------|------|
 | 設定 | Viper 載入 `config.yaml`，支援 `ENSAAS_SERVICES` / `VCAP_SERVICES` / `LOG_ENV` |
-| 日誌 | `log.tofile=true` 且非 BI 模式時，Gin 輸出導入 klog |
+| 日誌 | `log.tofile=true` 且非 EdgeHub 模式時，Gin 輸出導入 klog |
 | 資料庫 | 連線 `waxconfig`（預設 schema `public`，私有雲 `wx`） |
 | Session | `sessions.SessionsMany(["graphicSession","settingSession"])` |
 | CORS | `usecors=true` 時允許 localhost/私有 IP，支援 WASM |
@@ -71,7 +71,7 @@ sequenceDiagram
 | 模式 | Path | Domain | MaxAge | HttpOnly | Secure |
 |------|------|--------|--------|----------|--------|
 | 一般 | `/` | — | `sessiontimeout`（604800） | 否 | 否 |
-| BI | `/` | `Meta365.CookieDomain()` | `sessiontimeout` | 是 | 否 |
+| EdgeHub | `/` | `Meta365.CookieDomain()` | `sessiontimeout` | 是 | 否 |
 
 > Session key 由 `service/session_secret.go` 的 `LoadSessionKeys()` 解析：`SESSION_SECRET` 優先，否則使用 `aes_secret` 經 HKDF 派生，皆無則啟動失敗（見 SDS-13）。
 
@@ -179,7 +179,7 @@ flowchart TD
 | `device` | `RecordController` | Record CRUD、查詢、Datalog |
 | `device` | `AlarmController` | 告警定義/群組/Tag |
 | `device` | `UserController`/`GroupController` | 使用者、群組、權限 |
-| `device` | `DataSourceController` | 資料來源設定（WA/BI/OPC UA/X） |
+| `device` | `DataSourceController` | 資料來源設定（WA/EdgeHub/OPC UA/X） |
 | `device` | `TagController` | Tag 查詢/匯入 |
 | `device` | `TemplateController` | 範本 |
 | `device` | `RecipeController` | 配方 |
@@ -213,7 +213,7 @@ flowchart TD
 | Auth/BasicAuth | `authService.go`、`basicAuth.go` | 登入快取、內部 API Basic Auth、各平台認證 |
 | Session | `sessionAPI.go` | Session 建立/查詢/刪除 |
 | WA 整合 | `WAAPI.go` | WebAccess 專案、Tag、使用者同步 |
-| BI/Edge365 | `BIAPI.go`、`edge365.go`、`balsam.go` | IApp、etcd、GraphQL、License、組織 |
+| EdgeHub/Edge365 | `BIAPI.go`、`edge365.go`、`balsam.go` | IApp、etcd、GraphQL、License、組織 |
 | X 整合 | `XAPI.go` | X 平台登入/資料 |
 | OPC UA | `OpcAPI.go`、`opcuaCert.go` | Agent 溝通、憑證產生 |
 | 匯入/匯出 | `bun-imex.go`、`zip.go` | bun 工具、壓縮 |
@@ -267,7 +267,7 @@ flowchart TD
 - 同步：`SyncWAAdminUser`、`CopyWAUser`。
 - 專案/Tag：`WAAPI.go` 呼叫 WebAccess API。
 
-### 8.2 Edge365 / BI
+### 8.2 Edge365 / EdgeHub
 
 - 設定：`edge365.meta`（cluster/namespace/exdomain）、`iapp`、`license`。
 - etcd：`pivot-etcd:2379`、namespace `iapps`。
@@ -346,7 +346,7 @@ flowchart TD
 2. 部分內部 HTTPS 呼叫仍停用憑證驗證（R-002-R）。
 3. 密碼雜湊未加鹽。
 4. Schema 迁移分散於程式碼。
-5. BI 模式部分功能（本機 DB）停用。
+5. EdgeHub 模式部分功能（本機 DB）停用。
 6. MQTT 相關路由/UI 保留但未啟用。
 7. 單程序背景工作（告警重載、同步）在多副本需協調。
 

@@ -26,12 +26,12 @@ EdgeView 是一套可跨平台執行的 HMI/SCADA 圖控平台，包含：
 - 專案與畫面（Drawing/Display）的建立、編輯、版本與匯入匯出。
 - Widget 庫、屬性系統、資料綁定（Tag/Variable/Record）、事件腳本、動畫與圖表。
 - 2D 向量繪圖（SCDraw2D）、3D 場景（SCDraw3D/threepp）、NanoCanvas 文字/向量渲染。
-- 使用者、群組、專案權限、登入來源（WebAccess、BI/EdgeHub、OPC UA、X）。
+- 使用者、群組、專案權限、登入來源（WebAccess、EdgeHub、OPC UA、X）。
 - OPC UA 子系統：設定 UI、Data Agent（即時/歷史/寫值/瀏覽/憑證/測點）、Alarm Agent（規則/評估/狀態機/Ack/歷史）。
 - OPC UA 連線、Tag、專案、使用者與警報設定。
 - Client 邏輯直連 OPC UA Data Agent，地端實體經 xnginx `/ua`、`/uadb`、`/uaam`。
-- 地端 Client ↔ Metadata/Runtime/Data Agent/Alarm 經 xnginx；EdgeHub/BI 經 K8s Ingress。
-- 資料來源設定（WebAccess、OPC UA、X、EdgeHub/BI）。
+- 地端 Client ↔ Metadata/Runtime/Data Agent/Alarm 經 xnginx；EdgeHub 經 K8s Ingress。
+- 資料來源設定（WebAccess、OPC UA、X、EdgeHub）。
 - Record 查詢定義、預覽、分頁、Datalog 歷史查詢。
 - WebSocket 即時資料（record data）、警報摘要（WA/EH/OPC UA/X）、系統資訊。
 - 警報通知、Firebase 推播、稽核與操作日誌、資料維護。
@@ -74,7 +74,7 @@ EdgeView 是一套可跨平台執行的 HMI/SCADA 圖控平台，包含：
 | RBAC | Role-Based Access Control | 角色為基礎的存取控制 |
 | FCM | Firebase Cloud Messaging | Firebase 雲端訊息 |
 | ltree | PostgreSQL ltree | 階層樹狀資料型別 |
-| BI | Business Intelligence / EdgeHub 模式 | 資料來源類型 |
+| EdgeHub | 雲端 EdgeHub 模式 | 資料來源類型 |
 | X | EdgeView X 資料平台 | 資料來源類型 |
 | WA | WebAccess | Advantech WebAccess |
 | OEM | Original Equipment Manufacturer | 品牌客製 |

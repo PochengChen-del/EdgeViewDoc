@@ -149,7 +149,7 @@
 - 介面：HTTP `8880`／HTTPS `8881`。
 - 路由：`/sc`→Metadata、`/wxproxy`、`/ws`→Runtime、`/ua`→Data Agent、`/uadb`→History、`/uaam`→Alarm、`/system`→system。
 - 設定：`xnginx.yaml`（主）、`xnginx.webaccess.yaml`、`xnginx.opcua.yaml`、`xnginx.x.yaml`。
-- EdgeHub/BI 例外：使用 K8s Ingress，不使用地端 xnginx。
+- EdgeHub 例外：使用 K8s Ingress，不使用地端 xnginx。
 
 ---
 
@@ -182,7 +182,7 @@
 | `csrfToken` | JSON body / form field | 與 Session 綁定的 CSRF 權杖 |
 | `packetTimestamp` | JSON body / form field | 防重放時間戳，需在 `driftseconds` 內 |
 | Basic Auth | `Authorization` | 伺服器對伺服器呼叫時可用 |
-| `EIToken` / `EIName` | Cookie | BI/Edge365 模式使用 |
+| `EIToken` / `EIName` | Cookie | EdgeHub/Edge365 模式使用 |
 
 ### IF-COM-003 錯誤碼
 
@@ -197,7 +197,7 @@
 
 ### IF-COM-004 WebSocket
 
-- Runtime 端點：`/so`（BI 模式為 `/`）。
+- Runtime 端點：`/so`（EdgeHub 模式為 `/`）。
 - 訊息信封：
 
 ```json

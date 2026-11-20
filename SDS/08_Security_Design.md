@@ -21,7 +21,7 @@ flowchart TB
     end
     subgraph Edge["EdgeView Server"]
         NG[xnginx / TLS<br/>8881（預設）/ WSS]
-        Ingress[K8s Ingress<br/>BI only]
+        Ingress[K8s Ingress<br/>EdgeHub only]
         Meta[Metadata]
         Proxy[Runtime]
         Agent[OPC UA Agent/Alarm]
@@ -35,12 +35,12 @@ flowchart TB
     end
     Browser -->|地端 HTTPS/WSS| NG
     LAN -->|地端 HTTPS/WSS| NG
-    Browser -->|BI HTTPS| Ingress
-    LAN -->|BI HTTPS| Ingress
+    Browser -->|EdgeHub HTTPS| Ingress
+    LAN -->|EdgeHub HTTPS| Ingress
     NG --> Meta
     NG --> Proxy
     NG --> Agent
-    Ingress -->|BI| Proxy
+    Ingress -->|EdgeHub| Proxy
     Meta --> DB
     Proxy --> DB
     Agent --> DB
@@ -50,7 +50,7 @@ flowchart TB
 
 **邊界規則**
 
-1. 地端請求經 xnginx（TLS `8881`、限流）；EdgeHub/BI 經 K8s Ingress。
+1. 地端請求經 xnginx（TLS `8881`、限流）；EdgeHub 經 K8s Ingress。
 2. 後端之間與外部服務使用獨立的認證（Basic/Token/憑證）。
 3. DB 僅限內網，使用最小權限帳號。
 4. 瀏覽器不直接連 DB/外部服務。
@@ -64,7 +64,7 @@ flowchart TB
 |------|----------|------|
 | 本機 | 帳密 + `UserInfo`/`UserAdmin` | `loginController.Login` |
 | WebAccess | Basic → Session/Token | `WebAccessBasicAuth`、`WAAPI.Login` |
-| Edge365/BI | Token 交換 | `BICheckToken`、`BIRefreshToken` |
+| Edge365/EdgeHub | Token 交換 | `BICheckToken`、`BIRefreshToken` |
 | X | X Basic/Token | `XBasicAuth` |
 | OPC UA | OPC UA 使用者 + 鎖定 | `opcuamodel`、`OPCUA_LoginLock` |
 
@@ -205,11 +205,11 @@ sequenceDiagram
 | Client ↔ Metadata | 預設 HTTPS（xnginx 8881） | 維持強制 HTTPS |
 | Client ↔ Runtime | 預設 HTTPS／WSS（xnginx 8881） | 維持強制 WSS |
 | xnginx（地端） | 預設 TLS 8881；HTTP 8880 僅 `protocol: http 或 both` | 憑證管理、限流、WS Upgrade |
-| K8s Ingress（BI） | TLS | 憑證管理/自動續期 |
+| K8s Ingress（EdgeHub） | TLS | 憑證管理/自動續期 |
 | Runtime → 外部 | 全域 `InsecureSkipVerify` 已移除；個別 client 仍停用 | 逐步改為系統 CA/指定 CA（R-002-R） |
 | Metadata → 外部 | 部分 client 停用驗證 | 全面驗證（R-002-R） |
 
-> **現況**：`wxproxy.go` 的全域 `http.DefaultTransport` 覆寫已移除。個別 WA/BI/X/HTTP client 仍有 `InsecureSkipVerify: true`，列為殘餘風險 R-002-R，正式環境應改為系統 CA 或指定 CA。
+> **現況**：`wxproxy.go` 的全域 `http.DefaultTransport` 覆寫已移除。個別 WA/EdgeHub/X/HTTP client 仍有 `InsecureSkipVerify: true`，列為殘餘風險 R-002-R，正式環境應改為系統 CA 或指定 CA。
 
 ## 8. WebSocket 安全
 

@@ -155,7 +155,7 @@ flowchart LR
 |------|------|----------|
 | `Tenant/Index.qml` | 租戶/組織選擇；Cookie `IFPTenant`、`RootOrgID` | `ProjectAPI.getTenantlist` |
 | `HttpConnect/BaseHttpConnect.qml` | 伺服器位址、最近清單、OpenGL 檢查 | 連線測試 |
-| `Login/BaseLogin.qml` | 帳密/BI/OPC UA 登入、版本檢查、改密 | `UserAPI`、`SystemAPI`、`BIAPI`、`OemAPI` |
+| `Login/BaseLogin.qml` | 帳密/EdgeHub/OPC UA 登入、版本檢查、改密 | `UserAPI`、`SystemAPI`、`BIAPI`、`OemAPI` |
 | `Project/BaseProject.qml` | 專案清單/樹、開啟、圖片更新、單專案自動 Viewer | `ProjectAPI` |
 | `Editor/Index.qml` | Designer 畫布、左右面板、頂部工具列 | `DisplayAPI`、`VariableAPI`、`DataModelAPI` |
 | `Config/Index.qml` | 設定模組 | `UserAPI`、`GroupAPI`、`ProjectAPI`、`ImportExport` |
@@ -414,7 +414,7 @@ flowchart LR
   - `/uadb/*` → OPC UA History `28887`
   - `/uaam/*` → OPC UA Alarm Agent `28889`
 - 常用 Metadata 路徑：`/api/about`、`/api/sysstatus`、`/api/alarm/*`、`/api/datalog/query`、`/api/datamodel/*`。
-- BI/EdgeHub（雲端）：`https://wxproxy<suffix>/apihub`、`/dbmaster`、`/alarm`，經 K8s Ingress，不使用地端 xnginx。
+- EdgeHub（雲端）：`https://wxproxy<suffix>/apihub`、`/dbmaster`、`/alarm`，經 K8s Ingress，不使用地端 xnginx。
 - OPC UA 邏輯直連（實體經 xnginx）：
   - 即時：`{opcuaUrlPrefix}/GetTagValueText/{projid}`（`/ua`）
   - 歷史：`{opcuaUrlPrefix}db/GetDataLog/{projid}`、`/GetRawDataLog/{projid}`（`/uadb`）

@@ -6,7 +6,7 @@ EdgeView 採三層式架構：**Client（Qt/QML）**、**EdgeView Server（Nginx
 
 通訊路徑依資料源區分：
 
-1. **EdgeHub/BI（雲端）**：Client 透過 **K8s Ingress** 連線 `wxproxy<suffix>` 與 Edge365 雲端服務。
+1. **EdgeHub（雲端）**：Client 透過 **K8s Ingress** 連線 `wxproxy<suffix>` 與 Edge365 雲端服務。
 2. **WebAccess / OPC UA / X（地端）**：Client 透過 **xnginx reverse proxy**（預設 HTTPS `8881`，`protocol: https`；WebSocket 即 WSS）統一路由到 Metadata、Runtime Proxy、OPC UA Data Agent、OPC UA Alarm Agent。
 3. **OPC UA 設定 UI**：同樣經 xnginx `/sc/opcua` 與 `/sc/api`。
 
@@ -29,7 +29,7 @@ flowchart TB
         ALM["OPC UA Alarm Agent<br/>:28889"]
     end
 
-    subgraph BI["EdgeHub / BI（雲端）"]
+    subgraph EdgeHub["EdgeHub（雲端）"]
         ING["K8s Ingress"]
         Cloud["wxproxy / Edge365"]
     end
@@ -44,8 +44,8 @@ flowchart TB
     Designer -->|地端：/sc、/wxproxy、/ua、/uadb、/uaam| NG
     Viewer -->|地端：/sc、/wxproxy、/ws、/ua、/uadb、/uaam| NG
     Vue -->|/sc/opcua、/sc/api| NG
-    Designer -->|BI：K8s Ingress| ING
-    Viewer -->|BI：K8s Ingress| ING
+    Designer -->|EdgeHub：K8s Ingress| ING
+    Viewer -->|EdgeHub：K8s Ingress| ING
     ING --> Cloud
 
     NG -->|/sc| Meta
@@ -87,8 +87,8 @@ flowchart TB
 | OPC UA Data Agent（Runtime） | 即時值、寫值、Tag 明細、瀏覽、憑證、測點計算 | 專案/畫面/Record |
 | OPC UA Data Agent（History） | 聚合/原始歷史查詢 | 即時寫值、專案設定 |
 | OPC UA Alarm Agent | 告警規則編譯、評估、狀態機、清單/歷史/Ack | 設定寫入、UI |
-| xnginx | 地端反向代理、TLS、靜態 UI、WebSocket、限流、服務監督 | 業務邏輯、雲端 EdgeHub/BI |
-| K8s Ingress | EdgeHub/BI 雲端入口、TLS、路由 | 地端 OPC UA Agent/Alarm |
+| xnginx | 地端反向代理、TLS、靜態 UI、WebSocket、限流、服務監督 | 業務邏輯、雲端 EdgeHub |
+| K8s Ingress | EdgeHub 雲端入口、TLS、路由 | 地端 OPC UA Agent/Alarm |
 
 ## 3. 分層設計
 
@@ -133,7 +133,7 @@ flowchart LR
 
 ### 3.3 地端反向代理（xnginx）
 
-`wax_nginx_ingress` 以 Go 產生/監督 Nginx 與後端程序，是**地端 Client 的唯一入口**（EdgeHub/BI 例外走 K8s Ingress）。
+`wax_nginx_ingress` 以 Go 產生/監督 Nginx 與後端程序，是**地端 Client 的唯一入口**（EdgeHub 例外走 K8s Ingress）。
 
 | 項目 | 設計 |
 |------|------|
@@ -177,7 +177,7 @@ flowchart LR
 | OPC UA 設定 UI | `/sc/opcua/` | 對外 HTTPS | xnginx 靜態/路由 |
 | PostgreSQL | 依設定 | PostgreSQL | `waxconfig`/`waxalarm` |
 | OPC UA Server | 依現場 | OPC UA TCP | 可加密 |
-| K8s Ingress | 依環境 | HTTPS | **僅 EdgeHub/BI** `/apihub`、`/dbmaster`、`/alarm`、`wxproxy` |
+| K8s Ingress | 依環境 | HTTPS | **僅 EdgeHub** `/apihub`、`/dbmaster`、`/alarm`、`wxproxy` |
 
 ### 4.1 部署圖
 
@@ -200,7 +200,7 @@ flowchart TB
         PG[(PostgreSQL)]
     end
 
-    subgraph Cloud["雲端 EdgeHub/BI"]
+    subgraph Cloud["雲端 EdgeHub"]
         ING[K8s Ingress]
         EH[wxproxy / Edge365]
     end
@@ -208,9 +208,9 @@ flowchart TB
     C1 -->|地端| NG
     C2 -->|地端| NG
     C3 -->|地端| NG
-    C1 -->|BI| ING
-    C2 -->|BI| ING
-    C3 -->|BI| ING
+    C1 -->|EdgeHub| ING
+    C2 -->|EdgeHub| ING
+    C3 -->|EdgeHub| ING
     ING --> EH
 
     NG --> META
@@ -327,7 +327,7 @@ sequenceDiagram
 | 設定儲存 | PostgreSQL + JSONB | 關聯 + 彈性 | 需管理 schema 與遷移 |
 | 多資料源 | 每來源獨立 manager | 方言差異大 | 維護成本 |
 | 地端入口 | xnginx reverse proxy | 統一 TLS/路由/限流/服務監督 | 需維護 datasource 變體設定 |
-| 雲端入口 | K8s Ingress | EdgeHub/BI 雲端服務 | 僅 BI 模式使用 |
+| 雲端入口 | K8s Ingress | EdgeHub 雲端服務 | 僅 EdgeHub 模式使用 |
 | 部署 | Docker/K8s 或主機 | 標準化、可擴充 | 需 Ingress/xnginx/Session 設計 |
 
 ## 7. 架構限制與邊界
@@ -340,7 +340,7 @@ sequenceDiagram
 6. OPC UA Data Agent 分 Runtime/History 兩個進程；Client 經 xnginx `/ua`、`/uadb` 存取，不直接連 28886/28887。
 7. Alarm Agent 與 Data Agent 共用 Metadata Session key；多副本需共享 DB 與一致的 `aes_secret`。
 8. 地端所有服務（Metadata/Runtime/Data Agent/Alarm）只綁 loopback，對外僅 xnginx HTTPS `8881`（預設，WebSocket 為 WSS）；HTTP `8880` 僅相容舊版。
-9. EdgeHub/BI 走 K8s Ingress，不使用地端 xnginx；兩者路徑與認證需分別測試。
+9. EdgeHub 走 K8s Ingress，不使用地端 xnginx；兩者路徑與認證需分別測試。
 
 ## 8. 與需求對照
 

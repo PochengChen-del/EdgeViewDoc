@@ -10,10 +10,10 @@
 | Metadata REST | Metadata | `127.0.0.1:28883` | HTTP（loopback）；對外 HTTPS | 設定、認證、資源 |
 | Metadata 檔案 | Metadata | 同上 | 對外 HTTPS | 縮圖、圖片、檔案、字型 |
 | Runtime REST | Runtime | `127.0.0.1:28884` | HTTP（loopback）；對外 HTTPS | Record 查詢/預覽 |
-| Runtime WS | Runtime | `/ws/so`（xnginx）／BI：K8s Ingress | **WSS** | 即時資料/告警/系統 |
+| Runtime WS | Runtime | `/ws/so`（xnginx）／EdgeHub：K8s Ingress | **WSS** | 即時資料/告警/系統 |
 | OPC UA Data Agent | Data Agent | `/ua`、`/uadb` | HTTP（loopback）；對外 HTTPS | 即時/歷史 Tag |
 | OPC UA Alarm Agent | Alarm Agent | `/uaam` | HTTP（loopback）；對外 HTTPS | 警報清單/歷史/Ack |
-| K8s Ingress（BI） | Edge365 | `wxproxy<suffix>` | HTTPS | `/apihub`、`/dbmaster`、`/alarm` |
+| K8s Ingress（EdgeHub） | Edge365 | `wxproxy<suffix>` | HTTPS | `/apihub`、`/dbmaster`、`/alarm` |
 | Swagger | 各服務 | `/swagger/*any` | 對外 HTTPS | API 文件 |
 
 ## 2. REST 慣例
@@ -68,7 +68,7 @@ sequenceDiagram
     participant C as Client
     participant M as Metadata
     C->>M: POST /api/login {account,password,packetTimestamp}
-    M->>M: 驗證（本機/WA/BI/X/OPC UA）
+    M->>M: 驗證（本機/WA/EdgeHub/X/OPC UA）
     M-->>C: Set-Cookie graphicSession + result.csrfToken
     C->>M: POST /api/getdisplaylist/:projid {csrfToken,packetTimestamp}
     M->>M: 驗 Session + CSRF + 時間戳
@@ -115,7 +115,7 @@ sequenceDiagram
 | POST | `/api/userprojlist` | needAuth | `projectController.userprojlist` |
 | POST | `/ping/:id` | 是 | `pingController.Ping` |
 
-### 3.2 BI / Edge365
+### 3.2 EdgeHub / Edge365
 
 | Method | Path | Auth | Handler |
 |--------|------|------|---------|
@@ -645,7 +645,7 @@ POST /api/alarm/ack
 |------|-----|
 | WebAccess/OPC UA/X（地端，預設） | `wss://<host>:8881/ws/so` → xnginx → Runtime `/so` |
 | WebAccess/OPC UA/X（相容舊版 `protocol: http`） | `ws://<host>:8880/ws/so` → xnginx → Runtime `/so` |
-| BI/Edge365（雲端） | `wss://wxproxy<suffix>/` → K8s Ingress |
+| EdgeHub/Edge365（雲端） | `wss://wxproxy<suffix>/` → K8s Ingress |
 
 ### 5.2 請求格式
 

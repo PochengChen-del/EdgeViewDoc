@@ -105,7 +105,7 @@ erDiagram
 | `projectdetail` | `projid` | `defaultpage`、`asyncdraw`、`highlightchange`、`initenabled`、`toolbarvisible`、`viewmode`、`scaletype`、`lang`、`fullscreen`、`userhomeenabled`、`showconfirmdialog`、`decimalSeparatorMode`、`usedevicetypeonly` | 專案顯示設定 |
 | `projecttheme` | `projid` | `systemtheme`、`viewtheme`、`viewthemeenabled`、`content` | 主題 |
 | `ObjectPath` | `id`（serial） | `objectname`、`parentpath ltree`、`objecttype`、`objectid`、`projid`、`displayid` | 物件樹（核心索引） |
-| `EdgeHub_Project` | `projid`（serial） | `tenantid`（unique） | BI 租戶對應 |
+| `EdgeHub_Project` | `projid`（serial） | `tenantid`（unique） | EdgeHub 租戶對應 |
 | `oemsettings` | `id=1` | `data jsonb`、`login_logo`、`product_icon` | OEM 品牌 |
 
 `ObjectPath` 索引：
@@ -307,7 +307,7 @@ erDiagram
 | 值 | 名稱 | 說明 |
 |----|------|------|
 | 1 | `WebAccess` | WebAccess/本機 |
-| 2 | `BI`／`EdgeHub` | Edge365 |
+| 2 | EdgeHub（`BI`） | Edge365 |
 | 3 | `Opcua` | OPC UA |
 | 4 | `X` | X 平台 |
 

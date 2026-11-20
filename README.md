@@ -68,7 +68,7 @@ flowchart LR
         A[OPC UA Data Agent<br/>Runtime :28886<br/>History :28887]
         L[OPC UA Alarm Agent<br/>:28889]
     end
-    subgraph Cloud["EdgeHub / BI 雲端"]
+    subgraph Cloud["EdgeHub 雲端"]
         ING[K8s Ingress]
         EH[wxproxy / Edge365]
     end
@@ -86,8 +86,8 @@ flowchart LR
     U -->|/sc/opcua、/sc/api| NG
     D -->|地端：/sc、/wxproxy| NG
     V -->|地端：/sc、/wxproxy、/ws、/ua、/uadb、/uaam| NG
-    D -->|BI：K8s Ingress| ING
-    V -->|BI：K8s Ingress| ING
+    D -->|EdgeHub：K8s Ingress| ING
+    V -->|EdgeHub：K8s Ingress| ING
     ING --> EH
     NG --> M
     NG --> R
@@ -113,7 +113,7 @@ flowchart LR
 - **OPC UA Data Agent**：Runtime 與 History 兩種角色，提供即時值、寫值、歷史值、Tag 明細、瀏覽、憑證與測點計算。
 - **OPC UA Alarm Agent**：告警規則編譯、條件評估、雙狀態機、Ack/Process、警報清單/歷史。
 - **xnginx**：地端反向代理/服務監督；`8880/8881`，路由 `/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam`、`/system`，依 datasource 使用 `xnginx.yaml`、`xnginx.webaccess.yaml`、`xnginx.opcua.yaml`、`xnginx.x.yaml`。
-- **K8s Ingress**：僅 EdgeHub/BI 雲端入口；Client 透過 `wxproxy<suffix>` 連 Edge365。
+- **K8s Ingress**：僅 EdgeHub 雲端入口；Client 透過 `wxproxy<suffix>` 連 Edge365。
 
 ## 3. 文件索引
 
@@ -201,7 +201,7 @@ flowchart LR
 | CSRF Token | 跨站請求偽造防護權杖，REST/WS 皆需帶入 |
 | Session | 伺服器端工作階段，儲存於 PostgreSQL `http_sessions` |
 | Edge365 / EdgeHub | Advantech 雲端平台與其資料來源 |
-| BI | Business Intelligence / EdgeHub 模式（`SourceTypeBI`） |
+| EdgeHub | 雲端 EdgeHub 模式（`SourceTypeBI`） |
 | X | 另一資料來源平台（`SourceTypeX`） |
 | FCM | Firebase Cloud Messaging |
 | Data Agent | OPC UA 資料代理；Runtime（`:28886`）與 History（`:28887`）兩種角色 |

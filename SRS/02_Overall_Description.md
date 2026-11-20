@@ -6,7 +6,7 @@ EdgeView 是 WebAccess/SCADA X 生態系中的圖控前端與執行平台。Clie
 
 連線路徑：
 
-- **EdgeHub/BI（雲端）**：Client 透過 **K8s Ingress** 連線 `wxproxy<suffix>`／Edge365。
+- **EdgeHub（雲端）**：Client 透過 **K8s Ingress** 連線 `wxproxy<suffix>`／Edge365。
 - **WebAccess/OPC UA/X（地端）**：Client 透過 **xnginx**（`8880`/`8881`）路由到 Metadata `/sc`、Runtime `/wxproxy`、Data Agent `/ua`、`/uadb`、Alarm `/uaam`。
 - Client 對 OPC UA Agent 是**邏輯直連**（不經 Runtime Proxy），實體經 xnginx。
 
@@ -40,12 +40,12 @@ flowchart TB
         Alarm --> DB
     end
 
-    subgraph Cloud["EdgeHub / BI（雲端）"]
+    subgraph Cloud["EdgeHub（雲端）"]
         ING[K8s Ingress]
         CloudSvc[wxproxy / Edge365]
         ING --> CloudSvc
     end
-    Client -->|BI| ING
+    Client -->|EdgeHub| ING
 
     subgraph External["外部系統"]
         WA[WebAccess]
@@ -55,7 +55,7 @@ flowchart TB
         SQL[(SQL Server / MySQL / Oracle / PostgreSQL)]
         Influx[(InfluxDB v1/v2)]
         FCM[Firebase FCM]
-        IdP[BI / 企業登入]
+        IdP[EdgeHub / 企業登入]
     end
 
     Designer --> Client
@@ -81,7 +81,7 @@ flowchart TB
 | 介面 | 方向 | 協定 | 說明 |
 |------|------|------|------|
 | Client ↔ xnginx | 雙向 | HTTP/HTTPS | 地端統一入口；`/sc`、`/wxproxy`、`/ws`、`/ua`、`/uadb`、`/uaam` |
-| Client ↔ K8s Ingress | 雙向 | HTTPS | EdgeHub/BI 雲端；`/apihub`、`/dbmaster`、`/alarm` |
+| Client ↔ K8s Ingress | 雙向 | HTTPS | EdgeHub 雲端；`/apihub`、`/dbmaster`、`/alarm` |
 | xnginx ↔ Metadata | 雙向 | HTTP | `/sc` → `28883` |
 | xnginx ↔ Runtime Proxy | 雙向 | HTTP/WS | `/wxproxy`、`/ws` → `28884` |
 | xnginx ↔ OPC UA Data Agent | 雙向 | HTTP | `/ua`、`/uadb` → `28886`/`28887` |
@@ -105,7 +105,7 @@ flowchart TB
 | 群組 | 主要功能 |
 |------|----------|
 | 啟動與連線 | 租戶/組織選擇、伺服器連線、OpenGL/渲染能力檢查、版本檢查、遠端 rcc 載入 |
-| 登入 | 帳密登入、BI/EdgeHub 登入、OPC UA 首次登入改密、記住連線、錯誤處理、Session 逾時 |
+| 登入 | 帳密登入、EdgeHub 登入、OPC UA 首次登入改密、記住連線、錯誤處理、Session 逾時 |
 | 專案 | 專案清單/樹、開啟專案、專案主題、圖片更新檢查、單一專案自動進入 Viewer |
 | 畫面設計 | 新增/開啟/儲存/另存畫面、畫面屬性、Grid/RWD、縮放、裁剪、圖層 |
 | Widget | 內建 Widget 庫、屬性編輯、群組、批次建立、JSON 匯入匯出、自訂 Widget |
@@ -121,7 +121,7 @@ flowchart TB
 
 | 群組 | 主要功能 |
 |------|----------|
-| 認證/授權 | 多來源登入、Session、CSRF、Token 驗證、專案使用者安全、BI Token |
+| 認證/授權 | 多來源登入、Session、CSRF、Token 驗證、專案使用者安全、EdgeHub Token |
 | 專案/物件樹 | 專案清單、資料夾、物件移動/複製/改名/刪除、路徑查詢、搜尋、匯入匯出 |
 | 畫面/腳本/模板 | Display/DisplayMobile/DisplaySystem、JS、Template 的 CRUD 與版本 |
 | 變數/資料模型 | Variable、Variablebody、DataModel、DataModel_Variable、rcmap |
@@ -132,7 +132,7 @@ flowchart TB
 | 系統設定 | Settings、i18n/font、OEM、MQTT Broker、WebPlugin、Symbol 資源 |
 | 檔案/資產 | Image、Audio、File、PluginFile、FileCache、3D Scene |
 | 稽核/維護 | ActionLog、AuditLog、Maintenance、日誌匯出 |
-| 平台整合 | WebAccess、EdgeHub/Edge365、X、BI、Firebase、授權 |
+| 平台整合 | WebAccess、EdgeHub/Edge365、X、Firebase、授權 |
 
 ### 2.3 Runtime Proxy
 
@@ -156,7 +156,7 @@ flowchart TB
 | 安全 | TLS `8881`、HTTP `8880`、限流、CORS/Cache 標頭 |
 | 服務監督 | 啟動/重啟 Metadata、Runtime、Data Agent、Alarm、wxlog |
 | 設定變體 | `xnginx.yaml`、`xnginx.webaccess.yaml`、`xnginx.opcua.yaml`、`xnginx.x.yaml` |
-| BI 例外 | EdgeHub/BI 走 K8s Ingress，不使用地端 xnginx |
+| 雲端例外 | EdgeHub 走 K8s Ingress，不使用地端 xnginx |
 
 ### 2.4 OPC UA 子系統
 
@@ -230,7 +230,7 @@ flowchart TB
 ### 5.1 限制
 
 1. 伺服器端設定資料庫以 PostgreSQL 為唯一支援的設定儲存。
-2. Metadata Service、Runtime Proxy、OPC UA Data/Alarm Agent 預設僅綁定 loopback；地端透過 xnginx `8880/8881` 對外，EdgeHub/BI 透過 K8s Ingress。
+2. Metadata Service、Runtime Proxy、OPC UA Data/Alarm Agent 預設僅綁定 loopback；地端透過 xnginx `8880/8881` 對外，EdgeHub 透過 K8s Ingress。
 3. Client 的 Designer 與 Viewer 為同一執行檔（`gc-designer`），以 `openMode` 區分。
 4. 資料來源若為 WebAccess/EdgeHub/X/OPC UA，需對應平台可用且網路可達。
 5. OPC UA 即時/歷史 Tag 值由 Client 邏輯直連 Data Agent；實體經 xnginx `/ua`、`/uadb`，Client 不需直連 `28886`/`28887`。
@@ -255,7 +255,7 @@ flowchart TB
 | 相依項目 | 影響 |
 |----------|------|
 | xnginx | 地端 Client 入口、TLS、路由、限流、服務監督 |
-| K8s Ingress | EdgeHub/BI 雲端入口 |
+| K8s Ingress | EdgeHub 雲端入口 |
 | PostgreSQL | 設定、Session、稽核、Record 定義；不可用時後端無法啟動 |
 | OPC UA Data Agent | OPC UA 即時/歷史值、寫值、Tag 明細、瀏覽 |
 | OPC UA Alarm Agent | OPC UA 警報清單/歷史/Ack |

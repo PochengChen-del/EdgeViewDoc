@@ -15,7 +15,7 @@
 | FR-CLI-003 | 租戶/組織選擇 | Must | 依 Cookie（`IFPTenant`、`RootOrgID`）或租戶清單選擇租戶與組織。 | Cookie 存在時直接進入專案頁；否則顯示租戶清單；失敗時導向登入。 |
 | FR-CLI-004 | 伺服器連線 | Must | 使用者可輸入/選擇伺服器位址，系統檢查連線與圖形能力。 | 顯示最近連線清單；連線失敗顯示錯誤；OpenGL/渲染能力不足時提示。 |
 | FR-CLI-005 | 帳密登入 | Must | 支援使用者名稱/密碼登入，取得 Session 與 CSRF Token。 | 正確帳密可進入專案頁；錯誤顯示訊息；連續失敗依後端政策鎖定。 |
-| FR-CLI-006 | 多來源登入 | Must | 支援 WebAccess、BI/EdgeHub、OPC UA、X 等登入來源。 | 依伺服器設定顯示對應登入流程；成功後可取得專案清單。 |
+| FR-CLI-006 | 多來源登入 | Must | 支援 WebAccess、EdgeHub、OPC UA、X 等登入來源。 | 依伺服器設定顯示對應登入流程；成功後可取得專案清單。 |
 | FR-CLI-007 | OPC UA 首次改密 | Should | OPC UA 使用者首次登入或密碼需變更時，強制顯示改密流程。 | 未完成改密前不得進入專案；改密成功後可登入。 |
 | FR-CLI-008 | 記住連線 | Could | 可將伺服器連線資訊存入本機快取。 | 下次啟動可快速選取；可清除紀錄。 |
 | FR-CLI-009 | 版本檢查 | Should | 登入/連線時檢查 Client 與伺服器版本相容性。 | 版本不支援時顯示警告或阻擋；支援時正常進入。 |
@@ -130,7 +130,7 @@
 | FR-CLI-087 | OPC UA 連線 | Should | 新增/修改/刪除 OPC UA 連線與憑證。 | 連線測試成功；憑證可下載。 |
 | FR-CLI-088 | 物件匯入匯出 | Should | 單一物件或整個專案的匯入匯出。 | 匯出檔可匯入；版本相容。 |
 | FR-CLI-089 | 資料模型 | Should | 建立/匯入資料模型與其變數。 | 模型可套用至畫面；版本管理。 |
-| FR-CLI-090 | 資料來源設定 | Must | 設定 WebAccess、OPC UA、X、EdgeHub/BI 連線參數。 | 測試連線成功；設定加密儲存。 |
+| FR-CLI-090 | 資料來源設定 | Must | 設定 WebAccess、OPC UA、X、EdgeHub 連線參數。 | 測試連線成功；設定加密儲存。 |
 | FR-CLI-091 | MQTT Broker 設定 | Could | 檢視/更新 MQTT Broker 設定（Client MQTT 目前停用）。 | 設定可儲存；不影響現有功能。 |
 | FR-CLI-092 | OEM 品牌 | Could | 檢視/更新 Logo、名稱等品牌設定。 | 更新後登入頁/關於頁顯示新品牌。 |
 | FR-CLI-093 | 外掛檔案 | Could | 上傳/管理 Web Plugin 與 Plugin 檔案。 | 外掛可載入；版本正確。 |
@@ -145,7 +145,7 @@
 |----|------|--------|------|----------|
 | FR-META-001 | 服務啟動 | Must | 載入 `config.yaml`、建立/驗證資料庫、初始化 Session Store、執行 SQLInit、註冊路由並啟動 HTTP/HTTPS。 | 服務可啟動；資料表與擴充存在；`/ping/:id` 正常。 |
 | FR-META-002 | 設定載入 | Must | 支援檔案、環境變數與命令列覆寫設定。 | 優先順序正確；預設值可用。 |
-| FR-META-003 | 多來源登入 | Must | 支援 WebAccess、BI/EdgeHub、OPC UA、X 登入並建立 Session。 | 各來源登入成功可取得 Session/CSRF。 |
+| FR-META-003 | 多來源登入 | Must | 支援 WebAccess、EdgeHub、OPC UA、X 登入並建立 Session。 | 各來源登入成功可取得 Session/CSRF。 |
 | FR-META-004 | Session 管理 | Must | 以 PostgreSQL 儲存 Session，支援逾時與登出。 | Session 過期後 API 回傳未授權；登出即失效。 |
 | FR-META-005 | CSRF 驗證 | Must | 驗證 JSON/表單中的 `csrfToken`。 | 缺少或錯誤時回傳 `-100`。 |
 | FR-META-006 | 封包時間戳 | Must | POST/PUT/DELETE 驗證 `packetTimestamp` 在容許漂移內。 | 超時回傳 `-102`；`driftseconds=0` 可停用。 |
@@ -187,7 +187,7 @@
 | FR-META-042 | 稽核日誌 | Must | 寫入與查詢稽核日誌，含 checksum。 | 日誌可查詢/匯出；checksum 可驗證。 |
 | FR-META-043 | 操作日誌 | Should | 寫入與查詢操作日誌。 | 可依專案/使用者/時間查詢。 |
 | FR-META-044 | 日誌維護 | Should | 設定備份/保留/刪除策略。 | 排程生效；可查詢設定。 |
-| FR-META-045 | 平台整合 | Should | Edge365 註冊、BI Token、Firebase、授權檢查。 | 各整合端點可用；失敗不影響核心功能。 |
+| FR-META-045 | 平台整合 | Should | Edge365 註冊、EdgeHub Token、Firebase、授權檢查。 | 各整合端點可用；失敗不影響核心功能。 |
 
 ---
 

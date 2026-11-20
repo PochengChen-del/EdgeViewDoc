@@ -38,7 +38,7 @@
 | 跨平台 | 同一 Client 支援桌面、行動與瀏覽器 |
 | 設計/執行分離 | 同一程式的 Designer 與 Viewer 模式，共用 Widget 與渲染管線 |
 | 設定與資料分離 | Metadata 管設定，Runtime 管資料查詢與即時資料 |
-| 多資料源 | WebAccess、EdgeHub/BI、X、OPC UA、SQL/Influx/HTTP |
+| 多資料源 | WebAccess、EdgeHub、X、OPC UA、SQL/Influx/HTTP |
 | 可擴充 | Widget、資料源、語系、外掛、3D 資產可擴充 |
 | 安全 | Session + CSRF + 時間戳 + 加密設定 + 稽核 |
 | 可維運 | 標準化組態、日誌、容器部署、Swagger |
@@ -109,7 +109,7 @@
 | ObjectPath | 專案物件樹資料表 |
 | Record | 資料查詢定義與執行結果 |
 | DataModel | 可重用變數集合 |
-| SourceType | 資料來源類型（WA/BI/OPCUA/X） |
+| SourceType | 資料來源類型（WA/EdgeHub/OPCUA/X） |
 
 ## 6. 文件結構
 
