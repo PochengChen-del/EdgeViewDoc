@@ -85,21 +85,21 @@
 - **對應**：[FR-CLI-016](../SRS/03_Functional_Requirements.md)、[FR-RT-021、FR-RT-022](../SRS/03_Functional_Requirements.md)、[NFR-PRV-004](../SRS/05_Nonfunctional_Requirements.md)、[SDS-03 §14](../SDS/03_Client_Design.md)、[SDS-05 §8.5](../SDS/05_Runtime_Proxy_Design.md)
 
 #### A.3.4 CR 2.04 Mobile code（部分符合）
-- **現況**：支援 Widget、JavaScript、外掛與 WebPlugin；腳本可壓縮/加密儲存。
-- **部分符合原因**：未限制行動程式碼來源與執行權限；外掛載入缺少簽章/雜湊白名單；腳本 API 雖受控，但無執行期沙箱與資源上限的完整描述。
-- **建議**：建立外掛/腳本來源白名單與簽章驗證；限制檔案系統與網路 API；設定執行時間、記憶體與遞迴上限；停用未使用的外掛類型；保留載入與失敗稽核。
+- **現況**：EdgeView 行動程式碼以 JavaScript 巨集與 WebPlugin 為主，於瀏覽器（Qt WebEngine/Chromium）沙箱內執行，不具原生檔案系統或系統呼叫權限。I/O 僅限網路：`fetch` 經 HTTPS `/fw` 代理（帶 CSRF Token）、WebSocket 訂閱；檔案讀取須由使用者透過瀏覽器原生檔案選擇器（`readFile` → `Global.root.openFileDialog`）授權，寫出僅能經瀏覽器下載機制（`writeFile` → `Global.saveToLocalFile`）存入使用者下載目錄。腳本以壓縮/加密形式存於 `JSTable`，可用 API 由 `macro metadata` 白名單（`fetch`、`readFile`、`writeFile`、Tag/Alarm 操作等）控管。
+- **部分符合原因**：瀏覽器沙箱與最小 API 已限制行動程式碼能力，但未強制外掛/腳本來源白名單與簽章驗證；WebPlugin 仍可載入第三方 HTML/JS，缺少 CSP、來源網域允許清單與執行期資源上限（時間/記憶體/訊息大小）的完整描述；下載寫出未區分敏感資料。
+- **建議**：建立腳本/外掛來源白名單與簽章/雜湊驗證；以 CSP 與 iframe sandbox 限制 WebPlugin 可載入的網域與能力；維持最小 API 並停用未使用之 API；設定腳本執行時間、遞迴與訊息大小上限；對 `readFile`/`writeFile` 之檔案類型與內容驗證；保留載入、執行失敗與下載稽核。
 - **對應**：[FR-CLI-050](../SRS/03_Functional_Requirements.md)、[FR-CLI-058~063](../SRS/03_Functional_Requirements.md)、[NFR-SEC-014](../SRS/05_Nonfunctional_Requirements.md)、[SDS-03 §9](../SDS/03_Client_Design.md)、[SDS-08 §9](../SDS/08_Security_Design.md)
 
 #### A.3.5 SAR 2.04 Mobile code（部分符合）
-- **現況**：應用層具備輸入驗證、腳本管理與外掛審核建議。
-- **部分符合原因**：EdgeView 為軟體應用，行動程式碼風險主要落在 JS/Plugin/Widget 生態；目前無強制掃毒、簽章或供應鏈驗證，僅靠流程審核。
-- **建議**：外掛上架前執行靜態/動態掃描與簽章；以雜湊清單封鎖未核准版本；部署端限制外掛來源；建立安全開發與外掛審核紀錄。
+- **現況**：EdgeView 為瀏覽器型軟體應用，行動程式碼（JavaScript 巨集與 WebPlugin）於瀏覽器沙箱內執行；跨域請求經 `/fw` 代理並帶 CSRF Token，檔案 I/O 受瀏覽器原生檔案選擇器與下載機制限制，無法直接存取本機檔案系統。
+- **部分符合原因**：沙箱降低直接系統破壞風險，但未強制掃毒、簽章或供應鏈驗證；外掛/腳本上架僅靠流程審核，無雜湊封鎖清單或執行期完整性檢查。
+- **建議**：外掛上架前執行靜態/動態掃描與簽章；以雜湊清單封鎖未核准版本；部署端限制外掛來源並套用 CSP；建立安全開發與外掛審核紀錄。
 - **對應**：[FR-CLI-050、FR-CLI-093](../SRS/03_Functional_Requirements.md)、[NFR-SEC-010、NFR-SEC-014](../SRS/05_Nonfunctional_Requirements.md)、[SDS-08 §9](../SDS/08_Security_Design.md)
 
 #### A.3.6 SAR 2.04 RE(1) Mobile code authenticity check（部分符合）
-- **現況**：Plugin 可經 HTTPS 下載，降低傳輸竄改風險。
-- **部分符合原因**：未驗證程式簽章或發行者；僅依 HTTPS 與伺服器信任，無法防止來源端被替換或內部檔案竄改。
-- **建議**：外掛採分離式簽章（如 Ed25519/GPG）並驗證憑證鏈；安裝/更新時比對雜湊；建立發行者信任清單與撤銷；拒絕未簽章或簽章失效的套件。
+- **現況**：腳本與外掛由 Metadata 服務經 HTTPS（`/getfile`、`/getpluginfile`）下載，腳本以壓縮/加密形式存於 `JSTable`，瀏覽器端再解壓/解密後執行。
+- **部分符合原因**：HTTPS 僅保護傳輸，未驗證程式簽章或發行者；亦未以雜湊白名單比對，無法防止來源端被替換或 DB/檔案竄改；壓縮/加密不具來源認證效果。
+- **建議**：外掛/腳本採分離式簽章（如 Ed25519/GPG）並驗證憑證鏈；安裝/更新時比對 SHA-256 雜湊與白名單；建立發行者信任清單與撤銷；拒絕未簽章或簽章失效的內容。
 - **對應**：[FR-CLI-050、FR-CLI-093](../SRS/03_Functional_Requirements.md)、[NFR-SEC-004、NFR-SEC-010](../SRS/05_Nonfunctional_Requirements.md)、[SDS-08 §7、§9](../SDS/08_Security_Design.md)
 
 #### A.3.7 CR 2.05 Session lock（部分符合）

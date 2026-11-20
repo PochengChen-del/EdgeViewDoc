@@ -71,15 +71,15 @@
 | CR 2.01 RE(4) | Dual approval | SL4 | 不符合 | 無雙人核准。 |
 | CR 2.02 | Wireless use control | SL1 | 不適用 | 無無線功能。 |
 | CR 2.03 | Use control for portable and mobile devices | N/A | 部分符合 | APP 可連線/推播；未細緻控制行動裝置。（SRS：[FR-CLI-016](../SRS/03_Functional_Requirements.md)、[FR-RT-021、FR-RT-022](../SRS/03_Functional_Requirements.md)、[NFR-PRV-004](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-03 §14](../SDS/03_Client_Design.md)、[SDS-05 §8.5](../SDS/05_Runtime_Proxy_Design.md)） |
-| CR 2.04 | Mobile code | N/A | 部分符合 | Widget/JS/Plugins 可執行；無行動程式碼下載控制。（SRS：[FR-CLI-050](../SRS/03_Functional_Requirements.md)、[FR-CLI-058~063](../SRS/03_Functional_Requirements.md)、[NFR-SEC-014](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-03 §9](../SDS/03_Client_Design.md)、[SDS-08 §9](../SDS/08_Security_Design.md)） |
+| CR 2.04 | Mobile code | N/A | 部分符合 | 行動程式碼為 JavaScript 巨集與 WebPlugin，於瀏覽器（Qt WebEngine/Chromium）沙箱內執行，無原生檔案系統/系統呼叫權限；I/O 僅限網路（HTTPS `fetch` 經 `/fw` 代理、WebSocket），檔案讀取須經瀏覽器原生檔案選擇器（`readFile`）授權，寫出僅能由瀏覽器下載（`writeFile`）至下載目錄。腳本以壓縮/加密形式存於 `JSTable`，可用 API 由 `macro metadata` 白名單控管；尚未強制簽章/雜湊與來源白名單。（SRS：[FR-CLI-050](../SRS/03_Functional_Requirements.md)、[FR-CLI-058~063](../SRS/03_Functional_Requirements.md)、[NFR-SEC-014](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-03 §9](../SDS/03_Client_Design.md)、[SDS-08 §9](../SDS/08_Security_Design.md)） |
 | EDR 2.04 | Mobile code | SL1 | 不適用（Web Server） | 非嵌入式裝置。 |
 | HDR 2.04 | Mobile code | SL1 | 不適用（OS/硬體） | 由 Host OS 負責。 |
 | NDR 2.04 | Mobile code | SL1 | 不適用（網路設備） | 非網路設備。 |
-| SAR 2.04 | Mobile code | SL1 | 部分符合 | EdgeView 屬軟體應用；JS/Plugin 需來源控管。（SRS：[FR-CLI-050、FR-CLI-093](../SRS/03_Functional_Requirements.md)、[NFR-SEC-010、NFR-SEC-014](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-08 §9](../SDS/08_Security_Design.md)） |
+| SAR 2.04 | Mobile code | SL1 | 部分符合 | EdgeView 為瀏覽器型軟體應用，JavaScript/WebPlugin 於瀏覽器沙箱內執行，僅能經受控 API 進行網路 I/O；檔案讀寫受瀏覽器檔案選擇器與下載機制限制，無直接本機檔案存取。缺口為未強制掃毒、簽章或供應鏈驗證，僅靠流程審核。（SRS：[FR-CLI-050、FR-CLI-093](../SRS/03_Functional_Requirements.md)、[NFR-SEC-010、NFR-SEC-014](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-08 §9](../SDS/08_Security_Design.md)） |
 | EDR 2.04 RE(1) | Mobile code authenticity check | SL2 | 不適用（Web Server） | 非嵌入式裝置。 |
 | HDR 2.04 RE(1) | Mobile code authenticity check | SL2 | 不適用（OS/硬體） | 由 Host OS 負責。 |
 | NDR 2.04 RE(1) | Mobile code authenticity check | SL2 | 不適用（網路設備） | 非網路設備。 |
-| SAR 2.04 RE(1) | Mobile code authenticity check | SL2 | 部分符合 | Plugin 經 HTTPS 下載；無簽章驗證。（SRS：[FR-CLI-050、FR-CLI-093](../SRS/03_Functional_Requirements.md)、[NFR-SEC-004、NFR-SEC-010](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-08 §7、§9](../SDS/08_Security_Design.md)） |
+| SAR 2.04 RE(1) | Mobile code authenticity check | SL2 | 部分符合 | 腳本與外掛由 Metadata 服務經 HTTPS（`/getfile`、`/getpluginfile`）下載，腳本以壓縮/加密形式儲存；僅依 HTTPS 與伺服器信任，未驗證程式簽章/發行者，亦無雜湊白名單比對。（SRS：[FR-CLI-050、FR-CLI-093](../SRS/03_Functional_Requirements.md)、[NFR-SEC-004、NFR-SEC-010](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-08 §7、§9](../SDS/08_Security_Design.md)） |
 | CR 2.05 | Session lock | SL1 | 部分符合 | `sessionmonitor`/Viewer 鎖定；無全介面强制鎖定政策。（SRS：[FR-CLI-010、FR-CLI-011](../SRS/03_Functional_Requirements.md)、[NFR-SEC-008](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-08 §3.4](../SDS/08_Security_Design.md)） |
 | CR 2.06 | Remote session termination | SL2 | 符合 | 使用者登出、Session 清除；管理端可移除 Session。（SRS：[FR-CLI-011](../SRS/03_Functional_Requirements.md)、[FR-META-004](../SRS/03_Functional_Requirements.md)、[NFR-SEC-008](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-08 §3.3、§3.4](../SDS/08_Security_Design.md)） |
 | CR 2.07 | Concurrent session control | SL3 | 不符合 | 未限制同時 Session 數。 |
