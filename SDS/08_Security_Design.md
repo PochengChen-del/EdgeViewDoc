@@ -217,6 +217,7 @@ sequenceDiagram
 |------|------|
 | 連線 | 同源/Ingress 控制 |
 | 登入 | `login` topic + `csrfToken` |
+| Session 綁定 | handshake 的 `graphicSession` 綁定連線；只比對該 Session 的 `csrfToken`，不掃描 `http_sessions` |
 | 逾時 | `websocket_auth_timeout=10` 秒 |
 | 授權 | 分派前檢查：非 `login` topic 需 `AlreadyLogin`；action 再有 `needAuth` |
 | 未登入 | `-100`，不進入 handler |
@@ -228,13 +229,14 @@ sequenceDiagram
 
 - `systeminfo` 未登入即訂閱：改由 `NotifyAuthenticated` 在登入成功後註冊。
 - `default` 未檢查登入：中央 gate 先阻擋，handler 再加一層檢查。
+- `verifyToken` 原掃描所有 `http_sessions`（R-007）：改由 WS handshake 綁定 `graphicSession`，登入只與該連線 Session 的 `csrfToken` 做 constant-time 比對；原生 Qt 的 `QWebSocket` handshake 會帶上 Cookie。
+- WASM／瀏覽器由原生 WebSocket 自動帶同源 Cookie；HTML WebSocket 不允許自訂 `Cookie` header。
 
 **殘餘風險**
 
-1. `verifyToken` 掃描所有 `http_sessions` 尋找相同 CSRF（R-007）。
-2. 缺少 Origin 檢查。
-3. 連線數/訊息大小無明顯上限。
-4. `default` 仍會將已登入者的訊息廣播給所有 client；若不需要應移除廣播。
+1. 缺少 Origin 檢查。
+2. 連線數/訊息大小無明顯上限。
+3. `default` 仍會將已登入者的訊息廣播給所有 client；若不需要應移除廣播。
 
 ## 8.1 OPC UA 子系統安全
 

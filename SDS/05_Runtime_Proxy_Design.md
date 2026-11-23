@@ -239,7 +239,7 @@ sequenceDiagram
 
 ### 4.5 認證規則
 
-- `loginController.login`：以 `csrfToken` 反查 `http_sessions` 的 session data，成功後 `SetAlreadyLogin` 並 `NotifyAuthenticated`。
+- `loginController.login`：以 WS handshake 的 `graphicSession` 取得連線所屬 Session，只比對該 Session 的 `csrfToken`，不掃描 `http_sessions` 全表；成功後 `SetAlreadyLogin` 並 `NotifyAuthenticated`。
 - 分派前檢查：非 `login` topic 若未登入，直接回 `-100`，不進入 handler 或 `default`。
 - 其他 `needAuth=true` 的 action：再次檢查 `client.AlreadyLogin()`，未登入回 `-100`。
 - `systeminfo` 在 WS login 成功後才加入 polling 訂閱。

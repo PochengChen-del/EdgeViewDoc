@@ -262,6 +262,7 @@ sequenceDiagram
     N->>R: Upgrade /so
     V->>N: {topic:login, action:login, csrfToken}
     N->>R: 轉發
+    R->>R: 以 handshake graphicSession 比對該 Session csrfToken
     R-->>V: {error:0}
     V->>N: {topic:recorddata, action:register, request}
     R->>WS: 建立訂閱與輪詢

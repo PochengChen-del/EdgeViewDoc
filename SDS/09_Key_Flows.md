@@ -106,6 +106,7 @@ sequenceDiagram
     E->>E: editor.clearAllProcess()
     V->>V: 載入 content 與變數
     V->>P: WS login（csrfToken）
+    P->>P: 以 handshake graphicSession 比對該 Session csrfToken
     P-->>V: 成功
     V->>P: recorddata register
     V->>P: alarm summary register
@@ -373,8 +374,9 @@ sequenceDiagram
     participant V as Viewer
     participant P as Runtime
     participant S as SC Server
-    V->>P: WS connect
+    V->>P: WS connect（handshake 帶 graphicSession Cookie）
     V->>P: login (csrfToken)
+    P->>P: 比對該連線 Session csrfToken
     P->>P: SetAlreadyLogin + NotifyAuthenticated
     P->>P: systeminfo 訂閱
     loop 每 3 秒

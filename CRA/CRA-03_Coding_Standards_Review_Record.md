@@ -8,7 +8,7 @@
 |------|------|
 | 文件編號 | CRA-03 |
 | 文件名稱 | 編碼標準審查紀錄（Coding Standards Review Record） |
-| 版本 | 1.1 |
+| 版本 | 1.2 |
 | 狀態 | 初稿（部分發現仍為 Open） |
 | 日期 | 2026-11-23（彙整日） |
 | 產品名稱 | EdgeView（HMI/SCADA 圖控設計與執行平台） |
@@ -106,7 +106,7 @@ flowchart LR
 | 紀錄 ID | 日期 | 子系統 | 範圍 | 方法 | 主要發現 | 結果 |
 |---------|------|--------|------|------|----------|------|
 | CSR-2026-01 | 2026-11 | Metadata／Runtime／xnginx | 認證、Session、CSRF、TLS | 人工 + SDS 追溯 | F-001、F-002、F-003、F-007、F-008 | 有條件通過 |
-| CSR-2026-02 | 2026-11 | Runtime WebSocket | topic/action、登入、訂閱 | 人工 + SDS 追溯 | F-004、F-006、F-009 | 有條件通過 |
+| CSR-2026-02 | 2026-11 | Runtime WebSocket | topic/action、登入、訂閱 | 人工 + SDS 追溯 | F-004、F-006、F-009 | 通過（F-004、F-006、F-009 已修） |
 | CSR-2026-03 | 2026-11 | Runtime 設定／輪詢 | 輪詢間隔、資源上限 | 人工 + SDS 追溯 | F-005 | 通過（已修） |
 | CSR-2026-04 | 2026-11 | OPC UA Data Agent | CORS、憑證、時間戳 | 人工 + SDS 追溯 | F-018、F-019、F-020 | 有條件通過（未修） |
 | CSR-2026-05 | 2026-11 | Metadata Web/HTTP | 端點、輸入、授權、日誌 | 人工 + 清單 | F-010、F-011、F-012、F-015、F-016、F-017、F-022、F-023 | 有條件通過 |
@@ -127,7 +127,7 @@ flowchart LR
 | F-006 | CWE-400／CWE-401 | Runtime `RecordDataPolling` | 無 TTL／上限／統計 | Medium | idle TTL、上限、reaper、`Stats()` | Fixed | R-009 |
 | F-007 | CWE-916／CWE-759 | Metadata `UserModel` | 密碼 SHA-256 單次、無鹽 | High | 遷移 Argon2id/bcrypt + 遷移計畫 | Open | R-004 |
 | F-008 | CWE-1004／CWE-352 | Metadata `loginController` | CSRF Token Cookie 非 HttpOnly | Medium | HttpOnly + SameSite + body token | Open | R-005 |
-| F-009 | CWE-307／CWE-203 | Runtime `loginController` | `verifyToken` 掃描所有 Session | Medium | 以 Session ID 驗證 | Open | R-007 |
+| F-009 | CWE-307／CWE-203 | Runtime `loginController` / `webSocket.go` | `verifyToken` 掃描所有 Session | Medium | WS handshake 綁定 `graphicSession`，僅比對該 Session 的 `csrfToken`；原生 Qt 由 handshake 帶 Cookie | Fixed | R-007 / SDS-13 §5.4 |
 | F-010 | CWE-306／CWE-639 | Metadata 檔案端點 | 公開 GET（`/getfile` 等） | Medium | 授權／簽章 URL／限流 | Open | R-012 |
 | F-011 | CWE-942 | Ingress／Runtime | CORS/Origin 寬鬆 | Medium | 明確白名單、移除強制 Origin | Open | R-015 |
 | F-012 | CWE-307／CWE-400 | xnginx／登入 | 限流門檻偏高、僅 OPC UA 有鎖定 | High | 登入專用限流、非 OPC UA 鎖定、WS 限流 | Mitigating | R-016 |
@@ -149,13 +149,13 @@ flowchart LR
 
 | 狀態 | 數量 |
 |------|------|
-| Fixed | 6（F-001~F-004、F-005、F-006） |
-| Open | 13 |
+| Fixed | 7（F-001~F-006、F-009） |
+| Open | 12 |
 | Mitigating | 1 |
 | 待盤點／待驗證 | 3 |
 | 接受 | 1 |
 
-> 註：F-001~F-006 對應 `SDS/13 §1` 已修項目，仍需 CP-4 回歸測試報告。
+> 註：F-001~F-006、F-009 對應 `SDS/13 §1` 已修項目，仍需 CP-4 回歸測試報告。
 
 ## 8. 語言別符合性檢查表
 
@@ -246,6 +246,7 @@ flowchart LR
 |------|------|------|
 | 1.0 | 2026-11-19 | 初版，彙整編碼標準、CWE 清單、審查紀錄與發現 |
 | 1.1 | 2026-11-23 | 對齊 CRA-01 v2.0：舊 RID/MID 改為 RID-EV/MID-EV |
+| 1.2 | 2026-11-23 | 更新 F-009 為 Fixed（R-007 WS 登入 Session 綁定） |
 
 ## 13. 追溯
 
@@ -253,7 +254,7 @@ flowchart LR
 |------|------|
 | `SDS/08` | §3、§4、§7 |
 | `SDS/11` | §6、§7 |
-| `SDS/13` | §6、§7（F-001~F-006） |
+| `SDS/13` | §5.4、§6、§7（F-001~F-006、F-009） |
 | `62443/Evidence.md` | §9、§11 |
 | CRA-02 | CP-3、CP-4 |
 | CRA-01 | RID 對照（§4、附錄 A） |

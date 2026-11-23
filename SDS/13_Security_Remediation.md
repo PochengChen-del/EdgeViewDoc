@@ -10,6 +10,7 @@
 | R-002 | 全域停用 TLS 憑證驗證 | Fixed | 移除 `http.DefaultTransport` 全域 `InsecureSkipVerify` |
 | R-003 | `/record/queryrecord` 無認證 | Fixed | 路由停用，handler 不再標註 `@Router`，Swagger 目錄移除 |
 | R-006 | WebSocket 部分 topic 未認證 | Fixed | 非 `login` topic 統一要求 `AlreadyLogin`；systeminfo 登入後才註冊 |
+| R-007 | WS 登入掃描所有 Session | Fixed | WS handshake 綁定 `graphicSession`；只比對該 Session 的 `csrfToken`，不掃描全表 |
 | R-008 | EH/X 告警輪詢間隔未初始化 | Fixed | 預設 1000ms；`<=0` 用預設、低於 100ms 夾到 100ms |
 | R-009 | Record 快取無 TTL | Fixed | 新增 idle TTL、全域/每 client 上限、reaper 與 `Stats()` |
 
@@ -106,6 +107,30 @@ sessionKey = HKDF-SHA256(
 3. 未登入 client 不出現在 `SystemInfoPolling.clients`。
 4. WS login 成功後，systeminfo 才開始推送。
 5. `CheckAuthAndCloseAfter` 10 秒後仍會關閉未登入連線。
+
+### 5.4 R-007 WS 登入 Session 綁定
+
+#### 設計
+
+- `service/webSocket.go` 在 WS handshake 時透過 session store 取得 `graphicSession` 對應的 `sessionID` 與 `csrfToken`，保存在 `SoClient`。
+- `loginController.verifyToken` 不再查詢 `http_sessions` 全表，只以 `subtle.ConstantTimeCompare` 比對該連線綁定 Session 的 `csrfToken`。
+- 缺少、無效或過期的 session cookie 一律登入失敗（`-100`）。
+- 原生 Qt `WaWebSocket` 在 handshake 加上 Cookie jar 內容，確保送出 `graphicSession`；WASM／瀏覽器由原生 WebSocket 自動帶同源 Cookie（HTML WebSocket 不允許自訂 `Cookie` header）。
+
+#### 程式位置
+
+| 功能 | 檔案 |
+|------|------|
+| Session 綁定與 token 比對 | `wax_rutime_proxy/service/webSocket.go` |
+| WS 登入驗證 | `wax_rutime_proxy/controller/websocket/loginController.go` |
+| 原生 Qt handshake Cookie | `wax_hmi-designer-client/wa-hmi-designer/io/websocket/wawebsocket.cpp` |
+
+#### 驗收
+
+1. 原始碼搜尋 `verifyToken` 不再呼叫 `HttpSessionModel.Query()` 或掃描 `http_sessions`。
+2. 有效 `graphicSession` + 相符 `csrfToken`：WS login 成功。
+3. 缺少／錯誤／過期 `graphicSession`，或以其他 Session 的 token 登入：回 `-100`。
+4. 原生 Qt 與同源 WASM 的 WS handshake 均可見 `Cookie: graphicSession=...` 或成功登入。
 
 ## 6. R-008 EH/X 告警輪詢間隔
 
@@ -209,6 +234,8 @@ K8s 環境若未注入 `SESSION_SECRET` 且資料庫沒有 `aes_secret`，服務
 12. 超過 record 或 per-client 上限時，register 回傳錯誤。
 13. 啟動後每分鐘可看到 `[recorddata] stats ...`。
 14. 將 `recorddata_idle_timeout_seconds` 設為 `0` 時，閒置 record 不會被 TTL 回收。
+15. WS login 只驗證 handshake `graphicSession` 綁定的 Session，不再掃描全部 `http_sessions`。
+16. 以其他 Session 的 `csrfToken` 登入回 `-100`；缺少／過期 cookie 亦回 `-100`。
 
 ## 10. 後續追蹤
 

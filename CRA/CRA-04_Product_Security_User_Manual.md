@@ -8,7 +8,7 @@
 |------|------|
 | 文件編號 | CRA-04 |
 | 文件名稱 | 產品安全使用手冊（Product Security User Manual） |
-| 版本 | 1.1 |
+| 版本 | 1.2 |
 | 狀態 | 初稿（隨產品版本更新） |
 | 日期 | 2026-11-23 |
 | 產品名稱 | EdgeView（HMI/SCADA 圖控設計與執行平台） |
@@ -209,6 +209,7 @@ EdgeView 為三層式 HMI/SCADA 平台：
 | Session | 儲存於 PostgreSQL `http_sessions`；預設有效期 7 天 |
 | Cookie | `Secure`/`HttpOnly`/`SameSite`（依部署與版本） |
 | CSRF | 狀態變更請求需帶 `csrfToken` |
+| WebSocket 登入 | 以 handshake 的 `graphicSession` 綁定；只比對該 Session 的 `csrfToken`，不掃描全部 Session（R-007） |
 | 時間戳 | 寫入操作需 `packetTimestamp`，預設容許 300 秒 |
 | 逾時 | WebSocket 連線需於 10 秒內完成登入 |
 | 金鑰輪替 | 以 `SESSION_SECRET_PREVIOUS` 保留至少一個 session timeout |
@@ -376,7 +377,7 @@ EdgeView 為三層式 HMI/SCADA 平台：
 |------|------|
 | 產品支援 | （由製造商填寫） |
 | 安全通報 | （由製造商填寫） |
-| 文件版本 | 1.1（2026-11-23） |
+| 文件版本 | 1.2（2026-11-23） |
 | 支援期間/EOL | （依產品生命週期政策填寫） |
 
 ## 24. 版本紀錄
@@ -385,6 +386,7 @@ EdgeView 為三層式 HMI/SCADA 平台：
 |------|------|------|
 | 1.0 | 2026-11-19 | 初版，依 CRA/SDS/SRS/62443 建立 |
 | 1.1 | 2026-11-23 | 對齊 CRA-01 v2.0：§19 加入 RID-EV、補 B-03-F01 對照與版本資訊 |
+| 1.2 | 2026-11-23 | §11 補充 WS 登入以 `graphicSession` 綁定 Session（R-007） |
 
 ## 25. 追溯
 

@@ -8,7 +8,7 @@
 |------|------|
 | 文件編號 | CRA-01 |
 | 文件名稱 | 威脅模型（Threat Modeling） |
-| 版本 | 2.0 |
+| 版本 | 2.1 |
 | 狀態 | 初稿（配合 CRA 技術文件送審） |
 | 日期 | 2026-11-23 |
 | 產品名稱 | EdgeView（OPC UA 版，HMI/SCADA 圖控設計與執行平台） |
@@ -292,7 +292,7 @@ flowchart TB
 | RID-EV-007 | IA | WA／EH／X 多來源登入 Token 交換或驗證弱點 | Metadata | Spoofing | Moderate | High | High | MID-EV-023 | 分擔／移轉 | R-002-R；SDS-08 §7 |
 | RID-EV-008 | IA | 未內建 MFA，管理帳號僅靠單一密碼 | Metadata | Spoofing | Moderate | High | High | MID-EV-025 | 接受 | CR 1.01 RE(2)；CRA-04 §7.4 |
 | RID-EV-009 | IA | 密碼雜湊未加鹽（SHA-256 單次） | Metadata | Information Disclosure | Low | High | Moderate | MID-EV-004 | 降低 | R-004；SDS-08 §6.1 |
-| RID-EV-010 | IA | Session 併發、逾時或登出未失效（7 天有效期） | Metadata／xnginx | Spoofing | Moderate | Moderate | Moderate | MID-EV-003 | 降低 | R-007；SDS-08 §3.3、§3.4 |
+| RID-EV-010 | IA | Session 併發、逾時或登出未失效（7 天有效期） | Metadata／xnginx | Spoofing | Moderate | Moderate | Moderate | MID-EV-003 | 降低 | R-007（WS 登入 Fixed）；SDS-08 §3.3、§3.4 |
 | RID-EV-011 | AC | 越權存取專案／畫面／物件（IDOR，未檢查 ACL） | Metadata／Runtime | Elevation of Privilege | Moderate | High | High | MID-EV-005 | 降低 | R-024；SDS-08 §4.2 |
 | RID-EV-012 | AC | OPC UA 設定 UI 角色繞過（`graphic` 進入設定頁） | Config UI／Metadata | Elevation of Privilege | Moderate | High | High | MID-EV-005 | 降低 | FR-OPC-001、FR-OPC-011 |
 | RID-EV-013 | AC | 公開檔案端點可列舉或未授權下載資源 | Metadata | Information Disclosure | High | Moderate | High | MID-EV-012、MID-EV-016 | 降低 | R-012；SDS-08 §9 |
@@ -305,7 +305,7 @@ flowchart TB
 | RID-EV-020 | WEB | HTTP 標頭注入或回應分割 | xnginx／Metadata | Tampering | Low | High | Moderate | MID-EV-011 | 降低 | SDS-08 §10 |
 | RID-EV-021 | WEB | 不安全反序列化（JSON／Protobuf／外掛） | Metadata／Runtime／Data Agent | Tampering | Low | High | Moderate | MID-EV-011 | 降低 | CRA-03 CWE-502 |
 | RID-EV-022 | WEB | 惡意或超大檔案上傳（75 MB、DB bytea） | Metadata | Tampering | Moderate | Moderate | Moderate | MID-EV-012、MID-EV-016 | 降低 | SDS-08 §9 |
-| RID-EV-023 | WEB | WebSocket topic 未認證或訊息廣播給未授權者 | Runtime | Information Disclosure | Moderate | High | High | MID-EV-003 | 降低 | R-006、R-007；SDS-08 §8 |
+| RID-EV-023 | WEB | WebSocket topic 未認證或訊息廣播給未授權者 | Runtime | Information Disclosure | Moderate | High | High | MID-EV-003 | 降低 | R-006、R-007（Fixed）；SDS-08 §8 |
 | RID-EV-024 | WEB | WebSocket 訊息或連線數耗盡 Runtime 資源 | Runtime | Denial of Service | High | Moderate | High | MID-EV-016 | 降低 | R-016；SDS-08 §8 |
 | RID-EV-025 | WEB | CORS／Origin 過寬（Data Agent／Ingress 允許任意來源帶憑證） | Data Agent／Ingress | Information Disclosure | High | Moderate | High | MID-EV-010 | 降低 | R-015、R-026；SDS-08 §8.1 |
 | RID-EV-026 | WEB | 錯誤訊息或日誌洩漏密碼、Token、連線字串 | All | Information Disclosure | Moderate | Moderate | Moderate | MID-EV-019 | 降低 | R-023；SDS-08 §11 |
@@ -402,7 +402,6 @@ flowchart TB
 |----------|------|----------|------|----------|
 | R-004 | 密碼雜湊未加鹽（SHA-256） | RID-EV-009 | Open | 遷移 Argon2id／bcrypt + 遷移計畫 |
 | R-005 | CSRF Token Cookie 非 HttpOnly | RID-EV-004、005 | Open | HttpOnly + SameSite，前端改用 body token |
-| R-007 | WS 登入掃描所有 Session | RID-EV-010、023 | Open | 以 Session ID 驗證 |
 | R-012 | 公開檔案端點 | RID-EV-001、013、019 | Open | 授權／簽章 URL／限流 |
 | R-015 | CORS／Origin 寬鬆 | RID-EV-025 | Open | 明確白名單 |
 | R-016 | 速率限制／鎖定不足（OPC UA 以外） | RID-EV-003、024、055 | Mitigating | 登入專用限流、帳號鎖定、WS 訊息限流 |
@@ -418,7 +417,7 @@ flowchart TB
 | R-032 | OPC UA 大量輪詢 | RID-EV-033、037 | Open | 分組／訂閱／調整間隔 |
 | R-035 | xnginx 設定變體漂移 | RID-EV-066 | Open | 設定基準與煙霧測試 |
 
-> 已修復（SDS-13）：R-001 Session secret、R-002 全域 TLS 驗證、R-003 `/record/queryrecord`、R-006 WebSocket 認證、R-008 輪詢間隔、R-009 Record TTL。仍須以測試報告補證（CRA-02 CP-4）。
+> 已修復（SDS-13）：R-001 Session secret、R-002 全域 TLS 驗證、R-003 `/record/queryrecord`、R-006 WebSocket 認證、R-007 WS 登入 Session 綁定、R-008 輪詢間隔、R-009 Record TTL。仍須以測試報告補證（CRA-02 CP-4）。
 
 ## 10. STRIDE 對照
 
@@ -542,6 +541,7 @@ flowchart TB
 |------|------|------|
 | 1.0 | 2026-11-19 | 初版，依三份 CRA CSV 與 SDS/SRS/62443 建立 |
 | 2.0 | 2026-11-23 | 改寫為 EdgeView + OPC UA 專屬威脅模型；新增 RID-EV-001~071、MID-EV-001~028，同步 IEC 62443-4-2／EN 18031／CRA Annex I 對照與舊 RID 對照 |
+| 2.1 | 2026-11-23 | R-007（WS 登入掃描所有 Session）改為 Fixed；更新殘餘風險與 RID 對照 |
 
 ## 14. 追溯
 

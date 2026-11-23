@@ -673,7 +673,7 @@ POST /api/alarm/ack
 
 | Topic | Action | 認證 | Request | Result |
 |-------|--------|------|---------|--------|
-| `login` | `login` | CSRF | `csrfToken` | 成功/`-100` |
+| `login` | `login` | CSRF + 連線 Session | `csrfToken` | 成功/`-100` |
 | `recorddata` | `register` | 登入 | `id`、`version`、`param` | 註冊資訊 |
 | `recorddata` | `unregister` | 登入 | `id` | `{id}` |
 | `recorddata` | `update` | 登入 | `id`、參數 | 查詢結果 |
@@ -696,8 +696,9 @@ sequenceDiagram
     participant H as Hub
     participant L as login
     participant R as recorddata
-    C->>H: 連線
+    C->>H: 連線（handshake 帶 graphicSession Cookie）
     C->>L: {topic:login, action:login, csrfToken}
+    L->>L: 比對該連線 Session 的 csrfToken
     L-->>C: {error:0}
     C->>R: {topic:recorddata, action:register, request:{id}}
     R-->>C: {error:0}

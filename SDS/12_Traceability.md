@@ -191,7 +191,7 @@ flowchart LR
 | SDS-14 | FR-OPC-001~045、IF-OPC-001~011、NFR-OPC-001~020、直連資料源 |
 | SDS-15 | FR-UM-001~064、NFR-UM-001~008、IF-UM-001~007、手冊功能對照 |
 | SDS-16 | 手冊截圖證據 ↔ 設計/程式碼/API/CR |
-| SDS-13 | R-001/R-002/R-003/R-006/R-008/R-009 修復設計與驗收 |
+| SDS-13 | R-001/R-002/R-003/R-006/R-007/R-008/R-009 修復設計與驗收 |
 
 ## 8. 反向追溯（程式碼 → 需求）
 
@@ -211,7 +211,7 @@ flowchart LR
 | `pgstore/*`、`routes/routes.go` | FR-RT-017~018、023~024 |
 | `service/session_secret.go`（Metadata/Runtime/xnginx/Alarm） | R-001、NFR-SEC-008 |
 | `controller/RecordController.go`（queryrecord 停用） | R-003、NFR-SEC-001 |
-| `service/webSocket.go`、`controller/websocket/*`（WS 認證） | R-006、NFR-SEC-009 |
+| `service/webSocket.go`、`controller/websocket/*`（WS 認證、Session 綁定） | R-006、R-007、NFR-SEC-009 |
 | `config/config.go`、`EHAlarmPolling.go`、`XAlarmPolling.go` | R-008、NFR-PERF-004 |
 | `service/RecordDataPolling.go`（TTL/上限/回收） | R-009、NFR-PERF-004 |
 | `xnginx.go`、`xnginx.yaml`、`nginx.conf.templ`（rate limit） | R-016、NFR-SEC-015 |
@@ -263,5 +263,6 @@ flowchart LR
 | 2026-11-13 | 1.3 | 補 R-008 EH/X 告警輪詢間隔修復與驗收 | 工程團隊 |
 | 2026-11-13 | 1.4 | 補 R-016 nginx 限流現況與殘餘風險 | 工程團隊 |
 | 2026-11-13 | 1.5 | 補 R-009 Record 訂閱 TTL、上限與 reaper 修復 | 工程團隊 |
+| 2026-11-23 | 1.6 | 補 R-007 WS 登入 Session 綁定修復與驗收 | 工程團隊 |
 
 > 需求變更時，需同步更新 SRS-03、SDS-12 與測試案例。

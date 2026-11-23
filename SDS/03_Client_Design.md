@@ -428,6 +428,7 @@ flowchart LR
 |------|------|
 | `Global.websocket` | `WaWebSocket` |
 | URL | `${wsprotocol}//${serverInfo.host}/ws/so`；`wsprotocol` 由 `serverInfo.protocol` 推導，預設 `https:` → **`wss:`** |
+| 認證 | WS handshake 帶 `graphicSession` Cookie；login 只比對該 Session 的 `csrfToken`（R-007）；原生 Qt 由 `WaWebSocket` 補帶 Cookie，WASM 由瀏覽器自動帶同源 Cookie |
 | 功能 | 自動重連、topic 訂閱 |
 | 主題 | `login`、`waalarmsummary`、`systeminfo`、`recorddata`、`ehalarmsummary`、`opcuaalarmsummary`、`xalarmsummary` |
 | Controller | `Common/Api/ws/<Topic>Controller.qml` 自動建立 |

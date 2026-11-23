@@ -195,10 +195,11 @@
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | Medium |
-| 證據 | `loginController.verifyToken` 逐筆比對 `http_sessions` |
-| 影響 | 效能與時序洩漏；大量 Session 時變慢 |
-| 緩解 | 以 Session ID/Cookie 驗證，不掃全表 |
-| 狀態 | Open |
+| 證據 | 原 `loginController.verifyToken` 逐筆比對 `http_sessions` |
+| 影響 | 效能與時序洩漏；大量 Session 時變慢；token 未與連線 Session 綁定 |
+| 緩解 | 已完成：WS handshake 由 `graphicSession` 取得單一 Session，`loginController.verifyToken` 只比對該 Session 的 `csrfToken`（constant-time），不再掃描全表；原生 Qt `WaWebSocket` handshake 補帶 Cookie，WASM 依瀏覽器自動帶同源 Cookie |
+| 驗證 | 原始碼不再呼叫 `HttpSessionModel.Query()`；使用非本連線 Session 的 token 回 `-100`；有效 Cookie + token 登入成功 |
+| 狀態 | Fixed |
 
 ### R-008 EH/X 告警輪詢間隔未初始化
 
@@ -520,11 +521,11 @@ flowchart LR
 
 | 階段 | 項目 |
 |------|------|
-| P0 | R-001、R-002、R-003、R-006、R-008 已修復；待處理 R-023、R-002-R、R-025、R-026、R-027、R-028 |
+| P0 | R-001、R-002、R-003、R-006、R-007、R-008 已修復；待處理 R-023、R-002-R、R-025、R-026、R-027、R-028 |
 | P1 | R-004、R-005、R-015、R-016、R-018、R-022、R-029、R-030、R-031、R-032、R-035 |
 | P2 | R-010、R-011、R-017、R-021、R-033、R-034、TD-001~008 |
 
-> R-001/R-002/R-003/R-006/R-008/R-009 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-009 原列 P2，已完成修復。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
+> R-001/R-002/R-003/R-006/R-007/R-008/R-009 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-009 原列 P2，已完成修復。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
 
 ## 6. 決策記錄格式
 
