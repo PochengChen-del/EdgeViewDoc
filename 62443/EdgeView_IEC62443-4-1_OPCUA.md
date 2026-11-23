@@ -103,7 +103,7 @@
 | ID | 要求摘要 | 狀態 | 證據 | 缺口／建議 |
 |----|----------|------|------|-------------|
 | SR-1 | Product security context：定義產品安全脈絡（用途、資產、假設、威脅環境）。 | 符合 | [SRS-01](../SRS/01_Introduction.md)、[SRS-02](../SRS/02_Overall_Description.md)、[SDS-08 §1~§2](../SDS/08_Security_Design.md)、[CRA-01 §5](../CRA/CRA-01_Threat_Modeling.md)、[CRA-04 §3~§4](../CRA/CRA-04_Product_Security_User_Manual.md) | 已定義元件、信任邊界、攻擊面、部署假設與責任分工；正式認證仍需簽核版本。 |
-| SR-2 | Threat model：建立並維護產品威脅模型。 | 部分符合 | [CRA-01 §4~§7](../CRA/CRA-01_Threat_Modeling.md)、[SDS-08 §13](../SDS/08_Security_Design.md) | 有 97 筆 RID、STRIDE、PID/TID 與風險矩陣；缺正式審查簽核、更新頻率與變更觸發紀錄。 |
+| SR-2 | Threat model：建立並維護產品威脅模型。 | 部分符合 | [CRA-01 §4~§7](../CRA/CRA-01_Threat_Modeling.md)、[SDS-08 §13](../SDS/08_Security_Design.md) | 有 71 筆 RID-EV、STRIDE、PID/TID 與風險矩陣；缺正式審查簽核、更新頻率與變更觸發紀錄。 |
 | SR-3 | Product security requirements：定義產品安全需求。 | 部分符合 | [SRS-05 §5.2](../SRS/05_Nonfunctional_Requirements.md)、[SRS-07](../SRS/07_OPCUA_Subsystem.md)、[EdgeView 4-2 對照](EdgeView_IEC62443-4-2_OPCUA.md) | 有安全 NFR 與 OPC UA 需求；缺完整安全需求規格與「威脅 → 需求」追溯。 |
 | SR-4 | Product security requirements content：安全需求具備必要內容與驗收條件。 | 部分符合 | [SRS-05](../SRS/05_Nonfunctional_Requirements.md)、[SRS-06 §5](../SRS/06_Acceptance_and_Traceability.md)、[SRS-07](../SRS/07_OPCUA_Subsystem.md) | 有需求與驗收方法；缺逐項假設、安全等級目標與驗收證據。 |
 | SR-5 | Security requirements review：審查安全需求。 | 部分符合 | [CRA-02 CP-1](../CRA/CRA-02_Security_Checkpoint.md)、[SRS-06 §7](../SRS/06_Acceptance_and_Traceability.md) | 有變更流程與檢查點；缺需求審查會議紀錄與跨部門簽核。 |
@@ -264,7 +264,7 @@
 
 ### A.4 SVV-2 Threat mitigation testing（不符合）
 
-- **現況**：`CRA-01` 已登錄 97 筆 RID 與對應 MID，但未針對威脅緩解措施執行驗證測試。
+- **現況**：`CRA-01` 已登錄 71 筆 RID-EV 與對應 MID-EV，但未針對威脅緩解措施執行驗證測試。
 - **缺口**：無法證明威脅模型中的高風險項目在實作中有效降低。
 - **建議**：從高風險 RID 建立測試案例，驗證 MID 的有效性；將結果回填 `CRA-01` 與 `SDS-11`，未通過者納入修復與回歸。
 - **證據**：[CRA-01 §7](../CRA/CRA-01_Threat_Modeling.md)、[CRA-02 CP-4](../CRA/CRA-02_Security_Checkpoint.md)、EV-13。
@@ -305,7 +305,7 @@
 
 | ID | 現況 | 缺口 | 建議 |
 |----|------|------|------|
-| SR-2 | 有 97 筆 RID、STRIDE 與風險矩陣。 | 缺審查簽核、更新頻率與變更觸發。 | 定義威脅模型更新時機並留存審查紀錄。 |
+| SR-2 | 有 71 筆 RID-EV、STRIDE 與風險矩陣。 | 缺審查簽核、更新頻率與變更觸發。 | 定義威脅模型更新時機並留存審查紀錄。 |
 | SR-3 | 有安全 NFR 與 OPC UA 需求。 | 缺完整安全需求規格與威脅→需求追溯。 | 建立需求規格與 CRA-01 RID 的對照。 |
 | SR-4 | 有需求與驗收方法。 | 缺逐項假設、安全等級目標與驗收證據。 | 補齊每項安全需求的內容與驗收準則。 |
 | SR-5 | 有變更流程與檢查點。 | 缺需求審查會議紀錄與跨部門簽核。 | 建立需求審查紀錄與核准流程。 |

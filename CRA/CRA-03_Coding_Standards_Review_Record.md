@@ -8,9 +8,9 @@
 |------|------|
 | 文件編號 | CRA-03 |
 | 文件名稱 | 編碼標準審查紀錄（Coding Standards Review Record） |
-| 版本 | 1.0 |
+| 版本 | 1.1 |
 | 狀態 | 初稿（部分發現仍為 Open） |
-| 日期 | 2026-11-19（彙整日） |
+| 日期 | 2026-11-23（彙整日） |
 | 產品名稱 | EdgeView（HMI/SCADA 圖控設計與執行平台） |
 | 範圍 | Client（C++/QML/JS）、Metadata Service（Go）、Runtime Proxy（Go）、OPC UA Data Agent（C#）、OPC UA Alarm Agent（Go）、OPC UA 設定 UI（Vue/JS）、SQL／設定檔 |
 | 關聯文件 | [CRA-01 威脅模型](CRA-01_Threat_Modeling.md)、[CRA-02 安全檢查點](CRA-02_Security_Checkpoint.md)、[CRA-04 產品安全使用手冊](CRA-04_Product_Security_User_Manual.md)、`SDS/08`、`SDS/11`、`SDS/13` |
@@ -53,9 +53,9 @@
 
 | CWE | 弱點 | 檢查重點 | 審查狀態 |
 |-----|------|----------|----------|
-| CWE-79 | XSS | 輸出編碼、CSP、避免 `innerHTML`／`v-html` | 待盤點驗證（RID-060） |
+| CWE-79 | XSS | 輸出編碼、CSP、避免 `innerHTML`／`v-html` | 待盤點驗證（RID-EV-017） |
 | CWE-89 | SQL Injection | 參數化查詢、動態識別字白名單 | Open（R-019） |
-| CWE-22 | Path Traversal | 路徑正規化、禁止 `..`、根目錄限制 | 有條件（RID-065） |
+| CWE-22 | Path Traversal | 路徑正規化、禁止 `..`、根目錄限制 | 有條件（RID-EV-019） |
 | CWE-352 | CSRF | 同步 token／double-submit、SameSite | Open（R-005） |
 | CWE-306 | Missing Authentication | 端點／topic／服務皆需認證 | 已修（R-003/R-006）、公開端點待處理（R-012） |
 | CWE-798 | Hardcoded Credentials | 掃描原始碼與設定 | Open（R-018/R-028） |
@@ -63,14 +63,14 @@
 | CWE-916 | Weak Password Hash | 加鹽、慢雜湊（Argon2id/bcrypt） | Open（R-004） |
 | CWE-327 | Broken/Risky Crypto | 停用弱演算法、TLS 1.2+ | 部分符合 |
 | CWE-295 | Improper Cert Validation | 不全域停用、信任清單 | 全域已修（R-002）、個別 client Open（R-002-R/R-027） |
-| CWE-330 | Insufficient Randomness | CSPRNG、足夠熵 | 符合（MID-047） |
+| CWE-330 | Insufficient Randomness | CSPRNG、足夠熵 | 符合（MID-EV-008、018） |
 | CWE-311 | Missing Encryption | 敏感傳輸加密（TLS） | 部分符合（明文協定除外） |
 | CWE-319 | Cleartext Transmission | 停用 HTTP 或導向 HTTPS | 待部署配合（8880） |
 | CWE-294 | Replay | 時間戳／nonce | 部分符合（R-025） |
 | CWE-400 | Resource Exhaustion | 限流、上限、TTL | 部分符合（R-009/R-016） |
 | CWE-532 | Log Exposure | 遮罩敏感欄位、避免 DumpRequest | Open（R-023） |
 | CWE-209 | Error Info Leak | 一般化錯誤訊息 | 待盤點 |
-| CWE-502 | Insecure Deserialization | 僅 Protobuf/JSON、長度限制 | 符合（RID-068） |
+| CWE-502 | Insecure Deserialization | 僅 Protobuf/JSON、長度限制 | 符合（RID-EV-021） |
 | CWE-787 | OOB Write | 邊界檢查、記憶體安全 | 接受（C/C++，ASLR/DEP） |
 | CWE-125 | OOB Read | 同上 | 接受 |
 | CWE-416 | Use After Free | 智慧指標、生命週期 | 待工具驗證 |
@@ -140,10 +140,10 @@ flowchart LR
 | F-019 | CWE-942 | OPC UA Data Agent | `SetIsOriginAllowed(_=>true).AllowCredentials()` | High | Origin 白名單、限制 Credentials | Open | R-026 |
 | F-020 | CWE-295 | OPC UA Data Agent | `AutoAcceptUntrustedCertificates=true`、允許 SHA1 | High | 信任清單、拒絕 SHA1 | Open | R-027 |
 | F-021 | CWE-1188 | OPC UA Alarm／部署 | 預設埠不一致（8090／28889） | Medium | 統一預設與文件 | Open | R-029 |
-| F-022 | CWE-22 | Web API 檔案讀取 | 路徑穿越風險 | High | 正規化 + 根目錄限制（待驗證） | 待盤點 | RID-065 |
-| F-023 | CWE-79 | Web／QML 輸出 | XSS／輸出編碼 | High | 依語境編碼、CSP（待盤點） | 待盤點 | RID-060 |
-| F-024 | CWE-787／CWE-125 | Client C/C++ | 記憶體邊界與 UAF | High | ASLR/DEP、RAII、邊界檢查 | 接受（搭配硬化） | RID-069/RID-070 |
-| F-025 | CWE-330 | 安裝／金鑰 | 對內 ZeroMQ 預設共用 access code | High | 安裝時強制輸入唯一 access code | Open | RID-048 |
+| F-022 | CWE-22 | Web API 檔案讀取 | 路徑穿越風險 | High | 正規化 + 根目錄限制（待驗證） | 待盤點 | RID-EV-019 |
+| F-023 | CWE-79 | Web／QML 輸出 | XSS／輸出編碼 | High | 依語境編碼、CSP（待盤點） | 待盤點 | RID-EV-017 |
+| F-024 | CWE-787／CWE-125 | Client C/C++ | 記憶體邊界與 UAF | High | ASLR/DEP、RAII、邊界檢查 | 接受（搭配硬化） | RID-EV-070 |
+| F-025 | CWE-330 | 安裝／金鑰 | 對內 ZeroMQ 預設共用 access code | High | 安裝時強制輸入唯一 access code | Open | RID-EV-043／071 |
 
 ### 7.1 發現狀態統計
 
@@ -245,6 +245,7 @@ flowchart LR
 | 版本 | 日期 | 變更 |
 |------|------|------|
 | 1.0 | 2026-11-19 | 初版，彙整編碼標準、CWE 清單、審查紀錄與發現 |
+| 1.1 | 2026-11-23 | 對齊 CRA-01 v2.0：舊 RID/MID 改為 RID-EV/MID-EV |
 
 ## 13. 追溯
 
@@ -255,4 +256,4 @@ flowchart LR
 | `SDS/13` | §6、§7（F-001~F-006） |
 | `62443/Evidence.md` | §9、§11 |
 | CRA-02 | CP-3、CP-4 |
-| CRA-01 | RID 對照（§4） |
+| CRA-01 | RID 對照（§4、附錄 A） |
