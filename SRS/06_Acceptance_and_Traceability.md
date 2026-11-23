@@ -94,8 +94,8 @@
 | OI-005 | 部分內部 HTTPS 呼叫停用憑證驗證 | NFR-SEC-004 | 正式環境改為驗證或指定 CA |
 | OI-006 | WebSocket `systeminfo`/`default` 認證不足 | NFR-SEC-009 | 已修（R-006/R-007）：非 `login` topic 需登入；systeminfo 登入後才訂閱；WS 登入綁定 `graphicSession`，只比對該 Session 的 `csrfToken` |
 | OI-007 | Record 快取無明確閒置 TTL | NFR-PERF/REL | 依設計註解實作 10 分鐘回收或調整文件 |
-| OI-008 | Data Agent `packetTimestamp` 未強制 | NFR-OPC-007、IF-OPC-002 | 修正中介層短路；補時間戳測試 |
-| OI-009 | Data Agent CORS 允許任意 Origin + Credentials | NFR-OPC-007 | 白名單化並限制憑證 |
+| OI-008 | Data Agent `packetTimestamp` 未強制 | NFR-OPC-007、IF-OPC-002 | 已修（R-025）：非 GET 強制毫秒時間戳、內部呼叫補值、新增單元測試 |
+| OI-009 | Data Agent CORS 允許任意 Origin + Credentials | NFR-OPC-007 | 已修（R-026）：`CorsOriginPolicy` 白名單（設定清單＋私有網段），僅白名單帶 Credentials |
 | OI-010 | OPC UA 憑證自動接受不受信任 | NFR-OPC-008 | 正式環境改為信任清單 |
 | OI-011 | Alarm 預設埠已統一為 28889 | FR-OPC-028、SDS-14 §11 | 已統一預設與部署文件 |
 | OI-012 | Root path 直連參數由 Metadata `config.yaml` 提供（非 `DataSourceBody`） | FR-OPC-015/018、SDS-14 §8.3 | 設定 `opcua.agent.dbport`／`opcua.alarm.port` 或改用 `/uadb`、`/uaam` |

@@ -410,8 +410,8 @@ flowchart TB
 | R-019 | 動態 SQL 組裝 | RID-EV-018 | Fixed | 識別字跳脫/白名單、值參數化、UpdateValue 欄位驗證 |
 | R-023 | 日誌可能含敏感請求 | RID-EV-026、062 | Open | 遮罩敏感欄位 |
 | R-024 | 權限檢查分散 | RID-EV-011、014 | Open | 集中式授權 middleware |
-| R-025 | Data Agent 時間戳未強制 | RID-EV-035 | Open | 移除短路並補測試 |
-| R-026 | Data Agent CORS 過寬 | RID-EV-025、036 | Open | Origin 白名單 |
+| R-025 | Data Agent 時間戳未強制 | RID-EV-035 | Fixed | 非 GET 強制毫秒時間戳、內部呼叫補值、新增測試；殘餘窗口內重放需 nonce/HMAC |
+| R-026 | Data Agent CORS 過寬 | RID-EV-025、036 | Fixed | `CorsOriginPolicy` Origin 白名單（設定清單＋私有網段），僅白名單帶 Credentials |
 | R-027 | OPC UA 憑證自動接受 | RID-EV-028 | Open | 信任清單、拒絕 SHA1 |
 | R-029／R-030 | Alarm 埠／Root path 參數來源 | RID-EV-067 | Fixed | 統一預設；`dbport`/`alarmport` 由 Metadata `config.yaml` 經 `QueryBodyKey` 提供 |
 | R-032 | OPC UA 大量輪詢 | RID-EV-033、037 | Open | 分組／訂閱／調整間隔 |

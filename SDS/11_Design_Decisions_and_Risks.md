@@ -360,10 +360,11 @@
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | High |
-| 證據 | `authorizeCore` 失敗時 `httputil.DumpRequest(..., true)` |
+| 證據 | `authorizeCore` 失敗時 `httputil.DumpRequest(..., true)`；多處直接記錄 token/csrfToken/sessionId |
 | 影響 | 密碼/Token 進入日誌 |
-| 緩解 | 遮罩敏感欄位、降低等級 |
-| 狀態 | Open |
+| 緩解 | 以 `util.SafeRequestDump` 取代 `DumpRequest`（不含 body、遮罩 Authorization/Cookie/csrfToken/EIToken 及敏感查詢參數）；token/sessionId 以 `util.MaskSecret` 遮罩並降至 V(4) |
+| 驗證 | 四個服務 `go build` 通過；專案內已無 `DumpRequest` |
+| 狀態 | Fixed（2026-11-23） |
 
 ### R-024 權限檢查分散
 
@@ -382,8 +383,9 @@
 | 嚴重度 | High |
 | 證據 | `PacketTimestampMiddleware.InvokeAsync` 開頭即 `await _next(); return;` |
 | 影響 | 重放攻擊窗口；與文件不符 |
-| 緩解 | 移除短路；補時間戳測試 |
-| 狀態 | Open |
+| 緩解 | 已移除短路；非 GET 強制 Unix 毫秒時間戳；Metadata/Alarm 內部呼叫補 `packetTimestamp`；新增 `wax_opcua_agent.Tests` |
+| 驗證 | `dotnet test`：32 項通過（時間戳與 CORS） |
+| 狀態 | Fixed（2026-11-23）；殘餘：容差窗口內重放需 nonce/HMAC |
 
 ### R-026 Data Agent CORS 過寬
 
@@ -392,8 +394,9 @@
 | 嚴重度 | High |
 | 證據 | `SetIsOriginAllowed(_ => true).AllowCredentials()` |
 | 影響 | 任意網站可帶 Session 呼叫 |
-| 緩解 | 白名單 Origin；限制 Credentials |
-| 狀態 | Open |
+| 緩解 | 已改為 `CorsOriginPolicy`：`MyService:Cors:AllowedOrigins` 明確清單 + localhost/loopback/私有網段；不允許 `Origin: null` 或未知公網來源；僅允許清單 Origin 帶 Credentials |
+| 驗證 | `wax_opcua_agent.Tests`：explicit/private/public/invalid Origin 共 15+ 案例 |
+| 狀態 | Fixed（2026-11-23） |
 
 ### R-027 OPC UA 憑證自動接受
 
@@ -524,7 +527,7 @@ flowchart LR
 
 | 階段 | 項目 |
 |------|------|
-| P0 | R-001、R-002、R-003、R-006、R-007、R-008、R-018、R-028 已修復；待處理 R-023、R-002-R、R-025、R-026、R-027 |
+| P0 | R-001、R-002、R-003、R-006、R-007、R-008、R-018、R-025、R-026、R-028 已修復；待處理 R-023、R-002-R、R-027 |
 | P1 | R-004、R-005、R-015、R-016、R-022、R-031、R-032（R-019、R-029、R-030 已修復；R-035 已接受） |
 | P2 | R-010、R-011、R-017、R-021、R-033、R-034、TD-001~008 |
 

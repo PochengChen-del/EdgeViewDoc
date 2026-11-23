@@ -198,7 +198,9 @@ sequenceDiagram
 |----|------|------|
 | `MyService:PostgresShema` | `public` | schema |
 | `MyService:SessionTimeout` | `604800` | Session 秒數 |
-| `MyService:DriftSeconds` | `300` | 時間戳容差 |
+| `MyService:DriftSeconds` | `300` | 時間戳容差（毫秒比對，`0` 代表停用） |
+| `MyService:Cors:AllowedOrigins` | `[]` | CORS 明確允許的 Origin（需含 scheme，如 `https://edge.example.com`） |
+| `MyService:Cors:AllowPrivateNetwork` | `true` | 允許 localhost/loopback/RFC1918/ULA Origin，供 LAN 上的 Qt WebAssembly UI 使用 |
 | `MyService:isHistory` | `false` | `true` 只允許歷史端點 |
 | `MyService:isUpdate` | `false` | 寫回設定後結束 |
 | `MyService:Kestrel:Protocol` | `https` | `http`/`https`；部署時 xnginx 以 `$protocol` 帶入（預設 `https`），appsettings 內建值為 `http` |
@@ -230,7 +232,9 @@ flowchart LR
 - **Session**：讀 `graphicSession` 或 `settingSession` Cookie，解 SecureCookie → 查 `http_sessions` → 比對 `csrfToken`；`csrfToken` 可來自 body、`csrfToken` header、`X-CSRF-Token` header。
 - **Internal Bearer**：由 `aes_secret` 推導的服務 Token；僅接受 loopback。
 - **角色限制**：`RuntimActionOnly` 在 `isHistory=true` 回 400；`HistoryActionOnly` 在 `isHistory=false` 回 400。
-- **時間戳**：`PacketTimestampMiddleware` 目前於進入方法即 `await _next(); return;`，實務上**未強制**（見 §12）。
+- **時間戳**：`PacketTimestampMiddleware` 對 POST/PUT/PATCH/DELETE 強制檢查 `packetTimestamp`（Unix 毫秒），與 HMI `Date.now()` 及 Go 服務一致；GET/HEAD/OPTIONS 不檢查，`DriftSeconds=0` 可停用。缺少、格式錯誤或超出容差回 406。
+- **內部呼叫**：Metadata `OpcAPI.Post`（Browse/TagDetail/Certificate）與 Alarm Agent 輪詢 Data Agent 時，皆已在 JSON body 補 `packetTimestamp`，因此非 GET 規則一體適用。
+- **重放限制**：時間戳僅縮小重放窗口，窗口內仍可能重放；若需完整防重放需另加 nonce／HMAC。
 
 ### 4.5 REST 端點目錄
 
@@ -836,8 +840,8 @@ stateDiagram-v2
 
 | 編號 | 風險 | 嚴重度 | 說明 |
 |------|------|--------|------|
-| R-OPC-001 | Data Agent 時間戳未強制 | High | `PacketTimestampMiddleware` 立即 `_next()` 後返回 |
-| R-OPC-002 | CORS 允許任意 Origin + Credentials | High | `SetIsOriginAllowed(_=>true).AllowCredentials()` |
+| R-OPC-001 | Data Agent 時間戳未強制 | High | Fixed：非 GET 強制毫秒 `packetTimestamp`，內部呼叫已補值；測試 `wax_opcua_agent.Tests`。殘餘：窗口內重放需 nonce/HMAC |
+| R-OPC-002 | CORS 允許任意 Origin + Credentials | High | Fixed：`CorsOriginPolicy` 白名單（設定清單 + localhost/loopback/私有網段），僅允許清單 Origin 帶 Credentials |
 | R-OPC-003 | 自動接受不受信任憑證 | High | `AutoAcceptUntrustedCertificates=true` |
 | R-OPC-004 | 預設 DB 帳密硬編碼（已修） | High | 已修（R-018/R-028）：移除 `Program.cs`/`service/app.go` 的 `postgres/Postgre@sql1`，改由 `ENSAAS_SERVICES`/`VCAP_SERVICES` 提供 |
 | R-OPC-005 | Runtime/History 同映像不同埠 | Medium | 需两个進程與正確 `isHistory`，部署易錯 |

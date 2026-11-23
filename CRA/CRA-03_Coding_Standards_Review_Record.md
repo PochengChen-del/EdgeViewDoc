@@ -66,16 +66,16 @@
 | CWE-330 | Insufficient Randomness | CSPRNG、足夠熵 | 符合（MID-EV-008、018） |
 | CWE-311 | Missing Encryption | 敏感傳輸加密（TLS） | 部分符合（明文協定除外） |
 | CWE-319 | Cleartext Transmission | 停用 HTTP 或導向 HTTPS | 待部署配合（8880） |
-| CWE-294 | Replay | 時間戳／nonce | 部分符合（R-025） |
+| CWE-294 | Replay | 時間戳／nonce | 部分符合（R-025 Fixed；窗口內重放需 nonce/HMAC） |
 | CWE-400 | Resource Exhaustion | 限流、上限、TTL | 部分符合（R-009/R-016） |
-| CWE-532 | Log Exposure | 遮罩敏感欄位、避免 DumpRequest | Open（R-023） |
+| CWE-532 | Log Exposure | 遮罩敏感欄位、避免 DumpRequest | Fixed（R-023） |
 | CWE-209 | Error Info Leak | 一般化錯誤訊息 | 待盤點 |
 | CWE-502 | Insecure Deserialization | 僅 Protobuf/JSON、長度限制 | 符合（RID-EV-021） |
 | CWE-787 | OOB Write | 邊界檢查、記憶體安全 | 接受（C/C++，ASLR/DEP） |
 | CWE-125 | OOB Read | 同上 | 接受 |
 | CWE-416 | Use After Free | 智慧指標、生命週期 | 待工具驗證 |
 | CWE-863 | Incorrect Authorization | 集中授權、預設拒絕 | Open（R-024） |
-| CWE-942 | Permissive CORS | Origin 白名單 | Open（R-015/R-026） |
+| CWE-942 | Permissive CORS | Origin 白名單 | 部分符合（R-015 Open；R-026 Fixed） |
 | CWE-601 | Open Redirect | 驗證轉址 | 待盤點 |
 | CWE-918 | SSRF | 外部 URL 白名單、限制內網 | 待盤點 |
 | CWE-611 | XXE | 停用外部實體、限制 XML 解析 | 待盤點（Client Xml） |
@@ -108,7 +108,7 @@ flowchart LR
 | CSR-2026-01 | 2026-11 | Metadata／Runtime／xnginx | 認證、Session、CSRF、TLS | 人工 + SDS 追溯 | F-001、F-002、F-003、F-007、F-008 | 有條件通過 |
 | CSR-2026-02 | 2026-11 | Runtime WebSocket | topic/action、登入、訂閱 | 人工 + SDS 追溯 | F-004、F-006、F-009 | 通過（F-004、F-006、F-009 已修） |
 | CSR-2026-03 | 2026-11 | Runtime 設定／輪詢 | 輪詢間隔、資源上限 | 人工 + SDS 追溯 | F-005 | 通過（已修） |
-| CSR-2026-04 | 2026-11 | OPC UA Data Agent | CORS、憑證、時間戳 | 人工 + SDS 追溯 | F-018、F-019、F-020 | 有條件通過（未修） |
+| CSR-2026-04 | 2026-11 | OPC UA Data Agent | CORS、憑證、時間戳 | 人工 + SDS 追溯 | F-018、F-019、F-020 | 有條件通過（F-018、F-019 已修；F-020 Open） |
 | CSR-2026-05 | 2026-11 | Metadata Web/HTTP | 端點、輸入、授權、日誌 | 人工 + 清單 | F-010、F-011、F-012、F-015、F-016、F-017、F-022、F-023 | 有條件通過 |
 | CSR-2026-06 | 2026-11 | Client（C++/QML/JS） | 記憶體安全、腳本、QML | 人工 + 清單 | F-024 | 有條件通過（接受） |
 | CSR-2026-07 | 2026-11 | DB／設定／Secrets | 連線字串、金鑰 | 人工 + 設定檢查 | F-014、F-025 | 有條件通過 |
@@ -134,10 +134,10 @@ flowchart LR
 | F-013 | CWE-779 | Metadata `Maintenance` | 稽核日誌可被管理者刪除 | Medium | WORM／外部儲存、分權 | Open | R-017 |
 | F-014 | CWE-798／CWE-1392 | Metadata／OPC UA Agent | 預設 DB 帳密寫死 | High | 移除預設密碼；改用 `ENSAAS_SERVICES`/`LOG_ENV`/`VCAP_SERVICES` 與 `RegisterDBEnv.reg` | Fixed | R-018/R-028 |
 | F-015 | CWE-89 | Metadata `model/*`／Runtime `databaseService.go` | 動態 SQL 組裝 | Medium | 識別字跳脫/白名單、值參數化、UpdateValue 欄位驗證 | Fixed | R-019 |
-| F-016 | CWE-532 | Metadata `authorizeCore` | `DumpRequest` 可能含敏感請求 | High | 遮罩欄位、降低等級 | Open | R-023 |
+| F-016 | CWE-532 | Metadata `authorizeCore` | `DumpRequest` 可能含敏感請求 | High | 以 `SafeRequestDump` 取代（不含 body、遮罩敏感標頭/查詢）；token/sessionId 遮罩並降至 V(4) | Fixed | R-023 |
 | F-017 | CWE-863 | Metadata 各 controller | 權限檢查分散、無統一 middleware | Medium | 集中式授權 middleware + 測試 | Open | R-024 |
-| F-018 | CWE-294／CWE-345 | OPC UA Data Agent | `PacketTimestampMiddleware` 短路 | High | 移除短路、補時間戳測試 | Open | R-025 |
-| F-019 | CWE-942 | OPC UA Data Agent | `SetIsOriginAllowed(_=>true).AllowCredentials()` | High | Origin 白名單、限制 Credentials | Open | R-026 |
+| F-018 | CWE-294／CWE-345 | OPC UA Data Agent | `PacketTimestampMiddleware` 短路 | High | 已移除短路、非 GET 強制毫秒時間戳、內部呼叫補值、新增單元測試 | Fixed | R-025 |
+| F-019 | CWE-942 | OPC UA Data Agent | `SetIsOriginAllowed(_=>true).AllowCredentials()` | High | `CorsOriginPolicy` Origin 白名單（設定清單＋私有網段），僅白名單帶 Credentials | Fixed | R-026 |
 | F-020 | CWE-295 | OPC UA Data Agent | `AutoAcceptUntrustedCertificates=true`、允許 SHA1 | High | 信任清單、拒絕 SHA1 | Open | R-027 |
 | F-021 | CWE-1188 | OPC UA Alarm／部署 | 預設埠已統一為 28889 | Medium | 統一預設與文件 | Closed | R-029 |
 | F-022 | CWE-22 | Web API 檔案讀取 | 路徑穿越風險 | High | 正規化 + 根目錄限制（待驗證） | 待盤點 | RID-EV-019 |
@@ -186,9 +186,9 @@ flowchart LR
 |--------|------|------|
 | Nullable／analyzers | 待補 | 建置報告待附 |
 | 憑證驗證 | 不符 | F-020 |
-| CORS 白名單 | 不符 | F-019 |
+| CORS 白名單 | 符合 | F-019 Fixed |
 | 無預設帳密 | 不符 | F-014 |
-| 時間戳中介層 | 不符 | F-018 |
+| 時間戳中介層 | 符合 | F-018 Fixed |
 
 ### 8.4 JavaScript／Vue（設定 UI）
 

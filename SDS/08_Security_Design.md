@@ -251,8 +251,8 @@ sequenceDiagram
 
 **風險**
 
-1. Data Agent `PacketTimestampMiddleware` 目前短路，時間戳未強制。
-2. CORS `SetIsOriginAllowed(_=>true).AllowCredentials()` 允許任意來源帶憑證。
+1. Data Agent `PacketTimestampMiddleware` 已修正：非 GET 強制 Unix 毫秒時間戳，內部呼叫（Metadata／Alarm Agent）已補值；殘餘風險為容差窗口內重放。
+2. CORS 已白名單化：`CorsOriginPolicy` 僅允許設定清單與 localhost/loopback/私有網段 Origin 帶 Credentials。
 3. `AutoAcceptUntrustedCertificates=true`、`RejectSHA1SignedCertificates=false`。
 4. 預設 DB 帳密硬編碼（`Program.cs`、`service/app.go`）：已於 R-018/R-028 移除，改由環境變數/Secret 提供。
 5. Runtime/History 同映像，若 `isHistory` 設定錯誤會暴露錯誤端點（以 400 阻擋）。
@@ -261,8 +261,8 @@ sequenceDiagram
 
 **建議**
 
-1. 修正時間戳中介層；加入 `packetTimestamp` 測試。
-2. CORS 白名單化；限制 Origin 與 Credentials。
+1. 時間戳中介層已修正；`wax_opcua_agent.Tests` 覆蓋缺少／過期／未來時間戳與 CORS Origin 白名單。
+2. CORS 已白名單化；公開 FQDN UI 需列入 `MyService:Cors:AllowedOrigins`，並定期檢視 `AllowPrivateNetwork`。
 3. 正式環境關閉自動接受憑證，使用信任清單。
 4. DB 帳密已改由 Secret/環境變數（R-018/R-028 Fixed）；部署時需設定 `ENSAAS_SERVICES`/`LOG_ENV` 或合併 `RegisterDBEnv.reg`。
 5. UI 與 Agent 全面 HTTPS；OPC UA 使用 SignAndEncrypt。

@@ -239,7 +239,7 @@ flowchart LR
 | `/api/oem`、`/api/langfont/settings` | 公開 | 確認資訊暴露範圍 |
 | OPC UA Data Agent `/swagger` | 公開 | 正式環境限制或關閉 |
 | OPC UA `GetTagValue`/`GetDataLog` | 直連端點 | 補速率限制與審計 |
-| Data Agent `packetTimestamp` | 目前未強制 | 修正中介層（R-025） |
+| Data Agent `packetTimestamp` | 已強制（R-025 Fixed） | 非 GET 毫秒時間戳；內部呼叫已補值；殘餘窗口內重放需 nonce/HMAC |
 
 ## 10. 測試案例目錄（建議）
 
