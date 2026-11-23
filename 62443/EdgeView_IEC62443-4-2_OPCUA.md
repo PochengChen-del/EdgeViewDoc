@@ -4,6 +4,8 @@
 > 包含：Qt Designer/Viewer、xnginx、Metadata Service、Runtime Proxy、OPC UA Data Agent（Runtime/History）、OPC UA Alarm Agent、OPC UA 設定 UI、PostgreSQL。  
 > 依據：`iec62443.csv`（IEC 62443-4-2 Requirements，148 列，其中 141 列為有效需求）。  
 > 證據索引：`62443/Evidence.md`（含 SBOM、手冊截圖、測試/流程缺口）。
+>
+> CRA 對照：`CRA/CRA-01` v2.0（71 RID-EV／28 MID-EV）、`CRA/CRA-02`~`CRA-04`、`CRA/B-03-F01`。
 
 > **通訊協定**：EdgeView 系統預設使用 HTTPS（xnginx `protocol: https`，TLS 入口 `8881`，後端僅綁 loopback）。HTTP `8880` 僅保留為相容性選項；使用者若自行改為 `protocol: http` 或 `both` 並以 HTTP 連線，其傳輸風險由使用者自行承擔，不納入本對照表的符合性判定。
 
@@ -263,7 +265,7 @@
 #### A.1.3 CCSC 4 Software development process（部分符合）
 - **現況**：具備 SRS/SDS、追溯表、CRA 文件、版本管理與弱點修復紀錄。
 - **部分符合原因**：未取得 IEC 62443-4-1 認證，亦缺少完整安全開發證據（安全需求評審、威脅建模更新頻率、程式碼安全掃描、滲透測試報告、供應鏈與漏洞處理 SLA 的正式紀錄）。
-- **建議**：以 IEC 62443-4-1 為框架進行差距分析；將威脅建模（`CRA-01`）、安全程式碼檢視（`CRA-03`）、SBOM 與漏洞修補 SLA 納入 CI/Release Gate；保存可稽核紀錄。
+- **建議**：以 IEC 62443-4-1 為框架進行差距分析；將威脅建模（`CRA-01` v2.0）、安全程式碼檢視（`CRA-03`）、流程檢查點（`CRA-02`）、部署指引（`CRA-04`）、安全需求檢視（`B-03-F01`）、SBOM 與漏洞修補 SLA 納入 CI/Release Gate；保存可稽核紀錄。
 - **對應**：[NFR-MNT-005](../SRS/05_Nonfunctional_Requirements.md)、[SRS-06 §7](../SRS/06_Acceptance_and_Traceability.md)、[SDS-12](../SDS/12_Traceability.md)
 
 ### A.2 Identification and Authentication Control（FR1）
@@ -624,3 +626,10 @@
   3. **長期**：自動化殘留掃描與合規報表。
 - **驗收建議**：清除後查詢/備份/快取無資料；金鑰銷毀後舊資料不可解；產出可稽核的清除證明。
 - **對應**：[NFR-PRV-003](../SRS/05_Nonfunctional_Requirements.md)、[NFR-SEC-008](../SRS/05_Nonfunctional_Requirements.md)、[SDS-08 §12](../SDS/08_Security_Design.md)、[SDS-11 R-022](../SDS/11_Design_Decisions_and_Risks.md)
+
+## 附錄 C：版本紀錄
+
+| 版本 | 日期 | 變更 |
+|------|------|------|
+| 1.0 | 2026-11-20 | 初版，建立 141 項 IEC 62443-4-2 對照、附錄 A 部分符合（38 項）與附錄 B 不符合（8 項）。 |
+| 1.1 | 2026-11-23 | 對齊 CRA-01 v2.0 與 B-03-F01；補 CRA 文件追溯與版本紀錄。 |

@@ -3,7 +3,7 @@
 > 評估範圍：EdgeView 完整系統，datasource = **OPC UA**。  
 > 包含：Qt Designer/Viewer、xnginx、Metadata Service、Runtime Proxy、OPC UA Data Agent（Runtime/History）、OPC UA Alarm Agent、OPC UA 設定 UI、PostgreSQL。  
 > 依據：**IEC 62443-4-1:2018** 的 8 個 Practice、47 項要求（SM／SR／SD／SI／SVV／DM／SUM／SG）。本文件僅引用條款編號與摘要名稱，不重製標準全文。  
-> 證據索引：`62443/Evidence.md`；4-2 對照：`62443/EdgeView_IEC62443-4-2_OPCUA.md`；安全開發流程證據：`CRA/CRA-01`~`CRA-04`。
+> 證據索引：`62443/Evidence.md`；4-2 對照：`62443/EdgeView_IEC62443-4-2_OPCUA.md`；安全開發流程證據：`CRA/CRA-01`~`CRA-04`、`CRA/B-03-F01`。
 
 > 本文件為**差距分析初稿**，用於整理 EdgeView 對 IEC 62443-4-1 的現況、證據與待補事項，不構成認證結論。正式認證仍需 CB 審查、成熟度（ML）評分、發布紀錄與可稽核證據。
 
@@ -12,14 +12,14 @@
 | 項目 | 內容 |
 |------|------|
 | 文件名稱 | EdgeView 對照 IEC 62443-4-1（OPC UA 版） |
-| 文件版本 | 1.0 |
+| 文件版本 | 1.1 |
 | 文件狀態 | 初稿（差距分析，含部分符合／不符合項目） |
-| 日期 | 2026-11-20 |
+| 日期 | 2026-11-23 |
 | 產品名稱 | EdgeView（HMI/SCADA 圖控設計與執行平台） |
 | 評估範圍 | EdgeView 完整系統與其安全開發生命週期（SDL） |
 | 資料源基準 | OPC UA（`DataSource=3`） |
 | 文件語言 | 繁體中文（技術名詞保留英文） |
-| 關聯文件 | `SRS/`、`SDS/`、`CRA/CRA-01`~`CRA-04`、`62443/Evidence.md`、`62443/EdgeView_IEC62443-4-2_OPCUA.md`、`edgeview.cdx.json` |
+| 關聯文件 | `SRS/`、`SDS/`、`CRA/CRA-01`~`CRA-04`、`CRA/B-03-F01`、`62443/Evidence.md`、`62443/EdgeView_IEC62443-4-2_OPCUA.md`、`edgeview.cdx.json` |
 
 ## 2. 評估範圍與邊界
 
@@ -385,3 +385,4 @@
 | 版本 | 日期 | 變更 |
 |------|------|------|
 | 1.0 | 2026-11-20 | 初版，建立 8 個 Practice、47 項要求對照、統計、缺口與附錄。 |
+| 1.1 | 2026-11-23 | 對齊 CRA-01 v2.0：RID 數 97→71、改 RID-EV/MID-EV，並同步 CRA-02/CRA-03 引用。 |

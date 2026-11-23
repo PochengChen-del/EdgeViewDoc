@@ -18,12 +18,13 @@
 | EV-09 | 原始碼/設定 | xnginx 反向代理 | `wax_nginx_ingress` |
 | EV-10 | 設定 | `xnginx*.yaml`、`config.yaml`、`appsettings.json` | 各服務目錄 |
 | EV-11 | SBOM | CycloneDX 1.7 `edgeview.cdx.json` | Repo 根目錄 |
-| EV-12 | 符合性 | IEC 62443-4-2 對照表 | `62443/EdgeView_IEC62443-4-2_OPCUA.md` |
+| EV-12 | 符合性 | IEC 62443-4-1／4-2 對照表 | `62443/EdgeView_IEC62443-4-1_OPCUA.md`、`62443/EdgeView_IEC62443-4-2_OPCUA.md` |
 | EV-SS | 手冊截圖 | 14 張 OPC UA UI/設定截圖（SS-01~SS-14） | `62443/evidence/` |
 | EV-13 | 測試 | 測試/驗證報告（目前缺） | 待補 |
 | EV-14 | 流程 | SDLC/SSP/安全開發證據（目前缺） | 待補 |
 | EV-15 | 授權 | 第三方授權/Notice（由 SBOM 授權欄位輔助） | `edgeview.cdx.json` |
 | EV-16 | 流程 | 出貨軟體簽章（Windows Authenticode、Linux GPG） | 發行/出貨流程（待補文件） |
+| EV-17 | CRA | CRA-01~CRA-04 與 B-03-F01 安全合規檢視表 | `CRA/` |
 
 ## 2. 需求群組 ↔ 證據
 
@@ -37,6 +38,8 @@
 | FR5 資料流限制 | EV-01（SRS-02/04）、EV-02（SDS-02/10）、EV-09/10 | 符合（設計） | xnginx 路由、loopback、TLS、限流有；網路分段由防火牆配合。 |
 | FR6 事件回應 | EV-01（SRS-05/06）、EV-02（SDS-08/09）、EV-04/07、EV-13 | 部分 | 稽核查詢/匯出有；SIEM/持續監控/測試報告缺。 |
 | FR7 資源可用性 | EV-01（SRS-05/06）、EV-02（SDS-10/11/12）、EV-04/05/09/11 | 部分 | 備份/還原/限流有；容量告警、SBOM 完整性與測試缺。 |
+
+> 威脅與風險追溯：`CRA/CRA-01` v2.0（71 RID-EV／28 MID-EV）；安全需求檢視：`CRA/B-03-F01`（SC1~SC2、CRA Annex I、FR1~FR7、OPC-1~OPC-8）；流程證據：`CRA/CRA-02`~`CRA-04`。
 
 ## 2.1 手冊截圖證據
 
@@ -113,6 +116,7 @@
 | P1 | 更新完整性/anti-rollback 與出貨簽章驗證紀錄 | CR 3.04、3.10 |
 | P1 | 備份/還原演練與容量告警 | CR 2.09、7.03 |
 | P2 | SSP/SDL/威脅模型/漏洞管理流程 | CCSC、FR3、FR7 |
+| P2 | 威脅模型複核與安全需求檢視（CRA-01、B-03-F01） | CRA Annex I、FR1~FR7 |
 | P2 | 滲透測試與 SBOM 簽章/雜湊 | FR3、FR7 |
 
 ## 6. 認證證據清單（CB 常要求）
@@ -121,6 +125,7 @@
 - [ ] 威脅模型與風險評鑑（IEC 62443-3-2/3-3）
 - [ ] 安全開發流程（IEC 62443-4-1）與訓練紀錄
 - [ ] 安全需求規格與追溯（SRS/SDS/本對照表）
+- [ ] CRA 技術文件（CRA-01~CRA-04、B-03-F01）
 - [ ] 安全測試計畫、案例、結果（功能/負向/滲透）
 - [ ] SBOM、VEX、弱點掃描與處置紀錄
 - [ ] 安全設定/加固指南
@@ -135,6 +140,7 @@
 - 逐條狀態與實作：`62443/EdgeView_IEC62443-4-2_OPCUA.md`
 - 本文件：提供證據 ID、群組對應、SBOM 與缺口
 - 需求/設計：`SRS/`、`SDS/`
+- CRA 對照：`CRA/CRA-01`~`CRA-04`、`CRA/B-03-F01`
 - 入口：Repo `README.md` 的「文件入口」
 
 > 目前證據以 **設計/程式碼/設定/SBOM** 為主；正式 IEC 62443 認證仍需測試報告與流程證據。

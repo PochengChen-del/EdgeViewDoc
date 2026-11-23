@@ -8,7 +8,9 @@
 |------|------|
 | [EdgeView_IEC62443-4-2_OPCUA.md](EdgeView_IEC62443-4-2_OPCUA.md) | 141 項需求逐條對照（狀態、實作說明）；附錄 A 部分符合項目明細（38 項）、附錄 B 不符合項目明細（8 項，含原因與建議） |
 | [Evidence.md](Evidence.md) | 證據索引、SBOM、手冊截圖、測試/流程缺口 |
-| [evidence/](evidence/) | 15 張 OPC UA 手冊截圖（SS-01~SS-15） |
+| [evidence/](evidence/) | 14 張 OPC UA 手冊截圖（SS-01~SS-14） |
+| [CRA-01](../CRA/CRA-01_Threat_Modeling.md) | EdgeView／OPC UA 威脅模型 v2.0（71 RID-EV／28 MID-EV、風險登錄、標準對照） |
+| [B-03-F01](../CRA/B-03-F01_Product%20Compliance%20and%20Security%20Requirement%20Check%20List.xlsx) | 安全合規及安全需求檢視表（SC1~SC2、CRA Annex I、FR1~FR7、OPC-1~OPC-8） |
 
 ## 1. 評估範圍
 
@@ -76,18 +78,19 @@
 
 ## 6. 主要缺口
 
-| 缺口 | 對應需求 | SL | 建議 |
-|------|----------|----|------|
-| 無 MFA | CR 1.01 RE(2) | SL3 | 整合外部 IdP/反向代理 MFA。 |
-| 密碼使用 SHA-256（未加鹽），無完整強度/到期/歷史政策 | CR 1.05、1.07 | SL1、SL3、SL4 | Argon2id/bcrypt + 複雜度/到期/歷史。 |
-| 無同時 Session 上限 | CR 2.07 | SL3 | Session 上限與管理。 |
-| 稽核無 WORM/容量門檻告警 | CR 2.09、3.09 | SL1、SL2、SL3、SL4 | 外部 WORM/SIEM、容量告警。 |
-| 更新流程缺 anti-rollback/版本固定 | CR 3.04、3.10 | SL1、SL2 | 更新包驗簽、版本 pinning、失敗回復。 |
-| 無執行期安全功能自我測試/完整性監控 | CR 3.03 | SL1、SL4 | 啟動/執行期 self-test。 |
-| 無共享記憶體抹除驗證 | CR 4.02 | SL2、SL3 | 共享記憶體/暫存清除與驗證。 |
+| 缺口 | 對應需求 | 對應 RID-EV | SL | 建議 |
+|------|----------|-------------|----|------|
+| 無 MFA | CR 1.01 RE(2) | RID-EV-008 | SL3 | 整合外部 IdP/反向代理 MFA。 |
+| 密碼使用 SHA-256（未加鹽），無完整強度/到期/歷史政策 | CR 1.05、1.07 | RID-EV-002、009 | SL1、SL3、SL4 | Argon2id/bcrypt + 複雜度/到期/歷史。 |
+| 無同時 Session 上限 | CR 2.07 | RID-EV-010 | SL3 | Session 上限與管理。 |
+| 稽核無 WORM/容量門檻告警 | CR 2.09、3.09 | RID-EV-053、054 | SL1、SL2、SL3、SL4 | 外部 WORM/SIEM、容量告警。 |
+| 更新流程缺 anti-rollback/版本固定 | CR 3.04、3.10 | RID-EV-047、048 | SL1、SL2 | 更新包驗簽、版本 pinning、失敗回復。 |
+| 無執行期安全功能自我測試/完整性監控 | CR 3.03 | RID-EV-052 | SL1、SL4 | 啟動/執行期 self-test。 |
+| 無共享記憶體抹除驗證 | CR 4.02 | RID-EV-063 | SL2、SL3 | 共享記憶體/暫存清除與驗證。 |
 
 ## 7. 使用建議
 
 - 正式投標/認證：以本表為初稿，補齊 CB 要求的證據（設定截圖、測試報告、SBOM、SDLC 文件）。
 - 將「部分符合」逐項轉為：功能補強、流程補強（OS/網路）或風險接受。
+- 威脅與風險追溯以 `CRA/CRA-01` v2.0（RID-EV／MID-EV）為準；安全需求檢視以 `CRA/B-03-F01` 為準；流程檢查點見 `CRA/CRA-02`，編碼審查見 `CRA/CRA-03`，部署指引見 `CRA/CRA-04`。
 - 每次版本更新後重跑本表與 `SDS/12_Traceability.md`。
