@@ -103,7 +103,7 @@
 | OI-014 | 手冊 25 ms 更新率與外部資料掃描最低 500 ms 的差異 | FR-UM-025/026、NFR-UM-001 | 文件區分繪製/資料週期 |
 | OI-015 | 手冊插件/主題色/APP 查詢限制 | FR-UM-061/064 | 補來源與平台限制測試 |
 | OI-016 | 手冊模型密碼/匯入刪除保護 | FR-UM-047/048 | 補密碼與錯誤測試 |
-| OI-017 | xnginx 四個 datasource 變體設定漂移 | IF-SW-012、IF-OPC-011 | 以 `xnginx.yaml` 為基準，建立設定比對/測試 |
+| OI-017 | xnginx 四個 datasource 變體設定漂移 | IF-SW-012、IF-OPC-011 | 已接受（R-035）：正式部署固定 `Proxy\xnginx.yaml` 單一設定與 `SCServer\config.yaml`／`appsettings.json`，變體僅供開發/建置；保留基準比對/啟動煙霧測試 |
 | OI-018 | 地端 xnginx 與 EdgeHub K8s Ingress 路徑/認證差異 | IF-COM、NFR-OPC-007 | 分流測試（WebAccess/OPC UA/X vs EdgeHub） |
 | OI-008 | DataSource source type 編號不一致 | IF-SW-002/004 | 統一常數並加轉換層 |
 | OI-009 | 非 OPC UA 登入鎖定與 K8s 限流未完整 | NFR-SEC-015 | nginx 已有 `limit_req`；補登入專用門檻、帳號鎖定、WS 訊息限流與 K8s ingress annotation |

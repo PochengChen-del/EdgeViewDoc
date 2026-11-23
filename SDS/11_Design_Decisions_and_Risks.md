@@ -480,11 +480,11 @@
 
 | 項目 | 內容 |
 |------|------|
-| 嚴重度 | Medium |
-| 證據 | `xnginx.yaml`、`xnginx.webaccess.yaml`、`xnginx.opcua.yaml`、`xnginx.x.yaml` 各自維護 apps/routes |
-| 影響 | 路徑/埠/服務清單不一致，導致 404/500 |
-| 緩解 | 以 `xnginx.yaml` 為基準、設定比對/啟動煙霧測試、文件同步 |
-| 狀態 | Open |
+| 嚴重度 | Low |
+| 證據 | `xnginx.yaml`、`xnginx.webaccess.yaml`、`xnginx.opcua.yaml`、`xnginx.x.yaml` 為開發/建置期依 datasource 產生的變體；正式部署固定為 `D:\Advantech\WebAccess\Proxy\xnginx.yaml` 單一設定，服務設定固定為 `D:\Advantech\WebAccess\SCServer\config.yaml` 與 `appsettings.json`，不並存多變體 |
+| 影響 | 正式部署下不會發生；僅在人工誤置或自行修改設定時可能造成路徑/埠/服務清單不一致（404/500） |
+| 緩解 | 正式版僅部署 `Proxy\xnginx.yaml`；保留以 `xnginx.yaml` 為基準、設定比對/啟動煙霧測試、文件同步；安裝/升級流程驗證固定路徑與檔案 |
+| 狀態 | Accepted |
 
 ## 3. 技術債
 
@@ -525,7 +525,7 @@ flowchart LR
 | 階段 | 項目 |
 |------|------|
 | P0 | R-001、R-002、R-003、R-006、R-007、R-008、R-018、R-028 已修復；待處理 R-023、R-002-R、R-025、R-026、R-027 |
-| P1 | R-004、R-005、R-015、R-016、R-022、R-031、R-032、R-035（R-019、R-029、R-030 已修復） |
+| P1 | R-004、R-005、R-015、R-016、R-022、R-031、R-032（R-019、R-029、R-030 已修復；R-035 已接受） |
 | P2 | R-010、R-011、R-017、R-021、R-033、R-034、TD-001~008 |
 
 > R-001/R-002/R-003/R-006/R-007/R-008/R-009/R-018/R-019/R-028 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-009 原列 P2，已完成修復。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。

@@ -160,6 +160,8 @@ flowchart LR
 >
 > `xnginx.x.yaml` 只開 HTTPS `8881`，apps 為 `waxconfig`/`waxapi`/`waxnotify`/`sc`/`wxproxy`，無 `system`。
 >
+> 上述為開發/建置期依 datasource 的變體；正式部署固定為 `D:\Advantech\WebAccess\Proxy\xnginx.yaml` 單一設定，SCServer 為 `config.yaml`／`appsettings.json`，不並存多變體。
+>
 > Nginx `proxy_pass .../` 會去掉前綴，因此 Client `/ua/GetTagValueText` → Agent `/GetTagValueText`；`/sc/api` → Metadata `/api`；`/wxproxy/record` → Runtime `/record`。
 
 ## 4. 執行期拓撲與連接埠

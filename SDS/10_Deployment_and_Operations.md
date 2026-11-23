@@ -114,6 +114,7 @@ flowchart TB
 | `xnginx.opcua.yaml` | 3 OPC UA | `sc`、`ua`、`uadb`、`uaam`、`wxproxy`、`system` | OPC UA 全套 |
 | `xnginx.x.yaml` | 4 X | `waxconfig`、`waxapi`、`waxnotify`、`sc`、`wxproxy` | 僅 HTTPS `8881`；無 system |
 
+- **正式部署**固定為 `D:\Advantech\WebAccess\Proxy\xnginx.yaml`（單一設定）；SCServer 設定固定為 `D:\Advantech\WebAccess\SCServer\config.yaml` 與 `appsettings.json`。上表 `xnginx.*.yaml` 僅為開發/建置期依 datasource 產生的變體，不於同一正式安裝並存，故無設定漂移。
 - `xnginx` 會依 `apps[].app_name` 產生 `/sc/`、`/wxproxy/`、`/ua/`、`/uadb/`、`/uaam/`、`/ws/`、`/system/` location 與 upstream。
 - `protocol: https` 為預設對外協定（WebSocket 即 `wss`）；`nginx.net.https.port=8881` 為預設入口，`http.port=8880` 僅在 `protocol: http|both` 時提供。
 - `nginx.net.http.port=8880`、`https.port=8881`；`websocket: true` 的 app 產生 `/ws/` Upgrade 設定。

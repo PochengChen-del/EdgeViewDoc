@@ -272,10 +272,10 @@ flowchart TB
 
 | 構面 | 分佈 |
 |------|------|
-| 風險等級 | High 41／Moderate 26／Low 4 |
+| 風險等級 | High 41／Moderate 25／Low 5 |
 | 類別 | IA 10／AC 6／WEB 10／OPC 12／CRY 8／INT 8／AVL 6／PRV 4／CFG 5／MEM 2 |
-| 處置 | 降低 57／接受 6／分擔移轉 8 |
-| 與 SDS-11 對應 | R-001~R-035 全部納入或標示已修復 |
+| 處置 | 降低 56／接受 7／分擔移轉 8 |
+| 與 SDS-11 對應 | R-001~R-035 全部納入或標示已修復／已接受 |
 
 ### 7.2 完整風險登錄表
 
@@ -348,7 +348,7 @@ flowchart TB
 | RID-EV-063 | PRV | 資料抹除或共享記憶體清除未驗證 | All | Information Disclosure | Low | Moderate | Low | MID-EV-020 | 接受 | CR 4.02；SDS-08 §12 |
 | RID-EV-064 | PRV | FCM Token 或裝置資訊外洩 | Runtime | Information Disclosure | Moderate | Moderate | Moderate | MID-EV-020 | 降低 | NFR-PRV-004；SDS-05 §8.5 |
 | RID-EV-065 | CFG | 預設 DB 帳密或設定檔權限過寬 | Backend／PostgreSQL | Elevation of Privilege | High | High | High | MID-EV-027 | 降低 | R-018、R-028（Fixed）；SDS-10 §5 |
-| RID-EV-066 | CFG | xnginx 設定變體漂移（路徑／埠／服務不一致） | xnginx | Tampering | Moderate | Moderate | Moderate | MID-EV-021 | 降低 | R-035；SDS-02 §3.3 |
+| RID-EV-066 | CFG | xnginx 設定變體漂移（正式部署固定單一 `Proxy\xnginx.yaml` 與 `SCServer\config.yaml`／`appsettings.json`，開發變體不並存） | xnginx | Tampering | Low | Moderate | Low | MID-EV-021 | 接受 | R-035（Accepted）；SDS-02 §3.3、SDS-10 §2.3 |
 | RID-EV-067 | CFG | Alarm 埠／路徑預設不一致導致連錯或中斷 | Alarm／Client | Denial of Service | Moderate | Moderate | Moderate | MID-EV-021 | 降低 | R-029、R-030；SDS-14 §6 |
 | RID-EV-068 | CFG | 不必要服務或埠對外暴露（後端未綁 loopback） | xnginx／Backend | Elevation of Privilege | Moderate | High | High | MID-EV-002、MID-EV-027 | 降低 | SDS-08 §2；SDS-02 §7 |
 | RID-EV-069 | CFG | 部署／維運文件缺安全設定與加固指引 | Docs | Elevation of Privilege | Moderate | Moderate | Moderate | MID-EV-022 | 分擔／移轉 | CRA-04 §5、§6 |
@@ -415,7 +415,7 @@ flowchart TB
 | R-027 | OPC UA 憑證自動接受 | RID-EV-028 | Open | 信任清單、拒絕 SHA1 |
 | R-029／R-030 | Alarm 埠／Root path 參數來源 | RID-EV-067 | Fixed | 統一預設；`dbport`/`alarmport` 由 Metadata `config.yaml` 經 `QueryBodyKey` 提供 |
 | R-032 | OPC UA 大量輪詢 | RID-EV-033、037 | Open | 分組／訂閱／調整間隔 |
-| R-035 | xnginx 設定變體漂移 | RID-EV-066 | Open | 設定基準與煙霧測試 |
+| R-035 | xnginx 設定變體漂移（正式部署固定單一 `Proxy\xnginx.yaml`） | RID-EV-066 | Accepted | 正式版僅部署固定路徑與單一設定；保留基準比對與啟動煙霧測試 |
 
 > 已修復（SDS-13）：R-001 Session secret、R-002 全域 TLS 驗證、R-003 `/record/queryrecord`、R-006 WebSocket 認證、R-007 WS 登入 Session 綁定、R-008 輪詢間隔、R-009 Record TTL、R-018/R-028 預設 DB 帳密、R-019 動態 SQL。仍須以測試報告補證（CRA-02 CP-4）。
 
