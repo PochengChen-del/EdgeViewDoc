@@ -284,7 +284,7 @@ flowchart TB
 | RID | 類別 | 威脅情境（EdgeView／OPC UA） | 元件／介面 | STRIDE | L | I | 風險 | MID | 處置 | 狀態／依據 |
 |-----|------|------------------------------|------------|--------|---|---|------|-----|------|-----------|
 | RID-EV-001 | IA | 未認證存取 xnginx 公開端點或未受保護路由（`/getfile`、`/system` 等） | xnginx／Metadata | Spoofing | High | High | High | MID-EV-001、MID-EV-003 | 降低 | R-012；SDS-08 §2、§5 |
-| RID-EV-002 | IA | 預設或弱密碼、硬編碼 DB 帳密（`postgres/Postgre@sql1`） | Metadata／Data Agent／PostgreSQL | Spoofing | High | High | High | MID-EV-004、MID-EV-027 | 降低 | R-018、R-028；SDS-08 §6.1 |
+| RID-EV-002 | IA | 預設或弱密碼、硬編碼 DB 帳密（`postgres/Postgre@sql1`） | Metadata／Data Agent／PostgreSQL | Spoofing | High | High | High | MID-EV-004、MID-EV-027 | 降低 | R-018、R-028（Fixed）；SDS-08 §6.1 |
 | RID-EV-003 | IA | 非 OPC UA 登入端點遭暴力破解或無限次嘗試 | Metadata／Client | Spoofing | High | Moderate | High | MID-EV-004、MID-EV-016 | 降低 | R-016；SDS-08 §3.1 |
 | RID-EV-004 | IA | Session 偽造、固定或竊取（Cookie 未 HttpOnly／SameSite） | Metadata／xnginx | Spoofing | Moderate | High | High | MID-EV-003 | 降低 | R-005、R-001；SDS-08 §3.3、§5.1 |
 | RID-EV-005 | IA | 對狀態變更 API 發動 CSRF（專案／使用者／設定） | Metadata／Runtime | Tampering | Moderate | High | High | MID-EV-003 | 降低 | R-005；NFR-SEC-005 |
@@ -300,7 +300,7 @@ flowchart TB
 | RID-EV-015 | AC | `/system` 服務管理端點遭濫用停用或重啟服務 | xnginx／system | Elevation of Privilege | Moderate | High | High | MID-EV-005、MID-EV-016 | 降低 | SDS-02 §3.3、§4 |
 | RID-EV-016 | AC | 共用裝置或瀏覽器 Session 遭他人操作 | Client | Spoofing | Moderate | Moderate | Moderate | MID-EV-003、MID-EV-005 | 降低 | SDS-08 §3.4 |
 | RID-EV-017 | WEB | HMI／Vue／WebPlugin 儲存型或反射型 XSS | Client／Config UI | Tampering | Moderate | High | High | MID-EV-011 | 降低 | CRA-03 F-023；SDS-08 §10 |
-| RID-EV-018 | WEB | Metadata／Runtime SQL 注入（動態 SQL 組裝） | Metadata／Runtime | Tampering | Moderate | High | High | MID-EV-011 | 降低 | R-019；SDS-08 §10 |
+| RID-EV-018 | WEB | Metadata／Runtime SQL 注入（動態 SQL 組裝） | Metadata／Runtime | Tampering | Moderate | High | High | MID-EV-011 | 降低 | R-019（Fixed）；SDS-08 §10 |
 | RID-EV-019 | WEB | 檔案 API 路徑穿越讀取任意檔案 | Metadata／Runtime | Information Disclosure | Moderate | High | High | MID-EV-012 | 降低 | R-012；CRA-03 F-022 |
 | RID-EV-020 | WEB | HTTP 標頭注入或回應分割 | xnginx／Metadata | Tampering | Low | High | Moderate | MID-EV-011 | 降低 | SDS-08 §10 |
 | RID-EV-021 | WEB | 不安全反序列化（JSON／Protobuf／外掛） | Metadata／Runtime／Data Agent | Tampering | Low | High | Moderate | MID-EV-011 | 降低 | CRA-03 CWE-502 |
@@ -325,7 +325,7 @@ flowchart TB
 | RID-EV-040 | CRY | 個別外部 client 停用 TLS 憑證驗證（InsecureSkipVerify） | Metadata／Runtime | Spoofing | Moderate | High | High | MID-EV-023 | 分擔／移轉 | R-002-R；SDS-08 §7 |
 | RID-EV-041 | CRY | TLS 版本或演算法過弱（未限制 1.2／1.3） | xnginx／Ingress | Information Disclosure | Low | High | Moderate | MID-EV-001 | 降低 | SDS-08 §7 |
 | RID-EV-042 | CRY | AES-256-CBC 缺乏完整性保護或 IV 管理不當 | Metadata／Runtime | Tampering | Low | High | Moderate | MID-EV-018 | 降低 | SDS-08 §6.2 |
-| RID-EV-043 | CRY | 金鑰熵不足或跨環境共用 `aes_secret` | Metadata／Data Agent | Spoofing | Moderate | High | High | MID-EV-018、MID-EV-027 | 降低 | R-001、R-018；SDS-08 §3.3 |
+| RID-EV-043 | CRY | 金鑰熵不足或跨環境共用 `aes_secret` | Metadata／Data Agent | Spoofing | Moderate | High | High | MID-EV-018、MID-EV-027 | 降低 | R-001、R-018（Fixed）；SDS-08 §3.3 |
 | RID-EV-044 | CRY | Session secret 輪替或派生失敗導致舊 Session 可用 | Metadata | Spoofing | Low | High | Moderate | MID-EV-003、MID-EV-018 | 降低 | R-001（Fixed）；SDS-08 §3.3 |
 | RID-EV-045 | CRY | 憑證到期、撤銷或主機名不符未處理 | xnginx／Data Agent | Spoofing | Moderate | Moderate | Moderate | MID-EV-008 | 分擔／移轉 | SDS-08 §7；CRA-04 §9 |
 | RID-EV-046 | CRY | 金鑰／憑證備份未加密或遭竊 | All | Information Disclosure | Moderate | High | High | MID-EV-008、MID-EV-027 | 分擔／移轉 | SDS-10 §8 |
@@ -347,13 +347,13 @@ flowchart TB
 | RID-EV-062 | PRV | 日誌或錯誤回應含密碼、Token、個資 | All | Information Disclosure | High | High | High | MID-EV-019 | 降低 | R-023；SDS-08 §11 |
 | RID-EV-063 | PRV | 資料抹除或共享記憶體清除未驗證 | All | Information Disclosure | Low | Moderate | Low | MID-EV-020 | 接受 | CR 4.02；SDS-08 §12 |
 | RID-EV-064 | PRV | FCM Token 或裝置資訊外洩 | Runtime | Information Disclosure | Moderate | Moderate | Moderate | MID-EV-020 | 降低 | NFR-PRV-004；SDS-05 §8.5 |
-| RID-EV-065 | CFG | 預設 DB 帳密或設定檔權限過寬 | Backend／PostgreSQL | Elevation of Privilege | High | High | High | MID-EV-027 | 降低 | R-018、R-028；SDS-10 §5 |
+| RID-EV-065 | CFG | 預設 DB 帳密或設定檔權限過寬 | Backend／PostgreSQL | Elevation of Privilege | High | High | High | MID-EV-027 | 降低 | R-018、R-028（Fixed）；SDS-10 §5 |
 | RID-EV-066 | CFG | xnginx 設定變體漂移（路徑／埠／服務不一致） | xnginx | Tampering | Moderate | Moderate | Moderate | MID-EV-021 | 降低 | R-035；SDS-02 §3.3 |
 | RID-EV-067 | CFG | Alarm 埠／路徑預設不一致導致連錯或中斷 | Alarm／Client | Denial of Service | Moderate | Moderate | Moderate | MID-EV-021 | 降低 | R-029、R-030；SDS-14 §6 |
 | RID-EV-068 | CFG | 不必要服務或埠對外暴露（後端未綁 loopback） | xnginx／Backend | Elevation of Privilege | Moderate | High | High | MID-EV-002、MID-EV-027 | 降低 | SDS-08 §2；SDS-02 §7 |
 | RID-EV-069 | CFG | 部署／維運文件缺安全設定與加固指引 | Docs | Elevation of Privilege | Moderate | Moderate | Moderate | MID-EV-022 | 分擔／移轉 | CRA-04 §5、§6 |
 | RID-EV-070 | MEM | Client C/C++ 記憶體安全（越界、UAF、第三方函式庫） | Client | Tampering | Moderate | High | High | MID-EV-011、MID-EV-022 | 降低 | CRA-03 F-024；SDS-03 |
-| RID-EV-071 | MEM | 內部服務共用密鑰（`aes_secret`／Bearer）熵不足或未輪替 | Backend | Spoofing | Moderate | High | High | MID-EV-018 | 降低 | R-001、R-018；SDS-08 §3.3 |
+| RID-EV-071 | MEM | 內部服務共用密鑰（`aes_secret`／Bearer）熵不足或未輪替 | Backend | Spoofing | Moderate | High | High | MID-EV-018 | 降低 | R-001、R-018（Fixed）；SDS-08 §3.3 |
 
 ### 7.3 高風險（High）清單
 
@@ -406,8 +406,8 @@ flowchart TB
 | R-015 | CORS／Origin 寬鬆 | RID-EV-025 | Open | 明確白名單 |
 | R-016 | 速率限制／鎖定不足（OPC UA 以外） | RID-EV-003、024、055 | Mitigating | 登入專用限流、帳號鎖定、WS 訊息限流 |
 | R-017 | 稽核日誌可被管理者刪除 | RID-EV-053 | Open | WORM／外部 SIEM |
-| R-018／R-028 | 預設 DB 帳密 | RID-EV-002、065 | Open | 強制環境變數／Secret |
-| R-019 | 動態 SQL 組裝 | RID-EV-018 | Open | 白名單／跳脫／參數化 |
+| R-018／R-028 | 預設 DB 帳密 | RID-EV-002、065 | Fixed | 移除預設密碼；改用環境變數/Secret 與 `RegisterDBEnv.reg` |
+| R-019 | 動態 SQL 組裝 | RID-EV-018 | Fixed | 識別字跳脫/白名單、值參數化、UpdateValue 欄位驗證 |
 | R-023 | 日誌可能含敏感請求 | RID-EV-026、062 | Open | 遮罩敏感欄位 |
 | R-024 | 權限檢查分散 | RID-EV-011、014 | Open | 集中式授權 middleware |
 | R-025 | Data Agent 時間戳未強制 | RID-EV-035 | Open | 移除短路並補測試 |
@@ -417,7 +417,7 @@ flowchart TB
 | R-032 | OPC UA 大量輪詢 | RID-EV-033、037 | Open | 分組／訂閱／調整間隔 |
 | R-035 | xnginx 設定變體漂移 | RID-EV-066 | Open | 設定基準與煙霧測試 |
 
-> 已修復（SDS-13）：R-001 Session secret、R-002 全域 TLS 驗證、R-003 `/record/queryrecord`、R-006 WebSocket 認證、R-007 WS 登入 Session 綁定、R-008 輪詢間隔、R-009 Record TTL。仍須以測試報告補證（CRA-02 CP-4）。
+> 已修復（SDS-13）：R-001 Session secret、R-002 全域 TLS 驗證、R-003 `/record/queryrecord`、R-006 WebSocket 認證、R-007 WS 登入 Session 綁定、R-008 輪詢間隔、R-009 Record TTL、R-018/R-028 預設 DB 帳密、R-019 動態 SQL。仍須以測試報告補證（CRA-02 CP-4）。
 
 ## 10. STRIDE 對照
 
@@ -488,7 +488,7 @@ flowchart TB
 | CRA 要求 | 對應 RID | 狀態 |
 |----------|----------|------|
 | (1)(a) 設計即以適當安全等級保護 | 001~008、016、023、028、043、044、051、070、071 | 部分符合（§9 殘餘風險） |
-| (1)(b) 預設安全組態 | 002、003、039、065、069 | 部分符合（HTTP 8880 相容、預設 DB 帳密） |
+| (1)(b) 預設安全組態 | 002、003、039、065、069 | 部分符合（HTTP 8880 相容；預設 DB 帳密已修，R-018/R-028） |
 | (1)(c) 漏洞處理與更新 | 047~050、052 | 部分符合（簽章、SBOM；測試證據待補） |
 | (1)(d) 攻擊面最小化 | 006、011、012、014、015、022、025、031、036、051、068 | 部分符合（角色、loopback、CORS） |
 | (1)(e) 機密性與完整性 | 004、005、009、013、017~021、023、026~029、035、039~046、062~064 | 部分符合（TLS/AES/OPC UA；CBC 與個別 client 驗證待改善） |
@@ -542,6 +542,7 @@ flowchart TB
 | 1.0 | 2026-11-19 | 初版，依三份 CRA CSV 與 SDS/SRS/62443 建立 |
 | 2.0 | 2026-11-23 | 改寫為 EdgeView + OPC UA 專屬威脅模型；新增 RID-EV-001~071、MID-EV-001~028，同步 IEC 62443-4-2／EN 18031／CRA Annex I 對照與舊 RID 對照 |
 | 2.1 | 2026-11-23 | R-007（WS 登入掃描所有 Session）改為 Fixed；更新殘餘風險與 RID 對照 |
+| 2.2 | 2026-11-23 | R-018/R-028（預設 DB 帳密）與 R-019（動態 SQL 組裝）改為 Fixed；同步 SDS-13 與驗收說明 |
 
 ## 14. 追溯
 

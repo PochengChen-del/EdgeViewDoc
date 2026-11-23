@@ -13,6 +13,9 @@
 | R-007 | WS 登入掃描所有 Session | Fixed | WS handshake 綁定 `graphicSession`；只比對該 Session 的 `csrfToken`，不掃描全表 |
 | R-008 | EH/X 告警輪詢間隔未初始化 | Fixed | 預設 1000ms；`<=0` 用預設、低於 100ms 夾到 100ms |
 | R-009 | Record 快取無 TTL | Fixed | 新增 idle TTL、全域/每 client 上限、reaper 與 `Stats()` |
+| R-018 | 預設 DB 連線字串/密碼 | Fixed | 移除預設密碼；改用 `ENSAAS_SERVICES` / `LOG_ENV` / `VCAP_SERVICES`；新增 `RegisterDBEnv.reg` 與 machine env fallback |
+| R-019 | 動態 SQL 組裝 | Fixed | 識別字集中跳脫/白名單；值參數化；UpdateValue 欄位驗證 |
+| R-028 | OPC UA 預設 DB 帳密 | Fixed | OPC UA Agent 移除預設密碼；Alarm 使用 `waxalarm`（runtime）與 `waxconfig`（metadata） |
 
 ## 2. R-001 Session secret
 
@@ -205,12 +208,95 @@ sessionKey = HKDF-SHA256(
 5. 每分鐘 log 可看到 `[recorddata] stats ...`。
 6. `recorddata_idle_timeout_seconds: 0` 時不因閒置回收。
 
-## 8. 部署需求
+## 8. R-018 預設 DB 連線字串/密碼
+
+### 8.1 設計
+
+- 各服務不再內建 `Postgre@sql1`；預設 DSN 的 `password=` 為空，未取得環境變數時連線失敗（fail-closed）。
+- 連線來源優先序：
+  1. `ENSAAS_SERVICES`（設定 DB）
+  2. `LOG_ENV`（action log DB）
+  3. `VCAP_SERVICES`（私有雲）
+- Windows 單機部署以 `edgeview-little-tool/RegisterDBEnv.reg` 寫入
+  `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment`。
+- Go 服務以 `util.GetEnv()` 先讀 process env，再 fallback 至 Windows machine registry；
+  OPC UA Agent 的 `ReadEnv()` 同樣支援 Process → Machine → User。
+- 服務 log 中的 DSN 一律經 `maskDSN()` / `MaskSecrets()` 遮蔽密碼。
+
+### 8.2 程式位置
+
+| 功能 | 檔案 |
+|------|------|
+| 環境變數解析 | `wax_metadata-service/service/app.go`、`wax_nginx_ingress/service/app.go`、`wax_rutime_proxy/service/app.go`、`wax_opcua_alarm_agent/service/app.go`、`wax_hmi_log/config/config.go` |
+| OPC UA Agent | `wax_opcua_agent/wax_opcua_agent/Program.cs` |
+| Windows machine env | `*/util/env_windows.go`、`*/util/env_other.go` |
+| 環境變數註冊 | `edgeview-little-tool/RegisterDBEnv.reg` |
+| ResetPassword | `wax_metadata-service/_tool/ResetPassword/ResetPassword.go`、`edgeview-little-tool/ResetPassword/ResetPassword.go` |
+
+### 8.3 驗收
+
+1. 原始碼掃描無 `Postgre@sql1` / `waxpgP@ssw0rd`。
+2. 未設定 `ENSAAS_SERVICES` / `LOG_ENV` 時，服務連線失敗並記錄可辨識錯誤。
+3. 合併 `RegisterDBEnv.reg` 後，服務可取得 machine env（或重啟後生效）。
+4. 服務啟動 log 只輸出遮罩後的 DSN。
+
+## 9. R-019 動態 SQL 組裝
+
+### 9.1 設計
+
+- 識別字（table / column / alias / order / schema）集中轉換與跳脫：
+  - Metadata：`model/*` 查詢前驗證欄位/排序，SQL 識別字以 `quoteIdent` / `pq.QuoteIdentifier` 處理。
+  - Runtime Proxy：`service/databaseService.go` 以 `ConvertDBIdentifier()` 依 driver 跳脫 table/column/alias/order；`UpdateValue` 先驗證更新欄位存在。
+- 資料值一律使用參數化查詢（`$1` / `?`），不拼接使用者輸入。
+- 動態排序、欄位選擇與 update 欄位需存在於允許清單。
+
+### 9.2 程式位置
+
+| 功能 | 檔案 |
+|------|------|
+| 識別字跳脫與查詢組裝 | `wax_rutime_proxy/service/databaseService.go` |
+| UpdateValue 欄位驗證 | `wax_rutime_proxy/service/databaseService.go` |
+| Metadata 查詢/排序驗證 | `wax_metadata-service/model/device/ObjectPathModel.go`、`RecordModel.go`、`model/log/ActionLogModel.go`、`model/opcua/TagModel.go` |
+| Session/schema 識別字 | `*/util/sqlident.go`、`service/session_secret.go` |
+
+### 9.3 驗收
+
+1. 以惡意 `table`、`column`、`order`、`alias` 呼叫查詢/更新 API，不會改變 SQL 結構或回傳 DB 錯誤。
+2. 合法查詢、排序、UpdateValue 功能回歸通過。
+3. SAST/程式碼審查不再出現未跳脫的使用者輸入拼接。
+
+## 10. R-028 OPC UA 預設 DB 帳密
+
+### 10.1 設計
+
+- OPC UA Data Agent 移除 `Program.cs` 的 `Password=Postgre@sql1` 預設值。
+- Alarm Agent 的 `ENSAAS_SERVICES` / `VCAP_SERVICES` 僅提供 server credentials；
+  runtime DB 固定 `waxalarm`，metadata DB 使用 `metadata.dbname`（預設 `waxconfig`）。
+- Windows 以 `RegisterDBEnv.reg` 註冊 `ENSAAS_SERVICES` / `LOG_ENV`；部署時應替換為正式 Secret。
+
+### 10.2 程式位置
+
+| 功能 | 檔案 |
+|------|------|
+| OPC UA Data Agent | `wax_opcua_agent/wax_opcua_agent/Program.cs` |
+| Alarm Agent DB | `wax_opcua_alarm_agent/service/app.go` |
+| 環境變數註冊 | `edgeview-little-tool/RegisterDBEnv.reg` |
+
+### 10.3 驗收
+
+1. OPC UA Agent 未設定 `ENSAAS_SERVICES` 時不具預設密碼，連線失敗。
+2. 設定環境變數後，Data Agent 連 `waxconfig`、Alarm Agent 連 `waxalarm` / `waxconfig`。
+3. `RegisterDBEnv.reg` 的 JSON 可被 `tryGetConnEnv` 正確解析。
+
+## 11. 部署需求
 
 | 項目 | 需求 |
 |------|------|
 | `SESSION_SECRET` | 至少 32 bytes；建議由 K8s Secret 或安裝程式產生 |
 | `SESSION_SECRET_PREVIOUS` | 選用；輪替期間使用 |
+| `ENSAAS_SERVICES` | 設定 DB 連線 JSON；Windows 可用 `RegisterDBEnv.reg` 註冊 |
+| `LOG_ENV` | action log DB 連線 JSON |
+| `VCAP_SERVICES` | 私有雲 DB 連線來源（`ENSAAS_SERVICES` 未提供時） |
 | `PG_SCHEMA` | 使用 `aes_secret` 時，所有共用服務需一致 |
 | `aes_secret` | 由 KeyMigrator 建立；K8s 若未執行 KeyMigrator，必須提供 `SESSION_SECRET` |
 | KeyMigrator | on-prem 由 xnginx 在啟動服務前執行 |
@@ -218,7 +304,7 @@ sessionKey = HKDF-SHA256(
 
 K8s 環境若未注入 `SESSION_SECRET` 且資料庫沒有 `aes_secret`，服務會依設計啟動失敗，這是 R-001 的 fail-closed 行為。
 
-## 9. 驗收
+## 12. 驗收
 
 1. 原始碼搜尋不得再出現固定 session secret 字串。
 2. 各服務 `go build ./...` 成功。
@@ -236,8 +322,11 @@ K8s 環境若未注入 `SESSION_SECRET` 且資料庫沒有 `aes_secret`，服務
 14. 將 `recorddata_idle_timeout_seconds` 設為 `0` 時，閒置 record 不會被 TTL 回收。
 15. WS login 只驗證 handshake `graphicSession` 綁定的 Session，不再掃描全部 `http_sessions`。
 16. 以其他 Session 的 `csrfToken` 登入回 `-100`；缺少／過期 cookie 亦回 `-100`。
+17. 原始碼不得再出現 `Postgre@sql1` / `waxpgP@ssw0rd`；未設定 DB 環境變數時服務連線失敗。
+18. 設定 DB 環境變數後，Metadata/Runtime/xnginx/OPC UA Agent/Alarm Agent/hmi_log 均可連線；Alarm runtime 使用 `waxalarm`、metadata 使用 `waxconfig`。
+19. 以惡意 table/column/order/alias 呼叫查詢/更新 API，不會改變 SQL 結構或造成 SQL injection。
 
-## 10. 後續追蹤
+## 13. 後續追蹤
 
 | 編號 | 項目 | 說明 |
 |------|------|------|

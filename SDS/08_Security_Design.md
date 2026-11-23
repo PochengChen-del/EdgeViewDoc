@@ -254,7 +254,7 @@ sequenceDiagram
 1. Data Agent `PacketTimestampMiddleware` 目前短路，時間戳未強制。
 2. CORS `SetIsOriginAllowed(_=>true).AllowCredentials()` 允許任意來源帶憑證。
 3. `AutoAcceptUntrustedCertificates=true`、`RejectSHA1SignedCertificates=false`。
-4. 預設 DB 帳密硬編碼（`Program.cs`、`service/app.go`）。
+4. 預設 DB 帳密硬編碼（`Program.cs`、`service/app.go`）：已於 R-018/R-028 移除，改由環境變數/Secret 提供。
 5. Runtime/History 同映像，若 `isHistory` 設定錯誤會暴露錯誤端點（以 400 阻擋）。
 6. Root path 直連參數（`dbport`/`alarmport`）由 Metadata `config.yaml` 提供；未設定時可能無法連線。
 7. Alarm 預設埠已統一為 28889（Go 預設、`config.yaml`、Runtime 設定）。
@@ -264,7 +264,7 @@ sequenceDiagram
 1. 修正時間戳中介層；加入 `packetTimestamp` 測試。
 2. CORS 白名單化；限制 Origin 與 Credentials。
 3. 正式環境關閉自動接受憑證，使用信任清單。
-4. DB 帳密改 Secret/環境變數。
+4. DB 帳密已改由 Secret/環境變數（R-018/R-028 Fixed）；部署時需設定 `ENSAAS_SERVICES`/`LOG_ENV` 或合併 `RegisterDBEnv.reg`。
 5. UI 與 Agent 全面 HTTPS；OPC UA 使用 SignAndEncrypt。
 6. 針對 `GetTagValue`/`GetDataLog` 加速率限制與審計。
 
@@ -290,8 +290,8 @@ sequenceDiagram
 
 | 類型 | 控制 |
 |------|------|
-| SQL | 參數化查詢（`$1`），但動態 SQL 需白名單 |
-| 識別字 | `convert.go` 跳脫/驗證 |
+| SQL | 參數化查詢（`$1`）；動態 SQL 識別字已集中跳脫/白名單（R-019 Fixed） |
+| 識別字 | `ConvertDBIdentifier` / `quoteIdent` / `pq.QuoteIdentifier` 跳脫與驗證 |
 | 腳本 | 壓縮/加密；執行於 QML JS 引擎 |
 | HTML | WebPlugin/iframe 需 CSP |
 | 檔案路徑 | 正規化，禁止 `..` |

@@ -308,20 +308,22 @@
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | High |
-| 證據 | `service/app.go` 預設 `postgres/Postgre@sql1`、`waxpguser` |
-| 影響 | 未改設定即暴露 |
-| 緩解 | 強制環境變數、啟動檢查 |
-| 狀態 | Open |
+| 證據 | 原 `service/app.go`、`Program.cs` 預設 `postgres/Postgre@sql1`、`waxpguser`；服務啟動時直接使用硬編碼 DSN |
+| 影響 | 未改設定即暴露；預設密碼可被用於橫向移動 |
+| 緩解 | 已完成：移除原始碼預設密碼（`password=` 空值），改由 `ENSAAS_SERVICES` / `LOG_ENV` / `VCAP_SERVICES` 提供；Windows 以 `RegisterDBEnv.reg` 註冊機器層環境變數；`util.GetEnv` 支援 process → machine registry fallback；未設定時 fail-closed |
+| 驗證 | 原始碼掃描不再有 `Postgre@sql1`；未設定環境變數時連線失敗；設定後服務可正常連線 |
+| 狀態 | Fixed |
 
 ### R-019 動態 SQL 組裝
 
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | Medium |
-| 證據 | `service/convert.go`、`fmt.Sprintf` 組 SQL |
-| 影響 | 若識別字未驗證可能注入 |
-| 緩解 | 白名單、跳脫、測試 |
-| 狀態 | Open |
+| 證據 | 原動態 SQL 以 `fmt.Sprintf` 拼接 table/column/order/alias；`service/databaseService.go` 與 Metadata 各 Model 的 orderBy/field 未集中驗證 |
+| 影響 | 未驗證的識別字可能造成 SQL injection |
+| 緩解 | 已完成：集中以 `ConvertDBIdentifier` / `QuoteIdent` / `pq.QuoteIdentifier` 跳脫識別字；值改參數化；UpdateValue 與 Metadata 查詢欄位/排序加入白名單與存在性驗證 |
+| 驗證 | 惡意 table/column/order/alias 不再直接進入 SQL；既有查詢/更新功能回歸通過 |
+| 狀態 | Fixed |
 
 ### R-020 數值/時間精度
 
@@ -408,10 +410,11 @@
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | High |
-| 證據 | `Program.cs`、`service/app.go` 預設 `postgres/Postgre@sql1` |
-| 影響 | 未改設定即暴露 |
-| 緩解 | 強制 Secret/環境變數 |
-| 狀態 | Open |
+| 證據 | `wax_opcua_agent/wax_opcua_agent/Program.cs`、`service/app.go` 預設 `postgres/Postgre@sql1` |
+| 影響 | OPC UA Agent 未改設定即暴露 |
+| 緩解 | 已完成：移除預設密碼；改由 `ENSAAS_SERVICES` / `VCAP_SERVICES`（Alarm 另用 `metadata.dbname`）提供；Windows 以 `RegisterDBEnv.reg` 註冊 |
+| 驗證 | OPC UA Agent 未設定環境變數時連線失敗；設定後可連線；原始碼無預設密碼 |
+| 狀態 | Fixed |
 
 ### R-029 Alarm 埠預設不一致
 
@@ -521,11 +524,11 @@ flowchart LR
 
 | 階段 | 項目 |
 |------|------|
-| P0 | R-001、R-002、R-003、R-006、R-007、R-008 已修復；待處理 R-023、R-002-R、R-025、R-026、R-027、R-028 |
-| P1 | R-004、R-005、R-015、R-016、R-018、R-022、R-031、R-032、R-035（R-029、R-030 已修復） |
+| P0 | R-001、R-002、R-003、R-006、R-007、R-008、R-018、R-028 已修復；待處理 R-023、R-002-R、R-025、R-026、R-027 |
+| P1 | R-004、R-005、R-015、R-016、R-022、R-031、R-032、R-035（R-019、R-029、R-030 已修復） |
 | P2 | R-010、R-011、R-017、R-021、R-033、R-034、TD-001~008 |
 
-> R-001/R-002/R-003/R-006/R-007/R-008/R-009 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-009 原列 P2，已完成修復。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
+> R-001/R-002/R-003/R-006/R-007/R-008/R-009/R-018/R-019/R-028 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-009 原列 P2，已完成修復。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
 
 ## 6. 決策記錄格式
 

@@ -54,12 +54,12 @@
 | CWE | 弱點 | 檢查重點 | 審查狀態 |
 |-----|------|----------|----------|
 | CWE-79 | XSS | 輸出編碼、CSP、避免 `innerHTML`／`v-html` | 待盤點驗證（RID-EV-017） |
-| CWE-89 | SQL Injection | 參數化查詢、動態識別字白名單 | Open（R-019） |
+| CWE-89 | SQL Injection | 參數化查詢、動態識別字白名單 | Fixed（R-019） |
 | CWE-22 | Path Traversal | 路徑正規化、禁止 `..`、根目錄限制 | 有條件（RID-EV-019） |
 | CWE-352 | CSRF | 同步 token／double-submit、SameSite | Open（R-005） |
 | CWE-306 | Missing Authentication | 端點／topic／服務皆需認證 | 已修（R-003/R-006）、公開端點待處理（R-012） |
-| CWE-798 | Hardcoded Credentials | 掃描原始碼與設定 | Open（R-018/R-028） |
-| CWE-259 | Hardcoded Password | 同上 | 同上 |
+| CWE-798 | Hardcoded Credentials | 掃描原始碼與設定 | Fixed（R-018/R-028） |
+| CWE-259 | Hardcoded Password | 同上 | Fixed（R-018/R-028） |
 | CWE-916 | Weak Password Hash | 加鹽、慢雜湊（Argon2id/bcrypt） | Open（R-004） |
 | CWE-327 | Broken/Risky Crypto | 停用弱演算法、TLS 1.2+ | 部分符合 |
 | CWE-295 | Improper Cert Validation | 不全域停用、信任清單 | 全域已修（R-002）、個別 client Open（R-002-R/R-027） |
@@ -132,8 +132,8 @@ flowchart LR
 | F-011 | CWE-942 | Ingress／Runtime | CORS/Origin 寬鬆 | Medium | 明確白名單、移除強制 Origin | Open | R-015 |
 | F-012 | CWE-307／CWE-400 | xnginx／登入 | 限流門檻偏高、僅 OPC UA 有鎖定 | High | 登入專用限流、非 OPC UA 鎖定、WS 限流 | Mitigating | R-016 |
 | F-013 | CWE-779 | Metadata `Maintenance` | 稽核日誌可被管理者刪除 | Medium | WORM／外部儲存、分權 | Open | R-017 |
-| F-014 | CWE-798／CWE-1392 | Metadata／OPC UA Agent | 預設 DB 帳密寫死 | High | 強制環境變數／Secret、啟動檢查 | Open | R-018/R-028 |
-| F-015 | CWE-89 | Metadata `convert.go` | 動態 SQL 組裝 | Medium | 白名單、跳脫、測試 | Open | R-019 |
+| F-014 | CWE-798／CWE-1392 | Metadata／OPC UA Agent | 預設 DB 帳密寫死 | High | 移除預設密碼；改用 `ENSAAS_SERVICES`/`LOG_ENV`/`VCAP_SERVICES` 與 `RegisterDBEnv.reg` | Fixed | R-018/R-028 |
+| F-015 | CWE-89 | Metadata `model/*`／Runtime `databaseService.go` | 動態 SQL 組裝 | Medium | 識別字跳脫/白名單、值參數化、UpdateValue 欄位驗證 | Fixed | R-019 |
 | F-016 | CWE-532 | Metadata `authorizeCore` | `DumpRequest` 可能含敏感請求 | High | 遮罩欄位、降低等級 | Open | R-023 |
 | F-017 | CWE-863 | Metadata 各 controller | 權限檢查分散、無統一 middleware | Medium | 集中式授權 middleware + 測試 | Open | R-024 |
 | F-018 | CWE-294／CWE-345 | OPC UA Data Agent | `PacketTimestampMiddleware` 短路 | High | 移除短路、補時間戳測試 | Open | R-025 |
@@ -165,8 +165,8 @@ flowchart LR
 |--------|------|------|
 | `gofmt`／`go vet` 無錯誤 | 待補 | CI 報告待附 |
 | 錯誤處理不忽略 | 部分符合 | 需 `staticcheck` 驗證 |
-| 參數化 SQL | 部分符合 | 動態 SQL（F-015） |
-| 無硬編碼秘密 | 不符 | F-014/F-025 |
+| 參數化 SQL | 符合 | F-015 已修（R-019） |
+| 無硬編碼秘密 | 部分符合 | F-014 已修（R-018/R-028）；F-025 仍 Open |
 | 日誌遮罩 | 不符 | F-016 |
 | 併發安全（map/slice） | 部分符合 | R-009 已補併發保護 |
 
@@ -247,6 +247,7 @@ flowchart LR
 | 1.0 | 2026-11-19 | 初版，彙整編碼標準、CWE 清單、審查紀錄與發現 |
 | 1.1 | 2026-11-23 | 對齊 CRA-01 v2.0：舊 RID/MID 改為 RID-EV/MID-EV |
 | 1.2 | 2026-11-23 | 更新 F-009 為 Fixed（R-007 WS 登入 Session 綁定） |
+| 1.3 | 2026-11-23 | 更新 F-014/F-015 與 CWE-89/CWE-798 為 Fixed（R-018/R-028、R-019） |
 
 ## 13. 追溯
 

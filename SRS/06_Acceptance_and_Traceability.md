@@ -57,7 +57,7 @@
 |------|----------|----------|
 | NFR-PERF-001/002/009 | 效能測試 | 符合章節目標值 |
 | NFR-PERF-006 | API 測試 | 1–1000 以外被拒 |
-| NFR-SEC-001~010 | 滲透/組態檢查 | 無高風險未修補項；CSRF/時間戳/Session 測試通過 |
+| NFR-SEC-001~010 | 滲透/組態檢查 | 無高風險未修補項；CSRF/時間戳/Session 測試通過；DB 預設密碼與動態 SQL 已修（R-018/R-019/R-028） |
 | NFR-REL-003/004 | 故障注入 | 斷線可重連；終止時正常關閉 |
 | NFR-AUD-001~005 | 稽核測試 | 事件可追溯、checksum 可驗證、可匯出 |
 | NFR-I18N-001~006 | 語系/時區測試 | 切換與格式正確 |
@@ -92,7 +92,7 @@
 | OI-003 | ODBC 未實作 | IF-SW-006 | 文件標示不支援，避免誤用 |
 | OI-004 | 密碼雜湊未加鹽 | NFR-SEC-003 | 規劃遷移至 Argon2/bcrypt |
 | OI-005 | 部分內部 HTTPS 呼叫停用憑證驗證 | NFR-SEC-004 | 正式環境改為驗證或指定 CA |
-| OI-006 | WebSocket `systeminfo`/`default` 認證不足 | NFR-SEC-009 | 已修（R-006）：非 `login` topic 需登入；systeminfo 登入後才訂閱 |
+| OI-006 | WebSocket `systeminfo`/`default` 認證不足 | NFR-SEC-009 | 已修（R-006/R-007）：非 `login` topic 需登入；systeminfo 登入後才訂閱；WS 登入綁定 `graphicSession`，只比對該 Session 的 `csrfToken` |
 | OI-007 | Record 快取無明確閒置 TTL | NFR-PERF/REL | 依設計註解實作 10 分鐘回收或調整文件 |
 | OI-008 | Data Agent `packetTimestamp` 未強制 | NFR-OPC-007、IF-OPC-002 | 修正中介層短路；補時間戳測試 |
 | OI-009 | Data Agent CORS 允許任意 Origin + Credentials | NFR-OPC-007 | 白名單化並限制憑證 |
@@ -107,3 +107,5 @@
 | OI-018 | 地端 xnginx 與 EdgeHub K8s Ingress 路徑/認證差異 | IF-COM、NFR-OPC-007 | 分流測試（WebAccess/OPC UA/X vs EdgeHub） |
 | OI-008 | DataSource source type 編號不一致 | IF-SW-002/004 | 統一常數並加轉換層 |
 | OI-009 | 非 OPC UA 登入鎖定與 K8s 限流未完整 | NFR-SEC-015 | nginx 已有 `limit_req`；補登入專用門檻、帳號鎖定、WS 訊息限流與 K8s ingress annotation |
+| OI-019 | 預設 DB 連線字串/密碼 | NFR-SEC-007、NFR-SEC-013 | 已修（R-018/R-028）：移除預設密碼，改用環境變數/Secret；Windows 以 `RegisterDBEnv.reg` 註冊 |
+| OI-020 | 動態 SQL 組裝 | NFR-SEC-001、NFR-SEC-007 | 已修（R-019）：識別字跳脫/白名單、值參數化、UpdateValue 欄位驗證 |

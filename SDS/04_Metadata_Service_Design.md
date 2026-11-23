@@ -343,7 +343,7 @@ flowchart TD
 
 ## 13. 已知限制
 
-1. DB 預設密碼仍為明文（Session secret 已改為 env/機器金鑰派生）。
+1. DB 預設密碼已移除（R-018/R-028），改由環境變數/Secret 提供（Session secret 已改為 env/機器金鑰派生）。
 2. 部分內部 HTTPS 呼叫仍停用憑證驗證（R-002-R）。
 3. 密碼雜湊未加鹽。
 4. Schema 迁移分散於程式碼。

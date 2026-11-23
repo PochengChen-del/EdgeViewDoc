@@ -839,7 +839,7 @@ stateDiagram-v2
 | R-OPC-001 | Data Agent 時間戳未強制 | High | `PacketTimestampMiddleware` 立即 `_next()` 後返回 |
 | R-OPC-002 | CORS 允許任意 Origin + Credentials | High | `SetIsOriginAllowed(_=>true).AllowCredentials()` |
 | R-OPC-003 | 自動接受不受信任憑證 | High | `AutoAcceptUntrustedCertificates=true` |
-| R-OPC-004 | 預設 DB 帳密硬編碼 | High | `Program.cs`/`service/app.go` 預設 `postgres/Postgre@sql1` |
+| R-OPC-004 | 預設 DB 帳密硬編碼（已修） | High | 已修（R-018/R-028）：移除 `Program.cs`/`service/app.go` 的 `postgres/Postgre@sql1`，改由 `ENSAAS_SERVICES`/`VCAP_SERVICES` 提供 |
 | R-OPC-005 | Runtime/History 同映像不同埠 | Medium | 需两个進程與正確 `isHistory`，部署易錯 |
 | R-OPC-006 | Alarm 預設埠不一致 | Medium | 已統一為 28889（程式預設、`config.yaml`、Runtime 設定） |
 | R-OPC-007 | Root path 直連參數來源 | Medium | `dbport`/`alarmport` 由 Metadata `config.yaml` 經 `QueryBodyKey` 提供；未設定時根路徑部署可能失效 |

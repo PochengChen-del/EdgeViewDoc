@@ -12,7 +12,7 @@
 | 項目 | 內容 |
 |------|------|
 | 文件名稱 | EdgeView 對照 IEC 62443-4-1（OPC UA 版） |
-| 文件版本 | 1.1 |
+| 文件版本 | 1.2 |
 | 文件狀態 | 初稿（差距分析，含部分符合／不符合項目） |
 | 日期 | 2026-11-23 |
 | 產品名稱 | EdgeView（HMI/SCADA 圖控設計與執行平台） |
@@ -115,14 +115,14 @@
 | SD-1 | Secure design principles：套用安全設計原則。 | 部分符合 | [SDS-08 §1~§2](../SDS/08_Security_Design.md)、[SDS-11 §1](../SDS/11_Design_Decisions_and_Risks.md) | 有信任邊界、最小權限、縱深防禦；缺設計原則 → 控制 → 威脅的正式對照。 |
 | SD-2 | Defense in depth design：設計具縱深防禦。 | 部分符合 | [SDS-02](../SDS/02_System_Architecture.md)、[SDS-08 §2、§7、§8](../SDS/08_Security_Design.md)、[SDS-10](../SDS/10_Deployment_and_Operations.md) | 有 xnginx／TLS／loopback／分層服務；缺 zone/conduit 與每層防護對應威脅的文件。 |
 | SD-3 | Security design review：審查安全設計。 | 部分符合 | [CRA-02 CP-2](../CRA/CRA-02_Security_Checkpoint.md)、[SDS-08](../SDS/08_Security_Design.md)、[SDS-11](../SDS/11_Design_Decisions_and_Risks.md) | 有設計審查檢查點；缺獨立審查紀錄與未關閉風險的正式核准。 |
-| SD-4 | Secure design best practices：採用安全設計最佳實務。 | 部分符合 | [SDS-08 §14](../SDS/08_Security_Design.md)、[CRA-04 §21](../CRA/CRA-04_Product_Security_User_Manual.md)、[SDS-11](../SDS/11_Design_Decisions_and_Risks.md) | 有加固清單；仍有 HTTP `8880`、預設 DB 帳密、CORS 過寬等不安全預設待改善。 |
+| SD-4 | Secure design best practices：採用安全設計最佳實務。 | 部分符合 | [SDS-08 §14](../SDS/08_Security_Design.md)、[CRA-04 §21](../CRA/CRA-04_Product_Security_User_Manual.md)、[SDS-11](../SDS/11_Design_Decisions_and_Risks.md) | 有加固清單；預設 DB 帳密已修（R-018/R-028）；仍有 HTTP `8880`、CORS 過寬等不安全預設待改善。 |
 
 ## 8. Practice 4 – Secure implementation（SI）
 
 | ID | 要求摘要 | 狀態 | 證據 | 缺口／建議 |
 |----|----------|------|------|-------------|
 | SI-1 | Security implementation review：審查安全實作。 | 部分符合 | [CRA-03 §5~§7](../CRA/CRA-03_Coding_Standards_Review_Record.md)、[SDS-13](../SDS/13_Security_Remediation.md) | 有人工審查與發現清單；缺 SAST／SCA 報告、審查者簽核與 CI 強制 gate。 |
-| SI-2 | Secure coding standards：建立並遵循安全編碼標準。 | 部分符合 | [CRA-03 §3~§4、§8](../CRA/CRA-03_Coding_Standards_Review_Record.md) | 有 Go／C++／C#／JS／SQL 編碼標準與 CWE 清單；工具未全面接入，Open findings 仍多。 |
+| SI-2 | Secure coding standards：建立並遵循安全編碼標準。 | 部分符合 | [CRA-03 §3~§4、§8](../CRA/CRA-03_Coding_Standards_Review_Record.md) | 有 Go／C++／C#／JS／SQL 編碼標準與 CWE 清單；SQL injection（R-019）已修；工具未全面接入，其餘 Open findings 仍多。 |
 
 ## 9. Practice 5 – Security verification and validation testing（SVV）
 
@@ -141,7 +141,7 @@
 | DM-1 | Receiving notifications of security-related issues：接收安全議題通知。 | 部分符合 | [CRA-04 §18.1](../CRA/CRA-04_Product_Security_User_Manual.md)、[CRA-02 CP6-03](../CRA/CRA-02_Security_Checkpoint.md) | 有 VDP 草案；聯絡窗口與公開公告仍為 placeholder，無正式受理管道。 |
 | DM-2 | Reviewing security-related issues：審查安全議題。 | 部分符合 | [SDS-11 §2](../SDS/11_Design_Decisions_and_Risks.md)、[CRA-03 §7](../CRA/CRA-03_Coding_Standards_Review_Record.md)、[SDS-13](../SDS/13_Security_Remediation.md) | 有風險／發現登錄；缺安全議題 triage 會議、分類與影響範圍紀錄。 |
 | DM-3 | Assessing security-related issues：評估安全議題影響。 | 部分符合 | [CRA-01 §4](../CRA/CRA-01_Threat_Modeling.md)、[SDS-11 §2](../SDS/11_Design_Decisions_and_Risks.md) | 有可能性 × 影響評分；缺 CVSS、供應鏈／客戶影響評估與 SLA 判定。 |
-| DM-4 | Addressing security-related issues：處理安全議題。 | 部分符合 | [SDS-13](../SDS/13_Security_Remediation.md)、[SDS-11 §5](../SDS/11_Design_Decisions_and_Risks.md) | 已修 R-001／R-002／R-003／R-006／R-008／R-009；其餘 Open 且缺 owner、due date 與風險接受紀錄。 |
+| DM-4 | Addressing security-related issues：處理安全議題。 | 部分符合 | [SDS-13](../SDS/13_Security_Remediation.md)、[SDS-11 §5](../SDS/11_Design_Decisions_and_Risks.md) | 已修 R-001／R-002／R-003／R-006／R-007／R-008／R-009／R-018／R-019／R-028；其餘 Open 且缺 owner、due date 與風險接受紀錄。 |
 | DM-5 | Disclosing security-related issues：揭露安全議題。 | 部分符合 | [CRA-04 §18.1、§19](../CRA/CRA-04_Product_Security_User_Manual.md) | 有揭露原則與殘餘風險；缺安全公告範本、CVE／CVSS、發布管道與時程。 |
 | DM-6 | Periodic review of security defect management practice：週期性檢討缺陷管理流程。 | 不符合 | [CRA-02 CP-6](../CRA/CRA-02_Security_Checkpoint.md)、EV-14 | 無安全缺陷管理流程的週期性檢討紀錄與改善追蹤。 |
 
@@ -317,14 +317,14 @@
 | SD-1 | 有信任邊界、最小權限與縱深防禦。 | 缺設計原則→控制→威脅對照。 | 建立安全設計原則檢查表。 |
 | SD-2 | 有 xnginx／TLS／loopback／分層服務。 | 缺 zone/conduit 與每層防護對應威脅。 | 補充分層防護與威脅對照圖。 |
 | SD-3 | 有設計審查檢查點。 | 缺獨立審查與未關閉風險核准。 | 建立設計審查紀錄與風險接受簽核。 |
-| SD-4 | 有加固清單。 | 仍有不安全預設。 | 關閉 HTTP 8880、移除預設 DB 帳密、收斂 CORS。 |
+| SD-4 | 有加固清單；預設 DB 帳密已修。 | 仍有 HTTP 8880 與 CORS 過寬。 | 關閉 HTTP 8880、收斂 CORS。 |
 
 ### B.4 Secure implementation（SI）
 
 | ID | 現況 | 缺口 | 建議 |
 |----|------|------|------|
 | SI-1 | 有人工審查與發現清單。 | 缺 SAST／SCA 報告、簽核與 CI gate。 | 接入工具並將高風險發現設為合併門檻。 |
-| SI-2 | 有編碼標準與 CWE 清單。 | 工具未全面接入，Open findings 仍多。 | 完成工具鏈接入與發現修復。 |
+| SI-2 | 有編碼標準與 CWE 清單；SQL injection 已修（R-019）。 | 工具未全面接入，其餘 Open findings 仍多。 | 完成工具鏈接入與發現修復。 |
 
 ### B.5 Security verification and validation testing（SVV）
 
@@ -340,7 +340,7 @@
 | DM-1 | 有 VDP 草案。 | 聯絡窗口與公告仍為 placeholder。 | 建立正式受理管道與公開窗口。 |
 | DM-2 | 有風險與發現登錄。 | 缺 triage、分類與影響範圍紀錄。 | 建立安全議題審查會議與紀錄。 |
 | DM-3 | 有可能性 × 影響評分。 | 缺 CVSS、供應鏈與客戶影響評估。 | 補 CVSS 與 SLA 判定。 |
-| DM-4 | 已修多項高風險項目。 | 其餘 Open 且缺 owner、due date。 | 建立修復追蹤與風險接受紀錄。 |
+| DM-4 | 已修 R-001/R-002/R-003/R-006/R-007/R-008/R-009/R-018/R-019/R-028。 | 其餘 Open 且缺 owner、due date。 | 建立修復追蹤與風險接受紀錄。 |
 | DM-5 | 有揭露原則與殘餘風險。 | 缺公告範本、CVE／CVSS 與時程。 | 建立安全公告流程與範本。 |
 
 ### B.7 Security update management（SUM）
@@ -386,3 +386,4 @@
 |------|------|------|
 | 1.0 | 2026-11-20 | 初版，建立 8 個 Practice、47 項要求對照、統計、缺口與附錄。 |
 | 1.1 | 2026-11-23 | 對齊 CRA-01 v2.0：RID 數 97→71、改 RID-EV/MID-EV，並同步 CRA-02/CRA-03 引用。 |
+| 1.2 | 2026-11-23 | 同步 R-018/R-028 預設 DB 帳密與 R-019 動態 SQL 已修復（SD-4、SI-2、DM-4）。 |

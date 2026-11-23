@@ -180,7 +180,7 @@ flowchart TB
 
 1. 增加 `livenessProbe`/`readinessProbe`（`/ping/*`、`/foo/serverTime`）。
 2. 設定 `PodDisruptionBudget`。
-3. 使用 Secret 管理 Session secret/DB 密碼（Session secret 已完成程式端改造；部署需注入 `SESSION_SECRET`）。
+3. 使用 Secret 管理 Session secret/DB 密碼（Session secret 與 DB 預設密碼已完成程式端改造，R-018/R-028；部署需注入 `SESSION_SECRET` 與 `ENSAAS_SERVICES`/`LOG_ENV`，或於 Windows 套用 `RegisterDBEnv.reg`）。
 4. 設定 HPA（CPU/記憶體/連線數）。
 5. 設定 NetworkPolicy 限制外部存取。
 

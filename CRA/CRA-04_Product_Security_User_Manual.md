@@ -210,6 +210,8 @@ EdgeView 為三層式 HMI/SCADA 平台：
 | Cookie | `Secure`/`HttpOnly`/`SameSite`（依部署與版本） |
 | CSRF | 狀態變更請求需帶 `csrfToken` |
 | WebSocket 登入 | 以 handshake 的 `graphicSession` 綁定；只比對該 Session 的 `csrfToken`，不掃描全部 Session（R-007） |
+| DB 連線 | 由 `ENSAAS_SERVICES`/`LOG_ENV`/`VCAP_SERVICES` 提供；Windows 可用 `RegisterDBEnv.reg`（R-018/R-028） |
+| SQL 輸入 | 識別字跳脫/白名單、值參數化、UpdateValue 欄位驗證（R-019） |
 | 時間戳 | 寫入操作需 `packetTimestamp`，預設容許 300 秒 |
 | 逾時 | WebSocket 連線需於 10 秒內完成登入 |
 | 金鑰輪替 | 以 `SESSION_SECRET_PREVIOUS` 保留至少一個 session timeout |
@@ -330,7 +332,7 @@ EdgeView 為三層式 HMI/SCADA 平台：
 | 部分服務仍可用 HTTP `8880` | RID-EV-039 | 明文傳輸 | 關閉或導向 HTTPS |
 | 個別外部 client 停用 TLS 驗證 | RID-EV-040 | 中間人風險 | 改指定 CA；網路隔離 |
 | Data Agent CORS/時間戳/憑證自動接受待強化 | RID-EV-025、028、035、036 | 越權/重放/偽造 | 反向代理白名單、信任清單、網路控制 |
-| 預設 DB 帳密 | RID-EV-002、065 | 未改設定即暴露 | 以 Secret/環境變數覆寫並檢查 |
+| 預設 DB 帳密（已修） | RID-EV-002、065 | 已移除預設密碼；未設定環境變數時連線失敗 | 確認 `RegisterDBEnv.reg` 或 Secret 已套用，並輪替預設密碼 |
 | 明文第三方 Driver Protocol | RID-EV-027、039 | 竊聽/重放 | VPN／專用網路 |
 | 無容器化/硬體加密模組 | RID-EV-029、046 | 隔離/金鑰保護有限 | OS 硬化、憑證存放區、CSPRNG |
 
@@ -354,7 +356,7 @@ EdgeView 為三層式 HMI/SCADA 平台：
 - [ ] 已設定 NTP 時間同步。
 - [ ] 已啟用稽核並集中日誌。
 - [ ] 已設定備份與還原演練。
-- [ ] 已以環境變數/Secret 覆寫預設 DB 帳密。
+- [x] 已以環境變數/Secret 覆寫預設 DB 帳密（R-018/R-028 已修）。
 - [ ] 已評估 MFA、Session 上限、SIEM/WORM 等補償控制。
 - [ ] 已閱讀 Release Note 並套用安全更新。
 
@@ -387,6 +389,7 @@ EdgeView 為三層式 HMI/SCADA 平台：
 | 1.0 | 2026-11-19 | 初版，依 CRA/SDS/SRS/62443 建立 |
 | 1.1 | 2026-11-23 | 對齊 CRA-01 v2.0：§19 加入 RID-EV、補 B-03-F01 對照與版本資訊 |
 | 1.2 | 2026-11-23 | §11 補充 WS 登入以 `graphicSession` 綁定 Session（R-007） |
+| 1.3 | 2026-11-23 | §11/§19/§21 更新 DB 環境變數、預設 DB 帳密與動態 SQL 修復狀態（R-018/R-019/R-028） |
 
 ## 25. 追溯
 

@@ -191,7 +191,7 @@ flowchart LR
 | SDS-14 | FR-OPC-001~045、IF-OPC-001~011、NFR-OPC-001~020、直連資料源 |
 | SDS-15 | FR-UM-001~064、NFR-UM-001~008、IF-UM-001~007、手冊功能對照 |
 | SDS-16 | 手冊截圖證據 ↔ 設計/程式碼/API/CR |
-| SDS-13 | R-001/R-002/R-003/R-006/R-007/R-008/R-009 修復設計與驗收 |
+| SDS-13 | R-001/R-002/R-003/R-006/R-007/R-008/R-009/R-018/R-019/R-028 修復設計與驗收 |
 
 ## 8. 反向追溯（程式碼 → 需求）
 
@@ -210,6 +210,9 @@ flowchart LR
 | `service/firebaseService.go`、`AlarmNotifyService.go` | FR-RT-021~022 |
 | `pgstore/*`、`routes/routes.go` | FR-RT-017~018、023~024 |
 | `service/session_secret.go`（Metadata/Runtime/xnginx/Alarm） | R-001、NFR-SEC-008 |
+| `*/util/env_windows.go`、`*/util/env_other.go`、`RegisterDBEnv.reg`（DB 環境變數） | R-018、R-028、NFR-SEC-007 |
+| `wax_rutime_proxy/service/databaseService.go`（識別字跳脫/欄位驗證） | R-019、NFR-SEC-001 |
+| `wax_metadata-service/model/*`（查詢欄位/排序驗證） | R-019、NFR-SEC-001 |
 | `controller/RecordController.go`（queryrecord 停用） | R-003、NFR-SEC-001 |
 | `service/webSocket.go`、`controller/websocket/*`（WS 認證、Session 綁定） | R-006、R-007、NFR-SEC-009 |
 | `config/config.go`、`EHAlarmPolling.go`、`XAlarmPolling.go` | R-008、NFR-PERF-004 |
@@ -264,5 +267,6 @@ flowchart LR
 | 2026-11-13 | 1.4 | 補 R-016 nginx 限流現況與殘餘風險 | 工程團隊 |
 | 2026-11-13 | 1.5 | 補 R-009 Record 訂閱 TTL、上限與 reaper 修復 | 工程團隊 |
 | 2026-11-23 | 1.6 | 補 R-007 WS 登入 Session 綁定修復與驗收 | 工程團隊 |
+| 2026-11-23 | 1.7 | 補 R-018/R-019/R-028 預設 DB 帳密與動態 SQL 修復追溯 | 工程團隊 |
 
 > 需求變更時，需同步更新 SRS-03、SDS-12 與測試案例。
