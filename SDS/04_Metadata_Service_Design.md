@@ -91,7 +91,8 @@ sequenceDiagram
 | `log` | `filemaxmb`、`tofile` | 日誌 |
 | `net.http` | `host`、`port` | 服務位址（28883，loopback） |
 | `net.https` | `host`、`port` | HTTPS（`port=-1` 停用；對外 HTTPS 由 xnginx 提供） |
-| `opcua.agent` | `host`、`port`、`dbport`、`user`、`password` | OPC UA Agent |
+| `opcua.agent` | `host`、`port`、`dbport`、`protocol` | OPC UA Data/History Agent；`QueryBodyKey` 回傳 `ip`/`port`/`dbport`/`protocol` |
+| `opcua.alarm` | `host`、`port`、`protocol` | OPC UA Alarm Agent；`QueryBodyKey` 回傳 `alarmip`/`alarmport`/`alarmprotocol` |
 | `opcua.cert` | `domains`、`name` | 憑證產生 |
 | `proxy.net.http` | `host`、`port` | Runtime Proxy（28884） |
 | `sessiontimeout` | int | Session 秒數 |
@@ -103,7 +104,7 @@ sequenceDiagram
 | `xproxy.agent.urlsuffix` | string | X Proxy 前綴 |
 | `alarm.metadataReloadMs` | int | 告警中介資料重載（30000） |
 | `alarm.net.http` | `host`、`port` | 告警服務（28889，loopback） |
-| `opcuaAgent` | `enabled`、`baseUrl`、`username`、`password`、`pollIntervalMs` | 內建 OPC UA Agent 連線 |
+| `opcuaAgent` | `enabled`、`baseUrl`、`dbUrl`、`alarmUrl`、`pollIntervalMs` | 共用 OPC UA Agent 端點；`dbUrl`/`alarmUrl` 會覆寫 `opcua.agent.dbport`／`opcua.alarm.port` |
 
 > 對外協定預設為 **HTTPS／WSS**：Client 一律經 xnginx（`protocol: https`，`8881`）存取，Metadata 僅在 loopback 以 HTTP 提供上游；`http://:8880` 僅相容舊版。
 

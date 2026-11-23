@@ -256,8 +256,8 @@ sequenceDiagram
 3. `AutoAcceptUntrustedCertificates=true`、`RejectSHA1SignedCertificates=false`。
 4. 預設 DB 帳密硬編碼（`Program.cs`、`service/app.go`）。
 5. Runtime/History 同映像，若 `isHistory` 設定錯誤會暴露錯誤端點（以 400 阻擋）。
-6. Root path 直連參數（`dbport`/`alarmport`）缺失時可能無法連線。
-7. Alarm 預設埠 8090 與部署 28889 不一致，易誤導。
+6. Root path 直連參數（`dbport`/`alarmport`）由 Metadata `config.yaml` 提供；未設定時可能無法連線。
+7. Alarm 預設埠已統一為 28889（Go 預設、`config.yaml`、Runtime 設定）。
 
 **建議**
 

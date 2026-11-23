@@ -139,7 +139,7 @@ flowchart LR
 | F-018 | CWE-294／CWE-345 | OPC UA Data Agent | `PacketTimestampMiddleware` 短路 | High | 移除短路、補時間戳測試 | Open | R-025 |
 | F-019 | CWE-942 | OPC UA Data Agent | `SetIsOriginAllowed(_=>true).AllowCredentials()` | High | Origin 白名單、限制 Credentials | Open | R-026 |
 | F-020 | CWE-295 | OPC UA Data Agent | `AutoAcceptUntrustedCertificates=true`、允許 SHA1 | High | 信任清單、拒絕 SHA1 | Open | R-027 |
-| F-021 | CWE-1188 | OPC UA Alarm／部署 | 預設埠不一致（8090／28889） | Medium | 統一預設與文件 | Open | R-029 |
+| F-021 | CWE-1188 | OPC UA Alarm／部署 | 預設埠已統一為 28889 | Medium | 統一預設與文件 | Closed | R-029 |
 | F-022 | CWE-22 | Web API 檔案讀取 | 路徑穿越風險 | High | 正規化 + 根目錄限制（待驗證） | 待盤點 | RID-EV-019 |
 | F-023 | CWE-79 | Web／QML 輸出 | XSS／輸出編碼 | High | 依語境編碼、CSP（待盤點） | 待盤點 | RID-EV-017 |
 | F-024 | CWE-787／CWE-125 | Client C/C++ | 記憶體邊界與 UAF | High | ASLR/DEP、RAII、邊界檢查 | 接受（搭配硬化） | RID-EV-070 |

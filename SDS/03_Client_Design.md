@@ -419,7 +419,7 @@ flowchart LR
   - 即時：`{opcuaUrlPrefix}/GetTagValueText/{projid}`（`/ua`）
   - 歷史：`{opcuaUrlPrefix}db/GetDataLog/{projid}`、`/GetRawDataLog/{projid}`（`/uadb`）
   - 警報：`{opcuaUrlPrefix}am/api/alarm/*`（`/uaam`）
-  - `opcuaUrlPrefix` 預設 `protocol//host/ua`（`protocol` 預設 `https:`，即 `https://<host>/ua`）；根路徑（無 xnginx）才用 `DataSourceBody` 的 `ip`/`port`/`dbport`/`alarmport`。
+  - `opcuaUrlPrefix` 預設 `protocol//host/ua`（`protocol` 預設 `https:`，即 `https://<host>/ua`）；根路徑（無 xnginx）才用 Metadata `QueryBodyKey` 回傳的 `ip`/`port`/`dbport`/`alarmport`（來自 `config.yaml` `opcua.agent`／`opcua.alarm`）。
 - 相容舊版：僅當伺服器 `protocol: http|both` 時才使用 `http://<EVS>:8880/sc`。
 
 ### 11.2 WebSocket
@@ -519,7 +519,7 @@ CMake 目標：`gc-designer`；連結 `RoniaKit`、`SCDraw2D`、`SCDraw3D`、`na
 5. 3D 資產較大，需快取與載入策略。
 6. 腳本 `eval` 需注意安全性與 CSP（WASM 模式）。
 7. OPC UA 即時/歷史值經 xnginx 直連 Data Agent；若 xnginx/Agent 不可達，Widget 顯示 Bad Quality，不影響 Record/其他資料源。
-8. 根路徑部署時需設定 `DataSourceBody.dbport`/`alarmport`，否則歷史/警報直連可能失效。
+8. 根路徑部署時需設定 Metadata `config.yaml` 的 `opcua.agent.dbport`／`opcua.alarm.port`（或 `opcuaAgent.dbUrl`／`alarmUrl`）；`dbport`/`alarmport` 由 `QueryBodyKey` 回傳，非 `DataSourceBody`。
 9. 手冊的圖紙/變數更新率（25/50/100 ms）與外部資料掃描（最低 500 ms）為不同層級，UI 需避免誤導。
 10. 模型（`WACustom`/`WACustomRectangle`）與 DataModel 密碼、匯入刪除保護需維持；詳見 SDS-15。
 

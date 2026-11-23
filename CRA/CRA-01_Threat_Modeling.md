@@ -413,7 +413,7 @@ flowchart TB
 | R-025 | Data Agent 時間戳未強制 | RID-EV-035 | Open | 移除短路並補測試 |
 | R-026 | Data Agent CORS 過寬 | RID-EV-025、036 | Open | Origin 白名單 |
 | R-027 | OPC UA 憑證自動接受 | RID-EV-028 | Open | 信任清單、拒絕 SHA1 |
-| R-029／R-030 | Alarm 埠／Root path 預設不一致 | RID-EV-067 | Open | 統一預設與 `/uadb`、`/uaam` |
+| R-029／R-030 | Alarm 埠／Root path 參數來源 | RID-EV-067 | Fixed | 統一預設；`dbport`/`alarmport` 由 Metadata `config.yaml` 經 `QueryBodyKey` 提供 |
 | R-032 | OPC UA 大量輪詢 | RID-EV-033、037 | Open | 分組／訂閱／調整間隔 |
 | R-035 | xnginx 設定變體漂移 | RID-EV-066 | Open | 設定基準與煙霧測試 |
 

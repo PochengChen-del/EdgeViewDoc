@@ -97,8 +97,8 @@
 | OI-008 | Data Agent `packetTimestamp` 未強制 | NFR-OPC-007、IF-OPC-002 | 修正中介層短路；補時間戳測試 |
 | OI-009 | Data Agent CORS 允許任意 Origin + Credentials | NFR-OPC-007 | 白名單化並限制憑證 |
 | OI-010 | OPC UA 憑證自動接受不受信任 | NFR-OPC-008 | 正式環境改為信任清單 |
-| OI-011 | Alarm 預設埠與 `config.yaml` 不一致（8090/28889） | FR-OPC-028、SDS-14 §11 | 統一預設與部署文件 |
-| OI-012 | Root path 部署缺少 `dbport`/`alarmport` | FR-OPC-015/018、SDS-14 §8.3 | 補 DataSourceBody 預設或改用路徑 |
+| OI-011 | Alarm 預設埠已統一為 28889 | FR-OPC-028、SDS-14 §11 | 已統一預設與部署文件 |
+| OI-012 | Root path 直連參數由 Metadata `config.yaml` 提供（非 `DataSourceBody`） | FR-OPC-015/018、SDS-14 §8.3 | 設定 `opcua.agent.dbport`／`opcua.alarm.port` 或改用 `/uadb`、`/uaam` |
 | OI-013 | OPC UA 設定 UI 與 Client 的 API 權限邊界 | FR-OPC-001、NFR-OPC-007 | 補權限測試與 CORS 驗證 |
 | OI-014 | 手冊 25 ms 更新率與外部資料掃描最低 500 ms 的差異 | FR-UM-025/026、NFR-UM-001 | 文件區分繪製/資料週期 |
 | OI-015 | 手冊插件/主題色/APP 查詢限制 | FR-UM-061/064 | 補來源與平台限制測試 |

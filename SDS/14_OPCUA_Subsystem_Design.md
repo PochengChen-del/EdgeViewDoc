@@ -372,7 +372,7 @@ sequenceDiagram
 
 | 鍵 | 預設 | 說明 |
 |----|------|------|
-| `alarm.net.http` | `0.0.0.0:8090`（預設值）；`config.yaml` 為 `:28889` | HTTP（loopback upstream） |
+| `alarm.net.http` | `0.0.0.0:28889`（預設值）；`config.yaml` 為 `:28889` | HTTP（loopback upstream） |
 | `alarm.net.https` | `-1` | HTTPS（對外 HTTPS 由 xnginx `protocol: https` 提供） |
 | `alarm.metadataReloadMs` | `30000` | 定期檢查 metadata |
 | `sessiontimeout` | `604800` | Session |
@@ -383,7 +383,7 @@ sequenceDiagram
 | `metadata.schema`/`dbname`/`dsn` | `public`/`waxconfig`/空 | Metadata DB |
 | `cert.crt`/`cert.key` | 空 | HTTPS |
 
-> 預設值 8090 與 `config.yaml` 28889 不同；部署時以設定檔/環境為準。
+> 程式預設值、`config.yaml` 與 Runtime 設定已統一為 28889。
 
 ### 5.4 告警定義編譯
 
@@ -679,8 +679,8 @@ Viewer/Preview 的即時 Tag 值與歷史 Tag 值由 Client **直接**呼叫 Dat
 
 ```mermaid
 flowchart TB
-    A["DataSourceBody<br/>ip/port/dbport/alarmport/protocol"] --> B{"serverInfo.pathname == '/' ?"}
-    B -->|是（無 xnginx，legacy）| C["http://ip:port<br/>http://ip:dbport<br/>http://ip:alarmport<br/>（僅直連相容）"]
+    A["Metadata config.yaml<br/>opcua.agent / opcua.alarm<br/>或 opcuaAgent dbUrl/alarmUrl"] --> B{"serverInfo.pathname == '/' ?"}
+    B -->|是（無 xnginx，legacy）| C["QueryBodyKey 回傳 info<br/>http://ip:port<br/>http://ip:dbport<br/>http://ip:alarmport"]
     B -->|否（標準：xnginx）| D["opcuaUrlPrefix = protocol//host/ua<br/>protocol 預設 https<br/>dburl = /uadb、alarmurl = /uaam"]
 ```
 
@@ -689,7 +689,7 @@ flowchart TB
 - 警報：`{alarmurl}/api/alarm/*` → xnginx `/uaam/`
 - 認證：`csrfToken` header；同 Metadata Session Cookie。
 - 標準部署一律經 xnginx，`protocol` 預設 `https`（即 `https://<host>/ua`）；`opcuaUrlPrefix` 不再組出 `http://`。
-- 僅在**無 xnginx 的根路徑部署**才直接使用 `DataSourceBody.ip/port/dbport/alarmport`（legacy，非預設）。
+- 僅在**無 xnginx 的根路徑部署**才直接使用 Metadata `QueryBodyKey` 回傳的 `info`（`ip`/`port`/`dbport`/`alarmport`）；這些值來自 Metadata `config.yaml`（`opcua.agent`／`opcua.alarm`，或 `opcuaAgent.dbUrl`／`alarmUrl`），非 `DataSourceBody`（legacy，非預設）。
 
 ### 8.4 更新週期
 
@@ -841,8 +841,8 @@ stateDiagram-v2
 | R-OPC-003 | 自動接受不受信任憑證 | High | `AutoAcceptUntrustedCertificates=true` |
 | R-OPC-004 | 預設 DB 帳密硬編碼 | High | `Program.cs`/`service/app.go` 預設 `postgres/Postgre@sql1` |
 | R-OPC-005 | Runtime/History 同映像不同埠 | Medium | 需两个進程與正確 `isHistory`，部署易錯 |
-| R-OPC-006 | Alarm 預設埠不一致 | Medium | 程式預設 8090、`config.yaml` 28889、Runtime 設定 8090 |
-| R-OPC-007 | Root path 直連參數不足 | Medium | `DataSourceBody` 無 `dbport`/`alarmport`，根路徑部署可能失效 |
+| R-OPC-006 | Alarm 預設埠不一致 | Medium | 已統一為 28889（程式預設、`config.yaml`、Runtime 設定） |
+| R-OPC-007 | Root path 直連參數來源 | Medium | `dbport`/`alarmport` 由 Metadata `config.yaml` 經 `QueryBodyKey` 提供；未設定時根路徑部署可能失效 |
 | R-OPC-008 | Alarm 設定與 runtime DB 分離 | Medium | 需確保 `waxconfig` 與 `waxalarm` 同步/備份 |
 | R-OPC-009 | 歷史查詢依賴 Server HDA | Medium | 未支援 Historical Access 時無資料 |
 | R-OPC-010 | 多副本 Alarm/Agent | Medium | 需共享 DB/Session/Token，否則狀態不一致 |

@@ -150,7 +150,7 @@ EdgeView 為三層式 HMI/SCADA 平台：
 | xnginx HTTPS | 8881 | 對使用者開放（僅必要網段） |
 | OPC UA Data Agent（Runtime） | 28886 | 僅經 xnginx `/ua`；勿直接對外 |
 | OPC UA Data Agent（History） | 28887 | 僅經 xnginx `/uadb` |
-| OPC UA Alarm Agent | 28889 | 僅經 xnginx `/uaam`（注意預設值可能為 8090，部署時統一） |
+| OPC UA Alarm Agent | 28889 | 僅經 xnginx `/uaam`（預設值已統一為 28889） |
 | PostgreSQL | 5432 | 僅內網 |
 
 ### 8.2 網路分段

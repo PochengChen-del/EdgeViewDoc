@@ -104,7 +104,7 @@ sequenceDiagram
 | `eh_alarm_summary_interval_ms` | int | 1000 | EH 告警摘要 |
 | `x_alarm_summary_interval_ms` | int | 1000 | X 告警摘要 |
 | `opcua_alarm_summary_interval_ms` | int | 1000 | OPC UA 告警摘要 |
-| `opcua.alarm` | `host`/`port`/`protocol`/`user`/`password` | `127.0.0.1:8090` | OPC UA 告警 |
+| `opcua.alarm` | `host`/`port`/`protocol`/`user`/`password` | `127.0.0.1:28889` | OPC UA 告警 |
 | `websocket_auth_timeout` | int | 10 | WS 認證秒數 |
 | `firebase_token_valid_days` | int | 30 | FCM token |
 | `edge365.meta` | cluster/namespace/exdomain | — | Edge365 |
@@ -365,7 +365,7 @@ sequenceDiagram
 | Record 輪詢 | `RecordDataPolling.go`、`Polling.go` | 1 秒 | 查詢並推送；具 idle TTL、訂閱上限與 reaper |
 | System Info | `SystemInfoPolling.go` | 3000 ms | SC Server TCP 連線狀態 |
 | WA 告警 | `WAAlarmPolling.go` | 1000 ms | `AlarmSummary(100000)` |
-| OPC UA 告警 | `OpcuaAlarmPolling.go` | 1000 ms | Alarm Agent（`:8090` 預設／`:28889` 部署）；連線資訊 TTL 60 秒 |
+| OPC UA 告警 | `OpcuaAlarmPolling.go` | 1000 ms | Alarm Agent（`:28889`）；連線資訊 TTL 60 秒 |
 | EH 告警 | `EHAlarmPolling.go` | `EHAlmSummaryIntervalMs`（預設 1000ms） | EdgeHub 告警 |
 | X 告警 | `XAlarmPolling.go` | `XAlmSummaryIntervalMs`（預設 1000ms） | X 平台；連線資訊 TTL 60 秒 |
 
@@ -389,7 +389,7 @@ sequenceDiagram
 
 ### 8.3 OPC UA
 
-- **告警摘要**：`OpcuaAlarmPolling` 呼叫 Alarm Agent（`opcua.alarm`，程式預設 `:8090`，部署常見 `:28889`）；連線資訊快取 60 秒。
+- **告警摘要**：`OpcuaAlarmPolling` 呼叫 Alarm Agent（`opcua.alarm`，預設 `:28889`）；連線資訊快取 60 秒。
 - **不自 Data Agent 讀取即時/歷史 Tag 值**：Client 直連 `/ua`、`/uadb`。
 - **Alarm 清單/歷史/Ack**：Client 經 xnginx `/uaam` 直連 Alarm Agent；Proxy 僅提供 `opcuaalarmsummary` WebSocket（`/ws`）。
 - 詳細子系統設計見 SDS-14。

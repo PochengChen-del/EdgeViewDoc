@@ -418,20 +418,20 @@
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | Medium |
-| 證據 | Go 預設 8090、`config.yaml` 28889、Runtime `opcua.alarm` 8090 |
+| 證據 | Go 預設 28889、`config.yaml` 28889、Runtime `opcua.alarm` 28889 |
 | 影響 | 部署連錯 |
-| 緩解 | 統一預設與文件 |
-| 狀態 | Open |
+| 緩解 | 已統一為 28889 |
+| 狀態 | Fixed |
 
-### R-030 Root path 直連參數缺失
+### R-030 Root path 直連參數來源
 
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | Medium |
-| 證據 | `DataSourceBody` 無 `dbport`/`alarmport`；`opcua.js` 根路徑使用 `info.dbport`/`alarmport` |
-| 影響 | 根路徑部署歷史/警報失效 |
-| 緩解 | 補預設或改用 `/uadb`、`/uaam` |
-| 狀態 | Open |
+| 證據 | `dbport`/`alarmport` 非存於 `DataSourceBody`；Metadata `QueryBodyKey` 由 `config.yaml`（`opcua.agent.dbport`／`opcuaAgent.dbUrl`、`opcua.alarm.port`／`opcuaAgent.alarmUrl`）填入回傳 `info`，`opcua.js` 根路徑再使用 `info.dbport`/`info.alarmport` |
+| 影響 | 未設定時根路徑部署歷史/警報失效（非預設部署） |
+| 緩解 | 已文件化設定來源與預設（SDS-04 §3、SDS-14 §8.3）；標準部署改用 `/uadb`、`/uaam` |
+| 狀態 | Fixed |
 
 ### R-031 Alarm/Agent 多副本狀態
 
@@ -522,7 +522,7 @@ flowchart LR
 | 階段 | 項目 |
 |------|------|
 | P0 | R-001、R-002、R-003、R-006、R-007、R-008 已修復；待處理 R-023、R-002-R、R-025、R-026、R-027、R-028 |
-| P1 | R-004、R-005、R-015、R-016、R-018、R-022、R-029、R-030、R-031、R-032、R-035 |
+| P1 | R-004、R-005、R-015、R-016、R-018、R-022、R-031、R-032、R-035（R-029、R-030 已修復） |
 | P2 | R-010、R-011、R-017、R-021、R-033、R-034、TD-001~008 |
 
 > R-001/R-002/R-003/R-006/R-007/R-008/R-009 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-009 原列 P2，已完成修復。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。

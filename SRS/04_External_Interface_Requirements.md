@@ -131,7 +131,7 @@
 ### IF-SW-010 OPC UA Alarm Agent
 
 - 用途：警報規則、清單/歷史、Ack/Process、Alarm 欄位。
-- 介面：HTTP/HTTPS；對外 xnginx `/uaam`（上游 `28889`；程式預設 8090）。
+- 介面：HTTP/HTTPS；對外 xnginx `/uaam`（上游 `28889`；程式預設 28889）。
 - 認證：Session + CSRF、本機 Basic Auth、loopback Bearer。
 - 端點：`/uaam/api/alarm/list`、`/uaam/api/alarm/log`、`/uaam/api/alarm/ack`、`/uaam/api/alarm/processhistory`、`/uaam/api/alarm/definition/list`、`/uaam/api/alarm/simulate`、`/uaam/api/alarm/reload`、`/uaam/GetTagValue/:projid`、`/uaam/ping/:id`。
 - 詳細需求：`SRS/07` FR-OPC-028~045、IF-OPC-004。
