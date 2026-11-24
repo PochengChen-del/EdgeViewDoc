@@ -29,7 +29,7 @@
 |----|------|--------|------|
 | NFR-SEC-001 | 認證 | Must | 所有非公開 API 需有效 Session 與 CSRF Token；公開端點需明確白名單。 |
 | NFR-SEC-002 | 授權 | Must | 依專案與角色檢查權限；無權限回傳 `-101`。 |
-| NFR-SEC-003 | 密碼儲存 | Must | 不得儲存明文密碼；現行使用 SHA-256，應逐步升級為加鹽雜湊（見 SDS-11）。 |
+| NFR-SEC-003 | 密碼儲存 | Must | 不得儲存明文密碼；使用者密碼採 Argon2id（隨機鹽 + pepper），舊 SHA-256 於登入成功時升級為 Argon2id（見 SDS-11 R-004）。 |
 | NFR-SEC-004 | 傳輸安全 | Must | 支援 HTTPS；憑證可設定。全域停用 TLS 驗證已移除；個別外部呼叫仍停用者應逐步改為系統 CA/指定 CA（R-002-R）。 |
 | NFR-SEC-005 | CSRF | Must | 狀態變更請求需驗證 `csrfToken`。 |
 | NFR-SEC-006 | 防重放 | Must | 寫入操作需驗證 `packetTimestamp`（預設 300 秒）。 |

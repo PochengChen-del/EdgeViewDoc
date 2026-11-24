@@ -60,7 +60,7 @@
 | CWE-306 | Missing Authentication | 端點／topic／服務皆需認證 | 已修（R-003/R-006）、公開端點待處理（R-012） |
 | CWE-798 | Hardcoded Credentials | 掃描原始碼與設定 | Fixed（R-018/R-028） |
 | CWE-259 | Hardcoded Password | 同上 | Fixed（R-018/R-028） |
-| CWE-916 | Weak Password Hash | 加鹽、慢雜湊（Argon2id/bcrypt） | Open（R-004） |
+| CWE-916 | Weak Password Hash | 加鹽、慢雜湊（Argon2id/bcrypt） | Fixed（R-004；Argon2id + 每帳號鹽 + pepper，舊雜湊登入即升級） |
 | CWE-327 | Broken/Risky Crypto | 停用弱演算法、TLS 1.2+ | 部分符合 |
 | CWE-295 | Improper Cert Validation | 不全域停用、信任清單 | 全域已修（R-002）、個別 client Open（R-002-R/R-027） |
 | CWE-330 | Insufficient Randomness | CSPRNG、足夠熵 | 符合（MID-EV-008、018） |
@@ -125,7 +125,7 @@ flowchart LR
 | F-004 | CWE-306 | Runtime `webSocket.go` | 部分 topic 未認證即處理／廣播 | Medium | 分派前檢查 `AlreadyLogin`；systeminfo 登入後註冊 | Fixed | R-006 |
 | F-005 | CWE-835／CWE-400 | Runtime `config.go` | EH/X 輪詢間隔 `-1` 造成忙迴圈 | High | 預設 1000ms；`normalizeIntervalMs` 夾 100ms | Fixed | R-008 |
 | F-006 | CWE-400／CWE-401 | Runtime `RecordDataPolling` | 無 TTL／上限／統計 | Medium | idle TTL、上限、reaper、`Stats()` | Fixed | R-009 |
-| F-007 | CWE-916／CWE-759 | Metadata `UserModel` | 密碼 SHA-256 單次、無鹽 | High | 遷移 Argon2id/bcrypt + 遷移計畫 | Open | R-004 |
+| F-007 | CWE-916／CWE-759 | Metadata `UserModel` | 密碼 SHA-256 單次、無鹽 | High | 改用 Argon2id（隨機鹽 + `aes_secret` pepper）；舊 SHA-256 登入即升級；四服務同步 | Fixed | R-004 / SDS-13 |
 | F-008 | CWE-1004／CWE-352 | Metadata `loginController` | CSRF Token Cookie 非 HttpOnly | Medium | HttpOnly + SameSite + body token | Open | R-005 |
 | F-009 | CWE-307／CWE-203 | Runtime `loginController` / `webSocket.go` | `verifyToken` 掃描所有 Session | Medium | WS handshake 綁定 `graphicSession`，僅比對該 Session 的 `csrfToken`；原生 Qt 由 handshake 帶 Cookie | Fixed | R-007 / SDS-13 §5.4 |
 | F-010 | CWE-306／CWE-639 | Metadata 檔案端點 | 公開 GET（`/getfile` 等） | Medium | 授權／簽章 URL／限流 | Open | R-012 |

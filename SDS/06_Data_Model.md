@@ -217,7 +217,7 @@ erDiagram
 
 | 資料表 | 主鍵 | 主要欄位 | 用途 |
 |--------|------|----------|------|
-| `UserAdmin` | `sourcetype`,`name` | `password`（SHA-256）、`active` | 平台管理員 |
+| `UserAdmin` | `sourcetype`,`name` | `password`（Argon2id，相容舊 SHA-256）、`active` | 平台管理員 |
 | `UserInfo` | `projid`,`name` | `password`、`usertype`、`home`、`area int[]`、`ack`、`change`、`sourceuserid`、`modifytime` | 專案使用者 |
 | `UserAcc` | `projid`,`name`,`displayid` | `ack`、`change` | 畫面權限 |
 | `UserScy` | `id`（serial） | `projid`、`name`、`descript`、`area int[]` | 角色/群組 |
@@ -377,7 +377,7 @@ erDiagram
 |------|------|------|
 | `projid` | int | 專案 |
 | `name` | text | 使用者 |
-| `password` | text | 雜湊（SHA-256，未加鹽） |
+| `password` | text | 雜湊（Argon2id + 隨機鹽；相容舊 SHA-256） |
 | `usertype` | int | 類型 |
 | `home` | int | 首頁畫面 ID |
 | `area` | int[] | 角色/區域 ID |
@@ -518,7 +518,7 @@ erDiagram
 
 | 資料 | 位置 | 保護 |
 |------|------|------|
-| 使用者密碼 | `UserAdmin`、`UserInfo`、`OPCUA_User` | SHA-256（未加鹽，風險） |
+| 使用者密碼 | `UserAdmin`、`UserInfo`、`OPCUA_User` | Argon2id + 隨機鹽 + pepper（R-004）；舊 SHA-256 登入即升級 |
 | 資料源密碼 | `DataSourceBody.value` | 可能加密（AES） |
 | Session | `http_sessions.data` | 簽章/加密（pgstore） |
 | 稽核 | `auditlog` | checksum |

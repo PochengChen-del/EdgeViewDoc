@@ -47,7 +47,7 @@
 | CR 1.06 | Wireless access management | N/A | 不適用 | 無無線管理功能。 |
 | NDR 1.06 | Wireless access management | SL1 | 不適用（網路設備） | 非網路設備。 |
 | NDR 1.06 RE(1) | Unique identification and authentication | SL2 | 不適用（網路設備） | 非網路設備。 |
-| CR 1.07 | Strength of password-based authentication | SL1 | 部分符合 | 密碼以 SHA-256 儲存（未加鹽），無強度政策；HTTPS 保護傳輸。（SRS：[NFR-SEC-003、NFR-SEC-004](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-08 §6.1](../SDS/08_Security_Design.md)、[SDS-11 R-004](../SDS/11_Design_Decisions_and_Risks.md)） |
+| CR 1.07 | Strength of password-based authentication | SL1 | 部分符合 | 密碼已改 Argon2id（隨機鹽 + pepper，R-004）；仍無強度/到期/歷史政策；HTTPS 保護傳輸。（SRS：[NFR-SEC-003、NFR-SEC-004](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-08 §6.1](../SDS/08_Security_Design.md)、[SDS-11 R-004](../SDS/11_Design_Decisions_and_Risks.md)） |
 | CR 1.07 RE(1) | Password generation and lifetime restrictions for human users | SL3 | 不符合 | 無產生規則/到期/歷史限制。 |
 | CR 1.07 RE(2) | Password lifetime restrictions for all users | SL4 | 不符合 | 未強制所有帳號生命週期。 |
 | CR 1.08 | Public key infrastructure certificates | SL2 | 符合 | HTTPS/xnginx 憑證、OPC UA PFX、Certificate/create；支援憑證匯入/下載。（SRS：[FR-OPC-005、FR-OPC-021](../SRS/07_OPCUA_Subsystem.md)、[NFR-SEC-004](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-08 §6.2、§7](../SDS/08_Security_Design.md)、[SDS-14 §4.5](../SDS/14_OPCUA_Subsystem_Design.md)） |
@@ -163,7 +163,7 @@
 | CR 4.02 | Information persistence | SL2 | 部分符合 | Session/資料保留可設定；缺少統一清除驗證。（SRS：[NFR-PRV-001~004](../SRS/05_Nonfunctional_Requirements.md)、[NFR-AUD-004](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-08 §12](../SDS/08_Security_Design.md)、[SDS-11](../SDS/11_Design_Decisions_and_Risks.md)） |
 | CR 4.02 RE(1) | Erase of shared memory resources | SL3 | 部分符合 | 程序結束釋放；無保證抹除 shared memory。（SRS：[NFR-PRV-003](../SRS/05_Nonfunctional_Requirements.md)、[NFR-SEC-008](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-08 §12](../SDS/08_Security_Design.md)、[SDS-11 R-022](../SDS/11_Design_Decisions_and_Risks.md)） |
 | CR 4.02 RE(2) | Erase verification | SL3 | 不符合 | 無抹除驗證。 |
-| CR 4.03 | Use of cryptography | SL1 | 部分符合 | TLS/AES/SHA-256；密碼雜湊未加鹽，需改善。（SRS：[NFR-SEC-003、NFR-SEC-004、NFR-SEC-007](../SRS/05_Nonfunctional_Requirements.md)、[NFR-OPC-008](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-08 §6](../SDS/08_Security_Design.md)、[SDS-11 R-004](../SDS/11_Design_Decisions_and_Risks.md)） |
+| CR 4.03 | Use of cryptography | SL1 | 部分符合 | TLS/AES/SHA-256 與 OPC UA 加密；密碼已改 Argon2id（R-004）；AES-CBC 完整性與金鑰輪替仍待改善。（SRS：[NFR-SEC-003、NFR-SEC-004、NFR-SEC-007](../SRS/05_Nonfunctional_Requirements.md)、[NFR-OPC-008](../SRS/05_Nonfunctional_Requirements.md)；SDS：[SDS-08 §6](../SDS/08_Security_Design.md)、[SDS-11 R-004](../SDS/11_Design_Decisions_and_Risks.md)） |
 
 ## 7. Restricted Data Flow（FR5）
 
@@ -208,7 +208,7 @@
 | 缺口 | 影響項目 | 對應 SL | 建議 |
 |------|----------|---------|------|
 | 無 MFA | CR 1.01 RE(2) | SL3 | 整合外部 IdP/反向代理 MFA。 |
-| 密碼政策/生命週期不足、SHA-256 未加鹽 | CR 1.05、1.07 | SL1、SL3、SL4 | Argon2id/bcrypt + 複雜度/到期/歷史。 |
+| 密碼政策/生命週期不足（雜湊已改 Argon2id） | CR 1.05、1.07 | SL1、SL3、SL4 | 複雜度/到期/歷史/鎖定政策。 |
 | 無 Concurrent Session 限制 | CR 2.07 | SL3 | Session 上限/管理。 |
 | 稽核無 WORM/容量告警 | CR 2.09、3.09 | SL1、SL2、SL3、SL4 | 外部 WORM/SIEM、容量告警。 |
 | 更新流程缺 anti-rollback/來源固定 | CR 3.04、3.10 | SL1、SL2 | 版本 pinning、更新前驗簽、失敗回復與供應鏈安全。 |
@@ -285,13 +285,13 @@
 #### A.2.3 CR 1.05 Authenticator management（部分符合）
 - **現況**：支援使用者改密、管理員重設；OPC UA 首次登入可強制改密。
 - **部分符合原因**：缺少密碼到期、歷史、複雜度與重用限制；重設流程與臨時密碼生命週期未標準化；未強制所有帳號定期更新。
-- **建議**：導入可設定的密碼政策（長度、複雜度、歷史次數、到期、首次改密）；重設採一次性臨時密碼並強制變更；所有變更寫入稽核；遷移至高強度雜湊。
+- **建議**：導入可設定的密碼政策（長度、複雜度、歷史次數、到期、首次改密）；重設採一次性臨時密碼並強制變更；所有變更寫入稽核；雜湊已遷移至 Argon2id（R-004）。
 - **對應**：[FR-CLI-007](../SRS/03_Functional_Requirements.md)、[FR-META-029](../SRS/03_Functional_Requirements.md)、[NFR-SEC-003](../SRS/05_Nonfunctional_Requirements.md)、[SDS-08 §6.1](../SDS/08_Security_Design.md)、[SDS-11 R-004](../SDS/11_Design_Decisions_and_Risks.md)
 
 #### A.2.4 CR 1.07 Strength of password-based authentication（部分符合）
-- **現況**：密碼以 SHA-256 儲存，無加鹽；登入經 HTTPS 保護。
-- **部分符合原因**：SHA-256 不具工作因子，無法抵抗離線暴力破解；無最小長度/複雜度/常見密碼阻擋；未加鹽導致相同密碼雜湊相同。
-- **建議**：改用 Argon2id 或 bcrypt（含成本參數與每帳號鹽）；登入端加入速率限制與鎖定；提供舊雜湊登入時自動升級（rehash）；政策與教育文件化。
+- **現況**：密碼以 Argon2id 儲存（隨機鹽 + `aes_secret`/`SESSION_SECRET` pepper，R-004）；舊 SHA-256 於登入成功即升級；登入經 HTTPS 保護。
+- **部分符合原因**：仍無最小長度/複雜度/歷史/到期政策與常見密碼阻擋；OPC UA 以外缺帳號鎖定（密碼雜湊本身已強化）。
+- **建議**：導入可設定密碼政策（長度/複雜度/歷史/到期）、登入速率限制與鎖定；政策與教育文件化（雜湊已完成）。
 - **對應**：[NFR-SEC-003、NFR-SEC-004](../SRS/05_Nonfunctional_Requirements.md)、[SDS-08 §6.1](../SDS/08_Security_Design.md)、[SDS-11 R-004](../SDS/11_Design_Decisions_and_Risks.md)
 
 #### A.2.5 CR 1.10 Authenticator feedback（部分符合）
@@ -439,9 +439,9 @@
 - **對應**：[NFR-PRV-003](../SRS/05_Nonfunctional_Requirements.md)、[NFR-SEC-008](../SRS/05_Nonfunctional_Requirements.md)、[SDS-08 §12](../SDS/08_Security_Design.md)、[SDS-11 R-022](../SDS/11_Design_Decisions_and_Risks.md)
 
 #### A.5.3 CR 4.03 Use of cryptography（部分符合）
-- **現況**：TLS、AES-256-CBC、SHA-256 與 OPC UA 加密；敏感設定加密儲存。
-- **部分符合原因**：密碼雜湊未加鹽且無工作因子；AES-CBC 缺少完整性保護（建議 GCM）；金鑰輪替與演算法盤點未完整。
-- **建議**：密碼改 Argon2id/bcrypt；新資料採 AES-GCM 或 Encrypt-then-MAC；建立加密演算法/金鑰清冊與輪替政策；淘汰弱協定/演算法；可選 FIPS 模式。
+- **現況**：TLS、AES-256-CBC、SHA-256 與 OPC UA 加密；使用者密碼採 Argon2id（R-004）；敏感設定加密儲存。
+- **部分符合原因**：AES-CBC 缺少完整性保護（建議 GCM）；金鑰輪替與演算法盤點未完整（密碼雜湊已改 Argon2id）。
+- **建議**：新資料採 AES-GCM 或 Encrypt-then-MAC；建立加密演算法/金鑰清冊與輪替政策；淘汰弱協定/演算法；可選 FIPS 模式。
 - **對應**：[NFR-SEC-003、NFR-SEC-004、NFR-SEC-007](../SRS/05_Nonfunctional_Requirements.md)、[NFR-OPC-008](../SRS/05_Nonfunctional_Requirements.md)、[SDS-08 §6](../SDS/08_Security_Design.md)、[SDS-11 R-004](../SDS/11_Design_Decisions_and_Risks.md)
 
 ### A.6 Timely Response to Events（FR6）

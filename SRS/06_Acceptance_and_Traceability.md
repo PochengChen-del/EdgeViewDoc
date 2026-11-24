@@ -90,7 +90,7 @@
 | OI-001 | EdgeHub/X 告警輪詢間隔未初始化（`-1`） | FR-RT-013、FR-RT-015、NFR-PERF-004 | 已修：預設 1000 ms，`<=0` 用預設、低於 100 ms 夾到 100 ms |
 | OI-002 | MQTT Client 停用但仍有設定/UI | FR-CLI-091 | 明確標示停用或移除 |
 | OI-003 | ODBC 未實作 | IF-SW-006 | 文件標示不支援，避免誤用 |
-| OI-004 | 密碼雜湊未加鹽 | NFR-SEC-003 | 規劃遷移至 Argon2/bcrypt |
+| OI-004 | 密碼雜湊未加鹽 | NFR-SEC-003 | 已修（R-004）：改 Argon2id + 隨機鹽 + pepper；舊 SHA-256 登入即升級 |
 | OI-005 | 部分內部 HTTPS 呼叫停用憑證驗證 | NFR-SEC-004 | 正式環境改為驗證或指定 CA |
 | OI-006 | WebSocket `systeminfo`/`default` 認證不足 | NFR-SEC-009 | 已修（R-006/R-007）：非 `login` topic 需登入；systeminfo 登入後才訂閱；WS 登入綁定 `graphicSession`，只比對該 Session 的 `csrfToken` |
 | OI-007 | Record 快取無明確閒置 TTL | NFR-PERF/REL | 依設計註解實作 10 分鐘回收或調整文件 |

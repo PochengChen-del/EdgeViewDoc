@@ -291,7 +291,7 @@ flowchart TB
 | RID-EV-006 | IA | OPC UA 使用者或專案授權繞過（UserFunc／UserProject） | Data Agent／Config UI | Elevation of Privilege | Moderate | High | High | MID-EV-005 | 降低 | FR-OPC-011；SDS-08 §4 |
 | RID-EV-007 | IA | WA／EH／X 多來源登入 Token 交換或驗證弱點 | Metadata | Spoofing | Moderate | High | High | MID-EV-023 | 分擔／移轉 | R-002-R；SDS-08 §7 |
 | RID-EV-008 | IA | 未內建 MFA，管理帳號僅靠單一密碼 | Metadata | Spoofing | Moderate | High | High | MID-EV-025 | 接受 | CR 1.01 RE(2)；CRA-04 §7.4 |
-| RID-EV-009 | IA | 密碼雜湊未加鹽（SHA-256 單次） | Metadata | Information Disclosure | Low | High | Moderate | MID-EV-004 | 降低 | R-004；SDS-08 §6.1 |
+| RID-EV-009 | IA | 密碼雜湊未加鹽（舊版 SHA-256 單次） | Metadata／xnginx／Runtime／Alarm | Information Disclosure | Low | High | Moderate | MID-EV-004 | 降低 | R-004（Fixed）；Argon2id + 隨機鹽 + pepper，舊雜湊登入即升級；SDS-08 §6.1 |
 | RID-EV-010 | IA | Session 併發、逾時或登出未失效（7 天有效期） | Metadata／xnginx | Spoofing | Moderate | Moderate | Moderate | MID-EV-003 | 降低 | R-007（WS 登入 Fixed）；SDS-08 §3.3、§3.4 |
 | RID-EV-011 | AC | 越權存取專案／畫面／物件（IDOR，未檢查 ACL） | Metadata／Runtime | Elevation of Privilege | Moderate | High | High | MID-EV-005 | 降低 | R-024；SDS-08 §4.2 |
 | RID-EV-012 | AC | OPC UA 設定 UI 角色繞過（`graphic` 進入設定頁） | Config UI／Metadata | Elevation of Privilege | Moderate | High | High | MID-EV-005 | 降低 | FR-OPC-001、FR-OPC-011 |
@@ -400,7 +400,7 @@ flowchart TB
 
 | SDS 風險 | 說明 | 對應 RID | 狀態 | 建議處置 |
 |----------|------|----------|------|----------|
-| R-004 | 密碼雜湊未加鹽（SHA-256） | RID-EV-009 | Open | 遷移 Argon2id／bcrypt + 遷移計畫 |
+| R-004 | 密碼雜湊未加鹽（舊版 SHA-256） | RID-EV-009 | Fixed | Argon2id + 隨機鹽 + `aes_secret` pepper；舊雜湊登入即升級 |
 | R-005 | CSRF Token Cookie 非 HttpOnly | RID-EV-004、005 | Open | HttpOnly + SameSite，前端改用 body token |
 | R-012 | 公開檔案端點 | RID-EV-001、013、019 | Open | 授權／簽章 URL／限流 |
 | R-015 | CORS／Origin 寬鬆 | RID-EV-025 | Open | 明確白名單 |

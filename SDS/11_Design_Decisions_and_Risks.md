@@ -164,10 +164,14 @@
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | High |
-| 證據 | `UserModel.go:632` SHA-256 單次 |
+| 證據 | 舊版 `UserModel.go:632` SHA-256 單次、無鹽 |
 | 影響 | 彩虹表/暴力破解 |
-| 緩解 | Argon2id/bcrypt + 遷移 |
-| 狀態 | Open |
+| 緩解 | 已完成：改用 Argon2id（`m=19456,t=2,p=1`，每帳號隨機 16-byte salt、32-byte key）；pepper 由 `aes_secret` 或 `SESSION_SECRET` 經 HKDF 派生（`edgeview/password-pepper/v1`）以 HMAC-SHA256 混入。舊 SHA-256 仍可驗證，登入成功即升級（rehash） |
+| 涵蓋服務 | metadata、xnginx、runtime proxy、alarm agent（共用 `security/password.go`） |
+| 相容性 | 舊 64-hex SHA-256 照常登入；空密碼不受理 |
+| 驗證 | `go test ./security/`（新/舊格式、錯誤密碼、pepper、惡意參數）；登入後 DB 值為 `$argon2id$…`（>64） |
+| 限制 | 輪替/刪除 `aes_secret` 或變更 `SESSION_SECRET` 會使已升級 Argon2id 失效（舊 SHA-256 不受影響）；輪替前需重設密碼 |
+| 狀態 | Fixed |
 
 ### R-005 CSRF Token 存於非 HttpOnly Cookie
 
@@ -507,7 +511,7 @@
 1. 單副本 Runtime（WebSocket 狀態）。
 2. MQTT 停用。
 3. ODBC 不支援。
-4. 本機帳密使用 SHA-256（待遷移）。
+4. 密碼 pepper 綁定 `aes_secret`/`SESSION_SECRET`；輪替或刪除金鑰會使已升級 Argon2id 失效，需先重設密碼（R-004）。
 5. 公開資源端點依賴難猜 ID。
 6. WASM 功能受限（無原生檔案/當機回報）。
 7. OPC UA 歷史查詢依賴 Server Historical Access。
@@ -520,18 +524,18 @@
 flowchart LR
     P0[P0 立即] --> P1[P1 短期]
     P1 --> P2[P2 中期]
-    P0 --- A[認證/密鑰/TLS/queryrecord<br/>R-001/R-002/R-003 已修復]
-    P1 --- B[密碼雜湊/速率限制/probes]
+    P0 --- A[認證/密鑰/TLS/queryrecord<br/>R-001/R-002/R-003/R-004 已修復]
+    P1 --- B[速率限制/probes]
     P2 --- C[物件儲存/多副本/SSO/測試]
 ```
 
 | 階段 | 項目 |
 |------|------|
 | P0 | R-001、R-002、R-003、R-006、R-007、R-008、R-018、R-025、R-026、R-028 已修復；待處理 R-023、R-002-R、R-027 |
-| P1 | R-004、R-005、R-015、R-016、R-022、R-031、R-032（R-019、R-029、R-030 已修復；R-035 已接受） |
+| P1 | R-005、R-015、R-016、R-022、R-031、R-032（R-004、R-019、R-029、R-030 已修復；R-035 已接受） |
 | P2 | R-010、R-011、R-017、R-021、R-033、R-034、TD-001~008 |
 
-> R-001/R-002/R-003/R-006/R-007/R-008/R-009/R-018/R-019/R-028 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-009 原列 P2，已完成修復。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
+> R-001/R-002/R-003/R-004/R-006/R-007/R-008/R-009/R-018/R-019/R-028 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-009 原列 P2，已完成修復。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
 
 ## 6. 決策記錄格式
 

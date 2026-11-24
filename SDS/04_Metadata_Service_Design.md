@@ -345,7 +345,7 @@ flowchart TD
 
 1. DB 預設密碼已移除（R-018/R-028），改由環境變數/Secret 提供（Session secret 已改為 env/機器金鑰派生）。
 2. 部分內部 HTTPS 呼叫仍停用憑證驗證（R-002-R）。
-3. 密碼雜湊未加鹽。
+3. 密碼雜湊已改 Argon2id（R-004）；pepper 綁定 `aes_secret`/`SESSION_SECRET`，輪替金鑰會使已升級密碼失效。
 4. Schema 迁移分散於程式碼。
 5. EdgeHub 模式部分功能（本機 DB）停用。
 6. MQTT 相關路由/UI 保留但未啟用。

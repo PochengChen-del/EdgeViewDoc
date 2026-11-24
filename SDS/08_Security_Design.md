@@ -167,10 +167,13 @@ sequenceDiagram
 
 | 項目 | 現況 | 建議 |
 |------|------|------|
-| 演算法 | SHA-256（`Sha256()`） | Argon2id/bcrypt |
-| 鹽 | 無 | 每帳號隨機鹽 |
-| 迭代 | 無 | 調整成本 |
+| 演算法 | Argon2id（`security/password.go`，`m=19456,t=2,p=1`） | 維持 |
+| 鹽 | 每帳號隨機 16 bytes（PHC 內嵌） | 維持 |
+| Pepper | `HKDF-SHA256(aes_secret 或 SESSION_SECRET, info="edgeview/password-pepper/v1")`，以 HMAC-SHA256 混入密碼 | 維持；輪替金鑰需重設密碼 |
+| 相容/遷移 | 舊 64-hex SHA-256 可驗證，登入成功即升級為 Argon2id | 遷移完成後可移除 legacy 分支 |
 | 傳輸 | TLS（建議） | 強制 HTTPS |
+
+密碼雜湊由 metadata、xnginx、runtime proxy、alarm agent 共用實作；四者必須取得相同的 `SESSION_SECRET` 或 `aes_secret`（及 `PG_SCHEMA`），pepper 才會一致。
 
 ### 6.2 資料加密
 
@@ -344,7 +347,7 @@ sequenceDiagram
 3. `/record/queryrecord` 加認證/授權（已改為停用路由）。
 4. `systeminfo`/`default` 加登入檢查（已完成，R-006）。
 5. Session secret 改環境變數/密鑰管理（已完成）。
-6. 密碼改 Argon2id/bcrypt（含遷移）。
+6. 密碼已改 Argon2id（含舊 SHA-256 登入即升級，R-004）。
 7. CSRF Cookie 設 `HttpOnly` + `SameSite`（前端改用 response body token）。
 
 ### 14.2 建議（P1）

@@ -16,6 +16,7 @@
 | R-018 | 預設 DB 連線字串/密碼 | Fixed | 移除預設密碼；改用 `ENSAAS_SERVICES` / `LOG_ENV` / `VCAP_SERVICES`；新增 `RegisterDBEnv.reg` 與 machine env fallback |
 | R-019 | 動態 SQL 組裝 | Fixed | 識別字集中跳脫/白名單；值參數化；UpdateValue 欄位驗證 |
 | R-028 | OPC UA 預設 DB 帳密 | Fixed | OPC UA Agent 移除預設密碼；Alarm 使用 `waxalarm`（runtime）與 `waxconfig`（metadata） |
+| R-004 | 密碼雜湊未加鹽 | Fixed | 改 Argon2id（隨機鹽 + `aes_secret`/`SESSION_SECRET` pepper）；舊 SHA-256 登入即升級 |
 
 ## 2. R-001 Session secret
 
@@ -288,7 +289,42 @@ sessionKey = HKDF-SHA256(
 2. 設定環境變數後，Data Agent 連 `waxconfig`、Alarm Agent 連 `waxalarm` / `waxconfig`。
 3. `RegisterDBEnv.reg` 的 JSON 可被 `tryGetConnEnv` 正確解析。
 
-## 11. 部署需求
+## 11. R-004 密碼雜湊（Argon2id）
+
+### 11.1 設計
+
+- 演算法：Argon2id，`m=19456` KiB、`t=2`、`p=1`，每帳號隨機 16-byte salt、32-byte key。
+- 輸出：PHC `$argon2id$v=19$m=19456,t=2,p=1$<salt>$<hash>`（約 97 字元，長於舊 64-hex）。
+- Pepper：`HKDF-SHA256(secret, info="edgeview/password-pepper/v1")`，`secret` 為 `SESSION_SECRET`，否則 `aes_secret`；Argon2 輸入為 `HMAC-SHA256(pepper, password)`。
+- 相容：舊 64-hex SHA-256 以 constant-time 比對，命中後於登入成功時改寫為 Argon2id（UPDATE 帶入舊值作為 CAS 條件，避免覆蓋併發改密碼）。
+- 空白密碼不受理；`userinfo` 空密碼以空字串儲存。
+
+### 11.2 程式位置
+
+| 服務 | 共用實作 | 驗證/寫入 |
+|------|----------|-----------|
+| Metadata | `security/password.go` | `model/device/UserModel.go`、`model/opcua/UserModel.go` |
+| xnginx | `security/password.go` | `model/UserModel.go` |
+| Runtime Proxy | `security/password.go` | `service/basicAuth.go` |
+| OPC UA Alarm Agent | `security/password.go` | `service/basicAuth.go` |
+
+各服務於 `LoadSessionKeys()` 後以 `SessionKeys.PasswordPepper` 呼叫 `security.SetPepper()`，須在開始接請求前完成。
+
+### 11.3 部署需求
+
+- 四個服務必須使用相同的 `SESSION_SECRET`，或同一 `aes_secret` 與 `PG_SCHEMA`，否則 pepper 不同而互不通過。
+- 輪替/刪除 `aes_secret`、或變更 `SESSION_SECRET` 會使已升級 Argon2id 全部失效；輪替前先重設使用者密碼。舊 SHA-256 不受影響。
+- `SESSION_SECRET_PREVIOUS` 僅用於 cookie 解碼，不參與密碼 pepper。
+- 工廠 `admin` 種子與 `ResetPassword` 工具仍寫 legacy SHA-256；登入後自動升級。
+
+### 11.4 驗收
+
+1. 舊 `admin` 登入成功，`UserAdmin.password` 由 64-hex 變為 `$argon2id$…`。
+2. 舊一般使用者登入成功並升級；新建立/修改的密碼直接為 Argon2id。
+3. 同一帳號在 metadata、xnginx、runtime proxy、alarm agent 的驗證結果一致。
+4. `go test ./security/` 通過（新/舊格式、錯誤密碼、pepper、惡意參數）。
+
+## 12. 部署需求
 
 | 項目 | 需求 |
 |------|------|
@@ -304,7 +340,7 @@ sessionKey = HKDF-SHA256(
 
 K8s 環境若未注入 `SESSION_SECRET` 且資料庫沒有 `aes_secret`，服務會依設計啟動失敗，這是 R-001 的 fail-closed 行為。
 
-## 12. 驗收
+## 13. 驗收
 
 1. 原始碼搜尋不得再出現固定 session secret 字串。
 2. 各服務 `go build ./...` 成功。
@@ -326,7 +362,7 @@ K8s 環境若未注入 `SESSION_SECRET` 且資料庫沒有 `aes_secret`，服務
 18. 設定 DB 環境變數後，Metadata/Runtime/xnginx/OPC UA Agent/Alarm Agent/hmi_log 均可連線；Alarm runtime 使用 `waxalarm`、metadata 使用 `waxconfig`。
 19. 以惡意 table/column/order/alias 呼叫查詢/更新 API，不會改變 SQL 結構或造成 SQL injection。
 
-## 13. 後續追蹤
+## 14. 後續追蹤
 
 | 編號 | 項目 | 說明 |
 |------|------|------|

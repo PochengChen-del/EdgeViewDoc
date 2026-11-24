@@ -233,6 +233,7 @@ flowchart LR
 - **Internal Bearer**：由 `aes_secret` 推導的服務 Token；僅接受 loopback。
 - **角色限制**：`RuntimActionOnly` 在 `isHistory=true` 回 400；`HistoryActionOnly` 在 `isHistory=false` 回 400。
 - **時間戳**：`PacketTimestampMiddleware` 對 POST/PUT/PATCH/DELETE 強制檢查 `packetTimestamp`（Unix 毫秒），與 HMI `Date.now()` 及 Go 服務一致；GET/HEAD/OPTIONS 不檢查，`DriftSeconds=0` 可停用。缺少、格式錯誤或超出容差回 406。
+- **Client 端**：`axios.mjs` 與 Opcua datasource 使用的 `Common/Api/httpRequest.js` 會帶 `packetTimestamp`；`HttpRequest` 需在建構時 opt-in，其他 datasource 不受影響。
 - **內部呼叫**：Metadata `OpcAPI.Post`（Browse/TagDetail/Certificate）與 Alarm Agent 輪詢 Data Agent 時，皆已在 JSON body 補 `packetTimestamp`，因此非 GET 規則一體適用。
 - **重放限制**：時間戳僅縮小重放窗口，窗口內仍可能重放；若需完整防重放需另加 nonce／HMAC。
 
