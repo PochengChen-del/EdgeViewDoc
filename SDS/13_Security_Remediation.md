@@ -17,6 +17,7 @@
 | R-019 | 動態 SQL 組裝 | Fixed | 識別字集中跳脫/白名單；值參數化；UpdateValue 欄位驗證 |
 | R-028 | OPC UA 預設 DB 帳密 | Fixed | OPC UA Agent 移除預設密碼；Alarm 使用 `waxalarm`（runtime）與 `waxconfig`（metadata） |
 | R-004 | 密碼雜湊未加鹽 | Fixed | 改 Argon2id（隨機鹽 + `aes_secret`/`SESSION_SECRET` pepper）；舊 SHA-256 登入即升級 |
+| R-005 | CSRF Token 存於非 HttpOnly Cookie | Fixed | `csrfToken` Cookie 設 `HttpOnly` + `SameSite=Lax`，HTTPS 加 `Secure`；前端改用 response body token |
 
 ## 2. R-001 Session secret
 

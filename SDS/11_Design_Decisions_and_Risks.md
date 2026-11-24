@@ -180,8 +180,9 @@
 | 嚴重度 | Medium |
 | 證據 | `loginController.go:130` `SetCookie(..., false, false)` |
 | 影響 | XSS 可竊取；CSRF 防護弱化 |
-| 緩解 | HttpOnly + SameSite + 前端用 body token |
-| 狀態 | Open |
+| 緩解 | 已完成：Metadata 與 xnginx 的 `csrfToken` Cookie 改以 `HttpOnly=true`、`SameSite=Lax` 下發；HTTPS（`X-Forwarded-Proto: https` 或直接 TLS）時加 `Secure`。前端一律使用登入／`validateToken` response body 的 token，不讀取伺服器 Cookie |
+| 驗證 | `go test ./controller/...`（Cookie 屬性）；登入回應 `Set-Cookie` 含 `HttpOnly; SameSite=Lax`；HTTPS 含 `Secure`；`validateToken` 重載仍成功；Logout 不分資料源皆以 `Max-Age=0` 刪除 |
+| 狀態 | Fixed |
 
 ### R-006 WebSocket 部分 topic 未認證
 

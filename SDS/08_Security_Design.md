@@ -85,7 +85,7 @@ sequenceDiagram
 ```
 
 - 隨機 `csrfToken`（UUID/隨機）寫入 Session 與回應。
-- `csrfToken` 同時以 Cookie 下發（`HttpOnly=false`，供前端讀取）。
+- `csrfToken` 同時以 Cookie 下發（`HttpOnly=true`、`SameSite=Lax`；HTTPS 時 `Secure`），前端一律使用 response body token。
 - 登入失敗寫入稽核；OPC UA 連續失敗會鎖定。
 
 ### 3.3 Session
@@ -142,12 +142,12 @@ sequenceDiagram
 |------|------|
 | Token 產生 | 登入時隨機 |
 | 儲存 | Session `csrfToken` |
-| 傳遞 | JSON/表單 `csrfToken`，另存 Cookie |
+| 傳遞 | JSON/表單 `csrfToken`；Cookie 僅作 `validateToken` 還原，前端不讀取 |
 | 驗證 | `authorizeCore` 比對 |
 | 無效 | `-100`，記錄來源/IP |
 | 例外 | 公開端點（login/about/settings 等） |
 
-> 風險：`csrfToken` Cookie 非 `HttpOnly`，且部分公開端點無 CSRF；需搭配 SameSite。
+> 已緩解：`csrfToken` Cookie 設 `HttpOnly` + `SameSite=Lax`（HTTPS 加 `Secure`），前端改用 response body token。部分公開端點無 CSRF 仍屬既有設計。
 
 ### 5.2 時間戳
 
@@ -331,7 +331,7 @@ sequenceDiagram
 
 | 威脅 | 範例 | 現有控制 | 殘餘風險 |
 |------|------|----------|----------|
-| Spoofing | 冒用 Session | Session + CSRF | Cookie 未 HttpOnly |
+| Spoofing | 冒用 Session | Session + CSRF | CSRF Cookie 已 HttpOnly；Session Cookie 未 HttpOnly |
 | Tampering | 修改請求/稽核 | 時間戳、checksum | 非一次性時間戳 |
 | Repudiation | 否認操作 | 稽核日誌 | 日誌可被管理者刪除 |
 | Information Disclosure | 攔截 TLS | 全域 `InsecureSkipVerify` 已移除 | 個別 client 仍停用驗證（R-002-R） |
@@ -348,7 +348,7 @@ sequenceDiagram
 4. `systeminfo`/`default` 加登入檢查（已完成，R-006）。
 5. Session secret 改環境變數/密鑰管理（已完成）。
 6. 密碼已改 Argon2id（含舊 SHA-256 登入即升級，R-004）。
-7. CSRF Cookie 設 `HttpOnly` + `SameSite`（前端改用 response body token）。
+7. 已完成：CSRF Cookie 設 `HttpOnly` + `SameSite=Lax`，HTTPS 加 `Secure`；前端改用 response body token。
 
 ### 14.2 建議（P1）
 
