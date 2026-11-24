@@ -93,6 +93,8 @@ sequenceDiagram
 | 項目 | 設計 |
 |------|------|
 | 名稱 | `graphicSession`、`settingSession` |
+| Cookie 屬性 | `HttpOnly=true`、`SameSite=Lax`；HTTPS（TLS 或 `X-Forwarded-Proto: https`）時 `Secure` |
+| 跨服務一致性 | Metadata、Runtime Proxy、Alarm Agent、xnginx 的 `pgstore.Save()` 統一設定，避免互相覆寫 |
 | 儲存 | PostgreSQL `http_sessions`（pgstore） |
 | 有效期 | `sessiontimeout=604800`（7 天） |
 | 續期 | 請求時由 store 更新 |
@@ -331,7 +333,7 @@ sequenceDiagram
 
 | 威脅 | 範例 | 現有控制 | 殘餘風險 |
 |------|------|----------|----------|
-| Spoofing | 冒用 Session | Session + CSRF | CSRF Cookie 已 HttpOnly；Session Cookie 未 HttpOnly |
+| Spoofing | 冒用 Session | Session + CSRF | CSRF/Session Cookie 已 HttpOnly + SameSite；XSS 仍可代用登入狀態 |
 | Tampering | 修改請求/稽核 | 時間戳、checksum | 非一次性時間戳 |
 | Repudiation | 否認操作 | 稽核日誌 | 日誌可被管理者刪除 |
 | Information Disclosure | 攔截 TLS | 全域 `InsecureSkipVerify` 已移除 | 個別 client 仍停用驗證（R-002-R） |
@@ -349,6 +351,7 @@ sequenceDiagram
 5. Session secret 改環境變數/密鑰管理（已完成）。
 6. 密碼已改 Argon2id（含舊 SHA-256 登入即升級，R-004）。
 7. 已完成：CSRF Cookie 設 `HttpOnly` + `SameSite=Lax`，HTTPS 加 `Secure`；前端改用 response body token。
+8. 已完成：Session Cookie（`graphicSession` / `settingSession`）統一 `HttpOnly` + `SameSite=Lax`，HTTPS 加 `Secure`。
 
 ### 14.2 建議（P1）
 

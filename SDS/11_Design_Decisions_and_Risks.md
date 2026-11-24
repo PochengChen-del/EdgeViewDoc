@@ -494,6 +494,17 @@
 | 緩解 | 正式版僅部署 `Proxy\xnginx.yaml`；保留以 `xnginx.yaml` 為基準、設定比對/啟動煙霧測試、文件同步；安裝/升級流程驗證固定路徑與檔案 |
 | 狀態 | Accepted |
 
+### R-036 Session Cookie 未 HttpOnly
+
+| 項目 | 內容 |
+|------|------|
+| 嚴重度 | Medium |
+| 證據 | `graphicSession` / `settingSession` 由各服務 `pgstore.Save()` 寫出，原未設 `HttpOnly`、`SameSite`、`Secure` |
+| 影響 | XSS 可讀取 Session Cookie；跨站請求可攜帶 Session Cookie |
+| 緩解 | 已完成：Metadata、Runtime Proxy、Alarm Agent、xnginx 的 `pgstore.Save()` 統一設 `HttpOnly=true`、`SameSite=Lax`，HTTPS（TLS 或 `X-Forwarded-Proto: https`）加 `Secure`；`store.Options` 同步設定 |
+| 驗證 | `go build` / `go vet`；HTTPS 登入 `Set-Cookie` 含 `HttpOnly; SameSite=Lax; Secure`；HTTP 不含 `Secure`；經 `/wxproxy`、`/uaam` 重寫後屬性仍保留；Logout `Max-Age=0` |
+| 狀態 | Fixed |
+
 ## 3. 技術債
 
 | 編號 | 項目 | 影響 | 建議 |
@@ -533,10 +544,10 @@ flowchart LR
 | 階段 | 項目 |
 |------|------|
 | P0 | R-001、R-002、R-003、R-006、R-007、R-008、R-018、R-025、R-026、R-028 已修復；待處理 R-023、R-002-R、R-027 |
-| P1 | R-005、R-015、R-016、R-022、R-031、R-032（R-004、R-019、R-029、R-030 已修復；R-035 已接受） |
+| P1 | R-015、R-016、R-022、R-031、R-032（R-004、R-005、R-019、R-029、R-030、R-036 已修復；R-035 已接受） |
 | P2 | R-010、R-011、R-017、R-021、R-033、R-034、TD-001~008 |
 
-> R-001/R-002/R-003/R-004/R-006/R-007/R-008/R-009/R-018/R-019/R-028 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-009 原列 P2，已完成修復。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
+> R-001/R-002/R-003/R-004/R-006/R-007/R-008/R-009/R-018/R-019/R-028/R-036 的修復設計、部署需求與驗收紀錄見 [SDS-13](13_Security_Remediation.md)。R-009 原列 P2，已完成修復。R-002-R 代表個別外部 HTTP client 仍停用 TLS 驗證的殘餘項目。
 
 ## 6. 決策記錄格式
 
@@ -567,3 +578,4 @@ flowchart LR
 | R-029~R-032 | NFR-OPC-001~012 |
 | R-033~R-034 | NFR-OPC-013~020 |
 | R-035 | IF-SW-012、IF-OPC-011、NFR-MNT-001~008 |
+| R-036 | NFR-SEC-001~010 |

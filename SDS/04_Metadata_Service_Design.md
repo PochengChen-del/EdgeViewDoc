@@ -68,10 +68,12 @@ sequenceDiagram
 
 ### 2.2 Session 選項
 
-| 模式 | Path | Domain | MaxAge | HttpOnly | Secure |
-|------|------|--------|--------|----------|--------|
-| 一般 | `/` | — | `sessiontimeout`（604800） | 否 | 否 |
-| EdgeHub | `/` | `Meta365.CookieDomain()` | `sessiontimeout` | 是 | 否 |
+| 模式 | Path | Domain | MaxAge | HttpOnly | SameSite | Secure |
+|------|------|--------|--------|----------|----------|--------|
+| 一般 | `/` | — | `sessiontimeout`（604800） | 是 | Lax | 條件式（HTTPS） |
+| EdgeHub | `/` | `Meta365.CookieDomain()` | `sessiontimeout` | 是 | Lax | 條件式（HTTPS） |
+
+> `Secure` 由 `pgstore.Save()` 依 request 的 TLS 或 `X-Forwarded-Proto: https` 逐次判斷，保留 HTTP 8880 相容性。
 
 > Session key 由 `service/session_secret.go` 的 `LoadSessionKeys()` 解析：`SESSION_SECRET` 優先，否則使用 `aes_secret` 經 HKDF 派生，皆無則啟動失敗（見 SDS-13）。
 
