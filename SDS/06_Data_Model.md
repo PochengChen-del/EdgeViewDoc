@@ -520,7 +520,7 @@ erDiagram
 |------|------|------|
 | 使用者密碼 | `UserAdmin`、`UserInfo`、`OPCUA_User` | Argon2id + 隨機鹽 + pepper（R-004）；舊 SHA-256 登入即升級 |
 | 資料源密碼 | `DataSourceBody.value` | 可能加密（AES） |
-| Session | `http_sessions.data` | 簽章/加密（pgstore） |
+| Session | `http_sessions.data` | HMAC 簽章（pgstore）；Session 內上游密碼（WebAccess/X）以 AES-256-GCM 加密，金鑰由 `SESSION_SECRET` 派生，未設定時 fallback `aes_secret` |
 | 稽核 | `auditlog` | checksum |
 | 憑證/金鑰 | 檔案系統 | 權限控管 |
 

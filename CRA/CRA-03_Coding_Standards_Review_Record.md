@@ -126,7 +126,7 @@ flowchart LR
 | F-005 | CWE-835／CWE-400 | Runtime `config.go` | EH/X 輪詢間隔 `-1` 造成忙迴圈 | High | 預設 1000ms；`normalizeIntervalMs` 夾 100ms | Fixed | R-008 |
 | F-006 | CWE-400／CWE-401 | Runtime `RecordDataPolling` | 無 TTL／上限／統計 | Medium | idle TTL、上限、reaper、`Stats()` | Fixed | R-009 |
 | F-007 | CWE-916／CWE-759 | Metadata `UserModel` | 密碼 SHA-256 單次、無鹽 | High | 改用 Argon2id（隨機鹽 + `aes_secret` pepper）；舊 SHA-256 登入即升級；四服務同步 | Fixed | R-004 / SDS-13 |
-| F-008 | CWE-1004／CWE-352 | Metadata `loginController` | CSRF Token Cookie 非 HttpOnly | Medium | HttpOnly + SameSite + body token | Open | R-005 |
+| F-008 | CWE-1004／CWE-352 | Metadata `loginController` | CSRF Token Cookie 非 HttpOnly | Medium | 移除 CSRF Cookie，token 僅存 Session 與 body | Fixed | R-005 |
 | F-009 | CWE-307／CWE-203 | Runtime `loginController` / `webSocket.go` | `verifyToken` 掃描所有 Session | Medium | WS handshake 綁定 `graphicSession`，僅比對該 Session 的 `csrfToken`；原生 Qt 由 handshake 帶 Cookie | Fixed | R-007 / SDS-13 §5.4 |
 | F-010 | CWE-306／CWE-639 | Metadata 檔案端點 | 公開 GET（`/getfile` 等） | Medium | 授權／簽章 URL／限流 | Open | R-012 |
 | F-011 | CWE-942 | Ingress／Runtime | CORS/Origin 寬鬆 | Medium | 明確白名單、移除強制 Origin | Open | R-015 |

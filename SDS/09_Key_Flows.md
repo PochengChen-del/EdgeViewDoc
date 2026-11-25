@@ -24,7 +24,8 @@ sequenceDiagram
     C->>M: POST /api/login
     M->>DB: 驗證使用者/來源
     M->>DB: 建立 http_sessions
-    M-->>C: Set-Cookie graphicSession + csrfToken
+    M-->>C: Set-Cookie graphicSession
+    M-->>C: result.csrfToken
     C->>M: POST /api/userprojlist
     M-->>C: 專案清單
     C->>C: 進入 Project 頁

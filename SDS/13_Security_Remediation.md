@@ -17,8 +17,9 @@
 | R-019 | 動態 SQL 組裝 | Fixed | 識別字集中跳脫/白名單；值參數化；UpdateValue 欄位驗證 |
 | R-028 | OPC UA 預設 DB 帳密 | Fixed | OPC UA Agent 移除預設密碼；Alarm 使用 `waxalarm`（runtime）與 `waxconfig`（metadata） |
 | R-004 | 密碼雜湊未加鹽 | Fixed | 改 Argon2id（隨機鹽 + `aes_secret`/`SESSION_SECRET` pepper）；舊 SHA-256 登入即升級 |
-| R-005 | CSRF Token 存於非 HttpOnly Cookie | Fixed | `csrfToken` Cookie 設 `HttpOnly` + `SameSite=Lax`，HTTPS 加 `Secure`；前端改用 response body token |
+| R-005 | CSRF Token 存於非 HttpOnly Cookie | Fixed | 移除 `csrfToken` Cookie 下發；token 僅存於 Session 與 response body，`validateToken` 由 Session 還原 |
 | R-036 | Session Cookie 未 HttpOnly | Fixed | `graphicSession`/`settingSession` 由四個服務的 `pgstore.Save()` 統一設 `HttpOnly` + `SameSite=Lax`，HTTPS 加 `Secure` |
+| R-037 | Session 上游密碼明文儲存 | Fixed | 僅 WebAccess/X 保存；`password` 以 AES-256-GCM 加密，金鑰 HKDF 自 `SESSION_SECRET`／`aes_secret`；OPC UA、xnginx 不保存 |
 
 ## 2. R-001 Session secret
 
@@ -363,6 +364,7 @@ K8s 環境若未注入 `SESSION_SECRET` 且資料庫沒有 `aes_secret`，服務
 17. 原始碼不得再出現 `Postgre@sql1` / `waxpgP@ssw0rd`；未設定 DB 環境變數時服務連線失敗。
 18. 設定 DB 環境變數後，Metadata/Runtime/xnginx/OPC UA Agent/Alarm Agent/hmi_log 均可連線；Alarm runtime 使用 `waxalarm`、metadata 使用 `waxconfig`。
 19. 以惡意 table/column/order/alias 呼叫查詢/更新 API，不會改變 SQL 結構或造成 SQL injection。
+20. WebAccess/X 登入後 `http_sessions.data` 的 `password` 為 `enc:v1:` 密文；舊明碼 session 可讀取，重新登入後升級；OPC UA/xnginx session 不含 `password`。
 
 ## 14. 後續追蹤
 

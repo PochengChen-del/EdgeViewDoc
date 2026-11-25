@@ -80,12 +80,12 @@ sequenceDiagram
     M->>M: 驗證帳密/來源
     M->>S: 建立 session
     S->>DB: 寫入 http_sessions
-    M-->>C: Set-Cookie graphicSession + csrfToken
-    M-->>C: result.role / changePassword
+    M-->>C: Set-Cookie graphicSession
+    M-->>C: result.csrfToken / role / changePassword
 ```
 
 - 隨機 `csrfToken`（UUID/隨機）寫入 Session 與回應。
-- `csrfToken` 同時以 Cookie 下發（`HttpOnly=true`、`SameSite=Lax`；HTTPS 時 `Secure`），前端一律使用 response body token。
+- `csrfToken` 僅存於 Session 與 response body，不下發 Cookie；`validateToken` 直接由 Session 還原。
 - 登入失敗寫入稽核；OPC UA 連續失敗會鎖定。
 
 ### 3.3 Session
@@ -144,12 +144,12 @@ sequenceDiagram
 |------|------|
 | Token 產生 | 登入時隨機 |
 | 儲存 | Session `csrfToken` |
-| 傳遞 | JSON/表單 `csrfToken`；Cookie 僅作 `validateToken` 還原，前端不讀取 |
+| 傳遞 | JSON/表單 `csrfToken`；`validateToken` 由 Session 還原，不下發 Cookie |
 | 驗證 | `authorizeCore` 比對 |
 | 無效 | `-100`，記錄來源/IP |
 | 例外 | 公開端點（login/about/settings 等） |
 
-> 已緩解：`csrfToken` Cookie 設 `HttpOnly` + `SameSite=Lax`（HTTPS 加 `Secure`），前端改用 response body token。部分公開端點無 CSRF 仍屬既有設計。
+> 已緩解：`csrfToken` 僅存於 Session 與 response body，不再下發 Cookie；`validateToken` 直接由 Session 還原。部分公開端點無 CSRF 仍屬既有設計。
 
 ### 5.2 時間戳
 
@@ -186,9 +186,12 @@ sequenceDiagram
 | 舊版金鑰 | `legacyAesKey`（回退） | `AES.go` |
 | 授權檔 | AES + MAC/TID | `secret_*.go` |
 | Client 指令碼 | 壓縮/加密 | `security/aes` |
+| Session 內上游密碼 | AES-256-GCM（HKDF from `SESSION_SECRET`；未設定時由 `aes_secret` 派生） | `service/session_credential.go` |
 
 - 資料加密：機器金鑰不存在時回退舊金鑰（需監控）。
 - Session key：不回退舊金鑰；`SESSION_SECRET` 與 `aes_secret` 皆無時啟動失敗（見 SDS-13）。
+- Session 內上游密碼僅 WebAccess/X 需要；OPC UA、xnginx 不保存。密文含 `enc:v1:` 前綴，舊明碼 session 可讀取並於下次登入升級。
+- 輪替 `SESSION_SECRET`（或未設定時輪替 `aes_secret`）後，舊 session 的上游密碼無法解密，使用者需重新登入。
 - CBC 需確保 IV 管理與完整性（建議 GCM）。
 
 ### 6.3 稽核完整性
@@ -333,7 +336,7 @@ sequenceDiagram
 
 | 威脅 | 範例 | 現有控制 | 殘餘風險 |
 |------|------|----------|----------|
-| Spoofing | 冒用 Session | Session + CSRF | CSRF/Session Cookie 已 HttpOnly + SameSite；XSS 仍可代用登入狀態 |
+| Spoofing | 冒用 Session | Session + CSRF | Session Cookie 已 HttpOnly + SameSite；CSRF token 僅存於 Session；XSS 仍可代用登入狀態 |
 | Tampering | 修改請求/稽核 | 時間戳、checksum | 非一次性時間戳 |
 | Repudiation | 否認操作 | 稽核日誌 | 日誌可被管理者刪除 |
 | Information Disclosure | 攔截 TLS | 全域 `InsecureSkipVerify` 已移除 | 個別 client 仍停用驗證（R-002-R） |
@@ -350,7 +353,7 @@ sequenceDiagram
 4. `systeminfo`/`default` 加登入檢查（已完成，R-006）。
 5. Session secret 改環境變數/密鑰管理（已完成）。
 6. 密碼已改 Argon2id（含舊 SHA-256 登入即升級，R-004）。
-7. 已完成：CSRF Cookie 設 `HttpOnly` + `SameSite=Lax`，HTTPS 加 `Secure`；前端改用 response body token。
+7. 已完成：不再下發 CSRF Cookie，`csrfToken` 僅存於 Session 與 response body。
 8. 已完成：Session Cookie（`graphicSession` / `settingSession`）統一 `HttpOnly` + `SameSite=Lax`，HTTPS 加 `Secure`。
 
 ### 14.2 建議（P1）

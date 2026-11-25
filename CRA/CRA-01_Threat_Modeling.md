@@ -401,7 +401,7 @@ flowchart TB
 | SDS 風險 | 說明 | 對應 RID | 狀態 | 建議處置 |
 |----------|------|----------|------|----------|
 | R-004 | 密碼雜湊未加鹽（舊版 SHA-256） | RID-EV-009 | Fixed | Argon2id + 隨機鹽 + `aes_secret` pepper；舊雜湊登入即升級 |
-| R-005 | CSRF Token Cookie 非 HttpOnly | RID-EV-004、005 | Open | HttpOnly + SameSite，前端改用 body token |
+| R-005 | CSRF Token Cookie 非 HttpOnly | RID-EV-004、005 | Fixed | 移除 CSRF Cookie；token 僅存 Session 與 body |
 | R-012 | 公開檔案端點 | RID-EV-001、013、019 | Open | 授權／簽章 URL／限流 |
 | R-015 | CORS／Origin 寬鬆 | RID-EV-025 | Open | 明確白名單 |
 | R-016 | 速率限制／鎖定不足（OPC UA 以外） | RID-EV-003、024、055 | Mitigating | 登入專用限流、帳號鎖定、WS 訊息限流 |

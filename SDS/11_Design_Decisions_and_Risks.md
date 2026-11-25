@@ -178,10 +178,10 @@
 | 項目 | 內容 |
 |------|------|
 | 嚴重度 | Medium |
-| 證據 | `loginController.go:130` `SetCookie(..., false, false)` |
+| 證據 | 歷史：`loginController.go` 曾以非 HttpOnly Cookie 下發 `csrfToken`；目前已移除該 Cookie |
 | 影響 | XSS 可竊取；CSRF 防護弱化 |
-| 緩解 | 已完成：Metadata 與 xnginx 的 `csrfToken` Cookie 改以 `HttpOnly=true`、`SameSite=Lax` 下發；HTTPS（`X-Forwarded-Proto: https` 或直接 TLS）時加 `Secure`。前端一律使用登入／`validateToken` response body 的 token，不讀取伺服器 Cookie |
-| 驗證 | `go test ./controller/...`（Cookie 屬性）；登入回應 `Set-Cookie` 含 `HttpOnly; SameSite=Lax`；HTTPS 含 `Secure`；`validateToken` 重載仍成功；Logout 不分資料源皆以 `Max-Age=0` 刪除 |
+| 緩解 | 已完成：不再下發 `csrfToken` Cookie；token 僅存於 Session 與登入／`validateToken` response body，`validateToken` 直接由 Session 還原 |
+| 驗證 | 原始碼不再有 `csrfToken` Cookie 寫入；登入回應不含該 Cookie；`validateToken` 重載仍成功；`go build ./...` 通過 |
 | 狀態 | Fixed |
 
 ### R-006 WebSocket 部分 topic 未認證
@@ -503,6 +503,17 @@
 | 影響 | XSS 可讀取 Session Cookie；跨站請求可攜帶 Session Cookie |
 | 緩解 | 已完成：Metadata、Runtime Proxy、Alarm Agent、xnginx 的 `pgstore.Save()` 統一設 `HttpOnly=true`、`SameSite=Lax`，HTTPS（TLS 或 `X-Forwarded-Proto: https`）加 `Secure`；`store.Options` 同步設定 |
 | 驗證 | `go build` / `go vet`；HTTPS 登入 `Set-Cookie` 含 `HttpOnly; SameSite=Lax; Secure`；HTTP 不含 `Secure`；經 `/wxproxy`、`/uaam` 重寫後屬性仍保留；Logout `Max-Age=0` |
+| 狀態 | Fixed |
+
+### R-037 Session 上游密碼明文儲存
+
+| 項目 | 內容 |
+|------|------|
+| 嚴重度 | Medium |
+| 證據 | WebAccess/X 登入與 Basic Auth 曾以明碼將上游 `password` 寫入 Session；`http_sessions.data` 僅 HMAC 簽章、未加密 |
+| 影響 | 取得 DB/備份即可讀取可重用的上游帳密 |
+| 緩解 | 已完成：僅 WebAccess/X 保存；`password` 改以 AES-256-GCM 加密（`enc:v1:` 前綴），金鑰由 `SESSION_SECRET` 經 HKDF 派生，未設定時 fallback `aes_secret`；OPC UA、xnginx 不再保存 |
+| 驗證 | `service/session_credential_test.go`；`go build` / `go vet`；舊明碼 session 可讀取，重新登入後寫入 `enc:v1:` 密文 |
 | 狀態 | Fixed |
 
 ## 3. 技術債

@@ -314,8 +314,9 @@ flowchart TD
 | Session | `graphicSession`/`settingSession`，PostgreSQL store |
 | CSRF | Session 內 `csrfToken`，請求需一致 |
 | 時間戳 | `packetTimestamp` ± `driftseconds` |
-| 密碼 | 使用者密碼 mail 雜湊（見風險） |
+| 密碼 | 使用者密碼雜湊（見風險） |
 | 加密 | AES（設定、憑證、敏感欄位） |
+| Session 上游密碼 | AES-256-GCM（HKDF from `SESSION_SECRET`；fallback `aes_secret`），僅 WebAccess/X |
 | 權限 | 專案/群組/使用者三層 |
 | 上傳限制 | 5 MB（Client）、Nginx 75 MB |
 | CORS | 僅本機/私有網段 |

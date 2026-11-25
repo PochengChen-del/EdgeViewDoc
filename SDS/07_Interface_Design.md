@@ -69,7 +69,8 @@ sequenceDiagram
     participant M as Metadata
     C->>M: POST /api/login {account,password,packetTimestamp}
     M->>M: 驗證（本機/WA/EdgeHub/X/OPC UA）
-    M-->>C: Set-Cookie graphicSession + result.csrfToken
+    M-->>C: Set-Cookie graphicSession
+    M-->>C: result.csrfToken
     C->>M: POST /api/getdisplaylist/:projid {csrfToken,packetTimestamp}
     M->>M: 驗 Session + CSRF + 時間戳
     M-->>C: result
